@@ -37,7 +37,7 @@ no MSVC Build Tools, CMake, libclang or WSL (see "Build").
 - `noid_p2p/src/{behaviour,protocol,network_profile,object_protocol,network,identity_store}.rs`: identify string, gossip id domain, devnet topics, profile digest domain and magics, object domains, relay domains, P2P key magic.
 - `noid_poseidon2b/src/primitives.rs`: HRP `o` → `k`.
 - Key and object separation, so Kairos keys and objects can never collide with Parano1d's:
-  - wallet KDF tag `noid-deri` → `kai-deriv` (`keystore.rs`)
+  - wallet KDF tag: unchanged (`noid-deri`, `keystore.rs`). Kept on purpose: it is a fixed derivation constant, and changing it would change every address.
   - plain key magic → `kai_plain_key_v1`
   - Photo Key blake3 contexts → `Kairos Chain master secret …` (`noid_gui/src/secret.rs`)
   - contract object magic `NOIDOBJ3` → `KAIROBJ1`, `NOIDV2TX` → `KAIV2TX1`

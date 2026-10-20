@@ -18,7 +18,7 @@ stream and feeds the following data to domain-separated BLAKE3 derive-key mode:
 The derivation context is fixed by the wallet format:
 
 ```text
-Kairos master secret from canonical image pixels v1
+Kairos Chain master secret from canonical image pixels v1
 ```
 
 The 32-byte output is the master secret.

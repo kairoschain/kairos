@@ -28,4 +28,4 @@ RPC 使用 `paranoid_` 命名空间和本地所有者权限。`getContractProtoc
 完整[合约文档](../contracts/index.md)包括[内核](../contracts/core.md)、
 [模板](../contracts/templates.md)、[API](../contracts/api.md)、
 [GUI](../contracts/gui.md)和[恢复](../contracts/receipts-and-recovery.md)。
-发布包读者可访问 [docs.kairoschain.xyz](https://docs.kairoschain.xyz/zh/contracts)。
+发布包读者可访问 [docs.kairoschain.org](https://docs.kairoschain.org/zh/contracts)。

@@ -10964,7 +10964,7 @@ mod tests {
         let local = PeerId::random();
         let peer = PeerId::random();
         let aggregate: Multiaddr = "/dnsaddr/noid.network".parse().unwrap();
-        let individual: Multiaddr = "/dns4/seed1.kairoschain.xyz/tcp/9500".parse().unwrap();
+        let individual: Multiaddr = "/dns4/seed1.kairoschain.org/tcp/9500".parse().unwrap();
         let first = libp2p::swarm::ConnectionId::new_unchecked(71);
         let duplicate = libp2p::swarm::ConnectionId::new_unchecked(72);
         let mut state = AutomaticPeerState::new(local);

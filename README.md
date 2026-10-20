@@ -13,9 +13,9 @@ Nodes verify state and rights from genesis without replay or trusted
 checkpoints. Block bodies and transactions are pruned after retention. Receipts
 remain verifiable. Mainnet is live.
 
-[Website](https://kairoschain.xyz) ·
-[Documentation](https://docs.kairoschain.xyz) ·
-[Research](https://lab.kairoschain.xyz) ·
+[Website](https://kairoschain.org) ·
+[Documentation](https://docs.kairoschain.org) ·
+[Research](https://lab.kairoschain.org) ·
 [Releases](https://git.parano1d.org/ignotusnemo/kairos/releases)
 
 **Source:** [Forgejo](https://git.parano1d.org/ignotusnemo/kairos) (canonical) ·
@@ -165,7 +165,7 @@ addresses, transactions, trees, transcripts and PoW. FROST-GKR batches its
 permutations and Merkle paths; sumcheck, zerocheck, lincheck and FRI-Binius
 close the relation without a trusted setup.
 
-The [FROST-GKR research article](https://lab.kairoschain.xyz/research/frost-gkr-global-trace-protocol/)
+The [FROST-GKR research article](https://lab.kairoschain.org/research/frost-gkr-global-trace-protocol/)
 links the paper, reference implementation and reproducible comparison with
 per-permutation reductions.
 
@@ -297,4 +297,4 @@ programs use this shared bank and do not generate new matrices.
 
 Designed and developed by **Ignotus Nemo**. [Apache License 2.0](LICENSE).
 Report security issues through the [security policy](.github/SECURITY.md).
-Contact: [dev@kairoschain.xyz](mailto:dev@kairoschain.xyz).
+Contact: [dev@kairoschain.org](mailto:dev@kairoschain.org).

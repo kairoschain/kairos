@@ -13,7 +13,7 @@ operators and wallet users should run its latest patch release.
 
 Please use GitHub's private vulnerability reporting to submit a finding: open
 the Kairos repository, select **Security and quality**, then **Report a
-vulnerability**. If that is unavailable, email <dev@kairoschain.xyz>. Do not open
+vulnerability**. If that is unavailable, email <dev@kairoschain.org>. Do not open
 a public issue or discuss an unpatched vulnerability in a public channel.
 
 Every report must include:

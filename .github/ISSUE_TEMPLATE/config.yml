@@ -4,5 +4,5 @@ contact_links:
     url: https://github.com/ignotusnemo/kairos/security/policy
     about: Report vulnerabilities privately according to the security policy.
   - name: Documentation
-    url: https://docs.kairoschain.xyz
+    url: https://docs.kairoschain.org
     about: Read the protocol, wallet, mining, and operator documentation.

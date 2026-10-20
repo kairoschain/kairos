@@ -24,9 +24,9 @@ no MSVC Build Tools, CMake, libclang or WSL (see "Build").
 | Protocol id / topics | `/noid/mainnet/860e70453390bf81/…` | **`/kai/mainnet/<genesis-id-prefix>/{1,blocks/1,txs/1}`**, derived at runtime from the genesis block id |
 | Devnet topics | `/noid/devnet/…` | `/kai/devnet/…` |
 | libp2p identify | `/noid/1.0.0` | `/kairos/1.0.0` |
-| DNS seeds | mseed1-4.parano1d.org | **seed1-4.kairoschain.xyz** (placeholders) |
+| DNS seeds | mseed1-4.parano1d.org | **seed1-4.kairoschain.org** (placeholders) |
 | Network profile digest | `NOID/P2P/NETWORK-PROFILE/V7`, NPQ6/NPS6 | `KAI/P2P/NETWORK-PROFILE/V1`, KPQ1/KPS1 |
-| Domain | parano1d.org | kairoschain.xyz |
+| Domain | parano1d.org | kairoschain.org |
 
 ## Changed files (main ones)
 
@@ -117,4 +117,4 @@ Devnet: `cargo run --release --example isolated_v2_node --features isolated-v2-f
 3. Regenerate the proof material with `scripts/kairos_generate_packs.sh` and finish the retirement-key step it prints. The step-3 arguments still need checking against `noid_retire_history prepare`.
 4. Deeper cleanup, optional: physically delete the v1/v1.1 code paths, the `retired-history` feature, the origin-recovery and retirement machinery, and the legacy matrices. Today they are dormant because v2 is active from block 1. They were not deleted blind, because they are wired through `build.rs`, the recursion bank and P2P origin transport.
 5. Wallet discovery of migrated UTXOs: the owner index is rebuilt at genesis, but the wallet scan of the genesis state should be checked end to end.
-6. Pin `GENESIS_NONCE_PIN` and set the final `GENESIS_TIMESTAMP`. Fill the migration file from the $KAI snapshot. Point the `seed1-4.kairoschain.xyz` DNS at live nodes.
+6. Pin `GENESIS_NONCE_PIN` and set the final `GENESIS_TIMESTAMP`. Fill the migration file from the $KAI snapshot. Point the `seed1-4.kairoschain.org` DNS at live nodes.

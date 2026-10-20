@@ -38,4 +38,4 @@ The detailed [contract documentation](../contracts/index.md) covers the
 [core](../contracts/core.md), [templates](../contracts/templates.md),
 [API](../contracts/api.md), [GUI](../contracts/gui.md) and
 [recovery](../contracts/receipts-and-recovery.md). Release-package readers can
-open the same section at [docs.kairoschain.xyz](https://docs.kairoschain.xyz/contracts).
+open the same section at [docs.kairoschain.org](https://docs.kairoschain.org/contracts).

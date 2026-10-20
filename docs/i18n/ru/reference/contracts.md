@@ -38,4 +38,4 @@ RPC использует префикс `paranoid_` и локальные пра
 [шаблоны](../contracts/templates.md), [API](../contracts/api.md),
 [GUI](../contracts/gui.md), [восстановление](../contracts/receipts-and-recovery.md).
 Для читателей релизного пакета раздел доступен на
-[docs.kairoschain.xyz](https://docs.kairoschain.xyz/ru/contracts).
+[docs.kairoschain.org](https://docs.kairoschain.org/ru/contracts).

@@ -3,9 +3,9 @@ Version: @VERSION@
 Section: utils
 Priority: optional
 Architecture: @ARCHITECTURE@
-Maintainer: Paranoid Zero <dev@kairoschain.xyz>
+Maintainer: Paranoid Zero <dev@kairoschain.org>
 Depends: libc6 (>= 2.35), libgcc-s1, xdg-desktop-portal
-Homepage: https://kairoschain.xyz/
+Homepage: https://kairoschain.org/
 Description: Native Kairos wallet
  Kairos wallet with its private, locally supervised full node.
  Wallet data remains in the user's home directory when the package is removed.

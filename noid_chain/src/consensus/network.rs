@@ -137,7 +137,7 @@ impl NetworkConfig {
             // 2. "dnsaddr:<hostname>" → dialled as /dnsaddr/<hostname>
             //    Resolves _dnsaddr.<hostname> TXT records.  Each TXT entry
             //    encodes a full multiaddr including PeerID, e.g.:
-            //      _dnsaddr.kairoschain.xyz TXT
+            //      _dnsaddr.kairoschain.org TXT
             //        "dnsaddr=/ip4/1.2.3.4/tcp/9700/p2p/12D3KooW..."
             //    Connection is cryptographically verified against PeerID.
             //    This is the libp2p standard (used by IPFS, Filecoin).
@@ -147,10 +147,10 @@ impl NetworkConfig {
             // Each hostname creates an independent startup dial; unresolved
             // future seeds fail independently without delaying usable seeds.
             dns_seeds: &[
-                "seed1.kairoschain.xyz",
-                "seed2.kairoschain.xyz",
-                "seed3.kairoschain.xyz",
-                "seed4.kairoschain.xyz",
+                "seed1.kairoschain.org",
+                "seed2.kairoschain.org",
+                "seed3.kairoschain.org",
+                "seed4.kairoschain.org",
             ],
         }
     }
@@ -204,10 +204,10 @@ mod tests {
         assert_eq!(
             NetworkConfig::mainnet().dns_seeds,
             &[
-                "seed1.kairoschain.xyz",
-                "seed2.kairoschain.xyz",
-                "seed3.kairoschain.xyz",
-                "seed4.kairoschain.xyz",
+                "seed1.kairoschain.org",
+                "seed2.kairoschain.org",
+                "seed3.kairoschain.org",
+                "seed4.kairoschain.org",
             ]
         );
     }

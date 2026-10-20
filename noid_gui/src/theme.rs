@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: Apache-2.0
 // Copyright (C) 2026 Paranoid Zero.
+// Modified by the Kairos Chain contributors (rebrand to Kairos Chain).
 
 use iced::border::Radius;
 use iced::widget::{
@@ -68,7 +69,7 @@ fn soft_shadow() -> Shadow {
 
 pub fn paranoid_theme() -> Theme {
     Theme::custom(
-        "ParanO(1)d System",
+        "Kairos System",
         Palette {
             background: BACKGROUND,
             text: TEXT,

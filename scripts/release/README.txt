@@ -1,23 +1,23 @@
-Parano1d Native Release
+Kairos Native Release
 =======================
 
 Each release contains two independent product lines.
 
 GUI Wallet packages (ordinary users):
 
-  Linux:   parano1d-gui-vVERSION-linux-ARCH.deb
-  Windows: parano1d-gui-vVERSION-windows-x86_64-setup.exe
-  macOS:   parano1d-gui-vVERSION-macos-ARCH.dmg
+  Linux:   kairos-gui-vVERSION-linux-ARCH.deb
+  Windows: kairos-gui-vVERSION-windows-x86_64-setup.exe
+  macOS:   kairos-gui-vVERSION-macos-ARCH.dmg
 
-The GUI package exposes only the Parano1d wallet application. Its full node
+The GUI package exposes only the Kairos wallet application. Its full node
 is bundled as a private application component and is supervised by the wallet.
 The user does not need to start a daemon or use a terminal.
 
 Core archives (node operators and miners):
 
-  parano1d        full node and built-in miner
-  parano1d-cli    wallet and node command-line client
-  parano1d-miner  external proof-of-work miner
+  kairos        full node and built-in miner
+  kairos-cli    wallet and node command-line client
+  kairos-miner  external proof-of-work miner
   LICENSE/NOTICE  Apache-2.0 distribution terms and project notices
 
 Scheduled v2
@@ -39,7 +39,7 @@ available. Open either through F7 -> Open file. Import merges by transaction ID,
 preserving your existing records and local name. F4 Receipts is for ordinary
 payments. A file does not contain the sender's entire journal.
 
-Call fee limit (default 1 NOID) is a ceiling for future calls. Saving unfunded
+Call fee limit (default 1 KAI) is a ceiling for future calls. Saving unfunded
 terms is free. Funding and calls show their actual network fee before signing.
 If you missed calls that peers have already pruned, obtain updated terms or a
 receipt from a participant, then check the current balances. Back up the GUI's
@@ -48,7 +48,7 @@ objects/ directory, including objects/terminals/.
 
 Node operators can inspect availability and class limits with:
 
-  parano1d-cli contract protocol
+  kairos-cli contract protocol
 
 Default Small blocks have 63 pages, 504 inputs and up to 63 contract calls.
 Large blocks have 206 pages with the same input and call limits. Calls use
@@ -62,7 +62,7 @@ Hardware check
 
 Before creating node or wallet data, run:
 
-  parano1d --check-hardware
+  kairos --check-hardware
 
 Production requires SSE4.1 and PCLMULQDQ on x86-64, or NEON and PMULL on
 ARM64. The executable selects wider AVX2+VPCLMULQDQ or AVX-512 kernels
@@ -74,7 +74,7 @@ Verify the download
 
 Download SHA256SUMS from the same release as this archive:
 
-  https://git.parano1d.org/ignotusnemo/parano1d/releases
+  https://git.parano1d.org/ignotusnemo/kairos/releases
 
 Before extracting or running anything, compute the archive's SHA-256 digest
 and compare it with the matching line in SHA256SUMS.
@@ -99,15 +99,15 @@ GUI Wallet — Linux
 Open the downloaded .deb in the system Software application, or install it
 from a terminal:
 
-  sudo apt install ./parano1d-gui-vVERSION-linux-ARCH.deb
+  sudo apt install ./kairos-gui-vVERSION-linux-ARCH.deb
 
-Launch Parano1d from the desktop application menu. Removing the package does
+Launch Kairos from the desktop application menu. Removing the package does
 not remove wallet data from the user's home directory.
 
 GUI Wallet — Windows
 --------------------
 
-Run the downloaded setup.exe and launch Parano1d from the Start menu. The
+Run the downloaded setup.exe and launch Kairos from the Start menu. The
 installer is per-user and does not require administrator privileges by
 default.
 
@@ -118,11 +118,11 @@ SmartScreen may display a warning. After verifying SHA256SUMS, select
 GUI Wallet — macOS
 ------------------
 
-Open the downloaded DMG and drag Parano1d.app to Applications. Launch it from
+Open the downloaded DMG and drag Kairos.app to Applications. Launch it from
 Applications like any other app.
 
 Until the project uses an Apple Developer ID certificate, macOS may block the
-first launch. After verifying SHA256SUMS, Control-click Parano1d, choose Open,
+first launch. After verifying SHA256SUMS, Control-click Kairos, choose Open,
 and confirm. If necessary, use Privacy & Security -> Open Anyway.
 
 Core archive — Linux
@@ -130,9 +130,9 @@ Core archive — Linux
 
 Open a terminal in the extracted directory:
 
-  ./parano1d --help
-  ./parano1d-cli --help
-  ./parano1d-miner --help
+  ./kairos --help
+  ./kairos-cli --help
+  ./kairos-miner --help
 
 Core archive — macOS
 --------------------
@@ -140,14 +140,14 @@ Core archive — macOS
 If Gatekeeper blocks a verified download, remove only the quarantine
 attributes from the three extracted binaries:
 
-  xattr -d com.apple.quarantine ./parano1d
-  xattr -d com.apple.quarantine ./parano1d-cli
-  xattr -d com.apple.quarantine ./parano1d-miner
+  xattr -d com.apple.quarantine ./kairos
+  xattr -d com.apple.quarantine ./kairos-cli
+  xattr -d com.apple.quarantine ./kairos-miner
 
 If xattr reports that an attribute does not exist, no action is required.
 Then run:
 
-  ./parano1d --help
+  ./kairos --help
 
 Core archive — Windows
 ----------------------
@@ -158,18 +158,18 @@ PowerShell can unblock all three verified extracted executables at once:
 
 Then run:
 
-  .\parano1d.exe --help
+  .\kairos.exe --help
 
 Node data
 ---------
 
 The first node start creates its configuration and persistent data under:
 
-  Linux/macOS:  ~/.parano1d/
-  Windows:      %USERPROFILE%\.parano1d\
+  Linux/macOS:  ~/.kairos/
+  Windows:      %USERPROFILE%\.kairos\
 
 The wallet key is stored in data/wallet.key and is not password-encrypted.
 Back it up and protect it before receiving funds.
 
-Documentation: https://docs.parano1d.org/
-Source:        https://git.parano1d.org/ignotusnemo/parano1d
+Documentation: https://docs.kairoschain.xyz/
+Source:        https://git.parano1d.org/ignotusnemo/kairos

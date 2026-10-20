@@ -1,6 +1,6 @@
-# Contributing to Parano1d
+# Contributing to Kairos
 
-Bug reports and focused contributions are welcome. Parano1d prioritizes
+Bug reports and focused contributions are welcome. Kairos prioritizes
 protocol correctness, security, and performance.
 
 **Agree on the task first, then submit a pull request with a verifiable benefit.**

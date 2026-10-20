@@ -166,7 +166,7 @@ PACK_DIR=$(release_canonical_directory "$PACK_DIR")
 
 cd "$RELEASE_ROOT_DIR"
 [[ $(git rev-parse --show-toplevel) == "$RELEASE_ROOT_DIR" ]] || \
-  release_die "run this command from the ParanO(1)d repository"
+  release_die "run this command from the Kairos repository"
 [[ $(git branch --show-current) == main ]] || \
   release_die "releases may be published only from main"
 [[ -z $(git status --porcelain=v1 --untracked-files=all) ]] || \
@@ -219,10 +219,10 @@ fi
 release_read_v2_pin_file "$V2_PIN_FILE"
 release_validate_v2_layout "$V2_PACK_DIR" "$RETIREMENT_KEYS_DIR"
 
-TEMP_DIR=$(mktemp -d "${TMPDIR:-/tmp}/parano1d-release.XXXXXX")
+TEMP_DIR=$(mktemp -d "${TMPDIR:-/tmp}/kairos-release.XXXXXX")
 cleanup() {
   local status=$?
-  if [[ -d $TEMP_DIR && $TEMP_DIR == "${TMPDIR:-/tmp}"/parano1d-release.* ]]; then
+  if [[ -d $TEMP_DIR && $TEMP_DIR == "${TMPDIR:-/tmp}"/kairos-release.* ]]; then
     rm -r -- "$TEMP_DIR" || true
   fi
   exit "$status"
@@ -318,16 +318,16 @@ fi
   release_die "published GitHub release channel does not match $CHANNEL"
 
 EXPECTED_ASSETS=(
-  "parano1d-core-$TAG-linux-x86_64.tar.gz"
-  "parano1d-core-$TAG-linux-aarch64.tar.gz"
-  "parano1d-core-$TAG-windows-x86_64.zip"
-  "parano1d-core-$TAG-macos-aarch64.tar.gz"
-  "parano1d-core-$TAG-macos-x86_64.tar.gz"
-  "parano1d-gui-$TAG-linux-x86_64.deb"
-  "parano1d-gui-$TAG-linux-aarch64.deb"
-  "parano1d-gui-$TAG-windows-x86_64-setup.exe"
-  "parano1d-gui-$TAG-macos-aarch64.dmg"
-  "parano1d-gui-$TAG-macos-x86_64.dmg"
+  "kairos-core-$TAG-linux-x86_64.tar.gz"
+  "kairos-core-$TAG-linux-aarch64.tar.gz"
+  "kairos-core-$TAG-windows-x86_64.zip"
+  "kairos-core-$TAG-macos-aarch64.tar.gz"
+  "kairos-core-$TAG-macos-x86_64.tar.gz"
+  "kairos-gui-$TAG-linux-x86_64.deb"
+  "kairos-gui-$TAG-linux-aarch64.deb"
+  "kairos-gui-$TAG-windows-x86_64-setup.exe"
+  "kairos-gui-$TAG-macos-aarch64.dmg"
+  "kairos-gui-$TAG-macos-x86_64.dmg"
   history-step-pack-v1.tar.gz
   history-step-pack-v2.tar.gz
   SHA256SUMS

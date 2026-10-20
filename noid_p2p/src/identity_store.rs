@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: Apache-2.0
 // Copyright (C) 2026 Paranoid Zero.
+// Modified by the Kairos Chain contributors (rebrand to Kairos Chain).
 
 //! Durable libp2p node identity.
 //!
@@ -16,7 +17,7 @@ use anyhow::{bail, Context, Result};
 use libp2p::identity::{KeyType, Keypair};
 
 const IDENTITY_FILE: &str = "p2p_identity.key";
-const IDENTITY_MAGIC: &[u8; 16] = b"NOID-P2P-KEY-v1!";
+const IDENTITY_MAGIC: &[u8; 16] = b"KAI-P2P-KEY-v1!!";
 const MAX_IDENTITY_BYTES: usize = 512;
 
 pub(crate) fn load_or_create(data_dir: &Path) -> Result<Keypair> {

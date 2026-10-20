@@ -87,7 +87,7 @@ version || page_count || ordered_page_hashes
 + growth_price × max(0, live_outputs - live_inputs)
 ```
 
-Все суммы указаны в μNOID. `growth_price` начинается с 2 500 μNOID за каждый
+Все суммы указаны в μKAI. `growth_price` начинается с 2 500 μKAI за каждый
 чисто новый слот и умножается на 1, 2, 4 или 8 в зависимости от занятости
 родительского `State`.
 

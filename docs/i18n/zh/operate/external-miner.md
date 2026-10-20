@@ -11,17 +11,17 @@
 
 ```sh
 umask 077
-openssl rand -hex 32 > ~/.parano1d/mining.key
+openssl rand -hex 32 > ~/.kairos/mining.key
 
-parano1d --mode extminer --mining-key-file ~/.parano1d/mining.key
+kairos --mode extminer --mining-key-file ~/.kairos/mining.key
 ```
 
 在另一个终端运行：
 
 ```sh
-parano1d-miner \
-  --rpc http://127.0.0.1:9601 \
-  --key-file ~/.parano1d/mining.key
+kairos-miner \
+  --rpc http://127.0.0.1:9701 \
+  --key-file ~/.kairos/mining.key
 ```
 
 不带 Origin 的本地客户端可以在通过回环地址连接时省略 Authorization，使 GUI 和 CLI 无需密码即可保留完整的本地管理权限。即使外部挖矿进程在本地运行，也应继续向它提供 `--key-file`，这样它的请求只获得挖矿权限。故意省略令牌的本地原生进程会被视为受信任的本地所有者进程。旧的 `--mining-key TOKEN` 和 `--key TOKEN` 形式继续兼容，但其值可能出现在进程参数中。在 Unix 上，key 文件必须属于当前用户，并且组和其他用户不可访问。
@@ -29,7 +29,7 @@ parano1d-miner \
 需要时可限制挖矿进程的线程数：
 
 ```sh
-parano1d-miner --key-file ~/.parano1d/mining.key --threads 8
+kairos-miner --key-file ~/.kairos/mining.key --threads 8
 ```
 
 ## 远程挖矿进程
@@ -40,10 +40,10 @@ parano1d-miner --key-file ~/.parano1d/mining.key --threads 8
 限制暴露路径。只有安全传输就绪后才绑定公网 RPC：
 
 ```sh
-parano1d \
+kairos \
   --mode extminer \
-  --rpc-listen 0.0.0.0:9601 \
-  --mining-key-file /secure/parano1d-mining.key
+  --rpc-listen 0.0.0.0:9701 \
+  --mining-key-file /secure/kairos-mining.key
 ```
 
 防火墙应只允许指定挖矿进程或代理访问该端口。
@@ -55,18 +55,18 @@ parano1d \
 若允许挖矿进程请求自己的奖励地址，节点运营者必须显式启用：
 
 ```sh
-parano1d \
+kairos \
   --mode extminer \
-  --mining-key-file ~/.parano1d/mining.key \
+  --mining-key-file ~/.kairos/mining.key \
   --allow-custom-coinbase
 ```
 
 此后挖矿进程可以使用：
 
 ```sh
-parano1d-miner \
-  --key-file ~/.parano1d/mining.key \
-  --coinbase o1...
+kairos-miner \
+  --key-file ~/.kairos/mining.key \
+  --coinbase k1...
 ```
 
 自定义 coinbase 只改变证明构建前嵌入的奖励地址，挖矿进程仍无法修改已经
@@ -81,12 +81,12 @@ parano1d-miner \
 
 ```sh
 umask 077
-openssl rand -hex 32 > /secure/parano1d-operator.key
+openssl rand -hex 32 > /secure/kairos-operator.key
 
-parano1d \
+kairos \
   --mode node \
-  --rpc-listen 0.0.0.0:9601 \
-  --operator-key-file /secure/parano1d-operator.key
+  --rpc-listen 0.0.0.0:9701 \
+  --operator-key-file /secure/kairos-operator.key
 ```
 
 运营者令牌允许有界的记账查询、交易和收据查询与验证、费用和付款规划、`walletSend`、精确的钱包合并，以及提交已在外部获得授权的原始交易意图。完整列表见 [JSON-RPC 认证](../reference/rpc.md#认证)。该令牌不能获取或提交挖矿模板、停止节点、扫描钱包、发现或更改地址、枚举无界的钱包历史或 UTXO，也不能调用列表之外的方法。挖矿令牌与运营者令牌必须不同。
@@ -109,7 +109,7 @@ nonce 索引和目标值。挖矿进程搜索随机且互不重叠的 nonce 范�
 运行：
 
 ```sh
-parano1d-miner --check-hardware
+kairos-miner --check-hardware
 ```
 
 请求失败时：

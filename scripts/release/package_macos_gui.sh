@@ -11,7 +11,7 @@ usage() {
   cat <<'EOF'
 Usage: package_macos_gui.sh BIN_DIR OUTPUT_DIR VERSION PLATFORM
 
-Build a native Parano1d .app and compressed DMG.
+Build a native Kairos .app and compressed DMG.
 PLATFORM must be macos-aarch64 or macos-x86_64.
 EOF
 }
@@ -47,37 +47,37 @@ done
 BIN_DIR="$(CDPATH='' cd -- "$BIN_DIR" && pwd -P)"
 mkdir -p -- "$OUTPUT_DIR"
 OUTPUT_DIR="$(CDPATH='' cd -- "$OUTPUT_DIR" && pwd -P)"
-for binary in parano1d-gui parano1d; do
+for binary in kairos-gui kairos; do
   [[ -f $BIN_DIR/$binary && -x $BIN_DIR/$binary ]] || {
     echo "release binary is missing or not executable: $BIN_DIR/$binary" >&2
     exit 1
   }
 done
 
-TEMPORARY=$(mktemp -d "${TMPDIR:-/tmp}/parano1d-macos-gui.XXXXXX")
+TEMPORARY=$(mktemp -d "${TMPDIR:-/tmp}/kairos-macos-gui.XXXXXX")
 MOUNTED=0
 cleanup() {
   local status=$?
   if [[ $MOUNTED == 1 ]]; then
     hdiutil detach "$TEMPORARY/mount" -quiet || true
   fi
-  if [[ -d $TEMPORARY && $TEMPORARY == "${TMPDIR:-/tmp}"/parano1d-macos-gui.* ]]; then
+  if [[ -d $TEMPORARY && $TEMPORARY == "${TMPDIR:-/tmp}"/kairos-macos-gui.* ]]; then
     rm -r -- "$TEMPORARY" || true
   fi
   exit "$status"
 }
 trap cleanup EXIT
 
-APP="$TEMPORARY/Parano1d.app"
+APP="$TEMPORARY/Kairos.app"
 CONTENTS="$APP/Contents"
 MACOS="$CONTENTS/MacOS"
 RESOURCES="$CONTENTS/Resources"
-ICONSET="$TEMPORARY/Parano1d.iconset"
+ICONSET="$TEMPORARY/Kairos.iconset"
 DMG_ROOT="$TEMPORARY/dmg"
 mkdir -p -- "$MACOS" "$RESOURCES" "$ICONSET" "$DMG_ROOT"
 
-install -m 0755 "$BIN_DIR/parano1d-gui" "$MACOS/Parano1d"
-install -m 0755 "$BIN_DIR/parano1d" "$MACOS/parano1d-node"
+install -m 0755 "$BIN_DIR/kairos-gui" "$MACOS/Kairos"
+install -m 0755 "$BIN_DIR/kairos" "$MACOS/kairos-node"
 install -m 0644 "$RELEASE_ROOT_DIR/LICENSE" "$RESOURCES/LICENSE.txt"
 install -m 0644 "$RELEASE_ROOT_DIR/NOTICE" "$RESOURCES/NOTICE.txt"
 install -m 0644 "$SCRIPT_DIR/README.txt" "$RESOURCES/README.txt"
@@ -105,36 +105,36 @@ for specification in \
 do
   size=${specification%% *}
   name=${specification#* }
-  icon="$RELEASE_ROOT_DIR/noid_gui/assets/app-icons/Parano1d-${size}.png"
+  icon="$RELEASE_ROOT_DIR/noid_gui/assets/app-icons/Kairos-${size}.png"
   [[ -f $icon ]] || {
     echo "macOS icon source is missing: $icon" >&2
     exit 1
   }
   install -m 0644 "$icon" "$ICONSET/$name"
 done
-iconutil -c icns "$ICONSET" -o "$RESOURCES/Parano1d.icns"
+iconutil -c icns "$ICONSET" -o "$RESOURCES/Kairos.icns"
 
 xattr -cr "$APP"
 SIGN_IDENTITY=${NOID_MACOS_SIGN_IDENTITY:--}
 if [[ $SIGN_IDENTITY == - ]]; then
-  codesign --force --sign - --timestamp=none "$MACOS/parano1d-node"
-  codesign --force --sign - --timestamp=none "$MACOS/Parano1d"
+  codesign --force --sign - --timestamp=none "$MACOS/kairos-node"
+  codesign --force --sign - --timestamp=none "$MACOS/Kairos"
   codesign --force --deep --sign - --timestamp=none "$APP"
 else
-  codesign --force --options runtime --timestamp --sign "$SIGN_IDENTITY" "$MACOS/parano1d-node"
-  codesign --force --options runtime --timestamp --sign "$SIGN_IDENTITY" "$MACOS/Parano1d"
+  codesign --force --options runtime --timestamp --sign "$SIGN_IDENTITY" "$MACOS/kairos-node"
+  codesign --force --options runtime --timestamp --sign "$SIGN_IDENTITY" "$MACOS/Kairos"
   codesign --force --deep --options runtime --timestamp --sign "$SIGN_IDENTITY" "$APP"
 fi
 codesign --verify --deep --strict "$APP"
-"$MACOS/Parano1d" --release-self-check >/dev/null
-"$MACOS/parano1d-node" --check-hardware >/dev/null
+"$MACOS/Kairos" --release-self-check >/dev/null
+"$MACOS/kairos-node" --check-hardware >/dev/null
 
-mv "$APP" "$DMG_ROOT/Parano1d.app"
+mv "$APP" "$DMG_ROOT/Kairos.app"
 ln -s /Applications "$DMG_ROOT/Applications"
-ARTIFACT="$OUTPUT_DIR/parano1d-gui-v${VERSION}-${PLATFORM}.dmg"
+ARTIFACT="$OUTPUT_DIR/kairos-gui-v${VERSION}-${PLATFORM}.dmg"
 IMAGE_SIZE_MIB=$(python3 "$SCRIPT_DIR/dmg_size.py" "$DMG_ROOT")
 hdiutil create \
-  -volname "Parano1d" \
+  -volname "Kairos" \
   -srcfolder "$DMG_ROOT" \
   -fs HFS+ \
   -size "${IMAGE_SIZE_MIB}m" \
@@ -145,17 +145,17 @@ hdiutil verify "$ARTIFACT" >/dev/null
 mkdir "$TEMPORARY/mount"
 hdiutil attach -readonly -nobrowse -mountpoint "$TEMPORARY/mount" "$ARTIFACT" >/dev/null
 MOUNTED=1
-"$TEMPORARY/mount/Parano1d.app/Contents/MacOS/Parano1d" \
+"$TEMPORARY/mount/Kairos.app/Contents/MacOS/Kairos" \
   --release-self-check >/dev/null
-"$TEMPORARY/mount/Parano1d.app/Contents/MacOS/parano1d-node" \
+"$TEMPORARY/mount/Kairos.app/Contents/MacOS/kairos-node" \
   --check-hardware >/dev/null
-[[ -s $TEMPORARY/mount/Parano1d.app/Contents/Resources/LICENSE.txt ]]
-[[ -s $TEMPORARY/mount/Parano1d.app/Contents/Resources/NOTICE.txt ]]
-[[ -s $TEMPORARY/mount/Parano1d.app/Contents/Resources/README.txt ]]
-[[ -s $TEMPORARY/mount/Parano1d.app/Contents/Resources/CONTRACTS.md ]]
-[[ -s $TEMPORARY/mount/Parano1d.app/Contents/MacOS/parano1d-node ]]
-[[ ! -e $TEMPORARY/mount/Parano1d.app/Contents/MacOS/parano1d-cli ]]
-[[ ! -e $TEMPORARY/mount/Parano1d.app/Contents/MacOS/parano1d-miner ]]
+[[ -s $TEMPORARY/mount/Kairos.app/Contents/Resources/LICENSE.txt ]]
+[[ -s $TEMPORARY/mount/Kairos.app/Contents/Resources/NOTICE.txt ]]
+[[ -s $TEMPORARY/mount/Kairos.app/Contents/Resources/README.txt ]]
+[[ -s $TEMPORARY/mount/Kairos.app/Contents/Resources/CONTRACTS.md ]]
+[[ -s $TEMPORARY/mount/Kairos.app/Contents/MacOS/kairos-node ]]
+[[ ! -e $TEMPORARY/mount/Kairos.app/Contents/MacOS/kairos-cli ]]
+[[ ! -e $TEMPORARY/mount/Kairos.app/Contents/MacOS/kairos-miner ]]
 hdiutil detach "$TEMPORARY/mount" -quiet
 MOUNTED=0
 printf '%s\n' "$ARTIFACT"

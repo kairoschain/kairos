@@ -22,7 +22,7 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
-NODE_BIN = ROOT / "target" / "release" / "parano1d"
+NODE_BIN = ROOT / "target" / "release" / "kairos"
 RUN_PARENT = ROOT / "target" / "live-tests"
 STAMP = datetime.datetime.now().strftime("%Y%m%d-%H%M%S")
 BASE = Path(
@@ -107,7 +107,7 @@ class Node:
         self.rpc_port = rpc_port
         self.root = BASE / name
         self.data_dir = self.root / "data"
-        self.config = self.root / "parano1d.toml"
+        self.config = self.root / "kairos.toml"
         self.proc = None
         self.log_handle = None
         self.log_path = None

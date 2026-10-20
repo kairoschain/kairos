@@ -1,7 +1,8 @@
 // SPDX-License-Identifier: Apache-2.0
 // Copyright (C) 2026 Paranoid Zero.
+// Modified by the Kairos Chain contributors (rebrand to Kairos Chain).
 
-//! Pruv compiles bounded contract source to Parano1d's existing ABI 3.
+//! Pruv compiles bounded contract source to Kairos's existing ABI 3.
 
 mod bindings;
 mod compile;

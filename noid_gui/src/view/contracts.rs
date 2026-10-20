@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: Apache-2.0
 // Copyright (C) 2026 Paranoid Zero.
+// Modified by the Kairos Chain contributors (rebrand to Kairos Chain).
 
 use crate::app::{App, Message, CONTRACTS_SCROLL_ID};
 use crate::contracts::{Action, DetailTab, Field, Info, Kind, Tab, UseAction};
@@ -370,7 +371,7 @@ fn create(app: &App, compact: bool) -> Element<'_, Message> {
                     ready
                 ),
                 field(
-                    "CALL FEE LIMIT (NOID)",
+                    "CALL FEE LIMIT (KAI)",
                     &state.max_fee,
                     Field::MaxFee,
                     ready
@@ -398,9 +399,9 @@ fn create(app: &App, compact: bool) -> Element<'_, Message> {
         ) {
             form = form.push(field(
                 if matches!(state.kind, Kind::Recurring | Kind::Vesting) {
-                    "FIXED PAYMENT / TRANCHE (NOID)"
+                    "FIXED PAYMENT / TRANCHE (KAI)"
                 } else {
-                    "PER-CALL PAYMENT LIMIT (NOID)"
+                    "PER-CALL PAYMENT LIMIT (KAI)"
                 },
                 &state.max_payment,
                 Field::MaxPayment,
@@ -409,7 +410,7 @@ fn create(app: &App, compact: bool) -> Element<'_, Message> {
         }
         if state.kind == Kind::Budget {
             form = form.push(field(
-                "TOTAL PERIOD BUDGET (NOID)",
+                "TOTAL PERIOD BUDGET (KAI)",
                 &state.budget,
                 Field::Budget,
                 ready,
@@ -417,7 +418,7 @@ fn create(app: &App, compact: bool) -> Element<'_, Message> {
         }
         if matches!(state.kind, Kind::Allowance | Kind::Budget) {
             form = form.push(field(
-                "MINIMUM RESERVE (NOID)",
+                "MINIMUM RESERVE (KAI)",
                 &state.reserve,
                 Field::Reserve,
                 ready,
@@ -433,7 +434,7 @@ fn create(app: &App, compact: bool) -> Element<'_, Message> {
 
     form = form.push(pair(
         field(
-            "INITIAL DEPOSIT (NOID)",
+            "INITIAL DEPOSIT (KAI)",
             &state.initial_amount,
             Field::InitialAmount,
             ready,
@@ -497,12 +498,12 @@ fn help_popup(kind: Kind) -> Element<'static, Message> {
     };
 
     let example = match kind {
-        Kind::Payment => "Example: reserve 10 NOID for a recipient. They collect before expiry; you can recover the remainder from the expiry block.",
+        Kind::Payment => "Example: reserve 10 KAI for a recipient. They collect before expiry; you can recover the remainder from the expiry block.",
         Kind::Vault => "Example: lock savings until a chosen block. The owner can withdraw after that block.",
         Kind::Allowance => "Example: give a spending key access to a funded balance with a maximum payment per call and a protected reserve.",
-        Kind::Budget => "Example: allow up to 10 NOID of payments and fees per period. Unused budget does not carry over.",
+        Kind::Budget => "Example: allow up to 10 KAI of payments and fees per period. Unused budget does not carry over.",
         Kind::Recurring => "Example: prepay a recurring allowance. The recipient claims each due payment; nothing is charged automatically.",
-        Kind::Vesting => "Example: unlock 5 NOID at each interval. The beneficiary submits a call to claim each tranche.",
+        Kind::Vesting => "Example: unlock 5 KAI at each interval. The beneficiary submits a call to claim each tranche.",
         Kind::Custom => "Two saved u64 counters, two scratch registers, up to 16 instructions. Use decimal strings for counters and constants; amounts in the program are micronoid.",
     };
     let mut content = column![
@@ -600,14 +601,14 @@ fn review(app: &App, compact: bool) -> Option<Element<'_, Message>> {
     {
         review = review
             .push(pair(
-                value("DEPOSIT AMOUNT (NOID)", format_micronoid(*amount)),
-                value("NETWORK FEE (NOID)", format_micronoid(*fee)),
+                value("DEPOSIT AMOUNT (KAI)", format_micronoid(*amount)),
+                value("NETWORK FEE (KAI)", format_micronoid(*fee)),
                 compact,
             ))
             .push(pair(
                 value("DEADLINE BLOCK", info.deadline_height),
                 value(
-                    "CALL FEE LIMIT (NOID)",
+                    "CALL FEE LIMIT (KAI)",
                     format_micronoid(info.max_fee_micronoid),
                 ),
                 compact,
@@ -628,14 +629,14 @@ fn review(app: &App, compact: bool) -> Option<Element<'_, Message>> {
         );
         review = review.push(
             row![
-                text("NETWORK FEE (NOID)"),
+                text("NETWORK FEE (KAI)"),
                 text(format_micronoid(preview.fee_micronoid))
             ]
             .spacing(8),
         );
         review = review.push(
             row![
-                text("REMAINING BALANCE (NOID)"),
+                text("REMAINING BALANCE (KAI)"),
                 text(format_micronoid(preview.retained_micronoid))
             ]
             .spacing(8),
@@ -645,7 +646,7 @@ fn review(app: &App, compact: bool) -> Option<Element<'_, Message>> {
                 row![
                     text("PAYMENT"),
                     text(format!(
-                        "{} NOID → {}",
+                        "{} KAI → {}",
                         format_micronoid(payout.amount_micronoid),
                         payout.address
                     ))
@@ -847,7 +848,7 @@ fn contract_actions<'a>(app: &'a App, info: &'a Info, compact: bool) -> Element<
                 button(
                     row![
                         text(if selected { "●" } else { "○" }).size(13),
-                        text(format!("{} NOID", format_micronoid(slot.value)))
+                        text(format!("{} KAI", format_micronoid(slot.value)))
                             .size(15)
                             .color(theme::ACCENT),
                         Space::new().width(Length::Fill),
@@ -961,7 +962,7 @@ fn contract_actions<'a>(app: &'a App, info: &'a Info, compact: bool) -> Element<
     let (label, action, enabled) = match state.use_action {
         UseAction::Fund => {
             form = form.push(field(
-                "DEPOSIT AMOUNT (NOID)",
+                "DEPOSIT AMOUNT (KAI)",
                 &state.amount,
                 Field::Amount,
                 ready,
@@ -974,7 +975,7 @@ fn contract_actions<'a>(app: &'a App, info: &'a Info, compact: bool) -> Element<
         }
         UseAction::Pay => {
             form = form.push(field(
-                "PAYMENT AMOUNT (NOID)",
+                "PAYMENT AMOUNT (KAI)",
                 &state.amount,
                 Field::Amount,
                 ready,
@@ -1074,18 +1075,18 @@ fn policy_rules<'a>(
         pair(
             value("DEADLINE BLOCK", info.deadline_height),
             value(
-                "CALL FEE LIMIT (NOID)",
+                "CALL FEE LIMIT (KAI)",
                 format_micronoid(info.max_fee_micronoid)
             ),
             compact
         ),
         pair(
             value(
-                "PER-CALL PAYMENT LIMIT (NOID)",
+                "PER-CALL PAYMENT LIMIT (KAI)",
                 format_micronoid(info.max_payout_micronoid)
             ),
             value(
-                "MINIMUM RESERVE (NOID)",
+                "MINIMUM RESERVE (KAI)",
                 format_micronoid(info.min_retained_micronoid)
             ),
             compact
@@ -1187,7 +1188,7 @@ fn activity(app: &App) -> Element<'_, Message> {
                         Space::new().width(Length::Fill),
                         text(operation.amount_micronoid.map_or_else(
                             || "AMOUNT NOT INCLUDED IN RECEIPT".into(),
-                            |amount| format!("{} NOID", format_micronoid(amount))
+                            |amount| format!("{} KAI", format_micronoid(amount))
                         ))
                         .size(13)
                     ]
@@ -1231,7 +1232,7 @@ fn activity(app: &App) -> Element<'_, Message> {
         let mut detail = column![
             value("TRANSACTION ID", &operation.txid),
             value(
-                "NETWORK FEE (NOID)",
+                "NETWORK FEE (KAI)",
                 operation
                     .fee_micronoid
                     .map_or_else(|| "NOT INCLUDED IN RECEIPT".into(), format_micronoid)
@@ -1299,7 +1300,7 @@ fn open_file(app: &App, compact: bool) -> Element<'_, Message> {
             if let Some(instances) = &file.instances {
                 let amount: u128 = instances.slots.iter().map(|s| u128::from(s.value)).sum();
                 preview = preview.push(value(
-                    "AVAILABLE IN THIS PAGE (NOID)",
+                    "AVAILABLE IN THIS PAGE (KAI)",
                     format!("{}.{:06}", amount / 1_000_000, amount % 1_000_000),
                 ));
                 preview = preview.push(

@@ -7,7 +7,7 @@
 доказательства, аутентифицированному пакету матриц, профилю сборки и машине. Это
 не консенсусная константа, и её нельзя вывести только из числа ядер.
 
-Исторические измерения времени построения ниже выполнены на версии Parano1d
+Исторические измерения времени построения ниже выполнены на версии Kairos
 `39626b22d53cf2f2c480a7e28446c197dca68043` со штатным профилем C1 и
 аутентифицированным пакетом матриц B25/B255, до появления кодирования общих
 путей в v1.1. Они остаются аппаратным ориентиром для будущих экспериментов с
@@ -21,7 +21,7 @@
 | ПК с AVX-512, 24 потока | B25 / `m=22` | **6,905 с** | p50 по 3 измерениям |
 | ПК с AVX-512, 24 потока | B255 / `m=24` | **21,053 с** | p50 по 3 измерениям |
 
-В [исходном отчёте](https://git.parano1d.org/ignotusnemo/parano1d/src/branch/v2/research/two_class/results/2026-08-06-history-step-b25-b255.md)
+В [исходном отчёте](https://git.parano1d.org/ignotusnemo/kairos/src/branch/v2/research/two_class/results/2026-08-06-history-step-b25-b255.md)
 сохранены размеры распакованного terminal той версии. Они не равны сетевому
 размеру terminal в v1.1; приведённое время не включает накладные расходы
 кодирования общих путей.
@@ -49,7 +49,7 @@
 Консенсусный предел остаётся 1 100 000 байт для закодированного и распакованного
 terminal. Тело блока, транспортное обрамление и hex-текст RPC сюда не входят.
 
-[Отчёт о кодировании](https://git.parano1d.org/ignotusnemo/parano1d/src/branch/v2/research/two_class/results/2026-09-24-terminal-shared-paths.md)
+[Отчёт о кодировании](https://git.parano1d.org/ignotusnemo/kairos/src/branch/v2/research/two_class/results/2026-09-24-terminal-shared-paths.md)
 содержит команды воспроизведения и результаты проверок. Этот замер показывает
 сокращение представления; исторический компьютер с AVX-512 повторно не измерялся.
 
@@ -105,7 +105,7 @@ NOID_WALLET_BENCH_SAMPLES=20 cargo run --release --locked \
 классы по отдельности, чтобы вывод однозначно указывал классы родителя и потомка.
 
 ```sh
-NOID_PACK_ROOT=../parano1d-artifacts/history-step-pack-v1
+NOID_PACK_ROOT=../kairos-artifacts/history-step-pack-v1
 source "$NOID_PACK_ROOT/pins.env"
 export NOID_HISTORY_STEP_RUNTIME_METADATA_RELEASE_DIGEST
 export NOID_HISTORY_STEP_PACK_LEAF_DIGESTS

@@ -1,6 +1,6 @@
 # Receipts and pruned history
 
-Parano1d does not require every node to retain every historical block body.
+Kairos does not require every node to retain every historical block body.
 That removes a growing consensus burden, but users still need a durable way to
 prove that a payment was included. A receipt preserves exactly that evidence.
 
@@ -40,7 +40,7 @@ that secret is imported on another computer.
 
 Back up receipt data separately if long-term payment evidence matters.
 Exported receipt text is self-contained and can be verified by another
-Parano1d node.
+Kairos node.
 
 ## Which transactions receive a receipt
 

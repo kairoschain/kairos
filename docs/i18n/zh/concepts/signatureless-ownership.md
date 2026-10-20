@@ -1,6 +1,6 @@
 # 无签名所有权
 
-Parano1d [地址](../reference/glossary.md#address)是 256 位秘密经 [Poseidon2b](../reference/glossary.md#poseidon2b) 映射所得[所有者](../reference/glossary.md#owner)值的公开编码。支出时既不公开公钥，也不附加数字签名。钱包改为生成[零知识证明](../reference/glossary.md#zero-knowledge-proof)，证明自己知道输入所有者背后的原像。
+Kairos [地址](../reference/glossary.md#address)是 256 位秘密经 [Poseidon2b](../reference/glossary.md#poseidon2b) 映射所得[所有者](../reference/glossary.md#owner)值的公开编码。支出时既不公开公钥，也不附加数字签名。钱包改为生成[零知识证明](../reference/glossary.md#zero-knowledge-proof)，证明自己知道输入所有者背后的原像。
 
 授权绑定到：
 
@@ -30,7 +30,7 @@ Parano1d [地址](../reference/glossary.md#address)是 256 位秘密经 [Poseido
 
 地址、金额、手续费、输入引用、输出记录和正在转发的交易都是公开的。零知识隐藏支出秘密，但不会在交易历史仍可取得时隐藏历史本身。
 
-Parano1d 让旧区块体不再是共识必需数据，从而减少普通节点的长期存储负担。公开交易仍可能被第三方归档；区块体被普通节点裁剪后，已经保存的收据仍能证明某一笔具体付款。
+Kairos 让旧区块体不再是共识必需数据，从而减少普通节点的长期存储负担。公开交易仍可能被第三方归档；区块体被普通节点裁剪后，已经保存的收据仍能证明某一笔具体付款。
 
 ## 后量子边界
 

@@ -1,4 +1,4 @@
-# Parano1d documentation
+# Kairos documentation
 
 - [Main](index.md)
 
@@ -64,7 +64,7 @@
 - [First run and the master secret](wallet/first-run.md)
 - [Photo-derived key](wallet/photo-key.md)
 - [Addresses](wallet/addresses.md)
-- [Send NOID](wallet/send.md)
+- [Send KAI](wallet/send.md)
 - [Receipts](wallet/receipts.md)
 - [Contracts in the wallet](wallet/contracts.md)
 - [Consolidation](wallet/consolidation.md)

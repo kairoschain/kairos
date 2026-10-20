@@ -1,6 +1,6 @@
 # 工作量证明
 
-Parano1d 的[工作量证明](../reference/glossary.md#proof-of-work)是在固定语义区块头字段上计算的带[域分离](../reference/glossary.md#domain-separation) [Poseidon2b](../reference/glossary.md#poseidon2b) 摘要。它只在不含 [nonce](../reference/glossary.md#nonce) 的 `HistoryStep` 完成证明后运行。
+Kairos 的[工作量证明](../reference/glossary.md#proof-of-work)是在固定语义区块头字段上计算的带[域分离](../reference/glossary.md#domain-separation) [Poseidon2b](../reference/glossary.md#poseidon2b) 摘要。它只在不含 [nonce](../reference/glossary.md#nonce) 的 `HistoryStep` 完成证明后运行。
 
 ## 字段序列
 

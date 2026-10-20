@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: Apache-2.0
 // Copyright (C) 2026 Paranoid Zero.
+// Modified by the Kairos Chain contributors (rebrand to Kairos Chain).
 
 pub const WALLET_CONSOLIDATION_INPUT_LIMIT: usize = 64;
 pub const MINED_BLOCK_PAGE_SIZE: u32 = 8;
@@ -742,7 +743,7 @@ impl AppSnapshot {
         let mut addresses = vec![
             AddressSnapshot {
                 key_index: 0,
-                address: "o12p4r8dl49ys3462zrqqys5vz8ll8m93su6lc70wu7rrwg3nn7fgsd7jnnt".into(),
+                address: "k12p4r8dl49ys3462zrqqys5vz8ll8m93su6lc70wu7rrwg3nn7fgs2mq8ug".into(),
                 label: "Main".into(),
                 balance_micronoid: PREVIEW_BALANCE_MICRONOID,
                 utxo_count: PREVIEW_UTXO_COUNT,
@@ -752,7 +753,7 @@ impl AppSnapshot {
             },
             AddressSnapshot {
                 key_index: 1,
-                address: "o17z7pfmh09rjztwga8y9pzpy05ncznl5teqe23a48d0sumjcnrlaszlk2vj".into(),
+                address: "k17z7pfmh09rjztwga8y9pzpy05ncznl5teqe23a48d0sumjcnrlas96y7r3".into(),
                 label: "Savings".into(),
                 balance_micronoid: 312_000_000,
                 utxo_count: 6,
@@ -762,7 +763,7 @@ impl AppSnapshot {
             },
             AddressSnapshot {
                 key_index: 2,
-                address: "o1ajnpfqtpkpugpwvpgjtkhk432fhd86l6vnvurgzn97hmvpcldpesewn8k6".into(),
+                address: "k1ajnpfqtpkpugpwvpgjtkhk432fhd86l6vnvurgzn97hmvpcldpes7tpnee".into(),
                 label: "Shop".into(),
                 balance_micronoid: 0,
                 utxo_count: 0,
@@ -1062,8 +1063,8 @@ fn compact_decimal(value: f64) -> String {
 
 /// Compact whole-network monetary value with at most two decimal places.
 ///
-/// The caller supplies μNOID; the returned text deliberately omits the final
-/// `NOID` suffix so views can retain it unconditionally at every window size.
+/// The caller supplies μKAI; the returned text deliberately omits the final
+/// `KAI` suffix so views can retain it unconditionally at every window size.
 pub fn format_compact_micronoid(value: u128) -> String {
     const UNITS: [(&str, u128); 5] = [
         ("", 1_000_000),

@@ -1,6 +1,6 @@
 # 架构
 
-Parano1d 把每一项证明责任放在相应[见证数据](../reference/glossary.md#witness)原本所在的位置。钱包知道支出秘密，矿工持有公开的 [`State`](../reference/glossary.md#state) 见证数据，全节点则两者都不需要：它只验证生成的证明，并[物化](../reference/glossary.md#materialization)其中已经证明的写入。
+Kairos 把每一项证明责任放在相应[见证数据](../reference/glossary.md#witness)原本所在的位置。钱包知道支出秘密，矿工持有公开的 [`State`](../reference/glossary.md#state) 见证数据，全节点则两者都不需要：它只验证生成的证明，并[物化](../reference/glossary.md#materialization)其中已经证明的写入。
 
 ![证明原生区块流程](../../../assets/architecture/proof-native-block-flow.svg)
 

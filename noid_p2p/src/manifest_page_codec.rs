@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: Apache-2.0
 // Copyright (C) 2026 Paranoid Zero.
+// Modified by the Kairos Chain contributors (rebrand to Kairos Chain).
 
 //! Exact content-addressed transfer for snapshot descriptor pages.
 
@@ -276,7 +277,7 @@ mod tests {
             page: SnapshotManifestPageRef {
                 page_index: 0,
                 byte_digest: noid_poseidon2b::native::poseidon2b_hash_bytes(
-                    b"PARANO1D/P2P/SNAPSHOT-MANIFEST-PAGE/V1",
+                    b"KAIROS/P2P/SNAPSHOT-MANIFEST-PAGE/V1",
                     bytes,
                 ),
                 encoded_len: bytes.len() as u32,

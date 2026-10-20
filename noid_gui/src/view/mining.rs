@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: Apache-2.0
 // Copyright (C) 2026 Paranoid Zero.
+// Modified by the Kairos Chain contributors (rebrand to Kairos Chain).
 
 #[cfg(feature = "dev-genesis")]
 use iced::widget::checkbox;
@@ -595,7 +596,7 @@ fn block_details<'a>(
             detail("BLOCK", format_bytes(retained.block_bytes)),
             detail("HISTORYSTEP", format_bytes(retained.history_step_bytes)),
             detail("BUNDLE", format_bytes(retained.bundle_bytes)),
-            detail("FEES", format!("{} μNOID", retained.total_fees_micronoid)),
+            detail("FEES", format!("{} μKAI", retained.total_fees_micronoid)),
         ]
         .spacing(18);
         let tx_header = container(
@@ -606,7 +607,7 @@ fn block_details<'a>(
                 table_cell("PAGES".into(), 2, theme::INK),
                 table_cell("IN".into(), 2, theme::INK),
                 table_cell("OUT".into(), 2, theme::INK),
-                table_cell("FEE / μNOID".into(), 4, theme::INK),
+                table_cell("FEE / μKAI".into(), 4, theme::INK),
                 text("OPEN")
                     .size(13)
                     .color(theme::INK)
@@ -835,7 +836,7 @@ fn transaction_details<'a>(
     let flow = if transaction.development_payout {
         column![
             text("REWARD SHARE").size(12).color(theme::DIM),
-            text("Block-reward shares paid to O(1) Network Fund and ParanO(1)d Lab. This protocol payout has no spend inputs.")
+            text("Block-reward shares paid to O(1) Network Fund and Kairos Lab. This protocol payout has no spend inputs.")
                 .size(13)
                 .color(theme::PROOF),
         ]
@@ -975,7 +976,7 @@ fn transaction_inputs(
             table_cell("REF".into(), 2, theme::INK),
             table_cell("SLOT".into(), 3, theme::INK),
             table_cell("ORIGIN".into(), 4, theme::INK),
-            table_cell("AMOUNT / NOID".into(), 5, theme::INK),
+            table_cell("AMOUNT / KAI".into(), 5, theme::INK),
         ]
         .spacing(6),
     )

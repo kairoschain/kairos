@@ -7,7 +7,7 @@ Performance belongs to one source revision, proof profile, authenticated matrix
 pack, build profile and host. It is not a consensus constant and cannot be
 inferred from core count alone.
 
-The historical construction measurements below use Parano1d revision
+The historical construction measurements below use Kairos revision
 `39626b22d53cf2f2c480a7e28446c197dca68043`, the production C1 profile and the
 authenticated B25/B255 matrix pack. They predate v1.1 shared-path encoding.
 They remain a hardware baseline for later capacity experiments, including v2;
@@ -20,7 +20,7 @@ new proof shapes and complete block production still need their own measurements
 | AVX-512 PC, 24 threads | B25 / `m=22` | **6.905 s** | p50 of 3 samples |
 | AVX-512 PC, 24 threads | B255 / `m=24` | **21.053 s** | p50 of 3 samples |
 
-The [original measurement record](https://git.parano1d.org/ignotusnemo/parano1d/src/branch/v2/research/two_class/results/2026-08-06-history-step-b25-b255.md)
+The [original measurement record](https://git.parano1d.org/ignotusnemo/kairos/src/branch/v2/research/two_class/results/2026-08-06-history-step-b25-b255.md)
 preserves the expanded terminal sizes from that revision. Those sizes are not
 the v1.1 network payload, and these timings exclude shared-path codec overhead.
 
@@ -47,7 +47,7 @@ An independently verified mainnet B25 terminal at height 137191 was 872,500 B.
 The consensus cap remains 1,100,000 bytes for encoded and expanded terminals.
 Block bodies, transport framing and RPC hex text are excluded from these sizes.
 
-The [codec measurement record](https://git.parano1d.org/ignotusnemo/parano1d/src/branch/v2/research/two_class/results/2026-09-24-terminal-shared-paths.md)
+The [codec measurement record](https://git.parano1d.org/ignotusnemo/kairos/src/branch/v2/research/two_class/results/2026-09-24-terminal-shared-paths.md)
 contains reproduction instructions and validation results. This audit measures
 representation savings; it does not remeasure the historical AVX-512 host.
 
@@ -102,7 +102,7 @@ matrix pack. Run each class separately so the output identifies the exact
 parent and child class.
 
 ```sh
-NOID_PACK_ROOT=../parano1d-artifacts/history-step-pack-v1
+NOID_PACK_ROOT=../kairos-artifacts/history-step-pack-v1
 source "$NOID_PACK_ROOT/pins.env"
 export NOID_HISTORY_STEP_RUNTIME_METADATA_RELEASE_DIGEST
 export NOID_HISTORY_STEP_PACK_LEAF_DIGESTS

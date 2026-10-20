@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: Apache-2.0
 // Copyright (C) 2026 Paranoid Zero.
+// Modified by the Kairos Chain contributors (rebrand to Kairos Chain).
 
 use std::{
     fs::{File, OpenOptions},
@@ -11,7 +12,7 @@ use clap::{Args, Parser, Subcommand};
 use noid_pruv::{compile, parse_parameters, verify, MAX_SOURCE_BYTES};
 
 #[derive(Parser)]
-#[command(name = "pruv", version, about = "Compile Parano1d native contracts")]
+#[command(name = "pruv", version, about = "Compile Kairos native contracts")]
 struct Cli {
     #[command(subcommand)]
     command: Command,
@@ -32,7 +33,7 @@ enum Command {
         #[command(flatten)]
         input: Input,
     },
-    /// Produce a definition accepted by parano1d-cli contract create.
+    /// Produce a definition accepted by kairos-cli contract create.
     Build {
         #[command(flatten)]
         input: Input,

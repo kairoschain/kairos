@@ -1,6 +1,6 @@
 # Установка и использование кошелька
 
-Нативный пакет GUI содержит кошелёк Parano1d и его собственную полную
+Нативный пакет GUI содержит кошелёк Kairos и его собственную полную
 ноду. Приложение само запускает, контролирует и останавливает эту ноду.
 Для обычной работы с кошельком терминал не нужен.
 
@@ -11,26 +11,26 @@
 
 | Платформа | Пакет |
 |---|---|
-| Debian или Ubuntu, x86-64 | `parano1d-gui-vVERSION-linux-x86_64.deb` |
-| Debian или Ubuntu, ARM64 | `parano1d-gui-vVERSION-linux-aarch64.deb` |
-| Windows x86-64 | `parano1d-gui-vVERSION-windows-x86_64-setup.exe` |
-| macOS Apple Silicon | `parano1d-gui-vVERSION-macos-aarch64.dmg` |
-| macOS Intel | `parano1d-gui-vVERSION-macos-x86_64.dmg` |
+| Debian или Ubuntu, x86-64 | `kairos-gui-vVERSION-linux-x86_64.deb` |
+| Debian или Ubuntu, ARM64 | `kairos-gui-vVERSION-linux-aarch64.deb` |
+| Windows x86-64 | `kairos-gui-vVERSION-windows-x86_64-setup.exe` |
+| macOS Apple Silicon | `kairos-gui-vVERSION-macos-aarch64.dmg` |
+| macOS Intel | `kairos-gui-vVERSION-macos-x86_64.dmg` |
 
 Скачайте `SHA256SUMS` из того же релиза и до открытия пакета проверьте его:
 
 ```sh
 # Linux
-sha256sum parano1d-gui-vVERSION-linux-x86_64.deb
+sha256sum kairos-gui-vVERSION-linux-x86_64.deb
 
 # macOS
-shasum -a 256 parano1d-gui-vVERSION-macos-aarch64.dmg
+shasum -a 256 kairos-gui-vVERSION-macos-aarch64.dmg
 ```
 
 В Windows используйте PowerShell:
 
 ```powershell
-Get-FileHash .\parano1d-gui-vVERSION-windows-x86_64-setup.exe -Algorithm SHA256
+Get-FileHash .\kairos-gui-vVERSION-windows-x86_64-setup.exe -Algorithm SHA256
 ```
 
 Полученный хэш должен совпасть с соответствующей строкой в `SHA256SUMS`.
@@ -42,10 +42,10 @@ Get-FileHash .\parano1d-gui-vVERSION-windows-x86_64-setup.exe -Algorithm SHA256
 Откройте `.deb` в системном центре приложений или выполните:
 
 ```sh
-sudo apt install ./parano1d-gui-vVERSION-linux-x86_64.deb
+sudo apt install ./kairos-gui-vVERSION-linux-x86_64.deb
 ```
 
-Запустите **Parano1d** из меню приложений.
+Запустите **Kairos** из меню приложений.
 
 ### Windows
 
@@ -58,7 +58,7 @@ sudo apt install ./parano1d-gui-vVERSION-linux-x86_64.deb
 
 ### macOS
 
-Откройте DMG и перетащите **Parano1d** в папку Applications.
+Откройте DMG и перетащите **Kairos** в папку Applications.
 
 Пока релизы не нотарифицированы с Apple Developer ID, щёлкните приложение с
 зажатой клавишей Control, выберите **Открыть** и подтвердите запуск. Если
@@ -88,8 +88,8 @@ macOS продолжает блокировать приложение, посл
 **ОНЛАЙН**.
 
 Собственная нода кошелька принимает исходящие и входящие P2P-соединения по TCP
-`9600`. Для обычной работы достаточно исходящих соединений; открытый входящий
-TCP `9600` также помогает связности сети.
+`9700`. Для обычной работы достаточно исходящих соединений; открытый входящий
+TCP `9700` также помогает связности сети.
 
 ## Получение и отправка
 
@@ -107,7 +107,7 @@ TCP `9600` также помогает связности сети.
 Кошелёк локально создаёт доказательство авторизации с нулевым разглашением и передаёт
 полную логическую транзакцию своей ноде. Финальная панель успешной отправки показывает
 логический идентификатор транзакции. Статусы и подтверждение подробно описаны
-в разделе [Отправка NOID](../wallet/send.md).
+в разделе [Отправка KAI](../wallet/send.md).
 
 ## Удаление приложения
 
@@ -116,13 +116,13 @@ TCP `9600` также помогает связности сети.
 В Debian или Ubuntu:
 
 ```sh
-sudo apt remove parano1d-gui
+sudo apt remove kairos-gui
 ```
 
-В Windows откройте **Установленные приложения → Parano1d → Удалить**. В
+В Windows откройте **Установленные приложения → Kairos → Удалить**. В
 macOS переместите приложение из Applications в корзину.
 
-Данные кошелька и ноды останутся в каталоге `.parano1d` профиля пользователя.
+Данные кошелька и ноды останутся в каталоге `.kairos` профиля пользователя.
 Удаляйте этот каталог только после экспорта или резервного копирования
 мастер-секрета и всех чеков, которые нужно сохранить.
 

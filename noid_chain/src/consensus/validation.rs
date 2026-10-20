@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: Apache-2.0
 // Copyright (C) 2026 Paranoid Zero.
+// Modified by the Kairos Chain contributors (rebrand to Kairos Chain).
 
 //! Consensus checks shared by proof-native validation and in-memory utilities.
 //!
@@ -304,8 +305,8 @@ pub fn validate_mandatory_coinbase_with_schedule(
             }
             let first = &payout.body.outputs[0];
             let second = &payout.body.outputs[1];
-            if first.owner != crate::consensus::development_allocation::O1_NETWORK_FUND_ADDRESS
-                || second.owner != crate::consensus::development_allocation::PARANO1D_LAB_ADDRESS
+            if first.owner != crate::consensus::development_allocation::DISABLED_FUND_ADDRESS_A
+                || second.owner != crate::consensus::development_allocation::DISABLED_FUND_ADDRESS_B
                 || first.amount != expected_amount
                 || second.amount != expected_amount
             {
@@ -655,12 +656,12 @@ mod tests {
                 TxOutput {
                     slot_index: 15_000_001,
                     amount,
-                    owner: crate::consensus::development_allocation::O1_NETWORK_FUND_ADDRESS,
+                    owner: crate::consensus::development_allocation::DISABLED_FUND_ADDRESS_A,
                 },
                 TxOutput {
                     slot_index: 15_000_002,
                     amount,
-                    owner: crate::consensus::development_allocation::PARANO1D_LAB_ADDRESS,
+                    owner: crate::consensus::development_allocation::DISABLED_FUND_ADDRESS_B,
                 },
             ],
             validity_bitmap: output_bitmap_bit(0) | output_bitmap_bit(1),

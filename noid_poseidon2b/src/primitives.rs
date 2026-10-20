@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: Apache-2.0
 // Copyright (C) 2026 Paranoid Zero.
+// Modified by the Kairos Chain contributors (rebrand to Kairos Chain).
 
 //! Typed cryptographic primitives for the transparent UTXO layer.
 //!
@@ -80,7 +81,7 @@ newtype_digest!(
 
 /// Human-readable part for Paranoid bech32m addresses.
 /// Produces addresses of the form `o1q...` (~60 chars).
-pub const ADDRESS_HRP: &str = "o";
+pub const ADDRESS_HRP: &str = "k";
 
 /// Error returned when decoding a bech32m address fails.
 #[derive(Debug, Clone, PartialEq, Eq)]
@@ -97,7 +98,7 @@ impl std::fmt::Display for AddressError {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
             Self::InvalidFormat => write!(f, "invalid address format (expected bech32m o1…)"),
-            Self::WrongHrp(h) => write!(f, "wrong address network: got '{h}', expected 'o'"),
+            Self::WrongHrp(h) => write!(f, "wrong address network: got '{h}', expected 'k'"),
             Self::WrongLength(n) => write!(f, "wrong address length: got {n} bytes, expected 32"),
         }
     }
@@ -111,7 +112,7 @@ impl Address {
     /// call this or use the `Display` impl.
     pub fn to_bech32(&self) -> String {
         use bech32::{Bech32m, Hrp};
-        let hrp = Hrp::parse(ADDRESS_HRP).expect("o is a valid HRP");
+        let hrp = Hrp::parse(ADDRESS_HRP).expect("k is a valid HRP");
         bech32::encode::<Bech32m>(hrp, &self.0).expect("32 bytes always encodes")
     }
 
@@ -461,7 +462,7 @@ mod tests {
         let encoded = addr.to_bech32();
         // Must start with o1
         assert!(
-            encoded.starts_with("o1"),
+            encoded.starts_with("k1"),
             "expected o1 prefix, got {encoded}"
         );
         // Must be exactly 60 chars (1 HRP + 52 data + 6 checksum + separator)

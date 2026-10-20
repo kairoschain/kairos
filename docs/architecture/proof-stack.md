@@ -1,11 +1,11 @@
 # Proof stack
 
-Parano1d uses one binary arithmetic stack for ownership, State transitions,
+Kairos uses one binary arithmetic stack for ownership, State transitions,
 Merkle relations, recursive continuity and proof of work commitments. The
 committed trace field is the binary tower field `GF(2^128)`. The production
 wide-challenge layer uses its quadratic extension `GF(2^256)`.
 
-![Parano1d proof stack](../assets/architecture/proof-stack.svg)
+![Kairos proof stack](../assets/architecture/proof-stack.svg)
 
 ## Poseidon2b
 
@@ -26,7 +26,7 @@ transcripts. Sharing a permutation does not mean sharing a hash domain.
 
 The protocol expresses batched Poseidon2b executions and Merkle paths as direct
 degree-seven relations over shared Boolean hypercubes. It is the committed-
-column reduction used by Parano1d, not a layer-by-layer replay of a circuit.
+column reduction used by Kairos, not a layer-by-layer replay of a circuit.
 
 The reduction keeps the multilinear-extension and sumcheck machinery of GKR
 while replacing recursive circuit-layer descent with global relations over

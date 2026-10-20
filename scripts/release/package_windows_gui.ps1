@@ -26,7 +26,7 @@ $BinDir = (Resolve-Path $BinDir).Path
 New-Item -ItemType Directory -Path $OutputDir -Force | Out-Null
 $OutputDir = (Resolve-Path $OutputDir).Path
 
-foreach ($Binary in @("parano1d-gui.exe", "parano1d.exe")) {
+foreach ($Binary in @("kairos-gui.exe", "kairos.exe")) {
     $Path = Join-Path $BinDir $Binary
     if (-not (Test-Path -Path $Path -PathType Leaf)) {
         throw "Release binary is missing: $Path"
@@ -44,13 +44,13 @@ if (-not $Compiler) {
     throw "Inno Setup 6 compiler was not found"
 }
 
-$Definition = Join-Path $ScriptDir "gui\windows\Parano1d.iss"
-$Icon = Join-Path $ReleaseRoot "noid_gui\assets\app-icons\Parano1d.ico"
+$Definition = Join-Path $ScriptDir "gui\windows\Kairos.iss"
+$Icon = Join-Path $ReleaseRoot "noid_gui\assets\app-icons\Kairos.ico"
 $License = Join-Path $ReleaseRoot "LICENSE"
 $Notice = Join-Path $ReleaseRoot "NOTICE"
 $UserGuide = Join-Path $ScriptDir "README.txt"
 $ContractGuide = Join-Path $ReleaseRoot "docs\reference\contracts.md"
-$OutputBaseFilename = "parano1d-gui-v$Version-$Platform-setup"
+$OutputBaseFilename = "kairos-gui-v$Version-$Platform-setup"
 $NumericVersion = [regex]::Match($Version, '^([0-9]+\.[0-9]+\.[0-9]+)').Groups[1].Value
 
 & $Compiler `
@@ -75,7 +75,7 @@ if (-not (Test-Path -Path $Artifact -PathType Leaf)) {
 }
 
 $InstallDir = Join-Path ([System.IO.Path]::GetTempPath()) (
-    "Parano1d-release-smoke-" + [guid]::NewGuid().ToString("N")
+    "Kairos-release-smoke-" + [guid]::NewGuid().ToString("N")
 )
 try {
     $Install = Start-Process `
@@ -94,8 +94,8 @@ try {
         throw "GUI installer smoke-test exited with code $($Install.ExitCode)"
     }
 
-    $Wallet = Join-Path $InstallDir "Parano1d.exe"
-    $Node = Join-Path $InstallDir "parano1d-node.exe"
+    $Wallet = Join-Path $InstallDir "Kairos.exe"
+    $Node = Join-Path $InstallDir "kairos-node.exe"
     $InstalledLicense = Join-Path $InstallDir "LICENSE.txt"
     $InstalledNotice = Join-Path $InstallDir "NOTICE.txt"
     $InstalledGuide = Join-Path $InstallDir "README.txt"
@@ -108,7 +108,7 @@ try {
         -not (Test-Path -Path $InstalledContracts -PathType Leaf)) {
         throw "GUI installer payload is incomplete"
     }
-    foreach ($ForbiddenBinary in @("parano1d-cli.exe", "parano1d-miner.exe")) {
+    foreach ($ForbiddenBinary in @("kairos-cli.exe", "kairos-miner.exe")) {
         if (Test-Path -Path (Join-Path $InstallDir $ForbiddenBinary)) {
             throw "GUI installer contains forbidden operator tool: $ForbiddenBinary"
         }

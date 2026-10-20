@@ -22,7 +22,7 @@ Labels are stored locally and are not part of consensus.
 Select **New address**. The next derivation index is created and added to the
 wallet. A new address is inactive until selected explicitly.
 
-Copy an address with the control beside it. Parano1d addresses use the
+Copy an address with the control beside it. Kairos addresses use the
 bech32m `o1…` display form; use the complete string.
 
 ## Change the active address

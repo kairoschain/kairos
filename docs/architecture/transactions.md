@@ -1,6 +1,6 @@
 # Transaction architecture
 
-Parano1d separates the physical transaction page carried by a block from the
+Kairos separates the physical transaction page carried by a block from the
 logical payment authorized by a wallet.
 
 The physical record is `Tx8x2`: at most eight inputs and two outputs in a
@@ -116,7 +116,7 @@ wallet, are retained as outgoing payment evidence.
 
 For normative validity rules, see
 [Transaction protocol](../protocol/transactions.md). For user-facing behavior,
-see [Send NOID](../wallet/send.md).
+see [Send KAI](../wallet/send.md).
 
 ## Contract intent
 

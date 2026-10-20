@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: Apache-2.0
 // Copyright (C) 2026 Paranoid Zero.
+// Modified by the Kairos Chain contributors (rebrand to Kairos Chain).
 
 use std::time::{Duration, Instant};
 
@@ -2716,7 +2717,7 @@ pub(crate) fn parse_noid_amount(input: &str) -> Result<u64, String> {
         return Err("Enter an amount.".into());
     }
     if normalized.starts_with('-') || normalized.starts_with('+') {
-        return Err("Amount must be a positive NOID value.".into());
+        return Err("Amount must be a positive KAI value.".into());
     }
     let mut parts = normalized.split('.');
     let whole = parts.next().unwrap_or_default();
@@ -2726,10 +2727,10 @@ pub(crate) fn parse_noid_amount(input: &str) -> Result<u64, String> {
         || !whole.bytes().all(|byte| byte.is_ascii_digit())
         || !fractional.bytes().all(|byte| byte.is_ascii_digit())
     {
-        return Err("Use a decimal NOID amount, for example 12.500000.".into());
+        return Err("Use a decimal KAI amount, for example 12.500000.".into());
     }
     if fractional.len() > 6 {
-        return Err("NOID supports at most 6 decimal places.".into());
+        return Err("KAI supports at most 6 decimal places.".into());
     }
     let whole = whole
         .parse::<u64>()
@@ -2749,7 +2750,7 @@ pub(crate) fn parse_noid_amount(input: &str) -> Result<u64, String> {
         .and_then(|value| value.checked_add(fractional))
         .ok_or_else(|| "Amount is too large.".to_string())?;
     if amount == 0 {
-        return Err("Amount must be at least 0.000001 NOID.".into());
+        return Err("Amount must be at least 0.000001 KAI.".into());
     }
     Ok(amount)
 }

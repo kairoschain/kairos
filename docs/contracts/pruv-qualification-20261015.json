@@ -56,8 +56,8 @@
   },
   "binary_sha256": {
     "isolated_v2_node": "0e7afec36473a81872c38254ebac92e8849ec828d48f9e1cf8aaa9966cfb1327",
-    "parano1d-cli": "eaaa1ca0ec49e4a7fa3d1a6e2dd01c44dcdf220670b5d3667e8e22934dd0d4f6",
-    "parano1d-miner": "fc5382608eafb64a66fd6f97b7520962167b1795a6295f4d358376735ddbcbcc",
+    "kairos-cli": "eaaa1ca0ec49e4a7fa3d1a6e2dd01c44dcdf220670b5d3667e8e22934dd0d4f6",
+    "kairos-miner": "fc5382608eafb64a66fd6f97b7520962167b1795a6295f4d358376735ddbcbcc",
     "pruv": "130a2707a08149f42f39a96a1a208c47c948558f09b775f5e1d8b2797dd774b9",
     "z3": "4da6a0f78424098b600a9112ebb9d8ce45de248a4913c26dd7d472e6dabef6d3"
   },

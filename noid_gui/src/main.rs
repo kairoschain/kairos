@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: Apache-2.0
 // Copyright (C) 2026 Paranoid Zero.
+// Modified by the Kairos Chain contributors (rebrand to Kairos Chain).
 
 #![cfg_attr(target_os = "windows", windows_subsystem = "windows")]
 
@@ -17,7 +18,7 @@ mod widgets;
 use iced::{window, Size};
 
 #[cfg(target_os = "linux")]
-const LINUX_APPLICATION_ID: &str = "org.parano1d.wallet";
+const LINUX_APPLICATION_ID: &str = "xyz.kairoschain.wallet";
 
 fn app_theme(_: &app::App) -> iced::Theme {
     theme::paranoid_theme()
@@ -54,7 +55,7 @@ fn handle_process_command() -> bool {
     }
 
     if argument == "--version" || argument == "-V" {
-        println!("Parano1d {}", env!("CARGO_PKG_VERSION"));
+        println!("Kairos {}", env!("CARGO_PKG_VERSION"));
         return true;
     }
     if argument != "--release-self-check" {
@@ -65,7 +66,7 @@ fn handle_process_command() -> bool {
     match node {
         Some(node) if node.is_file() => {
             println!(
-                "Parano1d {} release self-check OK",
+                "Kairos {} release self-check OK",
                 env!("CARGO_PKG_VERSION")
             );
             true
@@ -87,7 +88,7 @@ fn main() -> iced::Result {
     }
 
     iced::application(app::App::new, app::App::update, app::App::view)
-        .title("Parano1d")
+        .title("Kairos")
         .theme(app_theme)
         .subscription(app::App::subscription)
         .font(include_bytes!("../assets/fonts/NotoSansMono-Regular.ttf").as_slice())

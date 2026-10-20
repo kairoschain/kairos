@@ -376,7 +376,7 @@ def finish_workloads(a, b, fresh, evidence):
     converge(a, fresh, prune_height, timeout=600)
     verify_old_payment(fresh, evidence)
     checked = subprocess.run(
-        [str(TEST_BIN.with_name("parano1d-cli")), "--rpc", f"http://127.0.0.1:{fresh.rpc_port}",
+        [str(TEST_BIN.with_name("kairos-cli")), "--rpc", f"http://127.0.0.1:{fresh.rpc_port}",
          "--json", "verify", evidence["receipt_hex"]],
         capture_output=True, text=True, timeout=120, check=True,
     )

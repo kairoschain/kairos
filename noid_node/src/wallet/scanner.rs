@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: Apache-2.0
 // Copyright (C) 2026 Paranoid Zero.
+// Modified by the Kairos Chain contributors (rebrand to Kairos Chain).
 
 //! Incremental active-address wallet updates from accepted blocks.
 //!
@@ -486,12 +487,12 @@ mod tests {
                 TxOutput {
                     slot_index,
                     amount: 500,
-                    owner: noid_chain::consensus::O1_NETWORK_FUND_ADDRESS,
+                    owner: noid_chain::consensus::DISABLED_FUND_ADDRESS_A,
                 },
                 TxOutput {
                     slot_index: slot_index + 1,
                     amount: 500,
-                    owner: noid_chain::consensus::PARANO1D_LAB_ADDRESS,
+                    owner: noid_chain::consensus::DISABLED_FUND_ADDRESS_B,
                 },
             ],
             validity_bitmap: output_bitmap_bit(0) | output_bitmap_bit(1),
@@ -571,7 +572,7 @@ mod tests {
 
     #[test]
     fn incremental_scan_assigns_normal_ids_to_development_payout_outputs() {
-        let owner = noid_chain::consensus::O1_NETWORK_FUND_ADDRESS;
+        let owner = noid_chain::consensus::DISABLED_FUND_ADDRESS_A;
         let block = block(
             vec![
                 transaction(true, 10, owner),

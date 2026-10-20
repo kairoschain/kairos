@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: Apache-2.0
 // Copyright (C) 2026 Paranoid Zero.
+// Modified by the Kairos Chain contributors (rebrand to Kairos Chain).
 
 use std::time::{SystemTime, UNIX_EPOCH};
 
@@ -436,7 +437,7 @@ fn recent_transactions_panel<'a>(
                     2,
                     theme::MUTED,
                 ),
-                table_cell("FEE / NOID", 3, theme::MUTED),
+                table_cell("FEE / KAI", 3, theme::MUTED),
                 text("OPEN")
                     .size(13)
                     .color(theme::MUTED)
@@ -592,7 +593,7 @@ fn compact_transaction<'a>(
         )
     } else {
         format!(
-            "{} in · {} out · fee {} NOID",
+            "{} in · {} out · fee {} KAI",
             transaction.live_inputs,
             transaction.live_outputs,
             format_micronoid(transaction.fee_micronoid)
@@ -779,7 +780,7 @@ fn address_slots<'a>(
         let header = container(
             row![
                 table_cell("SLOT", 3, theme::MUTED),
-                table_cell("VALUE / NOID", 4, theme::MUTED),
+                table_cell("VALUE / KAI", 4, theme::MUTED),
                 table_cell("ORIGIN", 4, theme::MUTED),
                 table_cell("STATE", 2, theme::MUTED),
             ]

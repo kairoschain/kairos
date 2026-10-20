@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: Apache-2.0
 // Copyright (C) 2026 Paranoid Zero.
+// Modified by the Kairos Chain contributors (rebrand to Kairos Chain).
 
 //! Immutable, source-independent synchronization plans.
 
@@ -14,7 +15,7 @@ use super::{
     },
 };
 
-const PLAN_ID_DOMAIN: &[u8] = b"PARANO1D/NETWORK/SYNC-PLAN/V3";
+const PLAN_ID_DOMAIN: &[u8] = b"KAIROS/NETWORK/SYNC-PLAN/V3";
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 pub enum SyncPlanKind {

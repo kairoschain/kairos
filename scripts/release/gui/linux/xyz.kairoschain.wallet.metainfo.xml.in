@@ -1,31 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <component type="desktop-application">
-  <id>org.parano1d.wallet</id>
+  <id>xyz.kairoschain.wallet</id>
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>Apache-2.0</project_license>
-  <name>Parano1d</name>
+  <name>Kairos</name>
   <summary>Private proof-native wallet</summary>
   <description>
     <p>
-      Parano1d is a native wallet for the NOID network. It supervises its
+      Kairos is a native wallet for the KAI network. It supervises its
       bundled full node locally, so the wallet can be used without a terminal
       or a separately managed daemon.
     </p>
   </description>
-  <launchable type="desktop-id">org.parano1d.wallet.desktop</launchable>
-  <icon type="stock">org.parano1d.wallet</icon>
+  <launchable type="desktop-id">xyz.kairoschain.wallet.desktop</launchable>
+  <icon type="stock">xyz.kairoschain.wallet</icon>
   <provides>
-    <binary>parano1d-gui</binary>
+    <binary>kairos-gui</binary>
   </provides>
   <categories>
     <category>Finance</category>
     <category>Network</category>
   </categories>
-  <developer id="org.parano1d">
+  <developer id="xyz.kairoschain">
     <name>Paranoid Zero</name>
   </developer>
-  <url type="homepage">https://parano1d.org/</url>
-  <url type="bugtracker">https://github.com/ignotusnemo/parano1d/issues</url>
+  <url type="homepage">https://kairoschain.xyz/</url>
+  <url type="bugtracker">https://github.com/ignotusnemo/kairos/issues</url>
   <content_rating type="oars-1.1"/>
   <releases>
     <release version="@VERSION@" date="@RELEASE_DATE@"/>

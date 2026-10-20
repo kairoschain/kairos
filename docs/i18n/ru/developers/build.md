@@ -74,9 +74,9 @@ SHA256SUMS
 ```
 
 ```sh
-mkdir -p ../parano1d-artifacts
+mkdir -p ../kairos-artifacts
 ./scripts/generate_history_step_pack.sh \
-  ../parano1d-artifacts/history-step-pack-v1
+  ../kairos-artifacts/history-step-pack-v1
 ```
 
 Генерация пишет в новый временный каталог, выводит контрольные значения,
@@ -108,7 +108,7 @@ NOID_RETIREMENT_KEY_1_PIN=<authenticated-key-1-digest>
 ```
 
 Используйте независимо пересчитанные хеши ключей. Скрипт читает файл как данные
-без выполнения shell-кода. [Отчёт итогового банка](https://git.parano1d.org/ignotusnemo/parano1d/src/branch/v2/research/v2_feasibility/results/2026-09-25-common-input-budget/REPORT.md)
+без выполнения shell-кода. [Отчёт итогового банка](https://git.parano1d.org/ignotusnemo/kairos/src/branch/v2/research/v2_feasibility/results/2026-09-25-common-input-budget/REPORT.md)
 связывает генерацию, аутентификацию и квалификацию.
 
 ## Воспроизведение расчёта стойкости
@@ -122,7 +122,7 @@ target/release/noid_v2_soundness \
   CLASS_0_KEY CLASS_0_KEY_PIN CLASS_1_KEY CLASS_1_KEY_PIN
 ```
 
-[Вывод](https://git.parano1d.org/ignotusnemo/parano1d/src/branch/v2/noid_soundness/docs/v2-retirement.md)
+[Вывод](https://git.parano1d.org/ignotusnemo/kairos/src/branch/v2/noid_soundness/docs/v2-retirement.md)
 описывает предпосылки. Штатный `noid_soundness` сохраняет расчёт архивного
 профиля; для этого банка используйте инструмент v2.
 
@@ -132,7 +132,7 @@ target/release/noid_v2_soundness \
 
 ```sh
 ./scripts/build_release.sh \
-  --pack ../parano1d-artifacts/history-step-pack-v1 \
+  --pack ../kairos-artifacts/history-step-pack-v1 \
   --v2-pack PATH_TO_FROZEN_V2_PACK \
   --v2-pins PATH_TO_REVIEWED_PIN_FILE \
   --retirement-keys PATH_TO_AUTHENTICATED_KEYS \
@@ -178,9 +178,9 @@ README.txt
 CONTRACTS.md
 LICENSE
 NOTICE
-parano1d
-parano1d-cli
-parano1d-miner
+kairos
+kairos-cli
+kairos-miner
 ```
 
 GUI-пакет содержит только приложение и встроенную в него ноду. Операторский CLI и

@@ -1,15 +1,16 @@
 // SPDX-License-Identifier: Apache-2.0
 // Copyright (C) 2026 Paranoid Zero.
-//! parano1d-cli — Paranoid full node CLI client.
+// Modified by the Kairos Chain contributors (rebrand to Kairos Chain).
+//! kairos-cli — Paranoid full node CLI client.
 //!
-//! Connects to a running `parano1d` daemon via JSON-RPC (no local keys, no crypto).
+//! Connects to a running `kairos` daemon via JSON-RPC (no local keys, no crypto).
 //! All operations happen inside the daemon; the CLI is a thin terminal UI.
 //!
 //! Quick start:
-//!   parano1d-cli status            — node health at a glance
-//!   parano1d-cli balance           — wallet balance
-//!   parano1d-cli send <addr> 10.5  — send 10.5 NOID
-//!   parano1d-cli help              — full command list
+//!   kairos-cli status            — node health at a glance
+//!   kairos-cli balance           — wallet balance
+//!   kairos-cli send <addr> 10.5  — send 10.5 KAI
+//!   kairos-cli help              — full command list
 
 #![allow(clippy::format_in_format_args, clippy::print_literal)]
 
@@ -60,7 +61,7 @@ macro_rules! c {
 
 const MICRO_PER_NOID: u64 = 1_000_000;
 
-/// Parse a human amount like "10.5" or "0.000001" as NOID → μNOID.
+/// Parse a human amount like "10.5" or "0.000001" as KAI → μKAI.
 fn parse_noid_amount(s: &str) -> anyhow::Result<u64> {
     let (whole, fractional) = match s.split_once('.') {
         Some((whole, fractional)) if !fractional.contains('.') => (whole, fractional),
@@ -122,33 +123,33 @@ fn fmt_hash(h: &str) -> &str {
 
 #[derive(Parser)]
 #[command(
-    name = "parano1d-cli",
-    about = "ParanO(1)d thin client — control a running parano1d daemon",
+    name = "kairos-cli",
+    about = "Kairos thin client — control a running kairos daemon",
     version = env!("CARGO_PKG_VERSION"),
     long_about = "\
-ParanO(1)d thin client. Connects to a running parano1d daemon via JSON-RPC.
+Kairos thin client. Connects to a running kairos daemon via JSON-RPC.
 
 QUICK START:
-  parano1d-cli status              Node info (height, hash, slots)
-  parano1d-cli balance             Wallet balance
-  parano1d-cli send <addr> 10.5   Send 10.5 NOID to address
-  parano1d-cli history             Transaction history
-  parano1d-cli mempool             Pending transactions
-  parano1d-cli help                All commands
+  kairos-cli status              Node info (height, hash, slots)
+  kairos-cli balance             Wallet balance
+  kairos-cli send <addr> 10.5   Send 10.5 KAI to address
+  kairos-cli history             Transaction history
+  kairos-cli mempool             Pending transactions
+  kairos-cli help                All commands
 
 AMOUNT FORMAT:
-  Amounts are in NOID (e.g. 10.5, 0.000001).
-  1 NOID = 1,000,000 μNOID — the CLI converts automatically.
+  Amounts are in KAI (e.g. 10.5, 0.000001).
+  1 KAI = 1,000,000 μKAI — the CLI converts automatically.
 
 DAEMON:
-  The daemon must be running: parano1d --mode miner --data-dir ~/.parano1d/data",
+  The daemon must be running: kairos --mode miner --data-dir ~/.kairos/data",
 )]
 struct Cli {
-    /// JSON-RPC endpoint of the running parano1d daemon.
+    /// JSON-RPC endpoint of the running kairos daemon.
     #[arg(
         long,
         short = 'r',
-        default_value = "http://127.0.0.1:9601",
+        default_value = "http://127.0.0.1:9701",
         env = "NOID_RPC",
         value_name = "URL",
         global = true
@@ -291,7 +292,7 @@ enum Command {
         use_index: Option<u32>,
     },
 
-    /// Confirmed wallet balance (NOID and μNOID).
+    /// Confirmed wallet balance (KAI and μKAI).
     #[command(alias = "bal")]
     Balance,
 
@@ -299,24 +300,24 @@ enum Command {
     #[command(alias = "ls")]
     Utxos,
 
-    /// Send NOID to a recipient address.
+    /// Send KAI to a recipient address.
     ///
-    /// Amount is in NOID (e.g. 10.5 → 10,500,000 μNOID).
+    /// Amount is in KAI (e.g. 10.5 → 10,500,000 μKAI).
     /// Fee is auto-computed if not specified (recommended).
     ///
     /// Examples:
-    ///   parano1d-cli send f784...b61e 10.5
-    ///   parano1d-cli send f784...b61e 10.5 --fee 0.01
+    ///   kairos-cli send f784...b61e 10.5
+    ///   kairos-cli send f784...b61e 10.5 --fee 0.01
     Send {
-        /// Recipient address (canonical bech32m o1...).
+        /// Recipient address (canonical bech32m k1...).
         #[arg(value_name = "ADDRESS")]
         to: String,
-        /// Amount in NOID  (1 NOID = 1 000 000 μNOID).
-        /// Examples: "50" = 50 NOID, "0.5" = 500 000 μNOID, "0.000001" = 1 μNOID (minimum).
-        /// Tip: for programmatic use the RPC walletSend accepts raw μNOID directly.
+        /// Amount in KAI  (1 KAI = 1 000 000 μKAI).
+        /// Examples: "50" = 50 KAI, "0.5" = 500 000 μKAI, "0.000001" = 1 μKAI (minimum).
+        /// Tip: for programmatic use the RPC walletSend accepts raw μKAI directly.
         #[arg(value_name = "AMOUNT")]
         amount: String,
-        /// Transaction fee in NOID. Omit for automatic fee calculation.
+        /// Transaction fee in KAI. Omit for automatic fee calculation.
         #[arg(long, value_name = "FEE_NOID")]
         fee: Option<String>,
         /// Show the ordinary-transaction plan without submitting.
@@ -339,7 +340,7 @@ enum Command {
     Scan,
 
     /// Export a Merkle payment receipt for a confirmed transaction.
-    /// Redirect output to a file: parano1d-cli receipt <hash> > receipt.hex
+    /// Redirect output to a file: kairos-cli receipt <hash> > receipt.hex
     Receipt {
         /// Transaction hash (64-char hex).
         #[arg(value_name = "TX_HASH")]
@@ -355,14 +356,14 @@ enum Command {
     },
 
     // ---- Node control ---------------------------------------------------------
-    /// Gracefully stop the Parano1d daemon.
+    /// Gracefully stop the Kairos daemon.
     Stop,
 
     // ---- Mining (external miner API) ------------------------------------------
     /// Get a block template for an external Poseidon2b PoW miner.
     #[command(name = "block-template", alias = "template")]
     BlockTemplate {
-        /// Coinbase address for this template (bech32m o1...). Defaults to wallet address.
+        /// Coinbase address for this template (bech32m k1...). Defaults to wallet address.
         #[arg(long, value_name = "ADDRESS", default_value = "")]
         miner_addr: String,
     },
@@ -386,7 +387,7 @@ enum Command {
 #[tokio::main]
 async fn main() {
     // Suppress broken-pipe panics: happen when stdout is piped to `head`, etc.
-    // Without this, `parano1d-cli utxos | head -5` prints a Rust panic traceback.
+    // Without this, `kairos-cli utxos | head -5` prints a Rust panic traceback.
     // The payload can be either &str or String depending on the panic site.
     let default_hook = std::panic::take_hook();
     std::panic::set_hook(Box::new(move |info| {
@@ -417,7 +418,7 @@ async fn main() {
 
 async fn run(cli: Cli) -> anyhow::Result<()> {
     let client = reqwest::Client::builder()
-        .user_agent(concat!("parano1d-cli/", env!("CARGO_PKG_VERSION")))
+        .user_agent(concat!("kairos-cli/", env!("CARGO_PKG_VERSION")))
         .timeout(std::time::Duration::from_secs(cli.rpc_timeout))
         .build()?;
 
@@ -503,8 +504,8 @@ fn print_error(msg: &str) {
         || msg.contains("Node is not responding")
     {
         "Node is not responding.\n\
-             Is the parano1d daemon running?  Try: parano1d --mode miner\n\
-             Default RPC: http://127.0.0.1:9601  (override with --rpc)"
+             Is the kairos daemon running?  Try: kairos --mode miner\n\
+             Default RPC: http://127.0.0.1:9701  (override with --rpc)"
             .to_string()
     } else if msg.contains("Insufficient") || msg.contains("insufficient") {
         // Extract amounts from error if possible
@@ -515,7 +516,7 @@ fn print_error(msg: &str) {
         || msg.contains("invalid address")
         || msg.contains("WrongHrp")
     {
-        "Invalid address.\nUse a bech32m address (o1…).\nExample: parano1d-cli send o1q9gnyj0zwhqj9tm5sf… 10.5".to_string()
+        "Invalid address.\nUse a bech32m address (o1…).\nExample: kairos-cli send k1q9gnyj0zwhqj9tm5sf… 10.5".to_string()
     } else {
         msg.to_string()
     };
@@ -742,8 +743,8 @@ async fn cmd_slot(ctx: &Ctx<'_>, index: u32) -> anyhow::Result<()> {
         kv("Status", &c!(GRN, "live UTXO"));
         kv2(
             "Value",
-            &format!("{} NOID", noid_str(value)),
-            &format!("({value} μNOID)"),
+            &format!("{} KAI", noid_str(value)),
+            &format!("({value} μKAI)"),
         );
         kv("Creation ID", &creation_id.to_string());
         kv("Owner", ctx.h(owner));
@@ -835,7 +836,7 @@ async fn cmd_utxos_of(ctx: &Ctx<'_>, address: &str) -> anyhow::Result<()> {
     }
     let total: u64 = slots.iter().map(|s| s["value"].as_u64().unwrap_or(0)).sum();
     separator(74);
-    println!("  {:<12}  {:>20}  {:>14}", "slot", "creation id", "NOID");
+    println!("  {:<12}  {:>20}  {:>14}", "slot", "creation id", "KAI");
     separator(74);
     for s in &slots {
         let slot = s["slot_index"].as_u64().unwrap_or(0);
@@ -868,7 +869,7 @@ async fn cmd_tx(ctx: &Ctx<'_>, txhash: &str) -> anyhow::Result<()> {
     }
     if result.is_null() {
         warn_msg(&format!("Transaction {txhash} not found (not confirmed)"));
-        println!("  Use 'parano1d-cli mempool-tx {txhash}' to check if it is pending.");
+        println!("  Use 'kairos-cli mempool-tx {txhash}' to check if it is pending.");
         return Ok(());
     }
     section("Transaction");
@@ -989,8 +990,8 @@ async fn cmd_mining(ctx: &Ctx<'_>) -> anyhow::Result<()> {
     );
     kv2(
         "Block reward",
-        &format!("{} NOID/block", noid_str(reward_micro)),
-        &format!("({reward_micro} \u{03bc}NOID)"),
+        &format!("{} KAI/block", noid_str(reward_micro)),
+        &format!("({reward_micro} \u{03bc}KAI)"),
     );
     kv("Active UTXOs", &active.to_string());
     Ok(())
@@ -1027,28 +1028,28 @@ async fn cmd_estimate_fee(ctx: &Ctx<'_>, n_inputs: u32, n_outputs: u32) -> anyho
     ));
     kv2(
         "Min relay fee",
-        &format!("{} NOID", noid_str(fee_micro)),
-        &format!("({fee_micro} μNOID)"),
+        &format!("{} KAI", noid_str(fee_micro)),
+        &format!("({fee_micro} μKAI)"),
     );
     kv(
         "Base",
-        &format!("{} μNOID", b["base"].as_u64().unwrap_or(0)),
+        &format!("{} μKAI", b["base"].as_u64().unwrap_or(0)),
     );
     kv(
         "Inputs",
-        &format!("{} μNOID", b["input"].as_u64().unwrap_or(0)),
+        &format!("{} μKAI", b["input"].as_u64().unwrap_or(0)),
     );
     kv(
         "Outputs",
-        &format!("{} μNOID", b["output"].as_u64().unwrap_or(0)),
+        &format!("{} μKAI", b["output"].as_u64().unwrap_or(0)),
     );
     kv(
         "State growth burned",
-        &format!("{} μNOID", b["state_growth"].as_u64().unwrap_or(0)),
+        &format!("{} μKAI", b["state_growth"].as_u64().unwrap_or(0)),
     );
     kv(
         "Miner claimable",
-        &format!("{} μNOID", b["miner_claimable"].as_u64().unwrap_or(0)),
+        &format!("{} μKAI", b["miner_claimable"].as_u64().unwrap_or(0)),
     );
     println!();
     println!(
@@ -1088,7 +1089,7 @@ async fn cmd_mempool_tx(ctx: &Ctx<'_>, txhash: &str) -> anyhow::Result<()> {
     }
     if result.is_null() {
         warn_msg(&format!("Transaction {txhash} is not in the mempool."));
-        println!("  It may have been confirmed. Use 'parano1d-cli tx {txhash}' to check.");
+        println!("  It may have been confirmed. Use 'kairos-cli tx {txhash}' to check.");
         return Ok(());
     }
     section("Mempool transaction");
@@ -1096,8 +1097,8 @@ async fn cmd_mempool_tx(ctx: &Ctx<'_>, txhash: &str) -> anyhow::Result<()> {
     let fee = result["fee_micronoid"].as_u64().unwrap_or(0);
     kv2(
         "Fee",
-        &format!("{} NOID", noid_str(fee)),
-        &format!("({fee} \u{03bc}NOID)"),
+        &format!("{} KAI", noid_str(fee)),
+        &format!("({fee} \u{03bc}KAI)"),
     );
     kv(
         "Inputs",
@@ -1178,8 +1179,8 @@ async fn cmd_mempool(ctx: &Ctx<'_>) -> anyhow::Result<()> {
     kv2("Pending", &size.to_string(), "transactions");
     kv2(
         "Fee floor",
-        &format!("{} NOID", noid_str(fee_floor)),
-        &format!("({fee_floor} μNOID minimum)"),
+        &format!("{} KAI", noid_str(fee_floor)),
+        &format!("({fee_floor} μKAI minimum)"),
     );
 
     if txs.is_empty() {
@@ -1193,12 +1194,12 @@ async fn cmd_mempool(ctx: &Ctx<'_>) -> anyhow::Result<()> {
     if is_tty() {
         println!(
             "  {}{:<20}  {:>12}  {:>5}  {:>3}→{:<3}  {:>5}  {}{}",
-            BOLD, "tx hash", "fee (μNOID)", "pages", "in", "out", "class", "proof", RST
+            BOLD, "tx hash", "fee (μKAI)", "pages", "in", "out", "class", "proof", RST
         );
     } else {
         println!(
             "  {:<20}  {:>12}  {:>5}  {:>3}→{:<3}  {:>5}  {}",
-            "tx hash", "fee (μNOID)", "pages", "in", "out", "class", "proof"
+            "tx hash", "fee (μKAI)", "pages", "in", "out", "class", "proof"
         );
     }
     separator(100);
@@ -1272,7 +1273,7 @@ async fn cmd_address(
         } else {
             println!("  {}", addr);
         }
-        println!("  Balance: {bal:.6} NOID");
+        println!("  Balance: {bal:.6} KAI");
         println!();
         println!(
             "  {} Sends now spend from this address only; change returns here.",
@@ -1367,7 +1368,7 @@ async fn cmd_address(
         }
         println!();
         println!(
-            "  {} Sends spend from this address; share it to receive NOID here.",
+            "  {} Sends spend from this address; share it to receive KAI here.",
             c!(DIM, "↑")
         );
         println!(
@@ -1397,7 +1398,7 @@ async fn cmd_balance(ctx: &Ctx<'_>) -> anyhow::Result<()> {
     section("Wallet balance (active address)");
     if is_tty() {
         println!(
-            "  {}Balance:{} {}{} NOID{} {}({} \u{03bc}NOID){}  {}({} UTXOs){}",
+            "  {}Balance:{} {}{} KAI{} {}({} \u{03bc}KAI){}  {}({} UTXOs){}",
             CYN,
             RST,
             BOLD,
@@ -1412,7 +1413,7 @@ async fn cmd_balance(ctx: &Ctx<'_>) -> anyhow::Result<()> {
         );
     } else {
         println!(
-            "  Balance:           {} NOID  ({micro} \u{03bc}NOID)  ({utxos} UTXOs)",
+            "  Balance:           {} KAI  ({micro} \u{03bc}KAI)  ({utxos} UTXOs)",
             noid_str(micro)
         );
     }
@@ -1420,7 +1421,7 @@ async fn cmd_balance(ctx: &Ctx<'_>) -> anyhow::Result<()> {
     if pending_out > 0 {
         if is_tty() {
             println!(
-                "  {}Pending:{}  -{} NOID outbound  {}({} \u{03bc}NOID locked){}",
+                "  {}Pending:{}  -{} KAI outbound  {}({} \u{03bc}KAI locked){}",
                 YLW,
                 RST,
                 noid_str(pending_out),
@@ -1429,7 +1430,7 @@ async fn cmd_balance(ctx: &Ctx<'_>) -> anyhow::Result<()> {
                 RST
             );
             println!(
-                "  {}Spendable:{} {}{} NOID{}",
+                "  {}Spendable:{} {}{} KAI{}",
                 CYN,
                 RST,
                 BOLD,
@@ -1438,10 +1439,10 @@ async fn cmd_balance(ctx: &Ctx<'_>) -> anyhow::Result<()> {
             );
         } else {
             println!(
-                "  Pending:           -{} NOID outbound ({pending_out} \u{03bc}NOID locked)",
+                "  Pending:           -{} KAI outbound ({pending_out} \u{03bc}KAI locked)",
                 noid_str(pending_out)
             );
-            println!("  Spendable:         {} NOID", noid_str(spendable));
+            println!("  Spendable:         {} KAI", noid_str(spendable));
         }
     }
 
@@ -1450,7 +1451,7 @@ async fn cmd_balance(ctx: &Ctx<'_>) -> anyhow::Result<()> {
         warn_msg("No UTXOs found on the active address.");
         println!(
             "       Run {} to reload the active address; use {} to switch accounts.",
-            c!(BOLD, "'parano1d-cli scan'"),
+            c!(BOLD, "'kairos-cli scan'"),
             c!(BOLD, "'address --list'")
         );
     }
@@ -1474,7 +1475,7 @@ async fn cmd_utxos(ctx: &Ctx<'_>) -> anyhow::Result<()> {
     if utxos.is_empty() {
         println!(
             "  {}",
-            c!(DIM, "(no UTXOs — run 'parano1d-cli scan' to discover)")
+            c!(DIM, "(no UTXOs — run 'kairos-cli scan' to discover)")
         );
         return Ok(());
     }
@@ -1489,12 +1490,12 @@ async fn cmd_utxos(ctx: &Ctx<'_>) -> anyhow::Result<()> {
     if is_tty() {
         println!(
             "  {}{:<8}  {:>20}  {:>14}  {:>7}  {:>9}  {}{}",
-            BOLD, "slot", "creation id", "NOID", "key", "at block", "address", RST
+            BOLD, "slot", "creation id", "KAI", "key", "at block", "address", RST
         );
     } else {
         println!(
             "  {:<8}  {:>20}  {:>14}  {:>7}  {:>9}  {}",
-            "slot", "creation id", "NOID", "key", "at block", "address"
+            "slot", "creation id", "KAI", "key", "at block", "address"
         );
     }
     separator(96);
@@ -1551,13 +1552,13 @@ async fn cmd_send(
         bail!("Amount cannot be zero.");
     }
 
-    // Warn if the amount looks suspiciously large (> 1 000 000 NOID = 1e12 μNOID).
-    // This catches the common mistake of passing μNOID to a NOID-denomination CLI.
-    const MAX_WARN_MICRO: u64 = 1_000_000 * 1_000_000; // 1M NOID in μNOID
+    // Warn if the amount looks suspiciously large (> 1 000 000 KAI = 1e12 μKAI).
+    // This catches the common mistake of passing μKAI to a KAI-denomination CLI.
+    const MAX_WARN_MICRO: u64 = 1_000_000 * 1_000_000; // 1M KAI in μKAI
     if amount_micro > MAX_WARN_MICRO {
         eprintln!(
-            "⚠  Large amount: {} NOID ({} μNOID). \
-             Note: this CLI takes NOID, not μNOID. Press Ctrl-C to cancel.",
+            "⚠  Large amount: {} KAI ({} μKAI). \
+             Note: this CLI takes KAI, not μKAI. Press Ctrl-C to cancel.",
             noid_str(amount_micro),
             amount_micro
         );
@@ -1572,13 +1573,13 @@ async fn cmd_send(
     // Actual parsing/validation happens in the daemon; we just do a basic
     // sanity check to catch obvious typos before sending to RPC.
     let to_clean = to.trim();
-    let looks_like_bech32 = to_clean.to_ascii_lowercase().starts_with("o1");
+    let looks_like_bech32 = to_clean.to_ascii_lowercase().starts_with("k1");
     if !looks_like_bech32 {
         bail!(
             "Invalid address format.\n\
              \tExpected: bech32m address (o1…)\n\
              \tGot:      {:?}\n\
-             \tExample:  o1q9gnyj0z…",
+             \tExample:  k1q9gnyj0z…",
             &to_clean[..to_clean.len().min(30)]
         );
     }
@@ -1606,15 +1607,15 @@ async fn cmd_send(
         kv("To", to_clean);
         kv2(
             "Amount",
-            &format!("{} NOID", noid_str(amount_micro)),
-            &format!("({amount_micro} μNOID)"),
+            &format!("{} KAI", noid_str(amount_micro)),
+            &format!("({amount_micro} μKAI)"),
         );
         let planned_fee = result["fee_micronoid"].as_u64().unwrap_or(0);
         kv2(
             "Fee",
-            &format!("{} NOID", noid_str(planned_fee)),
+            &format!("{} KAI", noid_str(planned_fee)),
             &format!(
-                "({planned_fee} μNOID){}",
+                "({planned_fee} μKAI){}",
                 if fee.is_none() { " auto" } else { "" }
             ),
         );
@@ -1629,8 +1630,8 @@ async fn cmd_send(
         let change = result["change_micronoid"].as_u64().unwrap_or(0);
         kv2(
             "Change",
-            &format!("{} NOID", noid_str(change)),
-            &format!("({change} μNOID)"),
+            &format!("{} KAI", noid_str(change)),
+            &format!("({change} μKAI)"),
         );
         println!();
         println!(
@@ -1641,9 +1642,9 @@ async fn cmd_send(
     }
 
     // --- Confirm interactively for large amounts ---
-    if amount_micro >= 1_000_000_000 /* 1000 NOID */ && is_tty() {
+    if amount_micro >= 1_000_000_000 /* 1000 KAI */ && is_tty() {
         print!(
-            "  {} Send {}{} NOID{} to {}{}{}? [y/N] ",
+            "  {} Send {}{} KAI{} to {}{}{}? [y/N] ",
             c!(YLW, "⚠"),
             BOLD,
             noid_str(amount_micro),
@@ -1681,13 +1682,13 @@ async fn cmd_send(
             kv("To", to_clean);
             kv2(
                 "Amount",
-                &format!("{} NOID", noid_str(amount_micro)),
-                &format!("({amount_micro} μNOID)"),
+                &format!("{} KAI", noid_str(amount_micro)),
+                &format!("({amount_micro} μKAI)"),
             );
             kv2(
                 "Fee",
-                &format!("{} NOID", noid_str(actual_fee)),
-                &format!("({actual_fee} μNOID){auto_tag}"),
+                &format!("{} KAI", noid_str(actual_fee)),
+                &format!("({actual_fee} μKAI){auto_tag}"),
             );
             println!();
             println!(
@@ -1697,7 +1698,7 @@ async fn cmd_send(
             println!(
                 "  {} Use {} to check your balance after confirmation.",
                 c!(DIM, "Tip:"),
-                c!(BOLD, "'parano1d-cli balance'")
+                c!(BOLD, "'kairos-cli balance'")
             );
         }
         Err(e) => {
@@ -1710,12 +1711,12 @@ async fn cmd_send(
                 // Try to extract amounts
                 format!(
                     "Insufficient funds.\n\
-                     \t  Requested: {} NOID  ({amount_micro} μNOID)\n\
-                     \t  Run 'parano1d-cli balance' to check your current balance.",
+                     \t  Requested: {} KAI  ({amount_micro} μKAI)\n\
+                     \t  Run 'kairos-cli balance' to check your current balance.",
                     noid_str(amount_micro)
                 )
             } else if msg.contains("no UTXO") || msg.contains("no utxo") {
-                "No UTXOs available. Run 'parano1d-cli scan' to discover your coins.".into()
+                "No UTXOs available. Run 'kairos-cli scan' to discover your coins.".into()
             } else if msg.contains("no empty slot hints") {
                 "No empty output slots are currently available. This is usually transient; wait for the next block and retry."
                     .into()
@@ -1793,12 +1794,12 @@ async fn cmd_history(
     if is_tty() {
         println!(
             "  {}  {:<8}  {:<8}  {:>14}  {:<16}  {}{}",
-            BOLD, "block", "dir", "NOID", "own[idx]", "counterparty", RST
+            BOLD, "block", "dir", "KAI", "own[idx]", "counterparty", RST
         );
     } else {
         println!(
             "  {:<8}  {:<8}  {:>14}  {:<16}  {}",
-            "block", "dir", "NOID", "own[idx]", "counterparty"
+            "block", "dir", "KAI", "own[idx]", "counterparty"
         );
     }
     separator(88);
@@ -1862,9 +1863,9 @@ async fn cmd_history(
             "",
             "",
             GRN,
-            format!("+ {} NOID received", noid_str(received)),
+            format!("+ {} KAI received", noid_str(received)),
             RED,
-            format!("  - {} NOID sent", noid_str(sent)),
+            format!("  - {} KAI sent", noid_str(sent)),
             RST
         );
     } else {
@@ -1901,7 +1902,7 @@ async fn cmd_scan(ctx: &Ctx<'_>) -> anyhow::Result<()> {
 
     section("Active address reloaded");
     println!(
-        "  Index {}  \u{2022}  Snapshot height {}  \u{2022}  Found {} UTXO(s)  \u{2022}  Balance: {} NOID",
+        "  Index {}  \u{2022}  Snapshot height {}  \u{2022}  Found {} UTXO(s)  \u{2022}  Balance: {} KAI",
         active_index,
         snapshot_height,
         found,
@@ -1934,12 +1935,12 @@ async fn cmd_receipt(ctx: &Ctx<'_>, txhash: &str) -> anyhow::Result<()> {
         // If outputting to terminal, also show a tip
         eprintln!();
         eprintln!(
-            "  {} Redirect to a file: parano1d-cli receipt {} > receipt.hex",
+            "  {} Redirect to a file: kairos-cli receipt {} > receipt.hex",
             c!(DIM, "Tip:"),
             txhash
         );
         eprintln!(
-            "  {} Verify:              parano1d-cli verify $(cat receipt.hex)",
+            "  {} Verify:              kairos-cli verify $(cat receipt.hex)",
             c!(DIM, "Tip:")
         );
     }
@@ -2035,7 +2036,7 @@ async fn cmd_verify(ctx: &Ctx<'_>, receipt: &str) -> anyhow::Result<()> {
             &format!("#{height}"),
             &format!("unix {confirmed_unix}"),
         );
-        kv("Fee", &format!("{} ({} μNOID)", noid_str(fee), fee));
+        kv("Fee", &format!("{} ({} μKAI)", noid_str(fee), fee));
         kv("Inputs", &inputs.to_string());
         kv("Outputs", &outputs.len().to_string());
         for (index, output) in outputs.iter().enumerate() {
@@ -2044,7 +2045,7 @@ async fn cmd_verify(ctx: &Ctx<'_>, receipt: &str) -> anyhow::Result<()> {
             let slot = output["slot_index"].as_u64().unwrap_or(0);
             kv2(
                 &format!("  Output {}", index + 1),
-                &format!("{} ({} μNOID)", noid_str(amount), amount),
+                &format!("{} ({} μKAI)", noid_str(amount), amount),
                 &format!("to {owner}, slot {slot}"),
             );
         }
@@ -2101,8 +2102,8 @@ async fn cmd_block_template(ctx: &Ctx<'_>, miner_addr: &str) -> anyhow::Result<(
     kv("Expires in", &format!("{expires_in_seconds} s"));
     kv("Nonce field", &nonce_field_index.to_string());
     kv("Difficulty", difficulty_target);
-    kv("Claimable fees", &format!("{claimable_fees} μNOID"));
-    kv("Coinbase value", &format!("{coinbase_value} μNOID"));
+    kv("Claimable fees", &format!("{claimable_fees} μKAI"));
+    kv("Coinbase value", &format!("{coinbase_value} μKAI"));
     if !pow_fields.is_empty() {
         kv2(
             "PoW fields",
@@ -2112,7 +2113,7 @@ async fn cmd_block_template(ctx: &Ctx<'_>, miner_addr: &str) -> anyhow::Result<(
     }
     println!();
     println!(
-        "  {} Search the nonce, then run `parano1d-cli submit-block {template_id} <32-char-lowercase-nonce-hex>`.",
+        "  {} Search the nonce, then run `kairos-cli submit-block {template_id} <32-char-lowercase-nonce-hex>`.",
         c!(DIM, "PoW:")
     );
     if !pow_fields.is_empty() {
@@ -2191,7 +2192,7 @@ async fn rpc(ctx: &Ctx<'_>, method: &str, params: &[Value]) -> anyhow::Result<Va
             if e.is_connect() || e.is_timeout() {
                 anyhow::anyhow!(
                     "Node is not responding.\n\
-                     \tIs the parano1d daemon running?  Try: parano1d --mode miner\n\
+                     \tIs the kairos daemon running?  Try: kairos --mode miner\n\
                      \tRPC endpoint: {}\n\
                      \tOverride with --rpc <URL> or NOID_RPC env var",
                     ctx.rpc

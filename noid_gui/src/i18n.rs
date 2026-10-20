@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: Apache-2.0
 // Copyright (C) 2026 Paranoid Zero.
+// Modified by the Kairos Chain contributors (rebrand to Kairos Chain).
 
 use std::borrow::Cow;
 use std::cell::Cell;
@@ -261,10 +262,10 @@ fn translate_localized(language: Language, source: &str) -> String {
             Language::English => source.to_owned(),
         };
     }
-    if let Some(value) = source.strip_suffix(" NOID selected") {
+    if let Some(value) = source.strip_suffix(" KAI selected") {
         return match language {
-            Language::Russian => format!("ВЫБРАНО {value} NOID"),
-            Language::Chinese => format!("已选择 {value} NOID"),
+            Language::Russian => format!("ВЫБРАНО {value} KAI"),
+            Language::Chinese => format!("已选择 {value} KAI"),
             Language::English => source.to_owned(),
         };
     }
@@ -645,7 +646,7 @@ fn exact_translation(source: &str) -> Option<(&'static str, &'static str)> {
         "DIFFICULTY" => ("СЛОЖНОСТЬ", "难度"),
         "ACTIVE ADDRESS" => ("АКТИВНЫЙ АДРЕС", "当前地址"),
         "SWITCH" => ("СМЕНИТЬ", "切换"),
-        "NOID BALANCE" => ("БАЛАНС NOID", "NOID 余额"),
+        "KAI BALANCE" => ("БАЛАНС KAI", "KAI 余额"),
         "SPENDABLE OUTPUTS" => ("ДОСТУПНЫЕ ВЫХОДЫ", "可用输出"),
         "CONSOLIDATE" => ("ОБЪЕДИНИТЬ", "整合"),
         "CONSOLIDATION RECOMMENDED" => ("РЕКОМЕНДУЕТСЯ ОБЪЕДИНЕНИЕ", "建议整合 UTXO"),
@@ -659,7 +660,7 @@ fn exact_translation(source: &str) -> Option<(&'static str, &'static str)> {
         "LIVE SLOTS" => ("ЗАНЯТЫЕ СЛОТЫ", "实时槽位"),
         "SEGMENT" => ("СЕГМЕНТ", "分段"),
         "SLOT" => ("СЛОТ", "槽位"),
-        "VALUE / NOID" => ("СУММА / NOID", "金额 / NOID"),
+        "VALUE / KAI" => ("СУММА / KAI", "金额 / KAI"),
         "ORIGIN" => ("ИСТОЧНИК", "来源"),
         "SELECTED OUTPUT" => ("ВЫБРАННЫЙ ВЫХОД", "已选输出"),
         "FILTER ACTIVE" => ("ФИЛЬТР ВКЛЮЧЁН", "筛选已启用"),
@@ -701,7 +702,7 @@ fn exact_translation(source: &str) -> Option<(&'static str, &'static str)> {
         "PROVE & SEND" => ("ПОСТРОИТЬ И ОТПРАВИТЬ", "生成证明并发送"),
         "RECIPIENT" => ("ПОЛУЧАТЕЛЬ", "收款地址"),
         "Paste an o1 address" => ("Вставьте адрес o1", "粘贴 o1 地址"),
-        "AMOUNT / NOID" => ("СУММА / NOID", "金额 / NOID"),
+        "AMOUNT / KAI" => ("СУММА / KAI", "金额 / KAI"),
         "AUTOMATIC · calculated by the wallet" => (
             "АВТОМАТИЧЕСКИ · РАССЧИТАНО КОШЕЛЬКОМ",
             "自动 · 由钱包计算",
@@ -900,9 +901,9 @@ fn exact_translation(source: &str) -> Option<(&'static str, &'static str)> {
         "OUTPUT TOTAL" => ("СУММА ВЫХОДОВ", "输出总额"),
         "BLOCK REWARD" => ("ВОЗНАГРАЖДЕНИЕ ЗА БЛОК", "区块奖励"),
         "REWARD SHARE" => ("ДОЛЯ НАГРАДЫ", "奖励份额"),
-        "Block-reward shares paid to O(1) Network Fund and ParanO(1)d Lab. This protocol payout has no spend inputs." => (
-            "Доли вознаграждения за блок выплачены O(1) Network Fund и ParanO(1)d Lab. У этой протокольной выплаты нет расходуемых входов.",
-            "区块奖励份额支付给 O(1) Network Fund 和 ParanO(1)d Lab。该协议付款不消耗任何输入。",
+        "Block-reward shares paid to O(1) Network Fund and Kairos Lab. This protocol payout has no spend inputs." => (
+            "Доли вознаграждения за блок выплачены O(1) Network Fund и Kairos Lab. У этой протокольной выплаты нет расходуемых входов.",
+            "区块奖励份额支付给 O(1) Network Fund 和 Kairos Lab。该协议付款不消耗任何输入。",
         ),
         "INPUT UTXOS" => ("ВХОДНЫЕ UTXO", "输入 UTXO"),
         "OUTPUT UTXOS" => ("ВЫХОДНЫЕ UTXO", "输出 UTXO"),
@@ -927,8 +928,8 @@ fn exact_translation(source: &str) -> Option<(&'static str, &'static str)> {
         "SEND" => ("ОТПРАВИТЬ", "发送"),
         "USE KEY" => ("ИСПОЛЬЗОВАТЬ КЛЮЧ", "使用密钥"),
         "HEADER →" => ("ЗАГОЛОВОК →", "区块头 →"),
-        "FEE / NOID" => ("КОМИССИЯ / NOID", "手续费 / NOID"),
-        "FEE / μNOID" => ("КОМИССИЯ / μNOID", "手续费 / μNOID"),
+        "FEE / KAI" => ("КОМИССИЯ / KAI", "手续费 / KAI"),
+        "FEE / μKAI" => ("КОМИССИЯ / μKAI", "手续费 / μKAI"),
         "256 BITS · GENERATED LOCALLY" => (
             "256 БИТ · СОЗДАН ЛОКАЛЬНО",
             "256 位 · 本机生成",
@@ -1035,22 +1036,22 @@ fn exact_translation(source: &str) -> Option<(&'static str, &'static str)> {
         ),
         "Master secret ready." => ("Мастер-ключ готов.", "主密钥已就绪。"),
         "Enter an amount." => ("Введите сумму.", "请输入金额。"),
-        "Amount must be a positive NOID value." => (
-            "Сумма NOID должна быть положительной.",
-            "NOID 金额必须大于零。",
+        "Amount must be a positive KAI value." => (
+            "Сумма KAI должна быть положительной.",
+            "KAI 金额必须大于零。",
         ),
-        "Use a decimal NOID amount, for example 12.500000." => (
-            "Введите десятичную сумму NOID, например 12.500000.",
-            "请输入十进制 NOID 金额，例如 12.500000。",
+        "Use a decimal KAI amount, for example 12.500000." => (
+            "Введите десятичную сумму KAI, например 12.500000.",
+            "请输入十进制 KAI 金额，例如 12.500000。",
         ),
-        "NOID supports at most 6 decimal places." => (
-            "NOID поддерживает не более 6 знаков после запятой.",
-            "NOID 最多支持 6 位小数。",
+        "KAI supports at most 6 decimal places." => (
+            "KAI поддерживает не более 6 знаков после запятой.",
+            "KAI 最多支持 6 位小数。",
         ),
         "Amount is too large." => ("Сумма слишком велика.", "金额过大。"),
-        "Amount must be at least 0.000001 NOID." => (
-            "Минимальная сумма — 0.000001 NOID.",
-            "金额不得低于 0.000001 NOID。",
+        "Amount must be at least 0.000001 KAI." => (
+            "Минимальная сумма — 0.000001 KAI.",
+            "金额不得低于 0.000001 KAI。",
         ),
         "HISTORYSTEP" => ("HISTORYSTEP", "HISTORYSTEP"),
         "genesis" => ("генезис", "创世区块"),
@@ -1111,9 +1112,9 @@ fn exact_translation(source: &str) -> Option<(&'static str, &'static str)> {
         ),
         "Node data directory" => ("Каталог данных узла", "节点数据目录"),
         "LOG LEVEL" => ("УРОВЕНЬ ЛОГОВ", "日志级别"),
-        "Written locally to parano1d-node.log" => (
-            "Записываются локально в parano1d-node.log",
-            "在本机写入 parano1d-node.log",
+        "Written locally to kairos-node.log" => (
+            "Записываются локально в kairos-node.log",
+            "在本机写入 kairos-node.log",
         ),
         "ERROR" => ("ОШИБКИ", "错误"),
         "WARN" => ("ПРЕДУПР.", "警告"),
@@ -1124,9 +1125,9 @@ fn exact_translation(source: &str) -> Option<(&'static str, &'static str)> {
         "READ ERROR" => ("ОШИБКА ЧТЕНИЯ", "读取错误"),
         "NO OUTPUT" => ("НЕТ ДАННЫХ", "暂无日志输出"),
         "SELECT TEXT · CTRL+C TO COPY" => ("ВЫДЕЛИТЕ ТЕКСТ · CTRL+C — КОПИРОВАТЬ", "选择文本 · CTRL+C 复制"),
-        "No parano1d-node.log output yet…" => (
-            "В parano1d-node.log пока нет данных…",
-            "parano1d-node.log 暂无输出…",
+        "No kairos-node.log output yet…" => (
+            "В kairos-node.log пока нет данных…",
+            "kairos-node.log 暂无输出…",
         ),
         "P2P LISTEN" => ("P2P-АДРЕС", "P2P 监听地址"),
         "Address used for inbound peer connections" => (

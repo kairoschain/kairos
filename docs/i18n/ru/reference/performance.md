@@ -82,4 +82,4 @@ Intel i7-1365U, 12 потоков, AVX2+VPCLMUL. Каждая строка — �
 компонент и оборудование, не приравнивайте секунды доказательства к TPS.
 
 Полные записи, версии, ограничения, отрицательные проверки и сценарии
-воспроизведения приведены в [отчёте квалификации](https://git.parano1d.org/ignotusnemo/parano1d/src/branch/v2/research/v2_feasibility/results/2026-09-25-common-input-budget/REPORT.md).
+воспроизведения приведены в [отчёте квалификации](https://git.parano1d.org/ignotusnemo/kairos/src/branch/v2/research/v2_feasibility/results/2026-09-25-common-input-budget/REPORT.md).

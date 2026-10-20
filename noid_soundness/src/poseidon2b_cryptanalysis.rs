@@ -1,10 +1,11 @@
 // SPDX-License-Identifier: Apache-2.0
 // Copyright (C) 2026 Paranoid Zero.
+// Modified by the Kairos Chain contributors (rebrand to Kairos Chain).
 
 //! Production correspondence for published Poseidon2b algebraic attacks.
 //!
 //! This module records the classical attack-cost projections that can be
-//! instantiated for the fixed Parano1d profile. The production QROM delta
+//! instantiated for the fixed Kairos profile. The production QROM delta
 //! remains a separate premise of the end-to-end theorem.
 
 use noid_core::{Block128, TowerField};

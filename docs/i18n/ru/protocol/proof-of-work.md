@@ -1,6 +1,6 @@
 # Доказательство выполнения работы (Proof of work)
 
-[Proof of work](../reference/glossary.md#proof-of-work-pow) Parano1d представляет
+[Proof of work](../reference/glossary.md#proof-of-work-pow) Kairos представляет
 собой хэш-код Poseidon2b с разделением доменов над фиксированными полями
 семантического заголовка. Он выполняется после доказательства `HistoryStep`, не
 зависящего от nonce.

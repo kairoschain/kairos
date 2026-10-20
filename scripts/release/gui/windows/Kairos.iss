@@ -31,15 +31,15 @@
 
 [Setup]
 AppId={{8EAD67A1-91AB-497A-81A5-8A73CF4A6F31}
-AppName=Parano1d
+AppName=Kairos
 AppVersion={#MyAppVersion}
-AppVerName=Parano1d {#MyAppVersion}
+AppVerName=Kairos {#MyAppVersion}
 AppPublisher=Paranoid Zero
-AppPublisherURL=https://parano1d.org/
-AppSupportURL=https://github.com/ignotusnemo/parano1d/issues
-AppUpdatesURL=https://github.com/ignotusnemo/parano1d/releases
-DefaultDirName={localappdata}\Programs\Parano1d
-DefaultGroupName=Parano1d
+AppPublisherURL=https://kairoschain.xyz/
+AppSupportURL=https://github.com/ignotusnemo/kairos/issues
+AppUpdatesURL=https://github.com/ignotusnemo/kairos/releases
+DefaultDirName={localappdata}\Programs\Kairos
+DefaultGroupName=Kairos
 DisableProgramGroupPage=yes
 AllowNoIcons=yes
 PrivilegesRequired=lowest
@@ -50,7 +50,7 @@ OutputDir={#OutputDir}
 OutputBaseFilename={#OutputBaseFilename}
 SetupIconFile={#IconFile}
 LicenseFile={#LicenseFile}
-UninstallDisplayIcon={app}\Parano1d.exe
+UninstallDisplayIcon={app}\Kairos.exe
 Compression=lzma2/ultra64
 SolidCompression=yes
 WizardStyle=modern
@@ -59,8 +59,8 @@ RestartApplications=no
 SetupLogging=yes
 VersionInfoVersion={#NumericVersion}
 VersionInfoCompany=Paranoid Zero
-VersionInfoDescription=Parano1d Wallet Installer
-VersionInfoProductName=Parano1d
+VersionInfoDescription=Kairos Wallet Installer
+VersionInfoProductName=Kairos
 VersionInfoProductVersion={#MyAppVersion}
 
 [Languages]
@@ -72,16 +72,16 @@ Name: "chinesesimplified"; MessagesFile: "{#SourcePath}\ChineseSimplified.isl"
 Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked
 
 [Files]
-Source: "{#SourceDir}\parano1d-gui.exe"; DestDir: "{app}"; DestName: "Parano1d.exe"; Flags: ignoreversion
-Source: "{#SourceDir}\parano1d.exe"; DestDir: "{app}"; DestName: "parano1d-node.exe"; Flags: ignoreversion
+Source: "{#SourceDir}\kairos-gui.exe"; DestDir: "{app}"; DestName: "Kairos.exe"; Flags: ignoreversion
+Source: "{#SourceDir}\kairos.exe"; DestDir: "{app}"; DestName: "kairos-node.exe"; Flags: ignoreversion
 Source: "{#LicenseFile}"; DestDir: "{app}"; DestName: "LICENSE.txt"; Flags: ignoreversion
 Source: "{#NoticeFile}"; DestDir: "{app}"; DestName: "NOTICE.txt"; Flags: ignoreversion
 Source: "{#UserGuideFile}"; DestDir: "{app}"; DestName: "README.txt"; Flags: ignoreversion
 Source: "{#ContractGuideFile}"; DestDir: "{app}"; DestName: "CONTRACTS.md"; Flags: ignoreversion
 
 [Icons]
-Name: "{group}\Parano1d"; Filename: "{app}\Parano1d.exe"; WorkingDir: "{app}"
-Name: "{autodesktop}\Parano1d"; Filename: "{app}\Parano1d.exe"; WorkingDir: "{app}"; Tasks: desktopicon
+Name: "{group}\Kairos"; Filename: "{app}\Kairos.exe"; WorkingDir: "{app}"
+Name: "{autodesktop}\Kairos"; Filename: "{app}\Kairos.exe"; WorkingDir: "{app}"; Tasks: desktopicon
 
 [Run]
-Filename: "{app}\Parano1d.exe"; Description: "{cm:LaunchProgram,Parano1d}"; Flags: nowait postinstall skipifsilent
+Filename: "{app}\Kairos.exe"; Description: "{cm:LaunchProgram,Kairos}"; Flags: nowait postinstall skipifsilent

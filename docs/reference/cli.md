@@ -4,16 +4,16 @@ The Core archive contains three executables:
 
 | Executable | Role |
 |---|---|
-| `parano1d` | Full node, wallet backend and optional internal proof/mining pipeline |
-| `parano1d-cli` | Thin JSON-RPC client for a running node |
-| `parano1d-miner` | Separate Poseidon2b nonce-search worker |
+| `kairos` | Full node, wallet backend and optional internal proof/mining pipeline |
+| `kairos-cli` | Thin JSON-RPC client for a running node |
+| `kairos-miner` | Separate Poseidon2b nonce-search worker |
 
 ## Core daemon
 
 Run an ordinary node with no mode argument:
 
 ```sh
-parano1d
+kairos
 ```
 
 Public daemon options are:
@@ -29,8 +29,8 @@ Public daemon options are:
 | `--miner-address ADDRESS` | Mining payout address; active wallet owner is the default |
 | `--cpu-threads N` | Shared internal-miner thread budget |
 | `--data-dir PATH` | Chain, wallet and runtime data directory |
-| `--p2p-listen HOST:PORT` | P2P listener; default `0.0.0.0:9600` |
-| `--rpc-listen HOST:PORT` | JSON-RPC listener; default `127.0.0.1:9601` |
+| `--p2p-listen HOST:PORT` | P2P listener; default `0.0.0.0:9700` |
+| `--rpc-listen HOST:PORT` | JSON-RPC listener; default `127.0.0.1:9701` |
 | `--seed ENDPOINT` | Add a bootstrap endpoint; repeatable |
 | `--log LEVEL` | Tracing filter such as `error`, `warn`, `info` or `debug` |
 | `--mining-key TOKEN` | External-mining bearer token; retained for compatibility |
@@ -57,25 +57,25 @@ Examples:
 
 ```sh
 # Ordinary node
-parano1d --data-dir ~/.parano1d/data
+kairos --data-dir ~/.kairos/data
 
 # Internal miner using 12 logical CPUs
-parano1d --mode miner --cpu-threads 12
+kairos --mode miner --cpu-threads 12
 
 # Node with a local external nonce worker
-parano1d --mode extminer --mining-key-file ~/.parano1d/mining.key
+kairos --mode extminer --mining-key-file ~/.kairos/mining.key
 ```
 
 Keep RPC on loopback unless it is protected by a private or authenticated transport. A bearer key authenticates requests but does not encrypt them. The operator credential can authorize `walletSend`; prefer `--operator-key-file`, use a distinct token from the mining credential, and firewall the listener. Core refuses to start a non-loopback RPC listener unless at least one scoped credential is configured. The GUI and CLI may connect from the actual TCP loopback address without a key even when scoped credentials are configured. RPC supports HTTP only and rejects WebSocket upgrades.
 
 ## External miner
 
-`parano1d-miner` requests an already-proved, immutable template and searches
+`kairos-miner` requests an already-proved, immutable template and searches
 only its 128-bit nonce.
 
 | Option | Default | Meaning |
 |---|---|---|
-| `--rpc URL` | `http://127.0.0.1:9601` | Node JSON-RPC endpoint |
+| `--rpc URL` | `http://127.0.0.1:9701` | Node JSON-RPC endpoint |
 | `--key TOKEN` | — | Bearer token matching the node; retained for compatibility |
 | `--key-file FILE` | — | Read the bearer token from an owner-only file |
 | `--threads N` | `0` | PoW threads; zero uses every visible logical CPU |
@@ -89,9 +89,9 @@ only its 128-bit nonce.
 Typical local use:
 
 ```sh
-parano1d-miner \
-  --rpc http://127.0.0.1:9601 \
-  --key-file ~/.parano1d/mining.key \
+kairos-miner \
+  --rpc http://127.0.0.1:9701 \
+  --key-file ~/.kairos/mining.key \
   --threads 12
 ```
 
@@ -100,7 +100,7 @@ custom-payout boundaries.
 
 ## Node client
 
-`parano1d-cli` is a thin client for a running Core node. It holds no separate key
+`kairos-cli` is a thin client for a running Core node. It holds no separate key
 and performs wallet operations through local JSON-RPC.
 
 ### Global options
@@ -111,14 +111,14 @@ and performs wallet operations through local JSON-RPC.
 --rpc-timeout SECONDS   per-request timeout, default 60, range 1–3600
 ```
 
-The default endpoint is `http://127.0.0.1:9601`. Environment variable
+The default endpoint is `http://127.0.0.1:9701`. Environment variable
 `NOID_RPC` changes it. `--rpc` takes precedence.
 
-Amounts entered by CLI wallet commands are in NOID with up to six decimal
+Amounts entered by CLI wallet commands are in KAI with up to six decimal
 places:
 
 ```text
-1 NOID = 1,000,000 μNOID
+1 KAI = 1,000,000 μKAI
 ```
 
 ### Node and chain
@@ -140,11 +140,11 @@ places:
 Examples:
 
 ```sh
-parano1d-cli status
-parano1d-cli block-header 420
-parano1d-cli block 420
-parano1d-cli slot 9700063
-parano1d-cli utxos-of o1...
+kairos-cli status
+kairos-cli block-header 420
+kairos-cli block 420
+kairos-cli slot 9700063
+kairos-cli utxos-of k1...
 ```
 
 `block` returns data only inside the 42-block body-retention window. `header`
@@ -159,15 +159,15 @@ and `block-header` remain available for every canonical height.
 | `block-template` | `--miner-addr o1…` | Node-owned external mining template |
 | `submit-block` | `TEMPLATE_ID NONCE_HEX` | Submit one 16-byte little-endian nonce |
 
-The external-mining commands are low-level. `parano1d-miner` handles template
+The external-mining commands are low-level. `kairos-miner` handles template
 refresh and nonce encoding automatically.
 
 ### Fees and mempool
 
 ```sh
-parano1d-cli estimate-fee 2 --inputs 1
-parano1d-cli mempool
-parano1d-cli mempool-tx TXID
+kairos-cli estimate-fee 2 --inputs 1
+kairos-cli mempool
+kairos-cli mempool-tx TXID
 ```
 
 `estimate-fee` reports the current node-accepted minimum for the declared live
@@ -177,7 +177,7 @@ individual physical pages.
 ### Address validation
 
 ```sh
-parano1d-cli validate o1...
+kairos-cli validate k1...
 ```
 
 The command reports validity, canonical bech32m form and raw 32-byte payload.
@@ -185,11 +185,11 @@ The command reports validity, canonical bech32m form and raw 32-byte payload.
 ### Wallet addresses
 
 ```sh
-parano1d-cli address
-parano1d-cli address --list
-parano1d-cli address --new
-parano1d-cli address --index 3
-parano1d-cli address --use 3
+kairos-cli address
+kairos-cli address --list
+kairos-cli address --new
+kairos-cli address --index 3
+kairos-cli address --use 3
 ```
 
 `--new`, `--index` and `--use` are mutually exclusive actions. A generated
@@ -199,9 +199,9 @@ and return change to that owner.
 ### Balance and UTXOs
 
 ```sh
-parano1d-cli balance
-parano1d-cli utxos
-parano1d-cli scan
+kairos-cli balance
+kairos-cli utxos
+kairos-cli scan
 ```
 
 `balance` separates confirmed, reserved outbound, pending incoming and
@@ -213,19 +213,19 @@ owner index.
 Preview:
 
 ```sh
-parano1d-cli send o1... 10.5 --dry-run
+kairos-cli send k1... 10.5 --dry-run
 ```
 
 Submit with automatic fee:
 
 ```sh
-parano1d-cli send o1... 10.5
+kairos-cli send k1... 10.5
 ```
 
-Specify an exact fee in NOID only when needed:
+Specify an exact fee in KAI only when needed:
 
 ```sh
-parano1d-cli send o1... 10.5 --fee 0.012
+kairos-cli send k1... 10.5 --fee 0.012
 ```
 
 The returned ID names the complete logical spend. Automatic fee selection is
@@ -234,21 +234,21 @@ recommended because occupancy and relay floor can change.
 ### History and receipts
 
 ```sh
-parano1d-cli history
-parano1d-cli history --last 20
-parano1d-cli history --address o1...
+kairos-cli history
+kairos-cli history --last 20
+kairos-cli history --address k1...
 ```
 
 Export a confirmed outgoing receipt:
 
 ```sh
-parano1d-cli receipt TXID > receipt.hex
+kairos-cli receipt TXID > receipt.hex
 ```
 
 Verify it:
 
 ```sh
-parano1d-cli verify "$(tr -d '\n' < receipt.hex)"
+kairos-cli verify "$(tr -d '\n' < receipt.hex)"
 ```
 
 Receipt export works only for a locally saved different-owner payment.
@@ -256,7 +256,7 @@ Receipt export works only for a locally saved different-owner payment.
 ### Stop
 
 ```sh
-parano1d-cli stop
+kairos-cli stop
 ```
 
 This requests graceful daemon shutdown. It is equivalent to the GUI's normal
@@ -268,7 +268,7 @@ Use `--json` and check the process exit status:
 
 ```sh
 height="$(
-  parano1d-cli --json status |
+  kairos-cli --json status |
     jq -er '.height'
 )"
 ```
@@ -278,9 +278,9 @@ consume JSON.
 
 ### Contracts
 
-`parano1d-cli contract` provides `protocol`, `payment`, `vault`, `allowance`,
+`kairos-cli contract` provides `protocol`, `payment`, `vault`, `allowance`,
 `budget`, `recurring`, `vesting`, `create`, `fund`, `watch`, `status`, `instances`,
-`call`, `receipt`, `verify` and `restore`. Amounts are NOID. `call --preview`
+`call`, `receipt`, `verify` and `restore`. Amounts are KAI. `call --preview`
 reviews an exact instance; `--expected-txid` binds the reviewed body.
 See [complete workflow](../contracts/api.md#cli-workflow) and each command
 with `--help`. Contract API access uses local owner scope.

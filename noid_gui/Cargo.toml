@@ -3,7 +3,7 @@ name = "noid_gui"
 version.workspace = true
 edition.workspace = true
 license.workspace = true
-description = "Native Parano1d wallet application"
+description = "Native Kairos wallet application"
 
 [features]
 default = []
@@ -12,7 +12,7 @@ default = []
 dev-genesis = []
 
 [[bin]]
-name = "parano1d-gui"
+name = "kairos-gui"
 path = "src/main.rs"
 
 [dependencies]

@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 760" role="img"
      aria-labelledby="title description">
-  <title id="title">ParanO(1)d authenticated snapshot synchronization</title>
+  <title id="title">Kairos authenticated snapshot synchronization</title>
   <desc id="description">
     A joining node validates permanent headers, authenticates a finalized
     boundary with a recursive terminal, verifies a manifest and exact state
@@ -53,7 +53,7 @@
     </text>
     <text x="1384" y="57" fill="#34e06f" font-size="15" text-anchor="end"
           font-family="ui-monospace, SFMono-Regular, Menlo, monospace">
-      ParanO(1)d
+      Kairos
     </text>
 
     <!-- permanent header rail -->

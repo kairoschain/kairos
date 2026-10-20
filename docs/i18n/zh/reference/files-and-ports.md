@@ -4,9 +4,9 @@
 
 | 路径 | 用途 | 权限性质 |
 |---|---|---|
-| `~/.parano1d/parano1d.toml` | Core 配置 | 运营者 |
-| `~/.parano1d/gui-settings.json` | GUI 偏好 | 本地 UI |
-| `~/.parano1d/data/` | Core 与 GUI 节点默认数据 | 共识数据 |
+| `~/.kairos/kairos.toml` | Core 配置 | 运营者 |
+| `~/.kairos/gui-settings.json` | GUI 偏好 | 本地 UI |
+| `~/.kairos/data/` | Core 与 GUI 节点默认数据 | 共识数据 |
 | `DATA_DIR/wallet.key` | 256 位钱包主密钥 | 花费权限 |
 | `DATA_DIR/wallet.receipts` | 已保存的外发收据 | 本地付款证据 |
 | `DATA_DIR/wallet.labels` | 持久地址标签 | 仅本地显示 |
@@ -15,8 +15,8 @@
 | `DATA_DIR/peers.json` | 成功连接过的公网出站节点 | 发现提示 |
 | `DATA_DIR/history-step-cache/` | 派生的本地证明矩阵缓存 | 可重建 |
 | `DATA_DIR/snapshot-staging/` | 接收快照临时数据 | 永不作为规范 State |
-| `DATA_DIR/parano1d-gui.toml` | GUI 管理的节点配置 | 私有节点 |
-| `DATA_DIR/parano1d-node.log` | GUI 管理的节点日志 | 诊断 |
+| `DATA_DIR/kairos-gui.toml` | GUI 管理的节点配置 | 私有节点 |
+| `DATA_DIR/kairos-node.log` | GUI 管理的节点日志 | 诊断 |
 
 Windows 中的 `~` 表示用户配置文件目录。
 
@@ -43,8 +43,8 @@ Unix 上，`wallet.key` 和 `p2p_identity.key` 仅允许所有者访问。前者
 
 | 端口 | 绑定 | 用途 | 是否公开 |
 |---:|---|---|---|
-| TCP 9600 | `0.0.0.0` | libp2p | 是 |
-| TCP 9601 | `127.0.0.1` | JSON-RPC | 否 |
+| TCP 9700 | `0.0.0.0` | libp2p | 是 |
+| TCP 9701 | `127.0.0.1` | JSON-RPC | 否 |
 
 远程外部挖矿只能通过受保护的私有或 TLS 传输使用 RPC。Bearer token
 认证请求，但不加密传输。
@@ -55,7 +55,7 @@ Unix 上，`wallet.key` 和 `p2p_identity.key` 仅允许所有者访问。前者
 |---|---|
 | 网络 | `mainnet` |
 | 创世区块 ID | `860e70453390bf815718e933aa4927167a13d098b0151391eefd722ee1add610` |
-| 网络魔数（network magic） | `NOID` |
+| 网络魔数（network magic） | `KAI` |
 | libp2p 协议 | `/noid/mainnet/860e70453390bf81/1` |
 | 交易与区块 gossip | GossipSub |
 | 发现 | DNS 种子、Kademlia、mDNS |

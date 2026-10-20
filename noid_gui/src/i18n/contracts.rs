@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: Apache-2.0
 // Copyright (C) 2026 Paranoid Zero.
+// Modified by the Kairos Chain contributors (rebrand to Kairos Chain).
 
 use crate::model::Language;
 
@@ -15,18 +16,18 @@ pub(super) fn translate(language: Language, source: &str) -> Option<String> {
         "CONTRACT" => ("КОНТРАКТ", "合约"),
         "REFRESH LIST" => ("ОБНОВИТЬ СПИСОК", "刷新列表"),
         "CONTRACT NAME" => ("ИМЯ КОНТРАКТА", "合约名称"),
-        "INITIAL DEPOSIT (NOID)" => ("НАЧАЛЬНОЕ ПОПОЛНЕНИЕ (NOID)", "首次充值（NOID）"),
+        "INITIAL DEPOSIT (KAI)" => ("НАЧАЛЬНОЕ ПОПОЛНЕНИЕ (KAI)", "首次充值（KAI）"),
         "CREATE & FUND" => ("СОЗДАТЬ И ПОПОЛНИТЬ", "创建并充值"),
         "SAVE WITHOUT DEPOSIT" => ("СОХРАНИТЬ БЕЗ ПОПОЛНЕНИЯ", "保存但不充值"),
-        "Example: reserve 10 NOID for a recipient. They collect before expiry; you can recover the remainder from the expiry block." => ("Пример: выделите получателю 10 NOID. Он может забрать их до срока, а вы — вернуть остаток начиная с блока истечения срока.", "示例：为收款人预留 10 NOID。对方可在到期前领取；从到期区块起，您可收回余额。"),
+        "Example: reserve 10 KAI for a recipient. They collect before expiry; you can recover the remainder from the expiry block." => ("Пример: выделите получателю 10 KAI. Он может забрать их до срока, а вы — вернуть остаток начиная с блока истечения срока.", "示例：为收款人预留 10 KAI。对方可在到期前领取；从到期区块起，您可收回余额。"),
         "Example: lock savings until a chosen block. The owner can withdraw after that block." => ("Пример: заблокируйте сбережения до выбранного блока. Начиная с него владелец сможет вывести средства.", "示例：将储蓄锁定至指定区块。从该区块起，所有者即可提款。"),
         "Example: give a spending key access to a funded balance with a maximum payment per call and a protected reserve." => ("Пример: предоставьте расходному ключу доступ к средствам с лимитом платежа на вызов и неснижаемым резервом.", "示例：授予支出密钥使用余额的权限，同时设置单次付款上限及最低储备。"),
-        "Example: allow up to 10 NOID of payments and fees per period. Unused budget does not carry over." => ("Пример: разрешите тратить до 10 NOID на платежи и комиссии за период. Неиспользованный бюджет не переносится.", "示例：每周期允许支付和手续费合计最多 10 NOID。未使用的预算不会结转。"),
+        "Example: allow up to 10 KAI of payments and fees per period. Unused budget does not carry over." => ("Пример: разрешите тратить до 10 KAI на платежи и комиссии за период. Неиспользованный бюджет не переносится.", "示例：每周期允许支付和手续费合计最多 10 KAI。未使用的预算不会结转。"),
         "Example: prepay a recurring allowance. The recipient claims each due payment; nothing is charged automatically." => ("Пример: заранее пополните регулярное пособие. Получатель сам запрашивает очередной платёж; автоматических списаний нет.", "示例：预存定期津贴。收款人自行领取每笔到期付款，不会自动扣款。"),
-        "Example: unlock 5 NOID at each interval. The beneficiary submits a call to claim each tranche." => ("Пример: разблокируйте по 5 NOID через заданные интервалы. Для получения каждой части получатель отправляет вызов.", "示例：每隔指定周期解锁 5 NOID。受益人提交调用以领取每笔分期款。"),
+        "Example: unlock 5 KAI at each interval. The beneficiary submits a call to claim each tranche." => ("Пример: разблокируйте по 5 KAI через заданные интервалы. Для получения каждой части получатель отправляет вызов.", "示例：每隔指定周期解锁 5 KAI。受益人提交调用以领取每笔分期款。"),
         "Creating and funding requires your confirmation. Later actions depend on the contract rules and the active wallet address." => ("Создание с пополнением требует вашего подтверждения. Дальнейшие действия зависят от правил контракта и активного адреса кошелька.", "创建并充值需要您确认。后续操作取决于合约规则及钱包当前地址。"),
         "Contract schedules use block heights. Each deposit has its own balance and counters." => ("Сроки контракта задаются высотой блока. У каждого пополнения свой остаток и счётчики.", "合约时间表使用区块高度。每次充值都有独立余额和计数器。"),
-        "DEPOSIT AMOUNT (NOID)" => ("СУММА ПОПОЛНЕНИЯ (NOID)", "充值金额（NOID）"),
+        "DEPOSIT AMOUNT (KAI)" => ("СУММА ПОПОЛНЕНИЯ (KAI)", "充值金额（KAI）"),
         "SPENDING AUTHORITY BEFORE DEADLINE" => ("КЛЮЧ РАСХОДОВАНИЯ ДО СРОКА", "到期前的支出授权方"),
         "SPENDING AUTHORITY FROM DEADLINE" => ("КЛЮЧ РАСХОДОВАНИЯ С НАСТУПЛЕНИЕМ СРОКА", "到期后的支出授权方"),
         "SHARE CONTRACT" => ("ПЕРЕДАТЬ КОНТРАКТ", "分享合约"),
@@ -50,7 +51,7 @@ pub(super) fn translate(language: Language, source: &str) -> Option<String> {
         "CALL WITHOUT PAYMENT" => ("ВЫЗОВ БЕЗ ПЛАТЕЖА", "无付款调用"),
         "CHOOSE AN ACTION" => ("ВЫБЕРИТЕ ДЕЙСТВИЕ", "选择操作"),
         "REVIEW DEPOSIT" => ("ПРОВЕРИТЬ ПОПОЛНЕНИЕ", "核对充值"),
-        "PAYMENT AMOUNT (NOID)" => ("СУММА ПЛАТЕЖА (NOID)", "付款金额（NOID）"),
+        "PAYMENT AMOUNT (KAI)" => ("СУММА ПЛАТЕЖА (KAI)", "付款金额（KAI）"),
         "The selected deposit is closed. Its remaining balance, less the fee, goes to this recipient." => ("Выбранный остаток будет закрыт. Все средства за вычетом комиссии поступят этому получателю.", "所选充值将被关闭，余额扣除手续费后发送给此收款人。"),
         "Run the program without making a payment. The network fee comes from the selected balance." => ("Выполнить программу без платежа. Комиссия сети вычитается из выбранного остатка.", "执行程序但不付款。网络手续费从所选余额中扣除。"),
         "REVIEW CONTRACT CALL" => ("ПРОВЕРИТЬ ВЫЗОВ", "核对合约调用"),
@@ -74,7 +75,7 @@ pub(super) fn translate(language: Language, source: &str) -> Option<String> {
         "FILE" => ("ФАЙЛ", "文件"),
         "CALL AUTHORIZED BY" => ("КЛЮЧ АВТОРИЗАЦИИ ВЫЗОВА", "调用授权方"),
         "The receipt confirms a past operation. Available balances are checked separately." => ("Чек подтверждает прошлую операцию. Доступные остатки проверяются отдельно.", "凭证证明一笔历史操作。可用余额另行检查。"),
-        "AVAILABLE IN THIS PAGE (NOID)" => ("ДОСТУПНО НА ЭТОЙ СТРАНИЦЕ (NOID)", "本页可用余额（NOID）"),
+        "AVAILABLE IN THIS PAGE (KAI)" => ("ДОСТУПНО НА ЭТОЙ СТРАНИЦЕ (KAI)", "本页可用余额（KAI）"),
         "This state has no available balance. The file may describe a draft, a spent deposit or an older state." => ("В этом состоянии доступных средств нет. Файл может описывать контракт без пополнения, потраченный остаток или старое состояние.", "此状态没有可用余额。文件可能描述未充值的草稿、已花费的充值或旧状态。"),
         "UPDATE MY CONTRACT & OPEN" => ("ОБНОВИТЬ МОЙ КОНТРАКТ И ОТКРЫТЬ", "更新我的合约并打开"),
         "SIGNING ADDRESS" => ("АДРЕС ПОДПИСАНТА", "签名地址"),
@@ -176,14 +177,14 @@ pub(super) fn translate(language: Language, source: &str) -> Option<String> {
         "MATURITY BLOCK" => ("БЛОК ПОЛНОЙ РАЗБЛОКИРОВКИ", "完全解锁区块"),
         "FIRST PERIOD / UNLOCK BLOCK" => ("ПЕРВЫЙ БЛОК ПЕРИОДА / РАЗБЛОКИРОВКИ", "首个周期 / 解锁区块"),
         "PERIOD IN BLOCKS" => ("ПЕРИОД В БЛОКАХ", "周期区块数"),
-        "FIXED PAYMENT / TRANCHE (NOID)" => ("ФИКСИРОВАННЫЙ ПЛАТЁЖ / ТРАНШ (NOID)", "固定付款 / 分期金额（NOID）"),
-        "TOTAL PERIOD BUDGET (NOID)" => ("ОБЩИЙ БЮДЖЕТ ПЕРИОДА (NOID)", "周期总预算（NOID）"),
+        "FIXED PAYMENT / TRANCHE (KAI)" => ("ФИКСИРОВАННЫЙ ПЛАТЁЖ / ТРАНШ (KAI)", "固定付款 / 分期金额（KAI）"),
+        "TOTAL PERIOD BUDGET (KAI)" => ("ОБЩИЙ БЮДЖЕТ ПЕРИОДА (KAI)", "周期总预算（KAI）"),
         "EDIT AS NEW PROGRAM" => ("ИЗМЕНИТЬ КАК НОВУЮ ПРОГРАММУ", "编辑为新程序"),
         "REVIEW CALL WITHOUT PAYMENT" => ("ПРОВЕРИТЬ ВЫЗОВ БЕЗ ПЛАТЕЖА", "核对无付款调用"),
         "CHECK CANDIDATE BALANCE" => ("ПРОВЕРИТЬ БАЛАНС РЕЗУЛЬТАТА", "检查候选余额"),
         "INCLUSION BLOCK" => ("БЛОК ВКЛЮЧЕНИЯ", "包含区块"),
-        "NETWORK FEE (NOID)" => ("КОМИССИЯ СЕТИ (NOID)", "网络手续费（NOID）"),
-        "REMAINING BALANCE (NOID)" => ("ОСТАТОК В КОНТРАКТЕ (NOID)", "合约剩余余额（NOID）"),
+        "NETWORK FEE (KAI)" => ("КОМИССИЯ СЕТИ (KAI)", "网络手续费（KAI）"),
+        "REMAINING BALANCE (KAI)" => ("ОСТАТОК В КОНТРАКТЕ (KAI)", "合约剩余余额（KAI）"),
         "NEXT SAVED COUNTERS" => ("НОВЫЕ ЗНАЧЕНИЯ СЧЁТЧИКОВ", "下一状态计数器"),
         "Contracts become available automatically at the v2 activation block." => ("Контракты станут доступны автоматически с блока активации v2.", "合约将在 v2 激活区块自动启用。"),
         "The budget includes payments and fees. Unused budget does not carry over. The first call after a period expires starts a new period." => ("Бюджет включает платежи и комиссии. Неиспользованная часть не переносится. Первый вызов после истечения периода начинает новый период.", "预算包含付款和手续费。未用预算不结转。周期结束后的首次调用将开始新周期。"),
@@ -245,14 +246,14 @@ pub(super) fn translate(language: Language, source: &str) -> Option<String> {
         "EXPIRY BLOCK" => ("БЛОК ИСТЕЧЕНИЯ СРОКА", "到期区块"),
         "UNLOCK BLOCK" => ("БЛОК РАЗБЛОКИРОВКИ", "解锁区块"),
         "RECOVERY BLOCK" => ("БЛОК ВОЗВРАТА", "恢复区块"),
-        "CALL FEE LIMIT (NOID)" => (
-            "ЛИМИТ КОМИССИИ ВЫЗОВА (NOID)",
-            "调用手续费上限（NOID）",
+        "CALL FEE LIMIT (KAI)" => (
+            "ЛИМИТ КОМИССИИ ВЫЗОВА (KAI)",
+            "调用手续费上限（KAI）",
         ),
-        "PER-CALL PAYMENT LIMIT (NOID)" => {
-            ("ЛИМИТ ПЛАТЕЖА НА ВЫЗОВ (NOID)", "单次支付上限（NOID）")
+        "PER-CALL PAYMENT LIMIT (KAI)" => {
+            ("ЛИМИТ ПЛАТЕЖА НА ВЫЗОВ (KAI)", "单次支付上限（KAI）")
         }
-        "MINIMUM RESERVE (NOID)" => ("МИНИМАЛЬНЫЙ РЕЗЕРВ (NOID)", "最低储备（NOID）"),
+        "MINIMUM RESERVE (KAI)" => ("МИНИМАЛЬНЫЙ РЕЗЕРВ (KAI)", "最低储备（KAI）"),
         "FIXED PAYMENT RECIPIENT (EMPTY ALLOWS ANY)" => (
             "ФИКСИРОВАННЫЙ ПОЛУЧАТЕЛЬ (ПУСТО — ЛЮБОЙ)",
             "固定收款人（留空则不限）",
@@ -326,9 +327,9 @@ pub(super) fn translate(language: Language, source: &str) -> Option<String> {
             "这些条款下没有可支配余额。",
         ),
         "NEXT PAGE" => ("СЛЕДУЮЩАЯ СТРАНИЦА", "下一页"),
-        "AMOUNT TO FUND OR PAY (NOID)" => (
-            "СУММА ПОПОЛНЕНИЯ ИЛИ ПЛАТЕЖА (NOID)",
-            "充值或支付金额（NOID）",
+        "AMOUNT TO FUND OR PAY (KAI)" => (
+            "СУММА ПОПОЛНЕНИЯ ИЛИ ПЛАТЕЖА (KAI)",
+            "充值或支付金额（KAI）",
         ),
         "NETWORK FEE (EMPTY IS AUTOMATIC)" => (
             "КОМИССИЯ СЕТИ (ПУСТО — АВТОМАТИЧЕСКИ)",
@@ -498,19 +499,19 @@ fn dynamic(language: Language, source: &str) -> Option<String> {
     }
     if let Some((fee, tail)) = source
         .strip_prefix("Maximum fee: ")
-        .and_then(|s| s.split_once(" NOID · Per-call payout cap: "))
+        .and_then(|s| s.split_once(" KAI · Per-call payout cap: "))
     {
         if let Some((cap, reserve)) = tail
-            .strip_suffix(" NOID")
-            .and_then(|s| s.split_once(" NOID · Reserve: "))
+            .strip_suffix(" KAI")
+            .and_then(|s| s.split_once(" KAI · Reserve: "))
         {
             return Some(select(
                 language,
                 source,
                 &format!(
-                    "Макс. комиссия: {fee} NOID · Лимит на вызов: {cap} NOID · Резерв: {reserve} NOID"
+                    "Макс. комиссия: {fee} KAI · Лимит на вызов: {cap} KAI · Резерв: {reserve} KAI"
                 ),
-                &format!("手续费上限：{fee} NOID · 单次限额：{cap} NOID · 储备：{reserve} NOID"),
+                &format!("手续费上限：{fee} KAI · 单次限额：{cap} KAI · 储备：{reserve} KAI"),
             ));
         }
     }
@@ -530,13 +531,13 @@ fn dynamic(language: Language, source: &str) -> Option<String> {
             &format!("区块 {height} 的已充值合约"),
         ));
     }
-    if let Some((amount, tail)) = source.split_once(" NOID · position ") {
+    if let Some((amount, tail)) = source.split_once(" KAI · position ") {
         if let Some((slot, creation)) = tail.split_once(" · creation ") {
             return Some(select(
                 language,
                 source,
-                &format!("{amount} NOID · позиция {slot} · создание {creation}"),
-                &format!("{amount} NOID · 位置 {slot} · 创建编号 {creation}"),
+                &format!("{amount} KAI · позиция {slot} · создание {creation}"),
+                &format!("{amount} KAI · 位置 {slot} · 创建编号 {creation}"),
             ));
         }
     }
@@ -565,34 +566,34 @@ fn dynamic(language: Language, source: &str) -> Option<String> {
     if let Some((balance, address)) = source
         .strip_prefix("Close the selected contract and send its ")
         .and_then(|s| s.strip_suffix('.'))
-        .and_then(|s| s.split_once(" NOID balance, less the network fee, to "))
+        .and_then(|s| s.split_once(" KAI balance, less the network fee, to "))
     {
         return Some(select(
             language,
             source,
             &format!(
-                "Закрыть выбранный контракт и отправить его остаток {balance} NOID за вычетом комиссии сети на {address}."
+                "Закрыть выбранный контракт и отправить его остаток {balance} KAI за вычетом комиссии сети на {address}."
             ),
-            &format!("关闭选定合约，将其 {balance} NOID 余额扣除网络手续费后发送至 {address}。"),
+            &format!("关闭选定合约，将其 {balance} KAI 余额扣除网络手续费后发送至 {address}。"),
         ));
     }
     if let Some((amount, address)) = source
         .strip_prefix("Pay ")
         .and_then(|s| s.strip_suffix(". The remaining balance stays under the contract terms."))
-        .and_then(|s| s.split_once(" NOID to "))
+        .and_then(|s| s.split_once(" KAI to "))
     {
         return Some(select(
             language,
             source,
-            &format!("Перевести {amount} NOID на {address}. Остаток сохраняет условия контракта."),
-            &format!("向 {address} 支付 {amount} NOID。余额继续受合约条款约束。"),
+            &format!("Перевести {amount} KAI на {address}. Остаток сохраняет условия контракта."),
+            &format!("向 {address} 支付 {amount} KAI。余额继续受合约条款约束。"),
         ));
     }
     if let Some((address, tail)) = source
         .strip_prefix("Fund ")
         .and_then(|s| s.split_once(" with "))
     {
-        if let Some((amount, tail)) = tail.split_once(" NOID from ") {
+        if let Some((amount, tail)) = tail.split_once(" KAI from ") {
             if let Some((sender, fee)) = tail
                 .strip_suffix('.')
                 .and_then(|s| s.split_once(". Network fee: "))
@@ -607,9 +608,9 @@ fn dynamic(language: Language, source: &str) -> Option<String> {
                     language,
                     source,
                     &format!(
-                        "Пополнить {address} на {amount} NOID с адреса {sender}. Комиссия сети: {ru_fee}."
+                        "Пополнить {address} на {amount} KAI с адреса {sender}. Комиссия сети: {ru_fee}."
                     ),
-                    &format!("从 {sender} 向 {address} 充值 {amount} NOID。网络手续费：{zh_fee}。"),
+                    &format!("从 {sender} 向 {address} 充值 {amount} KAI。网络手续费：{zh_fee}。"),
                 ));
             }
         }

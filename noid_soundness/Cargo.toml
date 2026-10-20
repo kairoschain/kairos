@@ -5,7 +5,7 @@ edition = "2024"
 license = "Apache-2.0"
 publish = false
 readme = "README.md"
-description = "Executable soundness certificates for the production Parano1d protocol."
+description = "Executable soundness certificates for the production Kairos protocol."
 
 [dependencies]
 noid_core = { path = "../noid_core" }

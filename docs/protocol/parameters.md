@@ -28,7 +28,7 @@ These are the active v2 consensus rules. Mainnet genesis is 2026-08-21 16:00:00 
 | Ordinary / contract receipt decode caps | 128 KiB / 1,110,624 bytes |
 | RPC HTTP request cap | 2,237,632 bytes |
 | Mempool count / byte budget | 1,024 / 384 MiB |
-| P2P / local RPC | 9600 / 9601 |
+| P2P / local RPC | 9700 / 9701 |
 | External template lifetime | 30 s after preparation |
 
 Page, input and call budgets apply together. A call uses one page and one
@@ -47,7 +47,7 @@ requires at most 504 inputs and the selected class's page budget. Never use a
 wire-codec bound as a promised active capacity. Counts in blocks are consensus
 rules; minute equivalents use the target interval and are not deadlines.
 
-Issuance is 16 → 11.30 → 8 → 5.65 → 4 → 2.83 → 2 → 1.41 → 1 NOID,
+Issuance is 16 → 11.30 → 8 → 5.65 → 4 → 2.83 → 2 → 1.41 → 1 KAI,
 one step per 1,051,200 blocks on the height schedule. See [network economics](economics.md)
 for exact amounts, fees and rationale; [contracts](../contracts/index.md) for
 core limits, and [performance](../reference/performance.md) for measured costs.

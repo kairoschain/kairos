@@ -68,4 +68,4 @@ Large 后第一个 Small 之后，两个不同 Small 终端分别验证 2.729 �
 完整间隔包括选择、组装、递归证明、nonce 搜索、传输和接受。ASERT 目标针对
 整个节奏。应分别报告组件和硬件范围，不要把证明秒数等同 TPS。
 
-完整样本、源码身份、限制、负面检查及复现脚本见[验证报告](https://git.parano1d.org/ignotusnemo/parano1d/src/branch/v2/research/v2_feasibility/results/2026-09-25-common-input-budget/REPORT.md)。
+完整样本、源码身份、限制、负面检查及复现脚本见[验证报告](https://git.parano1d.org/ignotusnemo/kairos/src/branch/v2/research/v2_feasibility/results/2026-09-25-common-input-budget/REPORT.md)。

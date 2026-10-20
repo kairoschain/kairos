@@ -1,7 +1,8 @@
 // SPDX-License-Identifier: Apache-2.0
 // Copyright (C) 2026 Paranoid Zero.
+// Modified by the Kairos Chain contributors (rebrand to Kairos Chain).
 
-//! Network configuration for Parano1d mainnet.
+//! Network configuration for Kairos Chain mainnet.
 //!
 //! Every network participant shares these magic bytes, ports, protocol ID,
 //! and gossipsub topics. libp2p protocol IDs prevent cross-network connections.
@@ -10,15 +11,34 @@
 //!
 //! | Network  | P2P   | RPC   |
 //! |----------|-------|-------|
-//! | Mainnet  | 9600  | 9601  |
+//! | Mainnet  | 9700  | 9701  |
 //!
 //! # Magic bytes
 //!
 //! | Network  | Magic (ASCII) |
 //! |----------|---------------|
-//! | Mainnet  | 0x4E4F4944 "NOID" |
+//! | Mainnet  | 0x4B414952 "KAIR" |
 
 use std::str::FromStr;
+use std::sync::OnceLock;
+
+/// Kairos: `/kai/mainnet/<genesis id prefix>/<suffix>`. The namespace is derived
+/// from the genesis block id, so changing the genesis parameters (or the
+/// GENESIS MIGRATION file) automatically isolates the network.
+fn kai_namespace(suffix: &'static str) -> &'static str {
+    static NAMES: OnceLock<std::sync::Mutex<std::collections::HashMap<&'static str, &'static str>>> =
+        OnceLock::new();
+    let mut names = NAMES.get_or_init(Default::default).lock().expect("namespace lock");
+    names.entry(suffix).or_insert_with(|| {
+        Box::leak(
+            format!(
+                "/kai/mainnet/{}/{suffix}",
+                super::genesis::genesis_id_prefix()
+            )
+            .into_boxed_str(),
+        )
+    })
+}
 
 // ---------------------------------------------------------------------------
 // NetworkKind
@@ -31,7 +51,7 @@ use std::str::FromStr;
 /// an error at startup so misconfigured nodes fail fast.
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Default)]
 pub enum NetworkKind {
-    /// Parano1d mainnet.
+    /// Kairos Chain mainnet.
     #[default]
     Mainnet,
 }
@@ -100,25 +120,25 @@ impl NetworkConfig {
     pub fn mainnet() -> Self {
         Self {
             kind: NetworkKind::Mainnet,
-            magic: [0x4E, 0x4F, 0x49, 0x44], // "NOID"
-            default_p2p_port: 9600,
-            default_rpc_port: 9601,
+            magic: [0x4B, 0x41, 0x49, 0x52], // "KAIR"
+            default_p2p_port: 9700,
+            default_rpc_port: 9701,
             // Mainnet is isolated by its genesis-bound namespace. The exact
             // authenticated network profile adds a second fail-closed gate.
-            p2p_protocol_id: "/noid/mainnet/860e70453390bf81/1",
-            topic_blocks: "/noid/mainnet/860e70453390bf81/blocks/1",
-            topic_txs: "/noid/mainnet/860e70453390bf81/txs/1",
+            p2p_protocol_id: kai_namespace("1"),
+            topic_blocks: kai_namespace("blocks/1"),
+            topic_txs: kai_namespace("txs/1"),
             // DNS seeds — two formats supported:
             //
-            // 1. Bare hostname  → dialled as /dns4/<host>/tcp/9600
+            // 1. Bare hostname  → dialled as /dns4/<host>/tcp/9700
             //    Simple A-record setup.  Works immediately once the domain
             //    points to a live node.  No PeerID verification.
             //
             // 2. "dnsaddr:<hostname>" → dialled as /dnsaddr/<hostname>
             //    Resolves _dnsaddr.<hostname> TXT records.  Each TXT entry
             //    encodes a full multiaddr including PeerID, e.g.:
-            //      _dnsaddr.parano1d.org TXT
-            //        "dnsaddr=/ip4/1.2.3.4/tcp/9600/p2p/12D3KooW..."
+            //      _dnsaddr.kairoschain.xyz TXT
+            //        "dnsaddr=/ip4/1.2.3.4/tcp/9700/p2p/12D3KooW..."
             //    Connection is cryptographically verified against PeerID.
             //    This is the libp2p standard (used by IPFS, Filecoin).
             //    Add one TXT record per seed node; DNS round-robins them.
@@ -127,10 +147,10 @@ impl NetworkConfig {
             // Each hostname creates an independent startup dial; unresolved
             // future seeds fail independently without delaying usable seeds.
             dns_seeds: &[
-                "mseed1.parano1d.org",
-                "mseed2.parano1d.org",
-                "mseed3.parano1d.org",
-                "mseed4.parano1d.org",
+                "seed1.kairoschain.xyz",
+                "seed2.kairoschain.xyz",
+                "seed3.kairoschain.xyz",
+                "seed4.kairoschain.xyz",
             ],
         }
     }
@@ -159,26 +179,24 @@ mod tests {
     use super::*;
 
     #[test]
-    fn mainnet_magic_is_noid() {
-        assert_eq!(NetworkConfig::mainnet().magic, [0x4E, 0x4F, 0x49, 0x44]);
+    fn mainnet_magic_is_kair() {
+        assert_eq!(NetworkConfig::mainnet().magic, *b"KAIR");
     }
 
     #[test]
     fn mainnet_ports() {
         let m = NetworkConfig::mainnet();
-        assert_eq!(m.default_p2p_port, 9600);
-        assert_eq!(m.default_rpc_port, 9601);
+        assert_eq!(m.default_p2p_port, 9700);
+        assert_eq!(m.default_rpc_port, 9701);
     }
 
     #[test]
     fn mainnet_protocol_id() {
         let mainnet = NetworkConfig::mainnet();
-        assert_eq!(mainnet.p2p_protocol_id, "/noid/mainnet/860e70453390bf81/1");
-        assert_eq!(
-            mainnet.topic_blocks,
-            "/noid/mainnet/860e70453390bf81/blocks/1"
-        );
-        assert_eq!(mainnet.topic_txs, "/noid/mainnet/860e70453390bf81/txs/1");
+        let prefix = crate::consensus::genesis::genesis_id_prefix();
+        assert_eq!(mainnet.p2p_protocol_id, format!("/kai/mainnet/{prefix}/1"));
+        assert_eq!(mainnet.topic_blocks, format!("/kai/mainnet/{prefix}/blocks/1"));
+        assert_eq!(mainnet.topic_txs, format!("/kai/mainnet/{prefix}/txs/1"));
     }
 
     #[test]
@@ -186,10 +204,10 @@ mod tests {
         assert_eq!(
             NetworkConfig::mainnet().dns_seeds,
             &[
-                "mseed1.parano1d.org",
-                "mseed2.parano1d.org",
-                "mseed3.parano1d.org",
-                "mseed4.parano1d.org",
+                "seed1.kairoschain.xyz",
+                "seed2.kairoschain.xyz",
+                "seed3.kairoschain.xyz",
+                "seed4.kairoschain.xyz",
             ]
         );
     }

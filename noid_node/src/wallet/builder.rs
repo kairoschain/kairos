@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: Apache-2.0
 // Copyright (C) 2026 Paranoid Zero.
+// Modified by the Kairos Chain contributors (rebrand to Kairos Chain).
 
 //! Transaction builder for the Paranoid wallet.
 //!
@@ -54,7 +55,7 @@ pub struct TxBuildData {
 /// Errors that can occur during transaction construction.
 #[derive(Debug, thiserror::Error)]
 pub enum BuildError {
-    #[error("insufficient funds: need {need} μNOID, have {have} μNOID")]
+    #[error("insufficient funds: need {need} μKAI, have {have} μKAI")]
     InsufficientFunds { need: u64, have: u64 },
 
     #[error("payment needs more than {max} active UTXOs (selected at least {selected})")]
@@ -76,7 +77,7 @@ pub enum BuildError {
     ConsolidationInputUnavailable { slot_index: u32 },
 
     #[error(
-        "consolidation value mismatch: selected inputs total {selected_total} μNOID, expected output+fee {expected_total} μNOID"
+        "consolidation value mismatch: selected inputs total {selected_total} μKAI, expected output+fee {expected_total} μKAI"
     )]
     ConsolidationValueMismatch {
         selected_total: u64,

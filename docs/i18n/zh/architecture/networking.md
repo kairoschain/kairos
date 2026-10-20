@@ -1,12 +1,12 @@
 # 网络
 
-Parano1d 使用 libp2p 完成[对等节点身份](../reference/glossary.md#peer-identity)、发现、转发与同步。公网协议标识为：
+Kairos 使用 libp2p 完成[对等节点身份](../reference/glossary.md#peer-identity)、发现、转发与同步。公网协议标识为：
 
 ```text
 /noid/mainnet/860e70453390bf81/1
 ```
 
-默认 P2P 监听 TCP `9600`。[JSON-RPC](../reference/glossary.md#rpc) 是单独的本地管理接口，监听 `127.0.0.1:9601`。
+默认 P2P 监听 TCP `9700`。[JSON-RPC](../reference/glossary.md#rpc) 是单独的本地管理接口，监听 `127.0.0.1:9701`。
 
 ## 对等节点身份与共识身份
 
@@ -82,7 +82,7 @@ State 传输在 v2 共识分叉前后都支持 `/sync/segment/6` 与 `/sync/segm
 
 ## 接口边界
 
-P2P 端口 `9600` 服务公网对等节点。`9601` 上的 RPC 包含钱包和进程控制方法。
+P2P 端口 `9700` 服务公网对等节点。`9701` 上的 RPC 包含钱包和进程控制方法。
 本地 TCP 回环具有所有者权限；远程挖矿和运营者令牌仅开放各自固定的较窄方法集。
 合约方法要求本地所有者权限。HTTP Bearer 令牌不加密流量，远程 RPC 需要私有
 隧道或受保护的 TLS 传输。

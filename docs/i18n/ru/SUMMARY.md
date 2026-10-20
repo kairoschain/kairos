@@ -1,4 +1,4 @@
-# Документация Parano1d
+# Документация Kairos
 
 - [Главная](index.md)
 
@@ -64,7 +64,7 @@
 - [Первый запуск и мастер-секрет](wallet/first-run.md)
 - [Ключ из фотографии](wallet/photo-key.md)
 - [Адреса](wallet/addresses.md)
-- [Отправка NOID](wallet/send.md)
+- [Отправка KAI](wallet/send.md)
 - [Чеки](wallet/receipts.md)
 - [Контракты в кошельке](wallet/contracts.md)
 - [Консолидация](wallet/consolidation.md)

@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: Apache-2.0
 // Copyright (C) 2026 Paranoid Zero.
+// Modified by the Kairos Chain contributors (rebrand to Kairos Chain).
 
 //! `MdbxChainContext` — crash-consistent chain context backed by MDBX.
 //!
@@ -80,7 +81,7 @@ fn canonical_genesis_parts() -> (ChainState, HashMap<u64, BlockHeader>, [u8; 32]
     let hash = block_id(&header);
     let mut headers = HashMap::new();
     headers.insert(0, header);
-    (ChainState::new(), headers, hash)
+    (crate::consensus::genesis::genesis_state(), headers, hash)
 }
 
 fn recent_header_lookback() -> u64 {
@@ -718,19 +719,43 @@ impl MdbxChainContext {
         };
 
         // Write genesis header + tip + state_meta + consensus_meta in one transaction.
-        // For genesis: segments are all virtual-zero, no dirty segments.
+        // Kairos: GENESIS MIGRATION slots (if any) are persisted as dirty
+        // segments; with an empty migration every segment is virtual-zero.
+        let dirty_ids: Vec<u16> = self.state.state.dirty_segment_ids().collect();
+        let eff_log = self.state.state.effective_log_segment_size() as u8;
+        let mut dirty_refs = Vec::with_capacity(dirty_ids.len());
+        let mut dirty_summaries = Vec::with_capacity(dirty_ids.len());
+        for segment_id in dirty_ids {
+            let live_count = self.state.state.segment_live_count(segment_id);
+            let exact_root = self
+                .state
+                .cached_exact_segment_root(segment_id)
+                .ok_or(MdbxContextError::Corrupt("genesis segment root is missing"))?;
+            let columns = if live_count == 0 {
+                None
+            } else {
+                Some(
+                    self.state
+                        .state
+                        .try_get_segment_columns(segment_id)
+                        .ok_or(MdbxContextError::Corrupt("genesis segment is not resident"))?,
+                )
+            };
+            dirty_refs.push((segment_id, eff_log, columns));
+            dirty_summaries.push((segment_id, live_count, exact_root));
+        }
         self.store.commit_block(
             &genesis,
             &genesis_hash,
             &BlockUndoLog::empty(0, genesis.log_slots),
-            &[], // no dirty segments (all virtual zero)
-            &[],
+            &dirty_refs,
+            &dirty_summaries,
             &[],
             &[],
             None, // genesis is built in and has no accepted bundle
             self.state.circulating_supply_micronoid,
             &meta,
-            false,
+            !dirty_refs.is_empty(),
         )?;
         Ok(())
     }

@@ -1,6 +1,6 @@
-# Parano1d soundness certificate
+# Kairos soundness certificate
 
-`noid_soundness` instantiates the security analysis for the current Parano1d
+`noid_soundness` instantiates the security analysis for the current Kairos
 production proof profile. Protocol constants are imported from the crates used
 by the prover and verifier. Cross-component invariants and security inequalities
 are evaluated with arbitrary-precision integer or rational arithmetic.
@@ -101,7 +101,7 @@ The complete derivations are in:
 
 Block and Tiwari define concrete FS-FRI security as the minimum expected
 classical random-oracle query work over every positive integer query budget.
-Their published comparison and the production Parano1d row are:
+Their published comparison and the production Kairos row are:
 
 | Organization | Repository or configuration | Target | Provable | Conjectured |
 |---|---|---:|---:|---:|
@@ -113,9 +113,9 @@ Their published comparison and the production Parano1d row are:
 | Lambda Class | lambdaworks | 80 / 100 / 128 | 81 / 99 / 127 | 81 / 101 / 129 |
 | RISC Zero | RISC Zero | 100 | 37 | 99 |
 | Matter Labs | era-boojum | 100 | 50 | 99 |
-| **Parano1d** | History B25 / B255 | **128** | **127** | **127** |
+| **Kairos** | History B25 / B255 | **128** | **127** | **127** |
 
-Both Parano1d values lie in the exact interval `[127, 128)`. Their whole-bit
+Both Kairos values lie in the exact interval `[127, 128)`. Their whole-bit
 values are equal because the 256-bit random-oracle collision term controls the
 minimum expected-work scale in both calculations. The descriptive logarithms
 of the two exact rational work values are different:
@@ -137,7 +137,7 @@ profile. Construction fails unless the cross-component equalities required by
 the reductions hold.
 
 The documents define the security games, identify the applicable published
-theorems and derive every Parano1d-specific term. Separate Rust types preserve
+theorems and derive every Kairos-specific term. Separate Rust types preserve
 the distinction between the Block–Tiwari, sequential QROM and depth-aware
 Category 1 statements. Probabilities, optimizer boundaries and resource
 inequalities are evaluated with arbitrary-size integers and reduced rational
@@ -153,8 +153,8 @@ resulting inequality bounds the success probability of every adversary inside
 the declared resource envelope by less than one half in the from-genesis
 invalid-State game.
 
-This repository provides a Category 1 resource assessment for the Parano1d
-soundness game. It does not claim that NIST reviewed or certified Parano1d.
+This repository provides a Category 1 resource assessment for the Kairos
+soundness game. It does not claim that NIST reviewed or certified Kairos.
 
 ## Theorem dependencies
 
@@ -170,7 +170,7 @@ soundness game. It does not claim that NIST reviewed or certified Parano1d.
 
 ## Reproduce
 
-From the root of a downloaded Parano1d repository:
+From the root of a downloaded Kairos repository:
 
 ```sh
 cargo run --release --locked -p noid_soundness

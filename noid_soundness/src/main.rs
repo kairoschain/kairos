@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: Apache-2.0
 // Copyright (C) 2026 Paranoid Zero.
+// Modified by the Kairos Chain contributors (rebrand to Kairos Chain).
 
 use noid_soundness::calculate;
 
@@ -24,7 +25,7 @@ fn main() -> Result<(), String> {
     let ideal = &certificate.ideal_qrom;
     let category_one = &certificate.category_one;
 
-    println!("PARANO1D SOUNDNESS CERTIFICATE");
+    println!("KAIROS SOUNDNESS CERTIFICATE");
     println!("production parameter correspondence: PASS");
     println!(
         "profile: W{}/H{}, challenge support=2^{}, digest={} bits",

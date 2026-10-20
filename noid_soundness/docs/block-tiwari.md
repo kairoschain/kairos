@@ -3,7 +3,7 @@
 ## Result
 
 Using the definitions and whole-bit presentation of Block and Tiwari, the
-current Parano1d History profile gives:
+current Kairos History profile gives:
 
 | Target FRI security | Provable FS-FRI security | Conjectured FS-FRI security |
 |---:|---:|---:|
@@ -273,7 +273,7 @@ Equation (11), rather than a rounded logarithm, is the whole-bit certificate.
 
 ## Comparison
 
-Block and Tiwari publish the following FS-FRI results. The Parano1d row applies
+Block and Tiwari publish the following FS-FRI results. The Kairos row applies
 the same definitions, 256-bit random-oracle setting and integer presentation
 to the production parameters derived above.
 
@@ -287,12 +287,12 @@ to the production parameters derived above.
 | Lambda Class | lambdaworks | 80 / 100 / 128 | 81 / 99 / 127 | 81 / 101 / 129 |
 | RISC Zero | RISC Zero | 100 | 37 | 99 |
 | Matter Labs | era-boojum | 100 | 50 | 99 |
-| **Parano1d** | History B25 / B255 | **128** | **127** | **127** |
+| **Kairos** | History B25 / B255 | **128** | **127** | **127** |
 
-The Parano1d provable value matches the highest provable whole-bit value in
+The Kairos provable value matches the highest provable whole-bit value in
 the published table. Its conjectured value is one bit below Miden's 128-bit
 configuration and two bits below the lambdaworks 128-bit configuration. Both
-Parano1d columns are one whole bit below the assigned target.
+Kairos columns are one whole bit below the assigned target.
 
 ## Reproduction
 

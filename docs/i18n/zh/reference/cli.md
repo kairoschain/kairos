@@ -4,16 +4,16 @@ Core 压缩包包含三个可执行文件：
 
 | 可执行文件 | 角色 |
 |---|---|
-| `parano1d` | 完整节点、钱包后端，以及可选的内置证明/挖矿流水线 |
-| `parano1d-cli` | 连接运行中节点的轻量 JSON-RPC 客户端 |
-| `parano1d-miner` | 独立的 Poseidon2b nonce 搜索进程 |
+| `kairos` | 完整节点、钱包后端，以及可选的内置证明/挖矿流水线 |
+| `kairos-cli` | 连接运行中节点的轻量 JSON-RPC 客户端 |
+| `kairos-miner` | 独立的 Poseidon2b nonce 搜索进程 |
 
 ## Core 守护进程
 
 不带模式参数即可运行普通节点：
 
 ```sh
-parano1d
+kairos
 ```
 
 守护进程公共参数：
@@ -29,8 +29,8 @@ parano1d
 | `--miner-address ADDRESS` | 挖矿奖励地址；默认使用钱包活动地址 |
 | `--cpu-threads N` | 内置矿工共享线程预算 |
 | `--data-dir PATH` | 链、钱包和运行时数据目录 |
-| `--p2p-listen HOST:PORT` | P2P 监听；默认 `0.0.0.0:9600` |
-| `--rpc-listen HOST:PORT` | JSON-RPC 监听；默认 `127.0.0.1:9601` |
+| `--p2p-listen HOST:PORT` | P2P 监听；默认 `0.0.0.0:9700` |
+| `--rpc-listen HOST:PORT` | JSON-RPC 监听；默认 `127.0.0.1:9701` |
 | `--seed ENDPOINT` | 添加引导端点；可重复 |
 | `--log LEVEL` | Tracing 过滤器，如 `error`、`warn`、`info`、`debug` |
 | `--mining-key TOKEN` | 外部挖矿 Bearer 令牌；为兼容性保留 |
@@ -54,24 +54,24 @@ parano1d
 
 ```sh
 # Ordinary node
-parano1d --data-dir ~/.parano1d/data
+kairos --data-dir ~/.kairos/data
 
 # Internal miner using 12 logical CPUs
-parano1d --mode miner --cpu-threads 12
+kairos --mode miner --cpu-threads 12
 
 # Node with a local external nonce worker
-parano1d --mode extminer --mining-key-file ~/.parano1d/mining.key
+kairos --mode extminer --mining-key-file ~/.kairos/mining.key
 ```
 
 除非由私有或认证传输保护，否则 RPC 应保持在回环地址上。Bearer 令牌用于认证请求，但不会加密传输。运营者令牌可以授权 `walletSend`，因此应优先使用 `--operator-key-file`，使用与挖矿凭据不同的令牌，并通过防火墙限制 listener。Core 拒绝在非回环地址上启动未认证的 RPC listener。即使配置了受限令牌，GUI 和 CLI 也可以从实际 TCP 回环地址连接而无需密钥。RPC 仅支持 HTTP，并拒绝 WebSocket 升级。
 
 ## 外部矿工
 
-`parano1d-miner` 请求已经证明且不可变的模板，只搜索它的 128 位 nonce。
+`kairos-miner` 请求已经证明且不可变的模板，只搜索它的 128 位 nonce。
 
 | 参数 | 默认值 | 含义 |
 |---|---|---|
-| `--rpc URL` | `http://127.0.0.1:9601` | 节点 JSON-RPC 端点 |
+| `--rpc URL` | `http://127.0.0.1:9701` | 节点 JSON-RPC 端点 |
 | `--key TOKEN` | — | 与节点匹配的 Bearer 令牌；为兼容性保留 |
 | `--key-file FILE` | — | 从仅所有者可读的文件读取 Bearer 令牌 |
 | `--threads N` | `0` | PoW 线程；零表示使用全部可见逻辑 CPU |
@@ -83,9 +83,9 @@ parano1d --mode extminer --mining-key-file ~/.parano1d/mining.key
 典型本地用法：
 
 ```sh
-parano1d-miner \
-  --rpc http://127.0.0.1:9601 \
-  --key-file ~/.parano1d/mining.key \
+kairos-miner \
+  --rpc http://127.0.0.1:9701 \
+  --key-file ~/.kairos/mining.key \
   --threads 12
 ```
 
@@ -93,7 +93,7 @@ parano1d-miner \
 
 ## 节点客户端
 
-`parano1d-cli` 是运行中 Core 节点的轻量客户端。它不持有独立密钥，而是通过
+`kairos-cli` 是运行中 Core 节点的轻量客户端。它不持有独立密钥，而是通过
 本地 JSON-RPC 执行钱包操作。
 
 ### 全局参数
@@ -103,13 +103,13 @@ parano1d-miner \
 -j, --json      原始 JSON 输出
 ```
 
-默认端点是 `http://127.0.0.1:9601`。环境变量 `NOID_RPC` 可修改；
+默认端点是 `http://127.0.0.1:9701`。环境变量 `NOID_RPC` 可修改；
 `--rpc` 优先级更高。
 
-CLI 钱包命令输入的金额以 NOID 为单位，最多六位小数：
+CLI 钱包命令输入的金额以 KAI 为单位，最多六位小数：
 
 ```text
-1 NOID = 1,000,000 μNOID
+1 KAI = 1,000,000 μKAI
 ```
 
 ### 节点与链
@@ -131,11 +131,11 @@ CLI 钱包命令输入的金额以 NOID 为单位，最多六位小数：
 示例：
 
 ```sh
-parano1d-cli status
-parano1d-cli block-header 420
-parano1d-cli block 420
-parano1d-cli slot 9700063
-parano1d-cli utxos-of o1...
+kairos-cli status
+kairos-cli block-header 420
+kairos-cli block 420
+kairos-cli slot 9700063
+kairos-cli utxos-of k1...
 ```
 
 `block` 只在 42 区块体保留窗口内返回数据。每个规范高度的 `header` 和
@@ -150,14 +150,14 @@ parano1d-cli utxos-of o1...
 | `block-template` | `--miner-addr o1…` | 节点持有的外部挖矿模板 |
 | `submit-block` | `TEMPLATE_ID NONCE_HEX` | 提交一个 16 字节 little-endian nonce |
 
-外部挖矿命令属于低层接口。`parano1d-miner` 会自动刷新模板并编码 nonce。
+外部挖矿命令属于低层接口。`kairos-miner` 会自动刷新模板并编码 nonce。
 
 ### 手续费与内存池
 
 ```sh
-parano1d-cli estimate-fee 2 --inputs 1
-parano1d-cli mempool
-parano1d-cli mempool-tx TXID
+kairos-cli estimate-fee 2 --inputs 1
+kairos-cli mempool
+kairos-cli mempool-tx TXID
 ```
 
 `estimate-fee` 报告节点当前针对所声明有效输入和输出数量接受的最低费用。
@@ -166,7 +166,7 @@ parano1d-cli mempool-tx TXID
 ### 地址验证
 
 ```sh
-parano1d-cli validate o1...
+kairos-cli validate k1...
 ```
 
 命令报告有效性、规范 bech32m 形式和原始 32 字节载荷。
@@ -174,11 +174,11 @@ parano1d-cli validate o1...
 ### 钱包地址
 
 ```sh
-parano1d-cli address
-parano1d-cli address --list
-parano1d-cli address --new
-parano1d-cli address --index 3
-parano1d-cli address --use 3
+kairos-cli address
+kairos-cli address --list
+kairos-cli address --new
+kairos-cli address --index 3
+kairos-cli address --use 3
 ```
 
 `--new`、`--index` 和 `--use` 是互斥操作。生成的地址在被选中前保持
@@ -187,9 +187,9 @@ parano1d-cli address --use 3
 ### 余额与 UTXO
 
 ```sh
-parano1d-cli balance
-parano1d-cli utxos
-parano1d-cli scan
+kairos-cli balance
+kairos-cli utxos
+kairos-cli scan
 ```
 
 `balance` 分别列出已确认、预留外发、待定入账和可花费金额。`scan` 从
@@ -200,19 +200,19 @@ parano1d-cli scan
 预览：
 
 ```sh
-parano1d-cli send o1... 10.5 --dry-run
+kairos-cli send k1... 10.5 --dry-run
 ```
 
 自动费用提交：
 
 ```sh
-parano1d-cli send o1... 10.5
+kairos-cli send k1... 10.5
 ```
 
-仅在确有需要时指定精确 NOID 费用：
+仅在确有需要时指定精确 KAI 费用：
 
 ```sh
-parano1d-cli send o1... 10.5 --fee 0.012
+kairos-cli send k1... 10.5 --fee 0.012
 ```
 
 返回 ID 指向完整逻辑花费。建议使用自动费用，因为占用率和中继费率下限
@@ -221,21 +221,21 @@ parano1d-cli send o1... 10.5 --fee 0.012
 ### 历史与收据
 
 ```sh
-parano1d-cli history
-parano1d-cli history --last 20
-parano1d-cli history --address o1...
+kairos-cli history
+kairos-cli history --last 20
+kairos-cli history --address k1...
 ```
 
 导出已确认的外发收据：
 
 ```sh
-parano1d-cli receipt TXID > receipt.hex
+kairos-cli receipt TXID > receipt.hex
 ```
 
 验证：
 
 ```sh
-parano1d-cli verify "$(tr -d '\n' < receipt.hex)"
+kairos-cli verify "$(tr -d '\n' < receipt.hex)"
 ```
 
 只有本机保存的不同所有者付款才能导出收据。
@@ -243,7 +243,7 @@ parano1d-cli verify "$(tr -d '\n' < receipt.hex)"
 ### 停止
 
 ```sh
-parano1d-cli stop
+kairos-cli stop
 ```
 
 该命令请求守护进程正常关闭，等同于 GUI 的普通退出流程，而不是强制终止进程。
@@ -254,7 +254,7 @@ parano1d-cli stop
 
 ```sh
 height="$(
-  parano1d-cli --json status |
+  kairos-cli --json status |
     jq -er '.height'
 )"
 ```
@@ -263,8 +263,8 @@ height="$(
 
 ### 合约
 
-`parano1d-cli contract` 提供 `protocol`、`payment`、`vault`、`allowance`、
+`kairos-cli contract` 提供 `protocol`、`payment`、`vault`、`allowance`、
 `budget`、`recurring`、`vesting`、`create`、`fund`、`watch`、`status`、`instances`、
-`call`、`receipt`、`verify`、`restore`。金额为 NOID。`call --preview` 审阅精确实例，
+`call`、`receipt`、`verify`、`restore`。金额为 KAI。`call --preview` 审阅精确实例，
 `--expected-txid` 绑定已审阅交易体。见[完整流程](../contracts/api.md)及各命令
 `--help`。合约 API 使用本地所有者权限。

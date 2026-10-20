@@ -1,4 +1,4 @@
-# 发送 NOID
+# 发送 KAI
 
 发送流程构建一笔原子的 [`PagedSpend`](../reference/glossary.md#pagedspend)，生成新的[授权证明](../reference/glossary.md#authorization-envelope)，并提交给本地节点。
 
@@ -9,7 +9,7 @@
 打开 **发送** 或按 `F3`，然后输入：
 
 - 接收者完整的 `o1…` 地址；
-- NOID 金额。
+- KAI 金额。
 
 钱包会获取当前空槽提示和精确费用报价。它优先选择活动地址中最大的 UTXO，
 通常可减少输入数量和证明工作量。

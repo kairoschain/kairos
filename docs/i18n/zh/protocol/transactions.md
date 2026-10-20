@@ -74,7 +74,7 @@ version || page_count || ordered_page_hashes
 + growth_price × max(0, live_outputs - live_inputs)
 ```
 
-所有金额均以 μNOID 表示。`growth_price` 从每个净新增槽 2,500 μNOID 开始，并根据父 State 占用率乘以 1、2、4 或 8。
+所有金额均以 μKAI 表示。`growth_price` 从每个净新增槽 2,500 μKAI 开始，并根据父 State 占用率乘以 1、2、4 或 8。
 
 [State 增长费](../reference/glossary.md#state-growth-fee)会被销毁。超过必要最低值的部分是矿工可领取的自愿追加手续费。维持或缩减 State 的支出不支付 State 增长费。
 

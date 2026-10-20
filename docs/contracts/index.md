@@ -1,6 +1,6 @@
 # Contracts
 
-A **proof-native contract** holds NOID under a committed program and spending
+A **proof-native contract** holds KAI under a committed program and spending
 policy. The same recursive block proof that authenticates payments proves each
 contract transition. Users share one bounded core; they do not create a new
 proof system for each application.

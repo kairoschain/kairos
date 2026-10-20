@@ -59,7 +59,7 @@ Large 206/504/63。
 
 ## 定义与金额
 
-定义使用 `kind` 区分，拒绝未知字段。金额为整数 μNOID，高度及周期为区块数。
+定义使用 `kind` 区分，拒绝未知字段。金额为整数 μKAI，高度及周期为区块数。
 构造器字段如下：
 
 | `kind` | 字段 |
@@ -141,19 +141,19 @@ HTTP 请求体上限，请使用分页，不要收集无限列表。
 
 ## CLI 流程
 
-CLI 金额使用十进制 **NOID**，不同于 RPC 的整数 μNOID。请替换尖括号占位符。
+CLI 金额使用十进制 **KAI**，不同于 RPC 的整数 μKAI。请替换尖括号占位符。
 关闭时必须激活由纳入高度决定的收款或恢复钱包。
 
 ```sh
-parano1d-cli contract protocol
-parano1d-cli contract payment <payee-o1-address> <expiry-height> --max-fee 1 --out payment.json
-parano1d-cli contract fund payment.json 10
-parano1d-cli contract watch payment.json
-parano1d-cli contract instances payment.json --limit 64
-parano1d-cli contract call payment.json <slot> <creation-id> --close --preview
-parano1d-cli contract call payment.json <slot> <creation-id> --close --expected-txid <reviewed-txid> --out closing.json
-parano1d-cli contract receipt payment.json <confirmed-txid> --out closing.receipt
-parano1d-cli contract verify closing.receipt
+kairos-cli contract protocol
+kairos-cli contract payment <payee-o1-address> <expiry-height> --max-fee 1 --out payment.json
+kairos-cli contract fund payment.json 10
+kairos-cli contract watch payment.json
+kairos-cli contract instances payment.json --limit 64
+kairos-cli contract call payment.json <slot> <creation-id> --close --preview
+kairos-cli contract call payment.json <slot> <creation-id> --close --expected-txid <reviewed-txid> --out closing.json
+kairos-cli contract receipt payment.json <confirmed-txid> --out closing.receipt
+kairos-cli contract verify closing.receipt
 ```
 
 CLI 提交前绑定预览，并先持久保存审阅工件，以便响应丢失后恢复。
@@ -162,5 +162,5 @@ CLI 提交前绑定预览，并先持久保存审阅工件，以便响应丢失�
 
 其他构造器为 `vault`、`allowance`、`budget`、`recurring`、`vesting`。
 `create definition.json --out object.json` 接受自定义定义。
-准确参数见 `parano1d-cli contract <command> --help`。
+准确参数见 `kairos-cli contract <command> --help`。
 `restore <address> --out object.json` 恢复本地保留 opening。

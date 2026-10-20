@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: Apache-2.0
 // Copyright (C) 2026 Paranoid Zero.
+// Modified by the Kairos Chain contributors (rebrand to Kairos Chain).
 //! JSON response types for the Paranoid RPC API.
 
 use serde::{Deserialize, Serialize};
@@ -93,7 +94,7 @@ pub struct BlockTemplateResponse {
     /// Live output counts per user transaction in canonical block order.
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub tx_output_counts: Vec<usize>,
-    /// Coinbase output value in μNOID.
+    /// Coinbase output value in μKAI.
     pub coinbase_value_micronoid: u64,
     /// Sum of user fees claimable by the miner after burned state-growth fees.
     pub claimable_fees_micronoid: u64,
@@ -125,9 +126,9 @@ pub struct WalletStatus {
     pub address: String,
     /// The active address's key index.
     pub active_index: u32,
-    /// Confirmed balance of the ACTIVE address in μNOID.
+    /// Confirmed balance of the ACTIVE address in μKAI.
     pub balance_micronoid: u64,
-    /// Active-address balance in NOID (6 decimal places).
+    /// Active-address balance in KAI (6 decimal places).
     pub balance_noid: f64,
     /// Number of confirmed UTXOs at the active address.
     pub utxo_count: usize,
@@ -555,9 +556,9 @@ pub struct MiningInfo {
     pub difficulty_bits: u32,
     /// Difficulty target as 64-char hex (LE 256-bit).
     pub difficulty_target: String,
-    /// Block reward for the next block in μNOID.
+    /// Block reward for the next block in μKAI.
     pub block_reward_micronoid: u64,
-    /// Block reward in NOID.
+    /// Block reward in KAI.
     pub block_reward_noid: f64,
     /// Number of live UTXOs in the current State.
     pub active_slot_count: u64,
@@ -677,7 +678,7 @@ pub struct AddressInfo {
 // Conversion helpers
 // ---------------------------------------------------------------------------
 
-/// Convert μNOID to NOID with 6 decimal places.
+/// Convert μKAI to KAI with 6 decimal places.
 #[inline]
 pub fn micronoid_to_noid(micronoid: u64) -> f64 {
     micronoid as f64 / 1_000_000.0
@@ -692,7 +693,7 @@ pub fn micronoid_to_noid(micronoid: u64) -> f64 {
 pub struct MempoolTxInfo {
     /// Canonical logical transaction id (hex).
     pub tx_hash: String,
-    /// Fee in μNOID.
+    /// Fee in μKAI.
     pub fee_micronoid: u64,
     /// Fee rate using weighted resource units (`inputs + outputs + 4 × net_new_slots`).
     pub fee_rate: u64,
@@ -729,7 +730,7 @@ pub struct MempoolEntryInfo {
 pub struct MempoolInfo {
     /// Number of pending transactions.
     pub size: usize,
-    /// Current dynamic fee floor in μNOID.
+    /// Current dynamic fee floor in μKAI.
     pub fee_floor: u64,
     /// All pending transactions.
     pub txs: Vec<MempoolTxInfo>,

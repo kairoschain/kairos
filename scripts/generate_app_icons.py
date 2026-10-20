@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-"""Generate deterministic ParanO(1)d application icons without external tools."""
+"""Generate deterministic Kairos application icons without external tools."""
 
 from __future__ import annotations
 
@@ -231,10 +231,10 @@ def main() -> int:
         rgba = render(size)
         png = encode_png(size, rgba)
         encoded[size] = png
-        (OUTPUT / f"Parano1d-{size}.png").write_bytes(png)
+        (OUTPUT / f"Kairos-{size}.png").write_bytes(png)
 
     ico = encode_ico([(size, encoded[size]) for size in ICO_SIZES])
-    (OUTPUT / "Parano1d.ico").write_bytes(ico)
+    (OUTPUT / "Kairos.ico").write_bytes(ico)
     print(f"generated application icons in {OUTPUT}")
     return 0
 

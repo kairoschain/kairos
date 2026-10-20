@@ -3,7 +3,7 @@
 **Одной вычислительной мощности недостаточно для создания блоков. Майнинг
 требует [`State`](../reference/glossary.md#state); поиск nonce начинается только после завершения доказательства.**
 
-В Parano1d [proof of work (PoW)](../reference/glossary.md#proof-of-work-pow) упорядочивает переходы, корректность которых
+В Kairos [proof of work (PoW)](../reference/glossary.md#proof-of-work-pow) упорядочивает переходы, корректность которых
 уже установлена. До поиска nonce производитель блока должен следовать
 канонической цепи, хранить Live State, построить точный следующий
 переход и завершить рекурсивный `HistoryStep`.
@@ -27,7 +27,7 @@
 - атомарно принимает и распространяет полный пакет
   `{block, HistoryStep terminal}`.
 
-Поиск nonce может выполняться в том же процессе либо в `parano1d-miner`. Роль
+Поиск nonce может выполняться в том же процессе либо в `kairos-miner`. Роль
 внешнего вычислителя значительно уже:
 
 - получить одно неизменяемое расписание заголовка Poseidon2b и целевое
@@ -73,7 +73,7 @@
 | Режим | Построение доказательства | Поиск nonce | Подходит для |
 |---|---|---|---|
 | Встроенный | Нода Core | Нода Core | GUI-кошелёк, соло-майнер, один сервер |
-| Внешний | Нода Core | `parano1d-miner` | Отдельный CPU-вычислитель, приватная майнинговая сеть или пул |
+| Внешний | Нода Core | `kairos-miner` | Отдельный CPU-вычислитель, приватная майнинговая сеть или пул |
 
 Оба режима следуют одним правилам консенсуса и создают одинаковые блоки.
 Внешний режим переносит через RPC только поиск nonce.
@@ -100,13 +100,13 @@
 До создания данных проверьте реальную машину:
 
 ```sh
-parano1d --check-hardware
+kairos --check-hardware
 ```
 
 Запустите Core со встроенным майнером:
 
 ```sh
-parano1d --mode miner --cpu-threads 12
+kairos --mode miner --cpu-threads 12
 ```
 
 Без `--cpu-threads` используются все логические CPU, видимые процессу. Если
@@ -114,15 +114,15 @@ parano1d --mode miner --cpu-threads 12
 Отдельный канонический адрес bech32m можно зафиксировать так:
 
 ```sh
-parano1d --mode miner --miner-address o1...
+kairos --mode miner --miner-address k1...
 ```
 
 Следите за готовностью и цепью из другого терминала:
 
 ```sh
-parano1d-cli status
-parano1d-cli peers
-parano1d-cli mining
+kairos-cli status
+kairos-cli peers
+kairos-cli mining
 ```
 
 Если Core не синхронизирован или нет аутентифицированного пира, он ждёт и не
@@ -136,17 +136,17 @@ parano1d-cli mining
 доказательства:
 
 ```sh
-parano1d \
+kairos \
   --mode extminer \
-  --mining-key-file ~/.parano1d/mining.key
+  --mining-key-file ~/.kairos/mining.key
 ```
 
 Подключите вычислитель к RPC ноды через локальный интерфейс:
 
 ```sh
-parano1d-miner \
-  --rpc http://127.0.0.1:9601 \
-  --key-file ~/.parano1d/mining.key \
+kairos-miner \
+  --rpc http://127.0.0.1:9701 \
+  --key-file ~/.kairos/mining.key \
   --threads 12
 ```
 
@@ -205,7 +205,7 @@ ASERT регулирует целевое значение PoW Poseidon2b по �
 ступень меняется каждые 1 051 200 блоков. Её показывает:
 
 ```sh
-parano1d-cli mining
+kairos-cli mining
 ```
 
 В течение трёхлетнего периода финансирования разработки майнер получает 90%

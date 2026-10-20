@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: Apache-2.0
 // Copyright (C) 2026 Paranoid Zero.
+// Modified by the Kairos Chain contributors (rebrand to Kairos Chain).
 
 //! Local wallet artifact journals. This framing is not a consensus or receipt
 //! format. Each checksummed frame is one complete delta; an incomplete final
@@ -12,8 +13,8 @@ use std::io::{Read, Seek, SeekFrom, Write};
 use std::ops::Deref;
 use std::path::{Path, PathBuf};
 
-pub(super) const RECEIPTS_MAGIC: &[u8; 8] = b"NOIDRCJ1";
-pub(super) const HISTORY_MAGIC: &[u8; 8] = b"NOIDHSJ1";
+pub(super) const RECEIPTS_MAGIC: &[u8; 8] = b"KAIRRCJ1";
+pub(super) const HISTORY_MAGIC: &[u8; 8] = b"KAIRHSJ1";
 const FRAME_HEADER_BYTES: u64 = 16;
 const FRAME_DIGEST_BYTES: u64 = 32;
 const COMPACTION_SLACK_BYTES: u64 = 16 * 1024 * 1024;
@@ -269,7 +270,7 @@ impl Journal {
 
 fn frame_digest(magic: &[u8; 8], header: &[u8; 16], payload: &[u8]) -> [u8; 32] {
     let mut hash = blake3::Hasher::new();
-    hash.update(b"NOID/local-wallet-journal/frame/v1");
+    hash.update(b"KAI/local-wallet-journal/frame/v1");
     hash.update(magic);
     hash.update(header);
     hash.update(payload);

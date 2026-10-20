@@ -139,7 +139,7 @@ case "$HOST_TRIPLE" in
     ISA_PROFILE='portable x86-64 control path; runtime PCLMULQDQ / AVX2+VPCLMULQDQ / AVX-512'
     BINARY_SUFFIX=
     ARCHIVE_KIND=tar
-    GUI_ARTIFACT_NAME="parano1d-gui-v$RELEASE_VERSION-linux-x86_64.deb"
+    GUI_ARTIFACT_NAME="kairos-gui-v$RELEASE_VERSION-linux-x86_64.deb"
     ;;
   aarch64-unknown-linux-gnu)
     PLATFORM=linux-aarch64
@@ -147,7 +147,7 @@ case "$HOST_TRIPLE" in
     ISA_PROFILE='portable AArch64 control path; runtime NEON+PMULL'
     BINARY_SUFFIX=
     ARCHIVE_KIND=tar
-    GUI_ARTIFACT_NAME="parano1d-gui-v$RELEASE_VERSION-linux-aarch64.deb"
+    GUI_ARTIFACT_NAME="kairos-gui-v$RELEASE_VERSION-linux-aarch64.deb"
     ;;
   x86_64-pc-windows-msvc)
     PLATFORM=windows-x86_64
@@ -155,7 +155,7 @@ case "$HOST_TRIPLE" in
     ISA_PROFILE='portable x86-64 control path; runtime PCLMULQDQ / AVX2+VPCLMULQDQ / AVX-512'
     BINARY_SUFFIX=.exe
     ARCHIVE_KIND=zip
-    GUI_ARTIFACT_NAME="parano1d-gui-v$RELEASE_VERSION-windows-x86_64-setup.exe"
+    GUI_ARTIFACT_NAME="kairos-gui-v$RELEASE_VERSION-windows-x86_64-setup.exe"
     ;;
   aarch64-apple-darwin)
     PLATFORM=macos-aarch64
@@ -163,7 +163,7 @@ case "$HOST_TRIPLE" in
     ISA_PROFILE='portable Apple Silicon control path; runtime NEON+PMULL'
     BINARY_SUFFIX=
     ARCHIVE_KIND=tar
-    GUI_ARTIFACT_NAME="parano1d-gui-v$RELEASE_VERSION-macos-aarch64.dmg"
+    GUI_ARTIFACT_NAME="kairos-gui-v$RELEASE_VERSION-macos-aarch64.dmg"
     ;;
   x86_64-apple-darwin)
     PLATFORM=macos-x86_64
@@ -171,7 +171,7 @@ case "$HOST_TRIPLE" in
     ISA_PROFILE='portable Intel x86-64 control path; runtime PCLMULQDQ / AVX2+VPCLMULQDQ'
     BINARY_SUFFIX=
     ARCHIVE_KIND=tar
-    GUI_ARTIFACT_NAME="parano1d-gui-v$RELEASE_VERSION-macos-x86_64.dmg"
+    GUI_ARTIFACT_NAME="kairos-gui-v$RELEASE_VERSION-macos-x86_64.dmg"
     ;;
   *) release_die "unsupported release host: $HOST_TRIPLE" ;;
 esac
@@ -181,10 +181,10 @@ if [[ $PLATFORM == macos-* ]]; then
 fi
 
 if [[ $ARCHIVE_KIND == zip ]]; then
-  ARCHIVE_NAME="parano1d-core-v$RELEASE_VERSION-$PLATFORM.zip"
+  ARCHIVE_NAME="kairos-core-v$RELEASE_VERSION-$PLATFORM.zip"
   release_require_command 7z
 else
-  ARCHIVE_NAME="parano1d-core-v$RELEASE_VERSION-$PLATFORM.tar.gz"
+  ARCHIVE_NAME="kairos-core-v$RELEASE_VERSION-$PLATFORM.tar.gz"
 fi
 
 RELEASE_PARENT=$(dirname -- "$RELEASE_DIR")
@@ -242,7 +242,7 @@ unset NOID_RETIREMENT_KEYS_DIR NOID_RETIREMENT_KEY_0_PIN NOID_RETIREMENT_KEY_1_P
 unset TAR_OPTIONS GZIP GZIP_OPT
 export CARGO_TARGET_DIR="$RELEASE_ROOT_DIR/target"
 
-printf 'ParanO(1)d self-contained release build\n'
+printf 'Kairos self-contained release build\n'
 printf '  source:       %s\n' "$RELEASE_ROOT_DIR"
 printf '  matrix pack:  %s\n' "$PACK_DIR"
 printf '  v2 pack:      %s\n' "$V2_PACK_DIR"
@@ -281,31 +281,31 @@ CURRENT_STAGE='self-contained binary build'
 printf '\n==> Building matrix-embedded native binaries\n'
 cargo build "${NODE_BUILD_ARGS[@]}"
 cargo build --locked --release --timings --target "$HOST_TRIPLE" \
-  -p noid-extminer --bin parano1d-miner
+  -p noid-extminer --bin kairos-miner
 cargo build --locked --release --timings --target "$HOST_TRIPLE" \
-  -p noid_gui --bin parano1d-gui
+  -p noid_gui --bin kairos-gui
 
 TARGET_BIN_DIR="$CARGO_TARGET_DIR/$HOST_TRIPLE/release"
-for binary in parano1d parano1d-cli parano1d-miner; do
+for binary in kairos kairos-cli kairos-miner; do
   [[ -f $TARGET_BIN_DIR/$binary$BINARY_SUFFIX ]] || \
     release_die "release binary is missing: $TARGET_BIN_DIR/$binary$BINARY_SUFFIX"
 done
-[[ -f $TARGET_BIN_DIR/parano1d-gui$BINARY_SUFFIX ]] || \
-  release_die "release GUI is missing: $TARGET_BIN_DIR/parano1d-gui$BINARY_SUFFIX"
+[[ -f $TARGET_BIN_DIR/kairos-gui$BINARY_SUFFIX ]] || \
+  release_die "release GUI is missing: $TARGET_BIN_DIR/kairos-gui$BINARY_SUFFIX"
 
 CURRENT_STAGE='native smoke test'
 printf '\n==> Smoke-testing native executables\n'
-"$TARGET_BIN_DIR/parano1d$BINARY_SUFFIX" --check-hardware >/dev/null
-"$TARGET_BIN_DIR/parano1d$BINARY_SUFFIX" --help >/dev/null
-"$TARGET_BIN_DIR/parano1d-cli$BINARY_SUFFIX" --help >/dev/null
-"$TARGET_BIN_DIR/parano1d-miner$BINARY_SUFFIX" --check-hardware >/dev/null
-"$TARGET_BIN_DIR/parano1d-miner$BINARY_SUFFIX" --help >/dev/null
-"$TARGET_BIN_DIR/parano1d-gui$BINARY_SUFFIX" --release-self-check >/dev/null
+"$TARGET_BIN_DIR/kairos$BINARY_SUFFIX" --check-hardware >/dev/null
+"$TARGET_BIN_DIR/kairos$BINARY_SUFFIX" --help >/dev/null
+"$TARGET_BIN_DIR/kairos-cli$BINARY_SUFFIX" --help >/dev/null
+"$TARGET_BIN_DIR/kairos-miner$BINARY_SUFFIX" --check-hardware >/dev/null
+"$TARGET_BIN_DIR/kairos-miner$BINARY_SUFFIX" --help >/dev/null
+"$TARGET_BIN_DIR/kairos-gui$BINARY_SUFFIX" --release-self-check >/dev/null
 
 CURRENT_STAGE='binary packaging'
 printf '\n==> Packaging %s\n' "$ARCHIVE_NAME"
 mkdir -- "$BIN_DIR"
-for binary in parano1d parano1d-cli parano1d-miner; do
+for binary in kairos kairos-cli kairos-miner; do
   cp -- "$TARGET_BIN_DIR/$binary$BINARY_SUFFIX" "$BIN_DIR/$binary$BINARY_SUFFIX"
   chmod 0755 "$BIN_DIR/$binary$BINARY_SUFFIX" 2>/dev/null || true
 done
@@ -313,12 +313,12 @@ done
 CURRENT_STAGE='GUI wallet packaging'
 printf '\n==> Packaging %s\n' "$GUI_ARTIFACT_NAME"
 mkdir -- "$GUI_BIN_DIR"
-cp -- "$TARGET_BIN_DIR/parano1d-gui$BINARY_SUFFIX" \
-  "$GUI_BIN_DIR/parano1d-gui$BINARY_SUFFIX"
-cp -- "$TARGET_BIN_DIR/parano1d$BINARY_SUFFIX" \
-  "$GUI_BIN_DIR/parano1d$BINARY_SUFFIX"
-chmod 0755 "$GUI_BIN_DIR/parano1d-gui$BINARY_SUFFIX" 2>/dev/null || true
-chmod 0755 "$GUI_BIN_DIR/parano1d$BINARY_SUFFIX" 2>/dev/null || true
+cp -- "$TARGET_BIN_DIR/kairos-gui$BINARY_SUFFIX" \
+  "$GUI_BIN_DIR/kairos-gui$BINARY_SUFFIX"
+cp -- "$TARGET_BIN_DIR/kairos$BINARY_SUFFIX" \
+  "$GUI_BIN_DIR/kairos$BINARY_SUFFIX"
+chmod 0755 "$GUI_BIN_DIR/kairos-gui$BINARY_SUFFIX" 2>/dev/null || true
+chmod 0755 "$GUI_BIN_DIR/kairos$BINARY_SUFFIX" 2>/dev/null || true
 case "$PLATFORM" in
   linux-*)
     "$RELEASE_ROOT_DIR/scripts/release/package_linux_gui.sh" \
@@ -352,9 +352,9 @@ archive_entries=(
   CONTRACTS.md
   LICENSE
   NOTICE
-  "parano1d$BINARY_SUFFIX"
-  "parano1d-cli$BINARY_SUFFIX"
-  "parano1d-miner$BINARY_SUFFIX"
+  "kairos$BINARY_SUFFIX"
+  "kairos-cli$BINARY_SUFFIX"
+  "kairos-miner$BINARY_SUFFIX"
 )
 
 if [[ $ARCHIVE_KIND == zip ]]; then

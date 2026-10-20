@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: Apache-2.0
 // Copyright (C) 2026 Paranoid Zero.
+// Modified by the Kairos Chain contributors (rebrand to Kairos Chain).
 //! JSON-RPC trait definition (generated server + client traits via proc macro).
 
 use jsonrpsee::core::RpcResult;
@@ -210,7 +211,7 @@ pub trait ParanoidApi {
     #[method(name = "getNodeStatus")]
     async fn get_node_status(&self) -> RpcResult<NodeStatus>;
 
-    /// Estimated minimum fee in μNOID for a transaction with `n_outputs` outputs.
+    /// Estimated minimum fee in μKAI for a transaction with `n_outputs` outputs.
     /// Simple u64 method: assumes one live input.
     #[method(name = "estimateFee")]
     async fn estimate_fee(&self, n_outputs: u32) -> RpcResult<u64>;
@@ -300,7 +301,7 @@ pub trait ParanoidApi {
     // Node control
     // =========================================================================
 
-    /// Gracefully stop the Parano1d daemon.
+    /// Gracefully stop the Kairos daemon.
     #[method(name = "stop")]
     async fn stop(&self) -> RpcResult<String>;
 
@@ -369,9 +370,9 @@ pub trait ParanoidApi {
         fee_micronoid: u64,
     ) -> RpcResult<WalletSendPlan>;
 
-    /// Send NOID to a recipient address.
+    /// Send KAI to a recipient address.
     /// `to_address`: recipient bech32m address.
-    /// `amount_micronoid`: amount in μNOID.
+    /// `amount_micronoid`: amount in μKAI.
     /// `fee_micronoid`: exact fee (0 = automatic fee).
     #[method(name = "walletSend")]
     async fn wallet_send(

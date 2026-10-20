@@ -1,6 +1,6 @@
 # Hardware and capacity
 
-Parano1d does not make chain age a permanent execution requirement, but a
+Kairos does not make chain age a permanent execution requirement, but a
 node still needs enough CPU for proof verification, enough memory for bounded
 network work and enough disk for the current Live State. Check the actual
 machine exposed to the process; a provider's physical CPU model is not proof
@@ -21,8 +21,8 @@ unsupported host exits before opening the wallet or chain database.
 Run the preflight on the intended host:
 
 ```sh
-parano1d --check-hardware
-parano1d-miner --check-hardware
+kairos --check-hardware
+kairos-miner --check-hardware
 ```
 
 A successful node report ends with:
@@ -110,8 +110,8 @@ segments. MDBX grows in 64 MiB steps as needed.
 Monitor the real path:
 
 ```sh
-du -sh ~/.parano1d/data
-parano1d-cli state
+du -sh ~/.kairos/data
+kairos-cli state
 ```
 
 Snapshot synchronization requires temporary space for a complete candidate
@@ -121,11 +121,11 @@ State plus one staged replacement and normal database growth.
 ## Network
 
 Allow persistent outbound TCP connections and, for a public node, inbound TCP
-`9600`. A 100 Mbit/s unmetered connection is a sensible baseline. Latency is
+`9700`. A 100 Mbit/s unmetered connection is a sensible baseline. Latency is
 less important than stability and the absence of aggressive connection or
 traffic caps.
 
-RPC on TCP `9601` is an administrative interface. Keep it on loopback unless a
+RPC on TCP `9701` is an administrative interface. Keep it on loopback unless a
 private or authenticated transport protects it.
 
 ## Capacity checks
@@ -133,10 +133,10 @@ private or authenticated transport protects it.
 Revisit capacity after material changes in Live State or traffic:
 
 ```sh
-parano1d-cli status
-parano1d-cli state
-parano1d-cli peers
-du -sh ~/.parano1d/data
+kairos-cli status
+kairos-cli state
+kairos-cli peers
+du -sh ~/.kairos/data
 ```
 
 Alert on low disk space, repeated peer loss, sustained synchronization lag and

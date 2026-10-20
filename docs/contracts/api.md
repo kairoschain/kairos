@@ -65,7 +65,7 @@ Neither endpoint reconstructs a complete global history.
 ## Definitions and amounts
 
 Definitions have a `kind` discriminator and reject unknown fields. Amounts are
-integer μNOID; heights and periods are block counts. Constructor fields are:
+integer μKAI; heights and periods are block counts. Constructor fields are:
 
 | `kind` | Fields |
 | --- | --- |
@@ -157,20 +157,20 @@ body cap; use pagination instead of collecting unbounded lists.
 
 ## CLI workflow
 
-Amounts in the CLI are decimal **NOID**, unlike RPC integer μNOID. Replace the
+Amounts in the CLI are decimal **KAI**, unlike RPC integer μKAI. Replace the
 angle-bracket placeholders. The receiving or recovery wallet must be active
 for the closing call, as determined by the inclusion height.
 
 ```sh
-parano1d-cli contract protocol
-parano1d-cli contract payment <payee-o1-address> <expiry-height> --max-fee 1 --out payment.json
-parano1d-cli contract fund payment.json 10
-parano1d-cli contract watch payment.json
-parano1d-cli contract instances payment.json --limit 64
-parano1d-cli contract call payment.json <slot> <creation-id> --close --preview
-parano1d-cli contract call payment.json <slot> <creation-id> --close --expected-txid <reviewed-txid> --out closing.json
-parano1d-cli contract receipt payment.json <confirmed-txid> --out closing.receipt
-parano1d-cli contract verify closing.receipt
+kairos-cli contract protocol
+kairos-cli contract payment <payee-o1-address> <expiry-height> --max-fee 1 --out payment.json
+kairos-cli contract fund payment.json 10
+kairos-cli contract watch payment.json
+kairos-cli contract instances payment.json --limit 64
+kairos-cli contract call payment.json <slot> <creation-id> --close --preview
+kairos-cli contract call payment.json <slot> <creation-id> --close --expected-txid <reviewed-txid> --out closing.json
+kairos-cli contract receipt payment.json <confirmed-txid> --out closing.receipt
+kairos-cli contract verify closing.receipt
 ```
 
 The CLI binds preview results before submission and writes a durable review
@@ -180,5 +180,5 @@ file. `call --wait-seconds 0` returns after submission; the default wait is
 
 Other constructors are `vault`, `allowance`, `budget`, `recurring`, `vesting`;
 `create definition.json --out object.json` accepts a custom definition.
-Use `parano1d-cli contract <command> --help` for their exact arguments.
+Use `kairos-cli contract <command> --help` for their exact arguments.
 `restore <address> --out object.json` recovers a locally retained opening.

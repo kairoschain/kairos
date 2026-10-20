@@ -4,7 +4,7 @@
 
 性能数据只对特定源码修订、证明配置、经过认证的矩阵包、构建配置和主机成立。它不是共识常量，也不能仅由核心数量推导。
 
-下表是历史构造耗时测量，使用 Parano1d 修订版 `39626b22d53cf2f2c480a7e28446c197dca68043`、实际部署的 C1 配置以及经过认证的 B25/B255 矩阵包，早于 v1.1 共享路径编码。这些数据可作为后续容量实验（包括 v2）的硬件基线；新的证明形状和完整出块流程仍需单独测量。
+下表是历史构造耗时测量，使用 Kairos 修订版 `39626b22d53cf2f2c480a7e28446c197dca68043`、实际部署的 C1 配置以及经过认证的 B25/B255 矩阵包，早于 v1.1 共享路径编码。这些数据可作为后续容量实验（包括 v2）的硬件基线；新的证明形状和完整出块流程仍需单独测量。
 
 | 主机 | 类别 | `HistoryStep` 构造 | 统计量 |
 |---|---|---:|---|
@@ -13,7 +13,7 @@
 | AVX-512 PC，24 线程 | B25 / `m=22` | **6.905 秒** | 3 次测量的 p50 |
 | AVX-512 PC，24 线程 | B255 / `m=24` | **21.053 秒** | 3 次测量的 p50 |
 
-[原始测量记录](https://git.parano1d.org/ignotusnemo/parano1d/src/branch/v2/research/two_class/results/2026-08-06-history-step-b25-b255.md)保留了该修订版展开后的终端大小。这些大小不等于 v1.1 网络载荷；上述耗时不包含共享路径编解码开销。
+[原始测量记录](https://git.parano1d.org/ignotusnemo/kairos/src/branch/v2/research/two_class/results/2026-08-06-history-step-b25-b255.md)保留了该修订版展开后的终端大小。这些大小不等于 v1.1 网络载荷；上述耗时不包含共享路径编解码开销。
 
 表中不包含 PoW nonce 搜索。ASERT 的目标是已接受区块之间的完整时间间隔，而不是为 nonce 搜索单独分配 20 秒。证明准备、nonce 搜索和网络传播共同占用同一个观测到的区块间隔，ASERT 根据这一完整节奏调整 nonce 目标。
 
@@ -28,7 +28,7 @@
 
 两个样本都小于 1 MB（1,000,000 字节）。它们是单个证明的示例，不是固定大小或上界；共享路径大小取决于查询打开位置。另一个已验证的主网 B25 终端（高度 137191）为 872,500 字节。编码后与展开后的共识上限仍为 1,100,000 字节。上述大小不含区块体、传输帧或 RPC 十六进制文本。
 
-[编解码测量记录](https://git.parano1d.org/ignotusnemo/parano1d/src/branch/v2/research/two_class/results/2026-09-24-terminal-shared-paths.md)包含复现命令和验证结果。这次审计测量表示方式节省的字节数，没有重新测试历史 AVX-512 主机。
+[编解码测量记录](https://git.parano1d.org/ignotusnemo/kairos/src/branch/v2/research/two_class/results/2026-09-24-terminal-shared-paths.md)包含复现命令和验证结果。这次审计测量表示方式节省的字节数，没有重新测试历史 AVX-512 主机。
 
 ## 节点状态处理
 
@@ -62,7 +62,7 @@ NOID_WALLET_BENCH_SAMPLES=20 cargo run --release --locked \
 隔离式实际部署基准测试需要完整且经过认证的矩阵包。分别运行两个类别，以便输出明确标识父类别和子类别。
 
 ```sh
-NOID_PACK_ROOT=../parano1d-artifacts/history-step-pack-v1
+NOID_PACK_ROOT=../kairos-artifacts/history-step-pack-v1
 source "$NOID_PACK_ROOT/pins.env"
 export NOID_HISTORY_STEP_RUNTIME_METADATA_RELEASE_DIGEST
 export NOID_HISTORY_STEP_PACK_LEAF_DIGESTS

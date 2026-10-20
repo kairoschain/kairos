@@ -1,7 +1,8 @@
 // SPDX-License-Identifier: Apache-2.0
 // Copyright (C) 2026 Paranoid Zero.
+// Modified by the Kairos Chain contributors (rebrand to Kairos Chain).
 
-//! Built-in wallet for the `parano1d` daemon.
+//! Built-in wallet for the `kairos` daemon.
 //!
 //! The wallet lives inside the daemon process. The master secret is generated
 //! once and stored by the keystore; the active address's `SpendSecret` is
@@ -1067,7 +1068,7 @@ impl WalletOps for WalletHandle {
         if let Some(fee) = explicit_fee_micronoid {
             if fee < one_input_one_output_minimum {
                 return Err(WalletSendPlanError::Other(format!(
-                    "fee too low for transaction with 1 input and 1 output: required {one_input_one_output_minimum} μNOID, got {fee} μNOID"
+                    "fee too low for transaction with 1 input and 1 output: required {one_input_one_output_minimum} μKAI, got {fee} μKAI"
                 )));
             }
         }
@@ -1115,7 +1116,7 @@ impl WalletOps for WalletHandle {
                 let minimum = breakdown.required_total.max(relay_floor);
                 if fee < minimum {
                     return Err(WalletSendPlanError::Other(format!(
-                        "fee too low for transaction with {input_count} input(s) and {output_count} output(s): required {minimum} μNOID, got {fee} μNOID"
+                        "fee too low for transaction with {input_count} input(s) and {output_count} output(s): required {minimum} μKAI, got {fee} μKAI"
                     )));
                 }
                 planned = Some((input_count, fee, output_count, change, breakdown));
@@ -1203,7 +1204,7 @@ impl WalletOps for WalletHandle {
         let minimum = breakdown.required_total.max(relay_floor);
         if fee_micronoid < minimum {
             return Err(WalletSendPlanError::Other(format!(
-                "fee too low for selected transaction with {input_count} input(s) and {output_count} output(s): required {minimum} μNOID, got {fee_micronoid} μNOID"
+                "fee too low for selected transaction with {input_count} input(s) and {output_count} output(s): required {minimum} μKAI, got {fee_micronoid} μKAI"
             )));
         }
         let total_spend_micronoid =
@@ -1988,7 +1989,7 @@ mod tests {
         assert_eq!(
             error,
             WalletSendPlanError::Other(
-                "fee too low for transaction with 1 input and 1 output: required 5800 μNOID, got 1 μNOID"
+                "fee too low for transaction with 1 input and 1 output: required 5800 μKAI, got 1 μKAI"
                     .to_string()
             )
         );

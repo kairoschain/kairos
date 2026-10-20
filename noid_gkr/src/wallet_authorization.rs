@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: Apache-2.0
 // Copyright (C) 2026 Paranoid Zero.
+// Modified by the Kairos Chain contributors (rebrand to Kairos Chain).
 
 //! Production witness-hiding wallet authorization artifact.
 
@@ -23,7 +24,7 @@ use crate::{
 };
 
 pub const MAX_AUTHORIZATION_BUNDLE_BYTES: usize = noid_tx::MAX_TX_AUTHORIZATION_BYTES;
-const AUTHORIZATION_BUNDLE_MAGIC: [u8; 8] = *b"NOIDWZK1";
+const AUTHORIZATION_BUNDLE_MAGIC: [u8; 8] = *b"KAIRWZK1";
 const AUTHORIZATION_BUNDLE_HEADER_BYTES: usize = AUTHORIZATION_BUNDLE_MAGIC.len() + 4;
 /// Absolute cap for the transitional live-input-count metadata. The exact
 /// shape-specific count is derived from the canonical body at production

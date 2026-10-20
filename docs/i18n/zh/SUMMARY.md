@@ -1,4 +1,4 @@
-# Parano1d 技术文档
+# Kairos 技术文档
 
 - [首页](index.md)
 
@@ -64,7 +64,7 @@
 - [首次运行与主密钥](wallet/first-run.md)
 - [从照片派生密钥](wallet/photo-key.md)
 - [地址](wallet/addresses.md)
-- [发送 NOID](wallet/send.md)
+- [发送 KAI](wallet/send.md)
 - [收据](wallet/receipts.md)
 - [钱包中的合约](wallet/contracts.md)
 - [归集](wallet/consolidation.md)

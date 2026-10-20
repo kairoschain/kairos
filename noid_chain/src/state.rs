@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: Apache-2.0
 // Copyright (C) 2026 Paranoid Zero.
+// Modified by the Kairos Chain contributors (rebrand to Kairos Chain).
 
 //! Native-side state transition for the transparent UTXO chain.
 //!
@@ -50,7 +51,7 @@ pub struct ChainState {
     /// live output stores `creation_id = alloc_counter + 1`; the updated value
     /// also seeds deterministic wallet slot hints.
     pub alloc_counter: u64,
-    /// Exact sum of every live UTXO amount in μNOID.
+    /// Exact sum of every live UTXO amount in μKAI.
     ///
     /// This is derived local metadata, not a header or proof input. Snapshot
     /// installation accumulates it while already streaming authenticated
@@ -1350,12 +1351,12 @@ mod tests {
                 TxOutput {
                     slot_index: 5,
                     amount: 10,
-                    owner: crate::consensus::development_allocation::O1_NETWORK_FUND_ADDRESS,
+                    owner: crate::consensus::development_allocation::DISABLED_FUND_ADDRESS_A,
                 },
                 TxOutput {
                     slot_index: 6,
                     amount: 10,
-                    owner: crate::consensus::development_allocation::PARANO1D_LAB_ADDRESS,
+                    owner: crate::consensus::development_allocation::DISABLED_FUND_ADDRESS_B,
                 },
             ],
             validity_bitmap: output_bitmap_bit(0) | output_bitmap_bit(1),

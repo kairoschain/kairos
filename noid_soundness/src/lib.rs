@@ -1,7 +1,8 @@
 // SPDX-License-Identifier: Apache-2.0
 // Copyright (C) 2026 Paranoid Zero.
+// Modified by the Kairos Chain contributors (rebrand to Kairos Chain).
 
-//! Executable soundness certificates for the production Parano1d protocol.
+//! Executable soundness certificates for the production Kairos protocol.
 
 pub mod block_tiwari;
 pub mod exact;

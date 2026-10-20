@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: Apache-2.0
 // Copyright (C) 2026 Paranoid Zero.
+// Modified by the Kairos Chain contributors (rebrand to Kairos Chain).
 
 //! Presentation state for contracts. The daemon constructs policies, checks
 //! live incarnations, authorizes calls and verifies receipts through RPC.
@@ -1097,7 +1098,7 @@ impl State {
                 creation,
             }) => {
                 let summary = format!(
-                    "Fund {} with {} NOID from {}. Network fee: {} NOID.",
+                    "Fund {} with {} KAI from {}. Network fee: {} KAI.",
                     info.address,
                     crate::model::format_micronoid(amount),
                     sender,

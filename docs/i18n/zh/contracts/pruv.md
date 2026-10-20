@@ -1,6 +1,6 @@
 # Pruv
 
-Pruv 是 Parano1d 的 proof-native 合约语言。编译器将状态更新和明确的支出策略
+Pruv 是 Kairos 的 proof-native 合约语言。编译器将状态更新和明确的支出策略
 编译为现有 ABI 3，由当前 v2 区块关系证明执行。符合此 ABI 限制的程序可以直接
 使用现有节点，无需网络分叉或节点升级。
 
@@ -32,7 +32,7 @@ target/release/pruv --help
 ```
 
 `u64` 参数使用规范十进制字符串；`bool` 使用 JSON 布尔值；地址使用 `o1…` 字符串。
-重复、缺失、未知及类型不匹配的参数均会被拒绝。金额单位是整数 μNOID。
+重复、缺失、未知及类型不匹配的参数均会被拒绝。金额单位是整数 μKAI。
 预算同时扣除支付金额与手续费；`max_fee` 和 `max_payment` 分别限制每次调用的
 手续费与支付金额。节点计算实际手续费。
 
@@ -40,7 +40,7 @@ target/release/pruv --help
 target/release/pruv check noid_pruv/examples/budget.pruv --params budget.params.json
 target/release/pruv verify noid_pruv/examples/budget.pruv --params budget.params.json
 target/release/pruv build noid_pruv/examples/budget.pruv --params budget.params.json --out budget.json
-parano1d-cli contract create budget.json --out budget.opening.json
+kairos-cli contract create budget.json --out budget.opening.json
 ```
 
 `check` 检查语法、类型、策略完整性及 ABI 资源限制。`verify` 通过 Z3 验证声明的
@@ -52,21 +52,21 @@ parano1d-cli contract create budget.json --out budget.opening.json
 通过注资钱包的本地节点运行：
 
 ```sh
-parano1d-cli contract protocol
-parano1d-cli contract fund budget.opening.json 10
-parano1d-cli contract instances budget.opening.json
+kairos-cli contract protocol
+kairos-cli contract fund budget.opening.json 10
+kairos-cli contract instances budget.opening.json
 ```
 
-CLI 金额单位为十进制 **NOID**；Pruv 参数与 RPC 使用整数 **μNOID**。
+CLI 金额单位为十进制 **KAI**；Pruv 参数与 RPC 使用整数 **μKAI**。
 协议必须报告 ABI 3 和可用运行时。等待注资确认；每次独立注资都有自己的状态与余额。
 
 在支出钱包的节点上导入公开条件，查询当前 `slot_index` 和 `creation_id`，并预览支付：
 
 ```sh
-parano1d-cli contract watch budget.opening.json
-parano1d-cli contract instances budget.opening.json
-parano1d-cli contract call budget.opening.json <slot> <creation-id> --pay 0.1 --pay-to <收款-o1-地址> --preview
-parano1d-cli contract call budget.opening.json <slot> <creation-id> --pay 0.1 --pay-to <收款-o1-地址> --expected-txid <预览-txid> --out call-1.json
+kairos-cli contract watch budget.opening.json
+kairos-cli contract instances budget.opening.json
+kairos-cli contract call budget.opening.json <slot> <creation-id> --pay 0.1 --pay-to <收款-o1-地址> --preview
+kairos-cli contract call budget.opening.json <slot> <creation-id> --pay 0.1 --pay-to <收款-o1-地址> --expected-txid <预览-txid> --out call-1.json
 ```
 
 检查权限、收款人、手续费、剩余金额和后继状态。CLI 在授权前保存预览，将其绑定到
@@ -74,16 +74,16 @@ parano1d-cli contract call budget.opening.json <slot> <creation-id> --pay 0.1 --
 下次调用使用 `call-1.json` 中的后继状态，并重新查询当前实例：
 
 ```sh
-parano1d-cli contract instances call-1.json
-parano1d-cli contract verify call-1.receipt
+kairos-cli contract instances call-1.json
+kairos-cli contract verify call-1.receipt
 ```
 
 截止高度之前，支出密钥可继续支付。到达截止高度后，恢复钱包可以关闭当前后继：
 
 ```sh
-parano1d-cli contract watch call-1.json
-parano1d-cli contract call call-1.json <后继-slot> <后继-creation-id> --close --preview
-parano1d-cli contract call call-1.json <后继-slot> <后继-creation-id> --close --expected-txid <关闭-txid> --out closing.json
+kairos-cli contract watch call-1.json
+kairos-cli contract call call-1.json <后继-slot> <后继-creation-id> --close --preview
+kairos-cli contract call call-1.json <后继-slot> <后继-creation-id> --close --expected-txid <关闭-txid> --out closing.json
 ```
 
 保存公开条件、后继文件与回执。旧区块正文被裁剪后，回执仍可验证历史调用；当前可支配

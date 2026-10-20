@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: Apache-2.0
 // Copyright (C) 2026 Paranoid Zero.
+// Modified by the Kairos Chain contributors (rebrand to Kairos Chain).
 
 //! Durable public openings and receipts. These files never contain wallet
 //! keys. Replacement is atomic, and every reload is bounded and revalidated.
@@ -27,7 +28,7 @@ pub(super) fn receipt_page(
 static SEQUENCE: AtomicU64 = AtomicU64::new(0);
 // Local storage only: exported receipts keep their original self-contained
 // consensus-proof framing. Calls in one block share these exact proof bytes.
-const RECEIPT_REFERENCE_MAGIC: &[u8; 8] = b"NOIDORF1";
+const RECEIPT_REFERENCE_MAGIC: &[u8; 8] = b"KAIRORF1";
 const RECEIPT_REFERENCE_HEADER: usize = RECEIPT_REFERENCE_MAGIC.len() + 32;
 const TERMINAL_LIMIT: usize =
     noid_chain::consensus::wire_limits::MAX_HISTORY_STEP_TERMINAL_TRANSPORT_BYTES;

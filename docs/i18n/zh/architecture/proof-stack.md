@@ -1,10 +1,10 @@
 # 证明栈
 
-Parano1d 使用同一个二进制算术栈处理所有权、State 转换、Merkle 关系、递归连续性
+Kairos 使用同一个二进制算术栈处理所有权、State 转换、Merkle 关系、递归连续性
 以及工作量证明承诺。已承诺执行轨迹使用[二进制塔域](../reference/glossary.md#binary-tower-field)
 `GF(2^128)`；实际部署的扩展挑战值层使用其二次扩域 `GF(2^256)`。
 
-![Parano1d 证明栈](../../../assets/architecture/proof-stack.svg)
+![Kairos 证明栈](../../../assets/architecture/proof-stack.svg)
 
 ## Poseidon2b
 
@@ -21,7 +21,7 @@ Parano1d 使用同一个二进制算术栈处理所有权、State 转换、Merkl
 
 ## [FROST-GKR](../research/frost-gkr.md)
 
-FROST-GKR 把批量 Poseidon2b 执行与 Merkle 路径表示为共享布尔超立方体上的直接七次关系。Parano1d 使用的是这种承诺列归约（committed-column reduction），而不是逐层重放电路。
+FROST-GKR 把批量 Poseidon2b 执行与 Merkle 路径表示为共享布尔超立方体上的直接七次关系。Kairos 使用的是这种承诺列归约（committed-column reduction），而不是逐层重放电路。
 
 该归约保留 GKR 的[多线性扩展](../reference/glossary.md#multilinear-extension)与 [sumcheck](../reference/glossary.md#sumcheck-family) 机制，同时用覆盖整条执行轨迹的全局关系替代递归电路层下降。共享列让大量置换与路径可以共同检查，无需为每个实例单独执行一次约束 sumcheck。
 

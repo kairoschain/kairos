@@ -69,7 +69,7 @@ The full cost profile is:
 | State transfer and installation | Live State |
 | Recent suffix | At most 18 block bodies plus one tip terminal |
 
-Parano1d removes historical execution replay; it does not pretend that proof
+Kairos removes historical execution replay; it does not pretend that proof
 of work can be compared without reading headers or that current State can be
 downloaded without transferring it.
 

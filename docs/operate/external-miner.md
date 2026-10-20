@@ -12,17 +12,17 @@ Create one protected token file and use it for the node and local worker:
 
 ```sh
 umask 077
-openssl rand -hex 32 > ~/.parano1d/mining.key
+openssl rand -hex 32 > ~/.kairos/mining.key
 
-parano1d --mode extminer --mining-key-file ~/.parano1d/mining.key
+kairos --mode extminer --mining-key-file ~/.kairos/mining.key
 ```
 
 In another terminal:
 
 ```sh
-parano1d-miner \
-  --rpc http://127.0.0.1:9601 \
-  --key-file ~/.parano1d/mining.key
+kairos-miner \
+  --rpc http://127.0.0.1:9701 \
+  --key-file ~/.kairos/mining.key
 ```
 
 Originless local clients may omit Authorization on loopback so the GUI and CLI keep full local administration without a password. Keep `--key-file` on the external miner even when it runs locally so its requests receive only the mining scope. A native local process that deliberately omits the key is treated as a trusted local owner process. The legacy `--mining-key TOKEN` and `--key TOKEN` forms remain compatible, but their values can be visible in process arguments. A key file must be owned by the current user and inaccessible to group and others on Unix.
@@ -30,7 +30,7 @@ Originless local clients may omit Authorization on loopback so the GUI and CLI k
 Limit worker threads when needed:
 
 ```sh
-parano1d-miner --key-file ~/.parano1d/mining.key --threads 8
+kairos-miner --key-file ~/.kairos/mining.key --threads 8
 ```
 
 ## Remote worker
@@ -40,10 +40,10 @@ Do not expose an unencrypted bearer token directly to the Internet. The RPC serv
 Place the worker and node on an authenticated private network, or terminate TLS and restrict the exposed path at a reverse proxy. Bind remote RPC only after that transport is in place:
 
 ```sh
-parano1d \
+kairos \
   --mode extminer \
-  --rpc-listen 0.0.0.0:9601 \
-  --mining-key-file /secure/parano1d-mining.key
+  --rpc-listen 0.0.0.0:9701 \
+  --mining-key-file /secure/kairos-mining.key
 ```
 
 Firewall the port so only intended workers or the proxy can reach it.
@@ -56,18 +56,18 @@ safer solo-mining mode.
 To let a worker request its own payout, the node operator must opt in:
 
 ```sh
-parano1d \
+kairos \
   --mode extminer \
-  --mining-key-file ~/.parano1d/mining.key \
+  --mining-key-file ~/.kairos/mining.key \
   --allow-custom-coinbase
 ```
 
 The worker can then use:
 
 ```sh
-parano1d-miner \
-  --key-file ~/.parano1d/mining.key \
-  --coinbase o1...
+kairos-miner \
+  --key-file ~/.kairos/mining.key \
+  --coinbase k1...
 ```
 
 Custom coinbase changes only the payout embedded before proof construction.
@@ -83,12 +83,12 @@ a second, distinct credential:
 
 ```sh
 umask 077
-openssl rand -hex 32 > /secure/parano1d-operator.key
+openssl rand -hex 32 > /secure/kairos-operator.key
 
-parano1d \
+kairos \
   --mode node \
-  --rpc-listen 0.0.0.0:9601 \
-  --operator-key-file /secure/parano1d-operator.key
+  --rpc-listen 0.0.0.0:9701 \
+  --operator-key-file /secure/kairos-operator.key
 ```
 
 The operator token authorizes bounded accounting, transaction and receipt lookup and verification, fee and send planning, `walletSend`, exact wallet consolidation, and submission of externally authorized raw transaction intents. The exact list is in [JSON-RPC authentication](../reference/rpc.md#authentication). It cannot obtain or submit mining templates, stop the node, scan, discover or change wallet addresses, enumerate unbounded wallet history or UTXOs, or call unlisted methods. The mining and operator tokens cannot be the same.
@@ -112,7 +112,7 @@ normal and the worker requests another template after its poll interval.
 Run:
 
 ```sh
-parano1d-miner --check-hardware
+kairos-miner --check-hardware
 ```
 
 If requests fail:

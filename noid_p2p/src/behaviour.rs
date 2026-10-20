@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: Apache-2.0
 // Copyright (C) 2026 Paranoid Zero.
+// Modified by the Kairos Chain contributors (rebrand to Kairos Chain).
 
 //! Combined libp2p NetworkBehaviour for the Paranoid full node.
 //!
@@ -37,7 +38,7 @@ use libp2p_connection_limits as connection_limits;
 use noid_chain::consensus::wire_limits::MAX_TX_INTENT_BYTES_GLOBAL;
 use noid_poseidon2b::native::poseidon2b_hash_bytes;
 
-const GOSSIPSUB_MESSAGE_ID_DOMAIN: &[u8] = b"NOID_P2P_GOSSIPSUB_MESSAGE_ID";
+const GOSSIPSUB_MESSAGE_ID_DOMAIN: &[u8] = b"KAI_P2P_GOSSIPSUB_MESSAGE_ID";
 
 use crate::availability_codec::AvailabilityCodec;
 use crate::header_protocol::MAX_HEADER_ANNOUNCE_BYTES;
@@ -481,7 +482,7 @@ impl NodeBehaviour {
         // Without this, Kademlia cannot populate its routing table because
         // the DHT only stores addresses it has been explicitly told about.
         let identify = identify::Behaviour::new(
-            identify::Config::new("/noid/1.0.0".into(), key.public())
+            identify::Config::new("/kairos/1.0.0".into(), key.public())
                 .with_push_listen_addr_updates(true)
                 // Re-identify periodically so address changes propagate.
                 .with_interval(Duration::from_secs(300)),

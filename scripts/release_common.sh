@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# Shared, source-only helpers for ParanO(1)d release tooling.
+# Shared, source-only helpers for Kairos release tooling.
 
 if [[ ${BASH_SOURCE[0]} == "$0" ]]; then
   printf 'error: scripts/release_common.sh must be sourced, not executed\n' >&2

@@ -1,6 +1,6 @@
 # Architecture
 
-Parano1d moves each proof obligation to the place where its witness already
+Kairos moves each proof obligation to the place where its witness already
 exists. The wallet knows the spending secret. The miner has the public State
 witness. Full nodes need neither: they verify the resulting proofs and
 materialize the proven writes.

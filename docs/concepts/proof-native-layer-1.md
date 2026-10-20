@@ -6,7 +6,7 @@ transition in order. Pruning can reduce disk use after validation, but it does
 not remove the original dependency: the present is accepted because the node
 reconstructed it from the past.
 
-Parano1d changes what a block means. A block is not merely a collection of
+Kairos changes what a block means. A block is not merely a collection of
 operations that every peer must execute. It arrives with a recursive
 `HistoryStep` proving that:
 
@@ -53,7 +53,7 @@ Older transaction bodies are not part of the active validation requirement.
 They can be discarded after their retention window. Headers remain because
 proof of work and fork choice still need a permanent cumulative-work history.
 
-This makes Parano1d **history-stateless**, not state-free. Joining still
+This makes Kairos **history-stateless**, not state-free. Joining still
 requires the live UTXO set. The amount of State transfer follows current
 usage, while validation no longer grows with the total number of transactions
 the network has ever processed.
@@ -92,7 +92,7 @@ consensus proofs and proof of work decide whether that data is acceptable.
 
 ## What proof of work still does
 
-Recursive validity does not choose a chain. Parano1d uses proof of work for
+Recursive validity does not choose a chain. Kairos uses proof of work for
 ordering and Sybil-resistant fork choice. A miner proves the nonce-independent
 block first, then searches the 128-bit nonce of the fixed header.
 

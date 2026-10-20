@@ -13,17 +13,17 @@
 
 ```sh
 umask 077
-openssl rand -hex 32 > ~/.parano1d/mining.key
+openssl rand -hex 32 > ~/.kairos/mining.key
 
-parano1d --mode extminer --mining-key-file ~/.parano1d/mining.key
+kairos --mode extminer --mining-key-file ~/.kairos/mining.key
 ```
 
 В другом терминале:
 
 ```sh
-parano1d-miner \
-  --rpc http://127.0.0.1:9601 \
-  --key-file ~/.parano1d/mining.key
+kairos-miner \
+  --rpc http://127.0.0.1:9701 \
+  --key-file ~/.kairos/mining.key
 ```
 
 Локальные клиенты без Origin могут не передавать Authorization через loopback, чтобы GUI и CLI сохраняли полные локальные права без пароля. Передавайте `--key-file` внешнему майнеру, даже если он работает локально, тогда его запросы получат только mining-права. Нативный локальный процесс, который намеренно не передаёт ключ, считается доверенным локальным процессом владельца. Старые формы `--mining-key TOKEN` и `--key TOKEN` сохранены для совместимости, но их значения видны в аргументах процесса. На Unix файл ключа должен принадлежать текущему пользователю и быть недоступен группе и остальным.
@@ -31,7 +31,7 @@ parano1d-miner \
 При необходимости ограничьте число потоков:
 
 ```sh
-parano1d-miner --key-file ~/.parano1d/mining.key --threads 8
+kairos-miner --key-file ~/.kairos/mining.key --threads 8
 ```
 
 ## Удалённый вычислитель
@@ -44,10 +44,10 @@ RPC только
 после настройки защищённого транспорта:
 
 ```sh
-parano1d \
+kairos \
   --mode extminer \
-  --rpc-listen 0.0.0.0:9601 \
-  --mining-key-file /secure/parano1d-mining.key
+  --rpc-listen 0.0.0.0:9701 \
+  --mining-key-file /secure/kairos-mining.key
 ```
 
 Межсетевой экран должен пропускать порт только от нужных вычислителей или
@@ -62,18 +62,18 @@ parano1d \
 включить эту возможность:
 
 ```sh
-parano1d \
+kairos \
   --mode extminer \
-  --mining-key-file ~/.parano1d/mining.key \
+  --mining-key-file ~/.kairos/mining.key \
   --allow-custom-coinbase
 ```
 
 Тогда вычислитель может передать:
 
 ```sh
-parano1d-miner \
-  --key-file ~/.parano1d/mining.key \
-  --coinbase o1...
+kairos-miner \
+  --key-file ~/.kairos/mining.key \
+  --coinbase k1...
 ```
 
 Пользовательский адрес меняет только выплату, зафиксированную до построения
@@ -88,12 +88,12 @@ Mining-токен разрешает только `getBlockTemplate` и `submitB
 
 ```sh
 umask 077
-openssl rand -hex 32 > /secure/parano1d-operator.key
+openssl rand -hex 32 > /secure/kairos-operator.key
 
-parano1d \
+kairos \
   --mode node \
-  --rpc-listen 0.0.0.0:9601 \
-  --operator-key-file /secure/parano1d-operator.key
+  --rpc-listen 0.0.0.0:9701 \
+  --operator-key-file /secure/kairos-operator.key
 ```
 
 Operator-токен разрешает ограниченные запросы учёта, поиск и проверку транзакций и чеков, расчёт комиссии и выплаты, `walletSend`, точную консолидацию кошелька и отправку внешней авторизованной транзакции. Точный список приведён в разделе [Аутентификация JSON-RPC](../reference/rpc.md#аутентификация). Токен не может получать или отправлять майнинговые шаблоны, останавливать ноду, сканировать кошелёк, обнаруживать или менять адреса, перечислять неограниченную историю или UTXO и вызывать методы вне списка. Mining-токен и operator-токен должны различаться.
@@ -119,7 +119,7 @@ Operator-токен разрешает ограниченные запросы �
 Выполните:
 
 ```sh
-parano1d-miner --check-hardware
+kairos-miner --check-hardware
 ```
 
 Если запросы не проходят:

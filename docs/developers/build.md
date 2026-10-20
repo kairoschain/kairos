@@ -73,9 +73,9 @@ SHA256SUMS
 ```
 
 ```sh
-mkdir -p ../parano1d-artifacts
+mkdir -p ../kairos-artifacts
 ./scripts/generate_history_step_pack.sh \
-  ../parano1d-artifacts/history-step-pack-v1
+  ../kairos-artifacts/history-step-pack-v1
 ```
 
 Generation writes a fresh staging directory, derives pins, authenticates the
@@ -107,7 +107,7 @@ NOID_RETIREMENT_KEY_1_PIN=<authenticated-key-1-digest>
 ```
 
 Use the independently recomputed key digests. The script parses this file as
-data; it does not execute shell code. The [final-bank record](https://git.parano1d.org/ignotusnemo/parano1d/src/branch/v2/research/v2_feasibility/results/2026-09-25-common-input-budget/REPORT.md)
+data; it does not execute shell code. The [final-bank record](https://git.parano1d.org/ignotusnemo/kairos/src/branch/v2/research/v2_feasibility/results/2026-09-25-common-input-budget/REPORT.md)
 links generation, authentication and qualification evidence.
 
 ## Soundness reproduction
@@ -121,7 +121,7 @@ target/release/noid_v2_soundness \
   CLASS_0_KEY CLASS_0_KEY_PIN CLASS_1_KEY CLASS_1_KEY_PIN
 ```
 
-The [derivation](https://git.parano1d.org/ignotusnemo/parano1d/src/branch/v2/noid_soundness/docs/v2-retirement.md)
+The [derivation](https://git.parano1d.org/ignotusnemo/kairos/src/branch/v2/noid_soundness/docs/v2-retirement.md)
 explains its assumptions. The default `noid_soundness` executable retains the
 archived profile's calculation; use the v2 tool for this bank.
 
@@ -131,7 +131,7 @@ Run source checks and [qualification](testing.md) before packaging:
 
 ```sh
 ./scripts/build_release.sh \
-  --pack ../parano1d-artifacts/history-step-pack-v1 \
+  --pack ../kairos-artifacts/history-step-pack-v1 \
   --v2-pack PATH_TO_FROZEN_V2_PACK \
   --v2-pins PATH_TO_REVIEWED_PIN_FILE \
   --retirement-keys PATH_TO_AUTHENTICATED_KEYS \
@@ -177,9 +177,9 @@ README.txt
 CONTRACTS.md
 LICENSE
 NOTICE
-parano1d
-parano1d-cli
-parano1d-miner
+kairos
+kairos-cli
+kairos-miner
 ```
 
 The GUI package contains only the application and its private node. It does not

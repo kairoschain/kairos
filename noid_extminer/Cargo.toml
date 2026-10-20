@@ -3,11 +3,11 @@ name        = "noid-extminer"
 version.workspace = true
 edition     = "2021"
 license     = "Apache-2.0"
-description = "External Poseidon2b PoW miner for ParanO(1)d"
-default-run = "parano1d-miner"
+description = "External Poseidon2b PoW miner for Kairos"
+default-run = "kairos-miner"
 
 [[bin]]
-name = "parano1d-miner"
+name = "kairos-miner"
 path = "src/main.rs"
 
 [dependencies]

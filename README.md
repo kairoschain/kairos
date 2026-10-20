@@ -1,6 +1,11 @@
-# Parano1d ①
+# Kairos Chain ($KAI)
 
-Parano1d is a live proof-native L1 where the present proves the past. Proofs
+> **Kairos Chain is a fork of [Parano1d](https://github.com/proof-native/parano1d)
+> (Copyright 2026 Paranoid Zero, Apache-2.0), modified by the Kairos Chain
+> contributors.** It is an independent network with its own genesis and is not
+> Parano1d or NOID. See [KAIROS-FORK.md](KAIROS-FORK.md) and [NOTICE](NOTICE).
+
+Kairos is a proof-native L1 where the present proves the past. Proofs
 establish validity. PoW sets canonical order. Signatureless authorization,
 execution and recursion share one transparent end-to-end post-quantum stack. V2
 adds proof-native contracts: programmable live rights verifiable after pruning.
@@ -8,14 +13,14 @@ Nodes verify state and rights from genesis without replay or trusted
 checkpoints. Block bodies and transactions are pruned after retention. Receipts
 remain verifiable. Mainnet is live.
 
-[Website](https://parano1d.org) ·
-[Documentation](https://docs.parano1d.org) ·
-[Research](https://lab.parano1d.org) ·
-[Releases](https://git.parano1d.org/ignotusnemo/parano1d/releases)
+[Website](https://kairoschain.xyz) ·
+[Documentation](https://docs.kairoschain.xyz) ·
+[Research](https://lab.kairoschain.xyz) ·
+[Releases](https://git.parano1d.org/ignotusnemo/kairos/releases)
 
-**Source:** [Forgejo](https://git.parano1d.org/ignotusnemo/parano1d) (canonical) ·
+**Source:** [Forgejo](https://git.parano1d.org/ignotusnemo/kairos) (canonical) ·
 [GitHub](https://github.com/proof-native/parano1d) ·
-[GitLab](https://gitlab.com/ignotusnemo/parano1d)
+[GitLab](https://gitlab.com/ignotusnemo/kairos)
 
 ## From live value to live rights
 
@@ -123,8 +128,8 @@ new outputs reuse empty positions with fresh `creation_id` values. Empty
 can expand the domain without moving existing outputs.
 
 Issuance follows an exact height schedule from H210537:
-**16 → 11.30 → 8 → 5.65 → 4 → 2.83 → 2 → 1.41 → 1 NOID**,
-one step every 1,051,200 blocks. The permanent 1 NOID tail means there is no
+**16 → 11.30 → 8 → 5.65 → 4 → 2.83 → 2 → 1.41 → 1 KAI**,
+one step every 1,051,200 blocks. The permanent 1 KAI tail means there is no
 fixed maximum supply. State expansion does not change the reward.
 
 Occupancy still increases the fee for net-new live slots. That growth component
@@ -134,12 +139,12 @@ rationale and the distinction between gross subsidy and actual supply.
 
 ## Development allocation
 
-Parano1d has no premine. For the original three 365-day target-time years from
+Kairos has no premine. For the original three 365-day target-time years from
 genesis, the consensus subsidy allocation is:
 
 - 90% to the miner;
 - 5% to the O(1) Network Fund;
-- 5% to Parano1d Lab.
+- 5% to Kairos Lab.
 
 The allocation ends at block 3,223,778. After that, 100% of new block subsidies
 go to miners. Transaction fees remain entirely miner-claimable after the
@@ -147,7 +152,7 @@ state-growth burn. The [allocation schedule](docs/protocol/economics.md#existing
 details the daily payouts and accounting.
 
 The O(1) Network Fund finances operation, maintenance, security and adoption
-of the live network. Parano1d Lab supports the founders, core developers,
+of the live network. Kairos Lab supports the founders, core developers,
 researchers and contributors advancing the protocol. Both will publish
 periodic reports covering funds received, major expenditures, completed work
 and current priorities.
@@ -160,7 +165,7 @@ addresses, transactions, trees, transcripts and PoW. FROST-GKR batches its
 permutations and Merkle paths; sumcheck, zerocheck, lincheck and FRI-Binius
 close the relation without a trusted setup.
 
-The [FROST-GKR research article](https://lab.parano1d.org/research/frost-gkr-global-trace-protocol/)
+The [FROST-GKR research article](https://lab.kairoschain.xyz/research/frost-gkr-global-trace-protocol/)
 links the paper, reference implementation and reproducible comparison with
 per-permutation reductions.
 
@@ -211,36 +216,36 @@ supervised node. The GUI supports Linux, Windows and macOS. See
 [installation](docs/getting-started/wallet.md) and [Core](docs/getting-started/core.md).
 
 ```sh
-parano1d --check-hardware
-parano1d
+kairos --check-hardware
+kairos
 ```
 
 For mining:
 
 ```sh
-parano1d --miner
-parano1d --miner --v2-large-blocks
+kairos --miner
+kairos --miner --v2-large-blocks
 ```
 
 External nonce search keeps proving in the node:
 
 ```sh
-parano1d --extminer --mining-key-file ~/.parano1d/mining.key
-parano1d-miner --key-file ~/.parano1d/mining.key
+kairos --extminer --mining-key-file ~/.kairos/mining.key
+kairos-miner --key-file ~/.kairos/mining.key
 ```
 
 Use only the mining command appropriate to the host. Default ports are P2P
-9600 and local JSON-RPC 127.0.0.1:9601. The built-in wallet key is not
+9700 and local JSON-RPC 127.0.0.1:9701. The built-in wallet key is not
 password-encrypted; protect it and back up contract terms and receipts too.
 
 ```sh
-parano1d-cli status
-parano1d-cli balance
-parano1d-cli contract protocol
-parano1d-cli contract --help
+kairos-cli status
+kairos-cli balance
+kairos-cli contract protocol
+kairos-cli contract --help
 ```
 
-Addresses use bech32m `o1…`; 1 NOID = 1,000,000 μNOID. F7 opens Contracts in
+Addresses use bech32m `o1…`; 1 KAI = 1,000,000 μKAI. F7 opens Contracts in
 the GUI, and F8 opens Settings. See [RPC](docs/reference/rpc.md) for owner,
 mining and operator access scopes.
 
@@ -250,8 +255,8 @@ The wallet saves outgoing payment receipts locally while the confirmed block
 data is available. Export a saved receipt for a payment to a different owner:
 
 ```sh
-parano1d-cli receipt TXID > receipt.hex
-parano1d-cli verify "$(tr -d '\n' < receipt.hex)"
+kairos-cli receipt TXID > receipt.hex
+kairos-cli verify "$(tr -d '\n' < receipt.hex)"
 ```
 
 For a retained contract-call receipt, use the saved contract terms and a
@@ -259,8 +264,8 @@ confirmed call ID. Replace `contract.json` and `CALL_TXID` with your file and
 transaction ID; `--out` must name a new file:
 
 ```sh
-parano1d-cli contract receipt contract.json CALL_TXID --out call.receipt
-parano1d-cli contract verify call.receipt
+kairos-cli contract receipt contract.json CALL_TXID --out call.receipt
+kairos-cli contract verify call.receipt
 ```
 
 Both receipt formats remain verifiable after the block body is pruned. Keep
@@ -292,4 +297,4 @@ programs use this shared bank and do not generate new matrices.
 
 Designed and developed by **Ignotus Nemo**. [Apache License 2.0](LICENSE).
 Report security issues through the [security policy](.github/SECURITY.md).
-Contact: [dev@parano1d.org](mailto:dev@parano1d.org).
+Contact: [dev@kairoschain.xyz](mailto:dev@kairoschain.xyz).

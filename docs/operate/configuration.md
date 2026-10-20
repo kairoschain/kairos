@@ -3,7 +3,7 @@
 Core reads TOML configuration from:
 
 ```text
-~/.parano1d/parano1d.toml
+~/.kairos/kairos.toml
 ```
 
 unless `--config` selects another file. A missing file is created atomically
@@ -14,15 +14,15 @@ replaced.
 
 ```toml
 [network]
-listen = "0.0.0.0:9600"
+listen = "0.0.0.0:9700"
 seeds = []
 
 [storage]
 backend = "mdbx"
-path = "~/.parano1d/data"
+path = "~/.kairos/data"
 
 [rpc]
-listen = "127.0.0.1:9601"
+listen = "127.0.0.1:9701"
 
 [mining]
 enabled = false
@@ -34,14 +34,14 @@ Command-line values override their corresponding file values.
 ## Network
 
 `network.listen` accepts `HOST:PORT` or a libp2p multiaddress. Bind
-`0.0.0.0:9600` to accept public IPv4 connections.
+`0.0.0.0:9700` to accept public IPv4 connections.
 
 `network.seeds` adds bootstrap peers. Accepted forms include:
 
 ```text
-198.51.100.10:9600
-seed.example.org:9600
-/ip4/198.51.100.10/tcp/9600
+198.51.100.10:9700
+seed.example.org:9700
+/ip4/198.51.100.10/tcp/9700
 dnsaddr:seed.example.org
 ```
 
@@ -65,7 +65,7 @@ The command-line `--data-dir` overrides this path.
 Keep RPC on:
 
 ```text
-127.0.0.1:9601
+127.0.0.1:9701
 ```
 
 The interface includes wallet submission and process control. It is not a
@@ -87,9 +87,9 @@ RPC supports HTTP only. WebSocket upgrades are rejected and request bodies are l
 Process mode is authoritative:
 
 ```sh
-parano1d --mode node
-parano1d --mode miner
-parano1d --mode extminer --mining-key-file ~/.parano1d/mining.key
+kairos --mode node
+kairos --mode miner
+kairos --mode extminer --mining-key-file ~/.kairos/mining.key
 ```
 
 The legacy `mining.enabled` field does not override `--mode`. An empty
@@ -106,14 +106,14 @@ apply to ordinary node mode or to the separate external worker.
 substantially noisier.
 
 Under systemd, output goes to the journal. The GUI redirects its private node
-to `parano1d-node.log` in the selected data directory.
+to `kairos-node.log` in the selected data directory.
 
 ## Preflight
 
 Validate CPU support without creating configuration, wallet or database files:
 
 ```sh
-parano1d --check-hardware
+kairos --check-hardware
 ```
 
 The successful final line is `NODE READY`.

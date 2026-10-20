@@ -1,6 +1,6 @@
 # Signatureless ownership
 
-An ordinary Parano1d owner address is the Poseidon2b image of a 256-bit secret. Spending does
+An ordinary Kairos owner address is the Poseidon2b image of a 256-bit secret. Spending does
 not reveal a public key and does not attach a digital signature. The wallet
 instead produces a zero-knowledge proof that it knows the preimage behind the
 input owner.
@@ -48,7 +48,7 @@ Addresses, amounts, fees, input references, output records and relayed
 transactions are public. Zero knowledge hides the spending secret. It does not
 hide transaction history while that history is available.
 
-Parano1d reduces permanent historical exposure by making old block bodies
+Kairos reduces permanent historical exposure by making old block bodies
 unnecessary for consensus. A saved receipt can still prove a specific payment
 after its body has been pruned.
 

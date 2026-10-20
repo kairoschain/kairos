@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: Apache-2.0
 // Copyright (C) 2026 Paranoid Zero.
+// Modified by the Kairos Chain contributors (rebrand to Kairos Chain).
 
 use std::collections::HashSet;
 use std::path::{Path, PathBuf};
@@ -12,8 +13,8 @@ use crate::model::SensitiveString;
 const MAX_SECRET_PHOTO_BYTES: u64 = 256 << 20;
 const MIN_SECRET_PHOTO_DIMENSION: u32 = 32;
 const MIN_SECRET_PHOTO_DISTINCT_PIXELS: usize = 64;
-const IMAGE_SECRET_CONTEXT: &str = "ParanO(1)d master secret from canonical image pixels v1";
-const KEY_ID_CONTEXT: &str = "ParanO(1)d master secret fingerprint v1";
+const IMAGE_SECRET_CONTEXT: &str = "Kairos Chain master secret from canonical image pixels v1";
+const KEY_ID_CONTEXT: &str = "Kairos Chain master secret fingerprint v1";
 
 #[derive(Clone)]
 pub struct PreparedPhoto {

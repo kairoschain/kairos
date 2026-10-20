@@ -21,7 +21,7 @@ GUI: **F7 Contracts**, затем Create, My contracts или Open file. Лок�
 проверенные данные, удаляет повторы txid и сохраняет свои записи. F4 работает
 с обычными платёжными квитанциями; контракты и квитанции вызовов открываются в F7.
 
-CLI: `parano1d-cli contract protocol`, `parano1d-cli contract --help`.
+CLI: `kairos-cli contract protocol`, `kairos-cli contract --help`.
 RPC использует префикс `paranoid_` и локальные права владельца. Пределы:
 `getContractProtocol`, создание условий: `createObject`, пополнение:
 `walletFundObject`, просмотр: `previewObjectCall`, отправка: `walletCallObject`.
@@ -38,4 +38,4 @@ RPC использует префикс `paranoid_` и локальные пра
 [шаблоны](../contracts/templates.md), [API](../contracts/api.md),
 [GUI](../contracts/gui.md), [восстановление](../contracts/receipts-and-recovery.md).
 Для читателей релизного пакета раздел доступен на
-[docs.parano1d.org](https://docs.parano1d.org/ru/contracts).
+[docs.kairoschain.xyz](https://docs.kairoschain.xyz/ru/contracts).

@@ -2,9 +2,9 @@
 
 Core 压缩包面向节点运营者、矿工和开发者，其中包含：
 
-- `parano1d`：完整节点与内置矿工；
-- `parano1d-cli`：本地节点及钱包客户端；
-- `parano1d-miner`：外部 PoW 工作进程。
+- `kairos`：完整节点与内置矿工；
+- `kairos-cli`：本地节点及钱包客户端；
+- `kairos-miner`：外部 PoW 工作进程。
 
 GUI 钱包单独发布。
 
@@ -13,11 +13,11 @@ GUI 钱包单独发布。
 请选择与主机平台匹配的 Core 压缩包：
 
 ```text
-parano1d-core-vVERSION-linux-x86_64.tar.gz
-parano1d-core-vVERSION-linux-aarch64.tar.gz
-parano1d-core-vVERSION-windows-x86_64.zip
-parano1d-core-vVERSION-macos-aarch64.tar.gz
-parano1d-core-vVERSION-macos-x86_64.tar.gz
+kairos-core-vVERSION-linux-x86_64.tar.gz
+kairos-core-vVERSION-linux-aarch64.tar.gz
+kairos-core-vVERSION-windows-x86_64.zip
+kairos-core-vVERSION-macos-aarch64.tar.gz
+kairos-core-vVERSION-macos-x86_64.tar.gz
 ```
 
 解压前，请将文件的 SHA-256 摘要与同一版本中的 `SHA256SUMS` 对照。
@@ -27,13 +27,13 @@ parano1d-core-vVERSION-macos-x86_64.tar.gz
 Linux 或 macOS：
 
 ```sh
-./parano1d --check-hardware
+./kairos --check-hardware
 ```
 
 Windows PowerShell：
 
 ```powershell
-.\parano1d.exe --check-hardware
+.\kairos.exe --check-hardware
 ```
 
 最后一行必须是：
@@ -54,31 +54,31 @@ PMULL。运行时会自动选择 `pclmul`、`avx2+vpclmul`、`avx512bw+vpclmul`
 在前台运行 Core：
 
 ```sh
-./parano1d
+./kairos
 ```
 
 首次启动会创建：
 
 ```text
-~/.parano1d/parano1d.toml
-~/.parano1d/data/
+~/.kairos/kairos.toml
+~/.kairos/data/
 ```
 
 在另一个终端中可以检查节点：
 
 ```sh
-./parano1d-cli status
-./parano1d-cli peers
-./parano1d-cli state
+./kairos-cli status
+./kairos-cli peers
+./kairos-cli state
 ```
 
-默认 P2P 监听地址是 `0.0.0.0:9600`，RPC 仅监听
-`127.0.0.1:9601`。
+默认 P2P 监听地址是 `0.0.0.0:9700`，RPC 仅监听
+`127.0.0.1:9701`。
 
 请使用以下命令正常停止节点：
 
 ```sh
-./parano1d-cli stop
+./kairos-cli stop
 ```
 
 常驻系统服务、防火墙和更新方法见

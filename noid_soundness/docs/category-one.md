@@ -2,7 +2,7 @@
 
 ## Result
 
-The security game asks whether a quantum adversary can make Parano1d accept an
+The security game asks whether a quantum adversary can make Kairos accept an
 invalid terminal State whose recursive ancestry starts at genesis.
 
 For the current W65/H133 production profile, the executable theorem gives:
@@ -39,7 +39,7 @@ premises, the result is provable end-to-end post-quantum soundness for state
 validation from genesis at NIST PQC Category 1.
 
 This is a cryptographic resource assessment, not a claim that NIST reviewed or
-certified Parano1d.
+certified Kairos.
 
 ## The security game
 

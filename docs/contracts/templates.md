@@ -75,8 +75,8 @@ continuously with wall-clock time.
 
 A day is nominally **2,880 blocks** at the 30-second target, not a timestamp
 guarantee. Use headroom around height deadlines for confirmation and reorgs.
-A fee ceiling of `1 NOID` permits a fee up to that amount; it does not charge
-1 NOID to create terms. Too little balance or a ceiling below the required fee
+A fee ceiling of `1 KAI` permits a fee up to that amount; it does not charge
+1 KAI to create terms. Too little balance or a ceiling below the required fee
 can prevent a call. Funding is a separate ordinary wallet transaction.
 
 Custom programs can combine integer counters, assertions, recipient checks

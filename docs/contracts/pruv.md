@@ -17,7 +17,7 @@ cargo build --release --locked -p noid_pruv
 target/release/pruv check noid_pruv/examples/budget.pruv --params budget.params.json
 target/release/pruv verify noid_pruv/examples/budget.pruv --params budget.params.json
 target/release/pruv build noid_pruv/examples/budget.pruv --params budget.params.json --out budget.json
-parano1d-cli contract create budget.json --out budget.opening.json
+kairos-cli contract create budget.json --out budget.opening.json
 ```
 
 `check` validates syntax, types, policy fields and native resource limits.
@@ -42,7 +42,7 @@ errors. For the budget example, provide:
 }
 ```
 
-Amounts are integer μNOID. Each separately funded instance has its own state
+Amounts are integer μKAI. Each separately funded instance has its own state
 and budget. The example debits both the payout and its fee from `remaining`.
 Before the deadline, the spending key can continue; afterwards, the recovery
 key can close. Closing follows ABI 3's physical output convention: `retained`
@@ -51,12 +51,12 @@ is output 0 and `payout` is output 1, so a close has `payout = 0`.
 ## Fund, call and recover
 
 Run creation and funding through the funding wallet's local node. The CLI
-uses decimal **NOID**, while Pruv parameters and RPC use integer **μNOID**.
+uses decimal **KAI**, while Pruv parameters and RPC use integer **μKAI**.
 
 ```sh
-parano1d-cli contract protocol
-parano1d-cli contract fund budget.opening.json 10
-parano1d-cli contract instances budget.opening.json
+kairos-cli contract protocol
+kairos-cli contract fund budget.opening.json 10
+kairos-cli contract instances budget.opening.json
 ```
 
 The runtime must be available and report ABI 3. Wait for funding confirmation.
@@ -67,16 +67,16 @@ Each funded instance has its own counters and balance.
 On the spending wallet's node, watch the public opening and review a payout:
 
 ```sh
-parano1d-cli contract watch budget.opening.json
-parano1d-cli contract instances budget.opening.json
-parano1d-cli contract call budget.opening.json <slot> <creation-id> --pay 0.1 --pay-to <recipient-o1-address> --preview
+kairos-cli contract watch budget.opening.json
+kairos-cli contract instances budget.opening.json
+kairos-cli contract call budget.opening.json <slot> <creation-id> --pay 0.1 --pay-to <recipient-o1-address> --preview
 ```
 
 Inspect authority, fee, payout, retained amount and successor. Submit with the
 reviewed transaction ID:
 
 ```sh
-parano1d-cli contract call budget.opening.json <slot> <creation-id> --pay 0.1 --pay-to <recipient-o1-address> --expected-txid <reviewed-txid> --out call-1.json
+kairos-cli contract call budget.opening.json <slot> <creation-id> --pay 0.1 --pay-to <recipient-o1-address> --expected-txid <reviewed-txid> --out call-1.json
 ```
 
 The CLI binds the review to the exact height and transaction, saves it before
@@ -85,16 +85,16 @@ height or transaction requires a fresh review. For another call, use the
 successor in `call-1.json` and discover its current instance again:
 
 ```sh
-parano1d-cli contract instances call-1.json
-parano1d-cli contract verify call-1.receipt
+kairos-cli contract instances call-1.json
+kairos-cli contract verify call-1.receipt
 ```
 
 At the deadline, the recovery wallet can close that current successor:
 
 ```sh
-parano1d-cli contract watch call-1.json
-parano1d-cli contract call call-1.json <successor-slot> <successor-creation-id> --close --preview
-parano1d-cli contract call call-1.json <successor-slot> <successor-creation-id> --close --expected-txid <reviewed-close-txid> --out closing.json
+kairos-cli contract watch call-1.json
+kairos-cli contract call call-1.json <successor-slot> <successor-creation-id> --close --preview
+kairos-cli contract call call-1.json <successor-slot> <successor-creation-id> --close --expected-txid <reviewed-close-txid> --out closing.json
 ```
 
 Keep public terms, successor files and receipts. Receipts authenticate historical

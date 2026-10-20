@@ -4,16 +4,16 @@
 
 | Файл | Роль |
 |---|---|
-| `parano1d` | Полная нода, серверная часть кошелька и необязательный внутренний конвейер доказательства и майнинга |
-| `parano1d-cli` | Тонкий JSON-RPC-клиент работающей ноды |
-| `parano1d-miner` | Отдельный вычислитель nonce Poseidon2b |
+| `kairos` | Полная нода, серверная часть кошелька и необязательный внутренний конвейер доказательства и майнинга |
+| `kairos-cli` | Тонкий JSON-RPC-клиент работающей ноды |
+| `kairos-miner` | Отдельный вычислитель nonce Poseidon2b |
 
 ## Демон Core
 
 Обычная нода запускается без режима:
 
 ```sh
-parano1d
+kairos
 ```
 
 Публичные параметры демона:
@@ -29,8 +29,8 @@ parano1d
 | `--miner-address ADDRESS` | Адрес выплаты; по умолчанию активный владелец кошелька |
 | `--cpu-threads N` | Общий бюджет потоков встроенного майнера |
 | `--data-dir PATH` | Каталог цепи, кошелька и данных времени выполнения |
-| `--p2p-listen HOST:PORT` | Адрес приёма P2P-соединений; по умолчанию `0.0.0.0:9600` |
-| `--rpc-listen HOST:PORT` | Адрес приёма JSON-RPC-соединений; по умолчанию `127.0.0.1:9601` |
+| `--p2p-listen HOST:PORT` | Адрес приёма P2P-соединений; по умолчанию `0.0.0.0:9700` |
+| `--rpc-listen HOST:PORT` | Адрес приёма JSON-RPC-соединений; по умолчанию `127.0.0.1:9701` |
 | `--seed ENDPOINT` | Добавить адрес первоначального подключения; можно повторять |
 | `--log LEVEL` | Фильтр tracing: `error`, `warn`, `info`, `debug` и другие |
 | `--mining-key TOKEN` | Токен внешнего майнинга; сохранён для совместимости |
@@ -56,25 +56,25 @@ parano1d
 
 ```sh
 # Ordinary node
-parano1d --data-dir ~/.parano1d/data
+kairos --data-dir ~/.kairos/data
 
 # Internal miner using 12 logical CPUs
-parano1d --mode miner --cpu-threads 12
+kairos --mode miner --cpu-threads 12
 
 # Node with a local external nonce worker
-parano1d --mode extminer --mining-key-file ~/.parano1d/mining.key
+kairos --mode extminer --mining-key-file ~/.kairos/mining.key
 ```
 
 Оставляйте RPC на локальном интерфейсе, если он не защищён приватным или аутентифицированным транспортом. Bearer-токен аутентифицирует запросы, но не шифрует их. Operator-токен может разрешить `walletSend`, поэтому используйте `--operator-key-file`, отдельный токен для майнинга и межсетевой экран. Core отказывается запускать незащищённый RPC listener на нелокальном адресе. GUI и CLI могут подключаться с фактического TCP-адреса loopback без ключа, даже если настроены токены с ограниченными правами. RPC поддерживает только HTTP и отклоняет переключение на WebSocket.
 
 ## Внешний майнер
 
-`parano1d-miner` запрашивает уже доказанный неизменяемый шаблон и ищет только
+`kairos-miner` запрашивает уже доказанный неизменяемый шаблон и ищет только
 его 128-битный nonce.
 
 | Параметр | По умолчанию | Значение |
 |---|---|---|
-| `--rpc URL` | `http://127.0.0.1:9601` | Адрес JSON-RPC ноды |
+| `--rpc URL` | `http://127.0.0.1:9701` | Адрес JSON-RPC ноды |
 | `--key TOKEN` | — | Токен, совпадающий с токеном ноды; сохранён для совместимости |
 | `--key-file FILE` | — | Прочитать токен из файла, доступного только владельцу |
 | `--threads N` | `0` | Потоки PoW; ноль использует все видимые логические CPU |
@@ -86,9 +86,9 @@ parano1d --mode extminer --mining-key-file ~/.parano1d/mining.key
 Обычный локальный запуск:
 
 ```sh
-parano1d-miner \
-  --rpc http://127.0.0.1:9601 \
-  --key-file ~/.parano1d/mining.key \
+kairos-miner \
+  --rpc http://127.0.0.1:9701 \
+  --key-file ~/.kairos/mining.key \
   --threads 12
 ```
 
@@ -97,7 +97,7 @@ parano1d-miner \
 
 ## Клиент ноды
 
-`parano1d-cli` — тонкий клиент работающего Core. У него нет отдельного ключа;
+`kairos-cli` — тонкий клиент работающего Core. У него нет отдельного ключа;
 операции кошелька выполняются через локальный JSON-RPC.
 
 ### Общие параметры
@@ -107,14 +107,14 @@ parano1d-miner \
 -j, --json      необработанный вывод JSON
 ```
 
-Стандартный адрес — `http://127.0.0.1:9601`. Его можно изменить переменной
+Стандартный адрес — `http://127.0.0.1:9701`. Его можно изменить переменной
 окружения `NOID_RPC`; параметр `--rpc` имеет приоритет.
 
-Суммы в командах кошелька указываются в NOID, не более шести десятичных
+Суммы в командах кошелька указываются в KAI, не более шести десятичных
 знаков:
 
 ```text
-1 NOID = 1,000,000 μNOID
+1 KAI = 1,000,000 μKAI
 ```
 
 ### Нода и цепь
@@ -136,11 +136,11 @@ parano1d-miner \
 Примеры:
 
 ```sh
-parano1d-cli status
-parano1d-cli block-header 420
-parano1d-cli block 420
-parano1d-cli slot 9700063
-parano1d-cli utxos-of o1...
+kairos-cli status
+kairos-cli block-header 420
+kairos-cli block 420
+kairos-cli slot 9700063
+kairos-cli utxos-of k1...
 ```
 
 `block` возвращает данные только внутри 42-блочного окна хранения тел.
@@ -155,15 +155,15 @@ parano1d-cli utxos-of o1...
 | `block-template` | `--miner-addr o1…` | Внешний шаблон майнинга, принадлежащий ноде |
 | `submit-block` | `TEMPLATE_ID NONCE_HEX` | Отправить один 16-байтный nonce в порядке от младшего байта к старшему |
 
-Команды внешнего майнинга низкоуровневые. `parano1d-miner` автоматически
+Команды внешнего майнинга низкоуровневые. `kairos-miner` автоматически
 обновляет шаблоны и кодирует nonce.
 
 ### Комиссии и мемпул
 
 ```sh
-parano1d-cli estimate-fee 2 --inputs 1
-parano1d-cli mempool
-parano1d-cli mempool-tx TXID
+kairos-cli estimate-fee 2 --inputs 1
+kairos-cli mempool
+kairos-cli mempool-tx TXID
 ```
 
 `estimate-fee` сообщает текущий минимум, принимаемый нодой для заявленного
@@ -173,7 +173,7 @@ parano1d-cli mempool-tx TXID
 ### Проверка адреса
 
 ```sh
-parano1d-cli validate o1...
+kairos-cli validate k1...
 ```
 
 Команда сообщает, корректен ли адрес, и выводит его каноническую форму bech32m
@@ -182,11 +182,11 @@ parano1d-cli validate o1...
 ### Адреса кошелька
 
 ```sh
-parano1d-cli address
-parano1d-cli address --list
-parano1d-cli address --new
-parano1d-cli address --index 3
-parano1d-cli address --use 3
+kairos-cli address
+kairos-cli address --list
+kairos-cli address --new
+kairos-cli address --index 3
+kairos-cli address --use 3
 ```
 
 `--new`, `--index` и `--use` — взаимоисключающие действия. Созданный адрес
@@ -196,9 +196,9 @@ parano1d-cli address --use 3
 ### Баланс и UTXO
 
 ```sh
-parano1d-cli balance
-parano1d-cli utxos
-parano1d-cli scan
+kairos-cli balance
+kairos-cli utxos
+kairos-cli scan
 ```
 
 `balance` отдельно показывает подтверждённые, зарезервированные исходящие,
@@ -210,19 +210,19 @@ parano1d-cli scan
 Предпросмотр:
 
 ```sh
-parano1d-cli send o1... 10.5 --dry-run
+kairos-cli send k1... 10.5 --dry-run
 ```
 
 Отправка с автоматической комиссией:
 
 ```sh
-parano1d-cli send o1... 10.5
+kairos-cli send k1... 10.5
 ```
 
-Точную комиссию в NOID задавайте только при необходимости:
+Точную комиссию в KAI задавайте только при необходимости:
 
 ```sh
-parano1d-cli send o1... 10.5 --fee 0.012
+kairos-cli send k1... 10.5 --fee 0.012
 ```
 
 Возвращаемый ID относится ко всей логической транзакции. Рекомендуется
@@ -233,21 +233,21 @@ parano1d-cli send o1... 10.5 --fee 0.012
 ### История и чеки
 
 ```sh
-parano1d-cli history
-parano1d-cli history --last 20
-parano1d-cli history --address o1...
+kairos-cli history
+kairos-cli history --last 20
+kairos-cli history --address k1...
 ```
 
 Экспорт подтверждённого исходящего чека:
 
 ```sh
-parano1d-cli receipt TXID > receipt.hex
+kairos-cli receipt TXID > receipt.hex
 ```
 
 Проверка:
 
 ```sh
-parano1d-cli verify "$(tr -d '\n' < receipt.hex)"
+kairos-cli verify "$(tr -d '\n' < receipt.hex)"
 ```
 
 Экспорт возможен только для локально сохранённого платежа другому владельцу.
@@ -255,7 +255,7 @@ parano1d-cli verify "$(tr -d '\n' < receipt.hex)"
 ### Остановка
 
 ```sh
-parano1d-cli stop
+kairos-cli stop
 ```
 
 Команда запрашивает корректное завершение демона. Она эквивалентна обычному
@@ -267,7 +267,7 @@ parano1d-cli stop
 
 ```sh
 height="$(
-  parano1d-cli --json status |
+  kairos-cli --json status |
     jq -er '.height'
 )"
 ```
@@ -277,8 +277,8 @@ height="$(
 
 ### Контракты
 
-`parano1d-cli contract` содержит `protocol`, `payment`, `vault`, `allowance`,
+`kairos-cli contract` содержит `protocol`, `payment`, `vault`, `allowance`,
 `budget`, `recurring`, `vesting`, `create`, `fund`, `watch`, `status`, `instances`,
-`call`, `receipt`, `verify`, `restore`. Суммы — NOID. `call --preview` проверяет
+`call`, `receipt`, `verify`, `restore`. Суммы — KAI. `call --preview` проверяет
 точный экземпляр, `--expected-txid` привязывает просмотренное тело. См.
 [полный процесс](../contracts/api.md) и `--help` команд. Доступ локальный, с правами владельца.

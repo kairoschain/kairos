@@ -24,7 +24,7 @@ support SSE4.1 and PCLMULQDQ, but the hypervisor must expose them.
 Run the non-mutating check:
 
 ```sh
-parano1d --check-hardware
+kairos --check-hardware
 ```
 
 ## No peers
@@ -32,14 +32,14 @@ parano1d --check-hardware
 Check:
 
 ```sh
-parano1d-cli peers
+kairos-cli peers
 ```
 
 Confirm outbound DNS and TCP access, local time, and the P2P listener setting.
-If accepting inbound connections, allow TCP `9600` in both host and upstream
+If accepting inbound connections, allow TCP `9700` in both host and upstream
 firewalls.
 
-Do not open RPC `9601` as a substitute for P2P.
+Do not open RPC `9701` as a substitute for P2P.
 
 ## Mining button or process is unavailable
 
@@ -54,9 +54,9 @@ Mining needs:
 Use:
 
 ```sh
-parano1d-cli status
-parano1d-cli peers
-parano1d-cli mining
+kairos-cli status
+kairos-cli peers
+kairos-cli mining
 ```
 
 An ordinary node started with `--mode node` never mines even if an old TOML
@@ -107,7 +107,7 @@ recovery work.
 
 ## Port already in use
 
-Find which process owns `9600` or `9601`. Only one node may bind a listener and
+Find which process owns `9700` or `9701`. Only one node may bind a listener and
 one process may own a data directory.
 
 Use distinct listener ports and distinct data directories for independent

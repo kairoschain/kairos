@@ -1,5 +1,5 @@
 name: Bug report
-description: Report a reproducible non-security problem in Parano1d
+description: Report a reproducible non-security problem in Kairos
 title: ""
 body:
   - type: checkboxes

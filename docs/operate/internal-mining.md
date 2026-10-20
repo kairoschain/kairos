@@ -8,15 +8,15 @@ and block submission in one Core process.
 Run the production hardware check:
 
 ```sh
-parano1d --check-hardware
+kairos --check-hardware
 ```
 
 Obtain a payout address from the node wallet:
 
 ```sh
-parano1d
-parano1d-cli address --list
-parano1d-cli stop
+kairos
+kairos-cli address --list
+kairos-cli stop
 ```
 
 The active wallet address is used automatically when no explicit payout is
@@ -27,14 +27,14 @@ configured.
 In the foreground:
 
 ```sh
-parano1d --mode miner --cpu-threads 12
+kairos --mode miner --cpu-threads 12
 ```
 
 Or update a systemd unit:
 
 ```ini
-ExecStart=/usr/local/bin/parano1d \
-  --config /etc/parano1d/parano1d.toml \
+ExecStart=/usr/local/bin/kairos \
+  --config /etc/kairos/kairos.toml \
   --mode miner \
   --cpu-threads 12
 ```
@@ -43,7 +43,7 @@ Then reload and restart:
 
 ```sh
 sudo systemctl daemon-reload
-sudo systemctl restart parano1d
+sudo systemctl restart kairos
 ```
 
 ## Readiness
@@ -52,9 +52,9 @@ Ordinary mining requires one authenticated peer and a synchronized chain.
 Check:
 
 ```sh
-parano1d-cli status
-parano1d-cli peers
-parano1d-cli mining
+kairos-cli status
+kairos-cli peers
+kairos-cli mining
 ```
 
 The process selects the supported CPU backend and uses Small m23 by default:
@@ -62,7 +62,7 @@ The process selects the supported CPU backend and uses Small m23 by default:
 the same input/call limits) with:
 
 ```sh
-parano1d --mode miner --v2-large-blocks
+kairos --mode miner --v2-large-blocks
 ```
 
 Large is selected when the eligible set yields more claimable fees. The flag
@@ -90,7 +90,7 @@ template cannot have its payout rewritten.
 To pin a separate payout for the process:
 
 ```sh
-parano1d --mode miner --miner-address o1...
+kairos --mode miner --miner-address k1...
 ```
 
 Use the complete bech32m address.
@@ -100,11 +100,11 @@ Use the complete bech32m address.
 Stop through RPC or the service manager:
 
 ```sh
-parano1d-cli stop
+kairos-cli stop
 ```
 
 ```sh
-sudo systemctl stop parano1d
+sudo systemctl stop kairos
 ```
 
 Graceful shutdown cancels mining, closes networking and flushes MDBX. Do not

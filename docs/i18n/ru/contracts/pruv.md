@@ -1,6 +1,6 @@
 # Pruv
 
-Pruv — язык для proof-native контрактов Parano1d. Компилятор переводит изменения
+Pruv — язык для proof-native контрактов Kairos. Компилятор переводит изменения
 состояния и явную политику расходования в действующий ABI 3. Исполнение доказывается
 общим отношением блока v2. Программа, которая помещается в этот ABI, работает
 без форка сети и обновления узлов.
@@ -35,7 +35,7 @@ target/release/pruv --help
 Параметры `u64` передаются каноническими десятичными строками, `bool` —
 значениями JSON `true` и `false`, адреса — строками `o1…`. Повторяющиеся,
 неизвестные, отсутствующие и неверно типизированные параметры отклоняются.
-Суммы здесь выражены в целых μNOID. Бюджет учитывает выплаты и комиссии;
+Суммы здесь выражены в целых μKAI. Бюджет учитывает выплаты и комиссии;
 `max_fee` и `max_payment` ограничивают один вызов. Фактическую комиссию
 рассчитывает узел.
 
@@ -43,7 +43,7 @@ target/release/pruv --help
 target/release/pruv check noid_pruv/examples/budget.pruv --params budget.params.json
 target/release/pruv verify noid_pruv/examples/budget.pruv --params budget.params.json
 target/release/pruv build noid_pruv/examples/budget.pruv --params budget.params.json --out budget.json
-parano1d-cli contract create budget.json --out budget.opening.json
+kairos-cli contract create budget.json --out budget.opening.json
 ```
 
 `check` проверяет синтаксис, типы, полноту политики и ограничения ABI.
@@ -56,13 +56,13 @@ CLI/RPC. Выходной файл должен быть новым. Без `--o
 Через локальный узел финансирующего кошелька:
 
 ```sh
-parano1d-cli contract protocol
-parano1d-cli contract fund budget.opening.json 10
-parano1d-cli contract instances budget.opening.json
+kairos-cli contract protocol
+kairos-cli contract fund budget.opening.json 10
+kairos-cli contract instances budget.opening.json
 ```
 
-CLI принимает суммы в десятичных **NOID**, а параметры Pruv и RPC — в целых
-**μNOID**. Протокол должен сообщать ABI 3 и доступный runtime. Дождитесь
+CLI принимает суммы в десятичных **KAI**, а параметры Pruv и RPC — в целых
+**μKAI**. Протокол должен сообщать ABI 3 и доступный runtime. Дождитесь
 подтверждения пополнения. Каждый отдельный депозит создаёт экземпляр
 с собственными счётчиками и балансом.
 
@@ -70,10 +70,10 @@ CLI принимает суммы в десятичных **NOID**, а пара�
 `slot_index` и `creation_id`, затем просмотрите выплату:
 
 ```sh
-parano1d-cli contract watch budget.opening.json
-parano1d-cli contract instances budget.opening.json
-parano1d-cli contract call budget.opening.json <slot> <creation-id> --pay 0.1 --pay-to <o1-получатель> --preview
-parano1d-cli contract call budget.opening.json <slot> <creation-id> --pay 0.1 --pay-to <o1-получатель> --expected-txid <txid-из-preview> --out call-1.json
+kairos-cli contract watch budget.opening.json
+kairos-cli contract instances budget.opening.json
+kairos-cli contract call budget.opening.json <slot> <creation-id> --pay 0.1 --pay-to <o1-получатель> --preview
+kairos-cli contract call budget.opening.json <slot> <creation-id> --pay 0.1 --pay-to <o1-получатель> --expected-txid <txid-из-preview> --out call-1.json
 ```
 
 Проверьте получателя, полномочия, комиссию, остаток и преемника. CLI сохраняет
@@ -82,17 +82,17 @@ parano1d-cli contract call budget.opening.json <slot> <creation-id> --pay 0.1 --
 нужен новый просмотр. Следующий вызов использует преемника из `call-1.json`:
 
 ```sh
-parano1d-cli contract instances call-1.json
-parano1d-cli contract verify call-1.receipt
+kairos-cli contract instances call-1.json
+kairos-cli contract verify call-1.receipt
 ```
 
 В примере до дедлайна расходующий ключ может продолжать выплаты. На высоте
 дедлайна и позже ключ восстановления может закрыть текущего преемника:
 
 ```sh
-parano1d-cli contract watch call-1.json
-parano1d-cli contract call call-1.json <новый-slot> <новый-creation-id> --close --preview
-parano1d-cli contract call call-1.json <новый-slot> <новый-creation-id> --close --expected-txid <txid-закрытия> --out closing.json
+kairos-cli contract watch call-1.json
+kairos-cli contract call call-1.json <новый-slot> <новый-creation-id> --close --preview
+kairos-cli contract call call-1.json <новый-slot> <новый-creation-id> --close --expected-txid <txid-закрытия> --out closing.json
 ```
 
 Сохраняйте условия, файлы преемников и чеки. Исторический чек проверяется после

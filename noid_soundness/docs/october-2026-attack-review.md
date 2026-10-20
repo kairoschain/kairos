@@ -1,8 +1,8 @@
-# October 2026 attacks and the Parano1d soundness certificate
+# October 2026 attacks and the Kairos soundness certificate
 
 ## Certificate result
 
-The mainnet v2 certificate was reproduced on October 13, 2026 from Parano1d v2.0.3 at `50d6dac5a37b9f1be425b5e6cd823de48f843b50`. The complete exact report is byte-for-byte identical to the October 8 report, SHA-256 `f99af13256d02f4cbd6554367a234725fc551806a163624e4cc892ccf0abbebd`.
+The mainnet v2 certificate was reproduced on October 13, 2026 from Kairos v2.0.3 at `50d6dac5a37b9f1be425b5e6cd823de48f843b50`. The complete exact report is byte-for-byte identical to the October 8 report, SHA-256 `f99af13256d02f4cbd6554367a234725fc551806a163624e4cc892ccf0abbebd`.
 
 | Quantity | Reproduced result |
 |---|---:|
@@ -12,7 +12,7 @@ The mainnet v2 certificate was reproduced on October 13, 2026 from Parano1d v2.0
 | Descriptive log2 dominant half-success gate-depth floor | `173.3897612554174` |
 | Ideal success bound at the Category 1 reference envelope | approximately `0.04937388373372754` |
 
-The [exact report](https://git.parano1d.org/ignotusnemo/parano1d-soundness/src/commit/698494bf1be26a3709be32aaa77f5e0a4d417f3a/research/evidence/artifacts/2026-10-13/v2-soundness-mainnet.json) contains the rational inequalities. The [execution receipt](https://git.parano1d.org/ignotusnemo/parano1d-soundness/src/commit/698494bf1be26a3709be32aaa77f5e0a4d417f3a/research/evidence/artifacts/2026-10-13/certificate-reproduction.json) records all four authenticated inputs, protocol pins and the report hash. The assessment uses the certificate's all-root composition, ideal compiler, fixed-Poseidon2b deviation, honest public preprocessing and coherent response-price conditions.
+The [exact report](https://git.parano1d.org/ignotusnemo/kairos-soundness/src/commit/698494bf1be26a3709be32aaa77f5e0a4d417f3a/research/evidence/artifacts/2026-10-13/v2-soundness-mainnet.json) contains the rational inequalities. The [execution receipt](https://git.parano1d.org/ignotusnemo/kairos-soundness/src/commit/698494bf1be26a3709be32aaa77f5e0a4d417f3a/research/evidence/artifacts/2026-10-13/certificate-reproduction.json) records all four authenticated inputs, protocol pins and the report hash. The assessment uses the certificate's all-root composition, ideal compiler, fixed-Poseidon2b deviation, honest public preprocessing and coherent response-price conditions.
 
 The review covers papers and revisions from October 1 through 13. Four successive publisher catalogue pages contain 262 distinct entries in that window. The checks address the Owner/Main authorization capsule, HistoryStep, sparse retirement and authenticated State installation. They establish the parameter and interface exclusions below.
 
@@ -55,9 +55,9 @@ H_tag(a,b) = (P(W)_0 + a0, P(W)_1 + a1).
 
 Addition is field XOR. For fixed left input `a` and target digest `h`, the two required permutation outputs are exactly `h0+a0` and `h1+a1`. This is the two-output instance whose dimension-preserving branch is excluded above. If `a` varies, both target equations vary with it; replacing them with fixed permutation-output constants changes the accepted relation.
 
-The native PCS verifier compares complete `[u8; 32]` cap hashes. Both 128-bit lanes also enter the Owner and Main transcripts. A CICO-1 solution constrains one permutation output; acceptance still requires both digest lanes and their feed-forward equations. This establishes why the published one-output result is not a complete commitment opening for Parano1d.
+The native PCS verifier compares complete `[u8; 32]` cap hashes. Both 128-bit lanes also enter the Owner and Main transcripts. A CICO-1 solution constrains one permutation output; acceptance still requires both digest lanes and their feed-forward equations. This establishes why the published one-output result is not a complete commitment opening for Kairos.
 
-The [October matrix audit](https://git.parano1d.org/ignotusnemo/parano1d-soundness/src/commit/698494bf1be26a3709be32aaa77f5e0a4d417f3a/docs/v2-poseidon2b-matrix-audit-2026-10-10.md) reproduces all four 2026/1792 projections, with minimum `1022.830074998558` in their stated semi-regular Macaulay model. [Smoothing regularity, 2026/408](https://eprint.iacr.org/2026/408), revised October 7, studies selected Macaulay systems, and the revised 2026/1692 experiments show the importance of stepwise solving costs. The v2 Category 1 calculation uses its twenty proof-event bounds and declared fixed-hash deviation; these solving-cost projections are separate from that arithmetic.
+The [October matrix audit](https://git.parano1d.org/ignotusnemo/kairos-soundness/src/commit/698494bf1be26a3709be32aaa77f5e0a4d417f3a/docs/v2-poseidon2b-matrix-audit-2026-10-10.md) reproduces all four 2026/1792 projections, with minimum `1022.830074998558` in their stated semi-regular Macaulay model. [Smoothing regularity, 2026/408](https://eprint.iacr.org/2026/408), revised October 7, studies selected Macaulay systems, and the revised 2026/1692 experiments show the importance of stepwise solving costs. The v2 Category 1 calculation uses its twenty proof-event bounds and declared fixed-hash deviation; these solving-cost projections are separate from that arithmetic.
 
 ## Authorization: recovery observations and fresh randomness
 
@@ -84,7 +84,7 @@ For `q <= 2^64`, this is strictly below `2^-32639`. The exact checker derives th
 
 Let `A` be the verifier acceptance predicate with only the grind check removed and `G` its nonce predicate. Actual acceptance requires `A AND G`, which is a subset of `A`. Dropping `G` therefore gives an upper acceptance bound. The certificate models the de-grinded IOP under its compiler conditions, and the wallet ledger assigns the final nonce zero fixed QROM security credit. The 2026/2326 impossibility theorem removes no premise used by this argument: neither a strong-PoW claim nor its conjunction with non-amortization supplies a term in the calculation. Chain PoW separately determines canonical order.
 
-The [October correspondence argument](https://git.parano1d.org/ignotusnemo/parano1d/src/commit/b159eb8c7c5d509ccbfc2102667769703272cd7c/noid_soundness/docs/v2-correspondence-2026-10.md) establishes the canonical preprocessing, complete retirement request, authenticated boolean selector, selected parent and exact inactive-lane carry under its stated algebraic, binding and extraction conditions. These semantic constraints are the relevant test for a changed State or authority.
+The [October correspondence argument](https://git.parano1d.org/ignotusnemo/kairos/src/commit/b159eb8c7c5d509ccbfc2102667769703272cd7c/noid_soundness/docs/v2-correspondence-2026-10.md) establishes the canonical preprocessing, complete retirement request, authenticated boolean selector, selected parent and exact inactive-lane carry under its stated algebraic, binding and extraction conditions. These semantic constraints are the relevant test for a changed State or authority.
 
 For characteristic two, `x^2=0` has the unique solution `x=0` while its Jacobian is zero. Consequently a tangent kernel alone does not imply a second valid witness. The large-characteristic condition `2^m < characteristic` in 2026/1852 also fails for any nonempty quadratic subsystem over our field. Those diagnostic corollaries do not invalidate the direct semantic arguments above.
 
@@ -92,15 +92,15 @@ The earlier [OtterSec public-claim binding cases](https://osec.io/blog/zkvms-unf
 
 ## Reproduction
 
-From the public parano1d-soundness repository, with the pinned production checkout available:
+From the public kairos-soundness repository, with the pinned production checkout available:
 
 ```sh
 python3 research/tools/october_attack_screening.py \
-  --production /path/to/parano1d \
+  --production /path/to/kairos \
   --output /tmp/october-attack-screening.json
 ```
 
-The [calculation record](https://git.parano1d.org/ignotusnemo/parano1d-soundness/src/commit/698494bf1be26a3709be32aaa77f5e0a4d417f3a/research/evidence/artifacts/2026-10-13/attack-screening.json) records fifteen frozen source hashes, all 138 minor checks and the fresh-region repetition bound. The [test record](https://git.parano1d.org/ignotusnemo/parano1d-soundness/src/commit/698494bf1be26a3709be32aaa77f5e0a4d417f3a/research/evidence/artifacts/2026-10-13/reproduction.json) records 64 production test results. The [catalogue record](https://git.parano1d.org/ignotusnemo/parano1d-soundness/src/commit/698494bf1be26a3709be32aaa77f5e0a4d417f3a/research/evidence/artifacts/2026-10-13/literature-window.json) lists the papers and revision dates. From production:
+The [calculation record](https://git.parano1d.org/ignotusnemo/kairos-soundness/src/commit/698494bf1be26a3709be32aaa77f5e0a4d417f3a/research/evidence/artifacts/2026-10-13/attack-screening.json) records fifteen frozen source hashes, all 138 minor checks and the fresh-region repetition bound. The [test record](https://git.parano1d.org/ignotusnemo/kairos-soundness/src/commit/698494bf1be26a3709be32aaa77f5e0a4d417f3a/research/evidence/artifacts/2026-10-13/reproduction.json) records 64 production test results. The [catalogue record](https://git.parano1d.org/ignotusnemo/kairos-soundness/src/commit/698494bf1be26a3709be32aaa77f5e0a4d417f3a/research/evidence/artifacts/2026-10-13/literature-window.json) lists the papers and revision dates. From production:
 
 ```sh
 cargo test --release --locked -p noid_gkr zk_authorization::tests::
@@ -108,6 +108,6 @@ cargo test --release --locked -p noid_fri_binius zk_capsule_pcs::tests::
 cargo test --release --locked -p noid_soundness
 ```
 
-The v2 calculator command and its four inputs are specified in [certificate reproduction](https://git.parano1d.org/ignotusnemo/parano1d-soundness/src/commit/698494bf1be26a3709be32aaa77f5e0a4d417f3a/docs/october-2026-certificate-refresh.md#reproduction). Today's execution receipt authenticates those same inputs and the identical exact output. The public research verifier passed all 69 tests and verified the existing evidence ledger.
+The v2 calculator command and its four inputs are specified in [certificate reproduction](https://git.parano1d.org/ignotusnemo/kairos-soundness/src/commit/698494bf1be26a3709be32aaa77f5e0a4d417f3a/docs/october-2026-certificate-refresh.md#reproduction). Today's execution receipt authenticates those same inputs and the identical exact output. The public research verifier passed all 69 tests and verified the existing evidence ledger.
 
 Reviewed PDF hashes are `907b85088cc8c78d0ca84656f7c0e8f008f4690a7e103c5f2df880aafefcb89d` for 2026/1692, `cc2eb7c8d7df1aa78ac02f813c6140d0a0330a18f44890f1092f8e03f5382f4f` for 2026/1036, `5e888b9f3d0f94a59c89754af48255459605b6253ee5ff25694bcd18f0288aea` for 2026/2326 and `048c2bcd864ec34ffae72c4bad9c4529b860040cd1e7a4854b7f0bf9e2fbc1df` for 2026/1542. These copies were retrieved from `eprint.iacr.asia`; revision dates and bibliographic metadata were checked against the publisher pages linked above.

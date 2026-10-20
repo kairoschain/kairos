@@ -1,11 +1,11 @@
-Package: parano1d-gui
+Package: kairos-gui
 Version: @VERSION@
 Section: utils
 Priority: optional
 Architecture: @ARCHITECTURE@
-Maintainer: Paranoid Zero <dev@parano1d.org>
+Maintainer: Paranoid Zero <dev@kairoschain.xyz>
 Depends: libc6 (>= 2.35), libgcc-s1, xdg-desktop-portal
-Homepage: https://parano1d.org/
-Description: Native Parano1d wallet
- Parano1d wallet with its private, locally supervised full node.
+Homepage: https://kairoschain.xyz/
+Description: Native Kairos wallet
+ Kairos wallet with its private, locally supervised full node.
  Wallet data remains in the user's home directory when the package is removed.

@@ -1,6 +1,6 @@
 # 术语表
 
-本页解释 Parano1d 文档中具有特定协议含义的术语。代码标识符、协议对象名和
+本页解释 Kairos 文档中具有特定协议含义的术语。代码标识符、协议对象名和
 通行缩写保留原文；首次出现时给出中文含义。普通的操作系统、Rust 与 JSON 类型
 不在此重复定义。
 
@@ -33,7 +33,7 @@
 <a id="utxo"></a>
 ### UTXO
 
-未花费交易输出（unspent transaction output）。在 Parano1d 中，每条 UTXO
+未花费交易输出（unspent transaction output）。在 Kairos 中，每条 UTXO
 占用一个精确槽位，并记录金额、创建标识符和所有者。
 
 <a id="slot"></a>
@@ -249,9 +249,9 @@ UTXO 中记录的 32 字节公开值。普通所有者值由 256 位支出秘密
 相应秘密即拥有支出权限。
 
 <a id="micronoid"></a>
-### μNOID
+### μKAI
 
-最小货币单位。1 NOID 等于 1,000,000 μNOID。
+最小货币单位。1 KAI 等于 1,000,000 μKAI。
 
 <a id="state-growth-fee"></a>
 ### State 增长费（State-growth fee）
@@ -265,7 +265,7 @@ UTXO 中记录的 32 字节公开值。普通所有者值由 256 位支出秘密
 ### 零知识证明（zero-knowledge proof，ZK proof）
 
 使证明者能够证明命题成立、同时不泄露命题之外私有见证数据的证明系统。
-Parano1d 的钱包证明隐藏支出秘密，不隐藏公开金额和所有者。
+Kairos 的钱包证明隐藏支出秘密，不隐藏公开金额和所有者。
 
 <a id="prover-verifier"></a>
 ### 证明者与验证者（prover and verifier）
@@ -297,7 +297,7 @@ Parano1d 的钱包证明隐藏支出秘密，不隐藏公开金额和所有者�
 <a id="poseidon2b"></a>
 ### Poseidon2b
 
-Parano1d 在 `GF(2^128)` 上使用的宽度为 4 的代数置换，服务于地址、交易、Merkle
+Kairos 在 `GF(2^128)` 上使用的宽度为 4 的代数置换，服务于地址、交易、Merkle
 节点、`State` 根、证明交互记录、区块 ID 和 PoW 摘要。
 
 <a id="binary-tower-field"></a>
@@ -405,13 +405,13 @@ Plonky2、RISC Zero 等 FRI 实现公开采用的一种基于码率、查询数�
 <a id="trusted-setup"></a>
 ### 可信设置（trusted setup）
 
-生成证明系统公共参数时必须由参与者保守秘密的初始化过程。Parano1d 的透明
+生成证明系统公共参数时必须由参与者保守秘密的初始化过程。Kairos 的透明
 证明栈不需要此类设置。
 
 <a id="post-quantum-resistance"></a>
 ### 后量子安全性（post-quantum resistance）
 
-Parano1d 的交易共识不依赖椭圆曲线签名或可信设置。其端到端 QROM 定理在明确
+Kairos 的交易共识不依赖椭圆曲线签名或可信设置。其端到端 QROM 定理在明确
 前提下，把从创世开始的无效 State 可靠性游戏与 NIST 后量子密码学 Category 1 资源
 门槛比较。
 
@@ -419,7 +419,7 @@ Parano1d 的交易共识不依赖椭圆曲线签名或可信设置。其端到�
 ### NIST 后量子密码学 Category 1
 
 以穷举 AES-128 密钥为参照并包含公开 `MAXDEPTH` 限制的 NIST 资源目标。
-Parano1d 针对从创世开始的端到端无效 State 可靠性游戏评估这一目标。
+Kairos 针对从创世开始的端到端无效 State 可靠性游戏评估这一目标。
 
 ## 网络
 
@@ -448,7 +448,7 @@ Parano1d 针对从创世开始的端到端无效 State 可靠性游戏评估这�
 <a id="mdns"></a>
 ### mDNS
 
-在同一本地网络中发现 Parano1d 节点的组播 DNS 机制。
+在同一本地网络中发现 Kairos 节点的组播 DNS 机制。
 
 <a id="gossipsub"></a>
 ### GossipSub

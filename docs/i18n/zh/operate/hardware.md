@@ -1,6 +1,6 @@
 # 硬件与容量
 
-Parano1d 不会让链龄成为永久的历史执行负担，但节点仍需要足够的 CPU
+Kairos 不会让链龄成为永久的历史执行负担，但节点仍需要足够的 CPU
 验证证明、足够的内存容纳有界网络工作集，以及足够的磁盘保存当前 [Live State](../reference/glossary.md#live-state)。
 请检查进程实际看到的机器：服务商公布的物理 CPU 型号并不能证明虚拟机
 一定暴露所需指令。
@@ -20,8 +20,8 @@ Parano1d 不会让链龄成为永久的历史执行负担，但节点仍需要�
 在计划使用的主机上运行预检：
 
 ```sh
-parano1d --check-hardware
-parano1d-miner --check-hardware
+kairos --check-hardware
+kairos-miner --check-hardware
 ```
 
 节点检查成功时以以下内容结束：
@@ -99,8 +99,8 @@ v2 接收节点验证使用四核 CPU、8 GiB 内存、无 swap、PCLMUL。完�
 监控真实路径：
 
 ```sh
-du -sh ~/.parano1d/data
-parano1d-cli state
+du -sh ~/.kairos/data
+kairos-cli state
 ```
 
 快照同步在原子安装前，需要临时保存一份完整候选 State。请为已经安装的 Live State、
@@ -108,10 +108,10 @@ parano1d-cli state
 
 ## 网络
 
-允许持久出站 TCP；公共节点还应开放入站 TCP `9600`。100 Mbit/s 不限量
+允许持久出站 TCP；公共节点还应开放入站 TCP `9700`。100 Mbit/s 不限量
 连接是合理基线。稳定性以及没有激进的连接或流量限制，比低延迟更重要。
 
-TCP `9601` 上的 RPC 是管理接口。除非有私有或认证传输保护，否则只应绑定
+TCP `9701` 上的 RPC 是管理接口。除非有私有或认证传输保护，否则只应绑定
 回环地址。
 
 ## 容量检查
@@ -119,10 +119,10 @@ TCP `9601` 上的 RPC 是管理接口。除非有私有或认证传输保护，�
 Live State 规模或流量显著变化后，应重新检查容量：
 
 ```sh
-parano1d-cli status
-parano1d-cli state
-parano1d-cli peers
-du -sh ~/.parano1d/data
+kairos-cli status
+kairos-cli state
+kairos-cli peers
+du -sh ~/.kairos/data
 ```
 
 请监控磁盘不足、反复掉线、持续同步落后和服务重启。部署方法见

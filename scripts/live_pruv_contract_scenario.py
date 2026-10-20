@@ -24,8 +24,8 @@ import live_v2_contract_scenario as contracts
 
 live = contracts.live
 contracts.NODE = Path(os.environ["NOID_PRUV_NODE"]).resolve()
-contracts.CLI = Path(os.environ.get("NOID_PRUV_CLI", ROOT / "target/release/parano1d-cli")).resolve()
-contracts.MINER = Path(os.environ.get("NOID_PRUV_MINER", ROOT / "target/release/parano1d-miner")).resolve()
+contracts.CLI = Path(os.environ.get("NOID_PRUV_CLI", ROOT / "target/release/kairos-cli")).resolve()
+contracts.MINER = Path(os.environ.get("NOID_PRUV_MINER", ROOT / "target/release/kairos-miner")).resolve()
 PRUV = Path(os.environ.get("NOID_PRUV_BIN", ROOT / "target/debug/pruv")).resolve()
 Z3 = Path(os.environ["NOID_PRUV_Z3"]).resolve()
 rpc = contracts.rpc

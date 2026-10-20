@@ -18,7 +18,7 @@
 派生上下文由钱包格式固定：
 
 ```text
-Parano1d master secret from canonical image pixels v1
+Kairos master secret from canonical image pixels v1
 ```
 
 32 字节输出即为主密钥。
@@ -34,7 +34,7 @@ Parano1d master secret from canonical image pixels v1
 图像只在本机处理，不会上传、写入交易，也不会复制到钱包数据目录。设置
 完成后，密钥库只保存派生出的主密钥，与使用生成或导入方式没有区别。
 
-在链上，照片派生的所有者与任何其他 Parano1d 所有者完全相同。照片只是
+在链上，照片派生的所有者与任何其他 Kairos 所有者完全相同。照片只是
 用户为同一类 256 位钱包密钥选择的来源。
 
 ## 谨慎选择照片

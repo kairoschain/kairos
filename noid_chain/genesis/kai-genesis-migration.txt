@@ -1,0 +1,13 @@
+# Kairos Chain GENESIS MIGRATION allocation.
+#
+# One line per migrated $KAI holder:   <k1 address> <amount in μKAI>
+#   - 1 KAI = 1000000 μKAI (6 decimals, same as the pump.fun SPL token)
+#   - fields separated by whitespace or a single comma
+#   - blank lines and lines starting with '#' are ignored
+#   - duplicate addresses and zero amounts are rejected
+#
+# This file is compiled into the node. It is EMPTY by default: no premine.
+# Changing it changes the genesis state root and the genesis block id.
+#
+# Example (do not uncomment):
+# k1qqqq...example 1500000

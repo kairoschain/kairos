@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 660" role="img"
      aria-labelledby="title description">
-  <title id="title">ParanO(1)d proof-native block flow</title>
+  <title id="title">Kairos proof-native block flow</title>
   <desc id="description">
     A wallet proves private spending authority, the mempool verifies the transaction
     intent, a miner proves the public state transition and searches the nonce,
@@ -73,7 +73,7 @@
     </text>
     <text x="1384" y="57" fill="#34e06f" font-size="15" text-anchor="end"
           font-family="ui-monospace, SFMono-Regular, Menlo, monospace">
-      ParanO(1)d
+      Kairos
     </text>
 
     <!-- phase glows -->

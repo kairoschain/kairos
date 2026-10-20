@@ -21,3 +21,11 @@ https://github.com/bcc-research/bolt-rs
 
 Copyright (c) 2026 Bain Capital Crypto, LP and Ron Rothblum
 Modifications copyright 2026 Succinct Labs, Benedikt Bunz, William Wang
+
+------------------------------------------------------------------------
+
+Kairos Chain is a fork of Parano1d (Copyright 2026 Paranoid Zero), modified by the Kairos Chain contributors.
+Upstream source: https://github.com/proof-native/parano1d (Apache-2.0, v2.0.4).
+Kairos Chain is an independent network and is not affiliated with or endorsed
+by Parano1d, Paranoid Zero or the NOID network. See KAIROS-FORK.md for the
+list of changes.

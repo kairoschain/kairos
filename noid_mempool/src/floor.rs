@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: Apache-2.0
 // Copyright (C) 2026 Paranoid Zero.
+// Modified by the Kairos Chain contributors (rebrand to Kairos Chain).
 
 //! Dynamic fee floor: tracks recent admitted-tx fees and raises the minimum.
 //!
@@ -45,7 +46,7 @@ impl FeeFloor {
         self.current = self.compute();
     }
 
-    /// Return the current dynamic fee floor (μNOID).
+    /// Return the current dynamic fee floor (μKAI).
     #[inline]
     pub fn current(&self) -> u64 {
         if self.pressure_active == Some(false) {
@@ -127,7 +128,7 @@ mod tests {
     fn floor_rises_with_high_fees() {
         let mut f = FeeFloor::new(10);
         for _ in 0..10 {
-            f.record(100_000); // 0.1 NOID
+            f.record(100_000); // 0.1 KAI
         }
         assert!(f.current() > MIN_FEE_BASE, "floor must rise above minimum");
     }

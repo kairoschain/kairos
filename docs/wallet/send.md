@@ -1,4 +1,4 @@
-# Send NOID
+# Send KAI
 
 The Send flow builds one atomic `PagedSpend`, forges a fresh authorization
 proof and submits it to the local node.
@@ -11,7 +11,7 @@ the owner whose UTXOs you intend to spend.
 Open **Send** or press `F3`, then enter:
 
 - the recipient's complete `o1…` address;
-- the amount in NOID.
+- the amount in KAI.
 
 The wallet obtains current empty-slot hints and an exact fee quote. It selects
 the active address's largest UTXOs first, which normally reduces input count

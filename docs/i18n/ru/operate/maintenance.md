@@ -1,6 +1,6 @@
 # Обслуживание
 
-Parano1d транзакционно хранит Live State. Для обычного обслуживания не
+Kairos транзакционно хранит Live State. Для обычного обслуживания не
 нужно воспроизводить или сохранять исторические тела блоков.
 
 ## Наблюдение
@@ -8,18 +8,18 @@ Parano1d транзакционно хранит Live State. Для обычно
 Используйте локальный CLI:
 
 ```sh
-parano1d-cli status
-parano1d-cli peers
-parano1d-cli state
-parano1d-cli mempool
-parano1d-cli mining
+kairos-cli status
+kairos-cli peers
+kairos-cli state
+kairos-cli mempool
+kairos-cli mining
 ```
 
 С systemd:
 
 ```sh
-systemctl status parano1d
-journalctl -u parano1d --since today
+systemctl status kairos
+journalctl -u kairos --since today
 ```
 
 Следите за свободным местом для Live State в MDBX и кеша доказательств, а
@@ -31,7 +31,7 @@ UTXO.
 Всегда останавливайте процесс перед копированием базы или заменой бинарников:
 
 ```sh
-sudo systemctl stop parano1d
+sudo systemctl stop kairos
 ```
 
 Дождитесь неактивного состояния службы. Обычное копирование работающего
@@ -62,7 +62,7 @@ DATA_DIR/wallet.receipts
 1. скачайте новый архив и соответствующий `SHA256SUMS`;
 2. проверьте хэш;
 3. остановите службу;
-4. одновременно замените `parano1d`, `parano1d-cli` и `parano1d-miner`;
+4. одновременно замените `kairos`, `kairos-cli` и `kairos-miner`;
 5. запустите службу;
 6. проверьте запуск и синхронизацию.
 
@@ -73,7 +73,7 @@ DATA_DIR/wallet.receipts
 Если вы подозреваете повреждение `State` и доступны здоровые пиры:
 
 ```sh
-parano1d --purge-state
+kairos --purge-state
 ```
 
 Команда очищает всю базу цепи: заголовки, индексы, сохранённые полные блоки,

@@ -3,7 +3,7 @@
 Core 默认从以下位置读取 TOML 配置：
 
 ```text
-~/.parano1d/parano1d.toml
+~/.kairos/kairos.toml
 ```
 
 也可通过 `--config` 指定其他文件。文件不存在时会以安全默认值原子创建。
@@ -13,15 +13,15 @@ TOML 格式错误会直接阻止启动，程序不会静默覆盖它。
 
 ```toml
 [network]
-listen = "0.0.0.0:9600"
+listen = "0.0.0.0:9700"
 seeds = []
 
 [storage]
 backend = "mdbx"
-path = "~/.parano1d/data"
+path = "~/.kairos/data"
 
 [rpc]
-listen = "127.0.0.1:9601"
+listen = "127.0.0.1:9701"
 
 [mining]
 enabled = false
@@ -33,14 +33,14 @@ miner_address = ""
 ## 网络
 
 `network.listen` 接受 `HOST:PORT` 或 libp2p multiaddress。绑定
-`0.0.0.0:9600` 可接受公网 IPv4 连接。
+`0.0.0.0:9700` 可接受公网 IPv4 连接。
 
 `network.seeds` 用于添加引导节点，支持以下形式：
 
 ```text
-198.51.100.10:9600
-seed.example.org:9600
-/ip4/198.51.100.10/tcp/9600
+198.51.100.10:9700
+seed.example.org:9700
+/ip4/198.51.100.10/tcp/9700
 dnsaddr:seed.example.org
 ```
 
@@ -63,7 +63,7 @@ dnsaddr:seed.example.org
 RPC 应保持监听：
 
 ```text
-127.0.0.1:9601
+127.0.0.1:9701
 ```
 
 该接口包含钱包提交和进程控制功能，并不是带有通用认证的公网浏览器 API。
@@ -82,9 +82,9 @@ RPC 仅支持 HTTP。WebSocket 升级会被拒绝，请求体限制为 2,237,632
 进程模式具有决定性：
 
 ```sh
-parano1d --mode node
-parano1d --mode miner
-parano1d --mode extminer --mining-key-file ~/.parano1d/mining.key
+kairos --mode node
+kairos --mode miner
+kairos --mode extminer --mining-key-file ~/.kairos/mining.key
 ```
 
 旧的 `mining.enabled` 字段不会覆盖 `--mode`。`miner_address` 为空时，
@@ -99,14 +99,14 @@ parano1d --mode extminer --mining-key-file ~/.parano1d/mining.key
 `info`。`debug` 适合有时间边界的诊断，但日志量会明显增加。
 
 systemd 环境下输出进入 journal。GUI 则把私有节点日志写入所选数据目录的
-`parano1d-node.log`。
+`kairos-node.log`。
 
 ## 启动前检查
 
 无需创建配置、钱包或数据库即可检查 CPU：
 
 ```sh
-parano1d --check-hardware
+kairos --check-hardware
 ```
 
 检查成功时，最后一行是 `NODE READY`。

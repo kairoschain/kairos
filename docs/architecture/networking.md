@@ -1,14 +1,14 @@
 # Networking
 
-Parano1d uses libp2p for peer identity, discovery, relay and synchronization.
+Kairos uses libp2p for peer identity, discovery, relay and synchronization.
 The public network protocol is identified as:
 
 ```text
 /noid/mainnet/860e70453390bf81/1
 ```
 
-The default P2P listener is TCP `9600`. JSON-RPC is a separate local
-administration interface on `127.0.0.1:9601`.
+The default P2P listener is TCP `9700`. JSON-RPC is a separate local
+administration interface on `127.0.0.1:9701`.
 
 ## Peer identity and consensus identity
 
@@ -153,7 +153,7 @@ proof verification and cumulative-work consensus.
 
 ## Interface boundaries
 
-P2P port `9600` serves public peers. RPC on `9601` includes wallet and
+P2P port `9700` serves public peers. RPC on `9701` includes wallet and
 process-control methods. Local TCP loopback has owner access; remote mining
 and operator tokens grant fixed, narrower method sets. Contract methods
 require local owner access. HTTP bearer tokens do not encrypt traffic, so

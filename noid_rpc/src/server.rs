@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: Apache-2.0
 // Copyright (C) 2026 Paranoid Zero.
+// Modified by the Kairos Chain contributors (rebrand to Kairos Chain).
 
 //! JSON-RPC server implementation.
 //!
@@ -4484,7 +4485,7 @@ mod access_control_tests {
         }
         .layer(OkService);
         let request = http::Request::builder()
-            .header(http::header::HOST, "127.0.0.1:9601")
+            .header(http::header::HOST, "127.0.0.1:9701")
             .header("forwarded", "for=127.0.0.1")
             .header("x-forwarded-for", "127.0.0.1")
             .body(())

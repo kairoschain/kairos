@@ -1,6 +1,6 @@
 # 共识
 
-Parano1d 只接受同时满足原生区块头规则、递归 [`HistoryStep`](../reference/glossary.md#historystep) 关系与[工作量证明](../reference/glossary.md#proof-of-work)的区块。[分叉选择](../reference/glossary.md#fork-choice)在所有有效候选链之间比较[累计工作量](../reference/glossary.md#cumulative-work)，同时保留具备[硬最终性](../reference/glossary.md#hard-finality)的前缀。
+Kairos 只接受同时满足原生区块头规则、递归 [`HistoryStep`](../reference/glossary.md#historystep) 关系与[工作量证明](../reference/glossary.md#proof-of-work)的区块。[分叉选择](../reference/glossary.md#fork-choice)在所有有效候选链之间比较[累计工作量](../reference/glossary.md#cumulative-work)，同时保留具备[硬最终性](../reference/glossary.md#hard-finality)的前缀。
 
 源代码是共识的规范定义。本规范描述稳定规则集及其边界。
 

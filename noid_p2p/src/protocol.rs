@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: Apache-2.0
 // Copyright (C) 2026 Paranoid Zero.
+// Modified by the Kairos Chain contributors (rebrand to Kairos Chain).
 
 //! Wire message types for the Paranoid P2P protocol.
 //!
@@ -118,8 +119,8 @@ pub const SNAPSHOT_MANIFEST_PAGE_HEADER_BYTES: usize = 4 + 2 + 2;
 pub const MAX_SNAPSHOT_MANIFEST_PAGES: usize =
     noid_chain::consensus::wire_limits::MAX_SNAPSHOT_MANIFEST_SEGMENTS
         .div_ceil(SNAPSHOT_MANIFEST_DESCRIPTORS_PER_PAGE);
-const SNAPSHOT_MANIFEST_PAGE_MAGIC: [u8; 4] = *b"NMP1";
-const SNAPSHOT_MANIFEST_PAGE_DIGEST_DOMAIN: &[u8] = b"PARANO1D/P2P/SNAPSHOT-MANIFEST-PAGE/V1";
+const SNAPSHOT_MANIFEST_PAGE_MAGIC: [u8; 4] = *b"KMP1";
+const SNAPSHOT_MANIFEST_PAGE_DIGEST_DOMAIN: &[u8] = b"KAIROS/P2P/SNAPSHOT-MANIFEST-PAGE/V1";
 
 /// Exact immutable identity of one canonical descriptor page. Page size and
 /// descriptor count are derived from the manifest's total segment count; a
@@ -225,7 +226,7 @@ pub struct GetStateManifestResponse {
 }
 
 pub const SNAPSHOT_MANIFEST_FORMAT_VERSION: u32 = 2;
-const SNAPSHOT_MANIFEST_DIGEST_DOMAIN: &[u8] = b"PARANO1D/P2P/SNAPSHOT-MANIFEST/V2";
+const SNAPSHOT_MANIFEST_DIGEST_DOMAIN: &[u8] = b"KAIROS/P2P/SNAPSHOT-MANIFEST/V2";
 
 impl GetStateManifestHeader {
     pub fn computed_manifest_digest(&self) -> Option<[u8; 32]> {
@@ -814,8 +815,8 @@ pub struct GetMempoolResponse {
 pub struct Topics;
 
 impl Topics {
-    pub const BLOCKS: &'static str = "/noid/devnet/blocks/1";
-    pub const TXS: &'static str = "/noid/devnet/txs/1";
+    pub const BLOCKS: &'static str = "/kai/devnet/blocks/1";
+    pub const TXS: &'static str = "/kai/devnet/txs/1";
 }
 
 #[derive(Debug, Clone)]

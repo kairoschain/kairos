@@ -11,7 +11,7 @@ activation remains H95125. The v2 fork does not rewrite those historical rules.
 | B25 | m22 / 25 pages |
 | B255 | m24 / 255 pages |
 | Live-input maximum | 1,020 |
-| Subsidy | max(50 / 2^(log_slots − 24), 1) NOID |
+| Subsidy | max(50 / 2^(log_slots − 24), 1) KAI |
 | Terminal cap, v1 | 1 MiB |
 | Terminal cap, v1.1 shared paths | 1,100,000 bytes |
 
@@ -22,7 +22,7 @@ the 20-second target; eligible transaction pages then determined selection.
 This automatic permission rule does not apply to v2.
 
 The gross reward at State levels 24–29 was 50, 25, 12.5, 6.25, 3.125 and
-1.5625 NOID, with a 1 NOID floor at levels 30–32. A level increase required
+1.5625 KAI, with a 1 KAI floor at levels 30–32. A level increase required
 sustained 75% occupancy. The original allocation horizon was 4,730,400 blocks
 and its nominal daily interval 4,320 blocks. The v2 transition preserves the
 three-year target-time horizon from genesis using the changed interval; see

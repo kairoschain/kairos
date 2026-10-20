@@ -43,7 +43,7 @@ Network settings control:
 - P2P listen address;
 - additional seed endpoints.
 
-The default P2P listener is `0.0.0.0:9600`. Built-in DNS discovery works
+The default P2P listener is `0.0.0.0:9700`. Built-in DNS discovery works
 without custom entries.
 
 Do not expose the private RPC endpoint as a network setting. The GUI and node

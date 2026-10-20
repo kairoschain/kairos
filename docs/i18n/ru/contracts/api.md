@@ -65,7 +65,7 @@ runtime v2 (`runtime_available = true`).
 ## Определения и суммы
 
 Определение выбирается полем `kind`, неизвестные поля отклоняются. Суммы —
-целые μNOID, высоты и периоды — блоки. Поля конструкторов:
+целые μKAI, высоты и периоды — блоки. Поля конструкторов:
 
 | `kind` | Поля |
 | --- | --- |
@@ -158,20 +158,20 @@ RPC не доказывает, что отправка не состоялась
 
 ## Работа через CLI
 
-Суммы CLI — десятичные **NOID**, в отличие от целых μNOID RPC. Замените
+Суммы CLI — десятичные **KAI**, в отличие от целых μKAI RPC. Замените
 поля в угловых скобках. Для закрытия активен кошелёк получателя или возврата,
 согласно высоте включения.
 
 ```sh
-parano1d-cli contract protocol
-parano1d-cli contract payment <payee-o1-address> <expiry-height> --max-fee 1 --out payment.json
-parano1d-cli contract fund payment.json 10
-parano1d-cli contract watch payment.json
-parano1d-cli contract instances payment.json --limit 64
-parano1d-cli contract call payment.json <slot> <creation-id> --close --preview
-parano1d-cli contract call payment.json <slot> <creation-id> --close --expected-txid <reviewed-txid> --out closing.json
-parano1d-cli contract receipt payment.json <confirmed-txid> --out closing.receipt
-parano1d-cli contract verify closing.receipt
+kairos-cli contract protocol
+kairos-cli contract payment <payee-o1-address> <expiry-height> --max-fee 1 --out payment.json
+kairos-cli contract fund payment.json 10
+kairos-cli contract watch payment.json
+kairos-cli contract instances payment.json --limit 64
+kairos-cli contract call payment.json <slot> <creation-id> --close --preview
+kairos-cli contract call payment.json <slot> <creation-id> --close --expected-txid <reviewed-txid> --out closing.json
+kairos-cli contract receipt payment.json <confirmed-txid> --out closing.receipt
+kairos-cli contract verify closing.receipt
 ```
 
 CLI привязывает предпросмотр перед отправкой и сначала надёжно сохраняет
@@ -181,5 +181,5 @@ CLI привязывает предпросмотр перед отправко�
 
 Другие конструкторы: `vault`, `allowance`, `budget`, `recurring`, `vesting`.
 `create definition.json --out object.json` принимает собственное определение.
-Точные аргументы: `parano1d-cli contract <command> --help`.
+Точные аргументы: `kairos-cli contract <command> --help`.
 `restore <address> --out object.json` возвращает локально сохранённое раскрытие.

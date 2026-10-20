@@ -16,7 +16,7 @@ class DmgSizeTests(unittest.TestCase):
     def test_sparse_binary_uses_file_length(self):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
-            binary = root / "Parano1d.app" / "Contents" / "MacOS" / "parano1d-node"
+            binary = root / "Kairos.app" / "Contents" / "MacOS" / "kairos-node"
             binary.parent.mkdir(parents=True)
             with binary.open("wb") as stream:
                 stream.truncate(512 * dmg_size.MIB)

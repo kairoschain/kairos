@@ -83,4 +83,4 @@ transport and acceptance. ASERT targets their combined cadence. Report each
 component and its hardware scope instead of equating proof seconds with TPS.
 
 All sample records, source identities, limits, negative controls and
-reproduction scripts are linked in the [qualification report](https://git.parano1d.org/ignotusnemo/parano1d/src/branch/v2/research/v2_feasibility/results/2026-09-25-common-input-budget/REPORT.md).
+reproduction scripts are linked in the [qualification report](https://git.parano1d.org/ignotusnemo/kairos/src/branch/v2/research/v2_feasibility/results/2026-09-25-common-input-budget/REPORT.md).

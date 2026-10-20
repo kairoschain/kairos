@@ -3,7 +3,7 @@
 **Hashpower alone cannot produce blocks. Mining requires State; nonce search
 begins only after the proof is complete.**
 
-Proof of work in Parano1d orders transitions whose validity has already been
+Proof of work in Kairos orders transitions whose validity has already been
 established. Before searching a nonce, a block producer must follow the
 canonical chain, hold the current State, construct the exact next
 transition and complete its recursive `HistoryStep`.
@@ -25,7 +25,7 @@ A mining node owns the block. It:
 - validates the winning nonce;
 - commits and broadcasts the complete `{block, HistoryStep terminal}` bundle.
 
-Nonce search may run inside that process or in `parano1d-miner`. An external
+Nonce search may run inside that process or in `kairos-miner`. An external
 worker has a much narrower role:
 
 - receive one immutable Poseidon2b header schedule and target;
@@ -66,7 +66,7 @@ chooses between valid competing chains.
 | Mode | Proof construction | Nonce search | Best fit |
 |---|---|---|---|
 | Internal | Core node | Core node | GUI wallet, solo miner, one server |
-| External | Core node | `parano1d-miner` | Separate CPU worker, private mining network or pool |
+| External | Core node | `kairos-miner` | Separate CPU worker, private mining network or pool |
 
 Both modes use the same consensus rules and produce the same blocks. External
 mining moves only nonce search across the RPC boundary.
@@ -94,13 +94,13 @@ block table.
 Check the actual host before creating node data:
 
 ```sh
-parano1d --check-hardware
+kairos --check-hardware
 ```
 
 Start Core with its built-in miner:
 
 ```sh
-parano1d --mode miner --cpu-threads 12
+kairos --mode miner --cpu-threads 12
 ```
 
 Omit `--cpu-threads` to use every logical CPU visible to the process. When no
@@ -108,15 +108,15 @@ explicit payout is configured, Core uses the active address in its local
 wallet. A separate canonical bech32m payout can be fixed with:
 
 ```sh
-parano1d --mode miner --miner-address o1...
+kairos --mode miner --miner-address k1...
 ```
 
 Watch readiness and chain progress from another terminal:
 
 ```sh
-parano1d-cli status
-parano1d-cli peers
-parano1d-cli mining
+kairos-cli status
+kairos-cli peers
+kairos-cli mining
 ```
 
 Core waits rather than mining an isolated local view when it is unsynchronized
@@ -128,17 +128,17 @@ procedure is in [Internal mining](../operate/internal-mining.md).
 Start a node that owns and proves external-mining templates:
 
 ```sh
-parano1d \
+kairos \
   --mode extminer \
-  --mining-key-file ~/.parano1d/mining.key
+  --mining-key-file ~/.kairos/mining.key
 ```
 
 Run the worker against its loopback RPC endpoint:
 
 ```sh
-parano1d-miner \
-  --rpc http://127.0.0.1:9601 \
-  --key-file ~/.parano1d/mining.key \
+kairos-miner \
+  --rpc http://127.0.0.1:9701 \
+  --key-file ~/.kairos/mining.key \
   --threads 12
 ```
 
@@ -196,11 +196,11 @@ The chain with the greatest cumulative valid work wins; an equal-work tie uses
 the canonical block-hash tie-break.
 
 The gross reward follows the [fixed height schedule](../protocol/economics.md#v2-issuance), starting at
-16 NOID gross and advancing every 1,051,200 blocks. The mining RPC reports the
+16 KAI gross and advancing every 1,051,200 blocks. The mining RPC reports the
 next block's gross subsidy:
 
 ```sh
-parano1d-cli mining
+kairos-cli mining
 ```
 
 During the three-year development allocation, the miner receives 90% of newly

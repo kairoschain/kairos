@@ -12,8 +12,8 @@ operators and wallet users should run its latest patch release.
 ## Reporting a vulnerability
 
 Please use GitHub's private vulnerability reporting to submit a finding: open
-the Parano1d repository, select **Security and quality**, then **Report a
-vulnerability**. If that is unavailable, email <dev@parano1d.org>. Do not open
+the Kairos repository, select **Security and quality**, then **Report a
+vulnerability**. If that is unavailable, email <dev@kairoschain.xyz>. Do not open
 a public issue or discuss an unpatched vulnerability in a public channel.
 
 Every report must include:
@@ -23,32 +23,32 @@ Every report must include:
 - the expected behavior, observed behavior, and concrete mainnet impact;
 - a reliable reproducer, test vector, proof of concept, trace, or other evidence
   that lets us reproduce the defect and verify its impact;
-- a NOID payout address.
+- a KAI payout address.
 
 A patch is welcome but not required. Reports that do not identify a concrete
 defect and provide enough evidence to verify it may be closed without further
 investigation. We will confirm receipt, assess qualifying reports, implement the
 final fix, and coordinate disclosure with the reporter.
 
-## Parano1d Bug Hunt ①
+## Kairos Bug Hunt ①
 
 **Scope updated: August 27, 2026.** Reports received before this update are
 assessed under the rules in effect when they were submitted.
 
-Parano1d pays for previously unknown, reproducible bugs that exist in the
+Kairos pays for previously unknown, reproducible bugs that exist in the
 unmodified current mainnet release or its official release artifacts and fall
 within the scope below. A test harness or instrumentation may be used to
 demonstrate a bug, but the defect itself must exist without changing
-Parano1d's validation or consensus rules.
+Kairos's validation or consensus rules.
 
 ### Scope
 
-The Bug Hunt covers the Parano1d protocol and consensus implementation, the
+The Bug Hunt covers the Kairos protocol and consensus implementation, the
 full-node core, State validation and storage, synchronization and P2P safety,
 the proof and cryptographic stack, the built-in wallet and GUI, and the
 built-in mining path.
 
-The standalone `parano1d-miner`, `--mode extminer`, the external-mining RPC
+The standalone `kairos-miner`, `--mode extminer`, the external-mining RPC
 integration, pool compatibility, template delivery, custom coinbase and
 worker authentication are outside this Bug Hunt. External mining is an
 optional integration surface provided for pool operators; it is not the
@@ -66,8 +66,8 @@ in-scope core, protocol, cryptographic or wallet security boundary.
 
 | Reward | Finding |
 |---:|---|
-| **500 NOID** | A confirmed non-critical mainnet bug with material impact on the correctness, reliability, or security of Parano1d. |
-| **10,000 NOID** | A confirmed vulnerability with at least one of the critical outcomes defined below. |
+| **500 KAI** | A confirmed non-critical mainnet bug with material impact on the correctness, reliability, or security of Kairos. |
+| **10,000 KAI** | A confirmed vulnerability with at least one of the critical outcomes defined below. |
 
 Critical means the report demonstrates that the unmodified current mainnet
 release can:
@@ -83,7 +83,7 @@ The reward tier is based on demonstrated impact, not the most severe
 hypothetical outcome. Temporary peer loss, slow synchronization, orphaned
 blocks, hardware performance, or degraded liveness do not by themselves meet
 the critical tier, although an underlying reproducible code defect may still
-qualify for 500 NOID.
+qualify for 500 KAI.
 
 A benchmark, performance difference or faster alternative is not evidence of
 a Bug Hunt defect. A performance-related report must demonstrate an incorrect
@@ -126,13 +126,13 @@ welcome as ordinary GitHub issues, but they are not Bug Hunt submissions.
 - behavior caused only by removing or changing local validation, proof, or
   consensus checks;
 - expected protocol behavior, user or configuration errors, hardware limits,
-  ISP or VPN restrictions, unless a defect in official Parano1d software is
+  ISP or VPN restrictions, unless a defect in official Kairos software is
   demonstrated;
 - refactoring, naming, style, or documentation suggestions without an
   underlying code defect;
 - cosmetic UI, wording, logging, or telemetry issues without material
   operational or security impact;
-- defects limited to `parano1d-miner`, `--mode extminer`, external-mining RPC
+- defects limited to `kairos-miner`, `--mode extminer`, external-mining RPC
   or pool integration, including template delivery, custom coinbase, worker
   authentication, compatibility and performance;
 - vague concerns, speculative issue lists, or claims without evidence;
@@ -153,7 +153,7 @@ first complete and reproducible private report has priority; an earlier vague
 warning or automated output does not reserve a reward.
 
 Submission alone does not guarantee payment. After the defect and its impact
-are reproduced and confirmed, we assign its reward tier and pay the NOID
-address provided in the report. Rewards are paid in NOID with no promised fiat
+are reproduced and confirmed, we assign its reward tier and pay the KAI
+address provided in the report. Rewards are paid in KAI with no promised fiat
 equivalent. Confirmed findings are disclosed after the fix is available, with
 credit to the reporter unless they choose to remain anonymous.

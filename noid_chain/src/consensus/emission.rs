@@ -1,23 +1,24 @@
 // SPDX-License-Identifier: Apache-2.0
 // Copyright (C) 2026 Paranoid Zero.
+// Modified by the Kairos Chain contributors (rebrand to Kairos Chain).
 
 //! Height-selected block reward schedules. The table below is the legacy rule;
 //! v2 advances through [`V2_REWARDS_MICRONOID`] by elapsed block height,
 //! starting at its activation block. State size does not select a v2 reward.
 //!
 //! Before v2, reward halves with every state expansion (`log_slots += 1`),
-//! floored at 1 NOID.
+//! floored at 1 KAI.
 //!
 //! ```text
 //! log_slots | expansion | reward
 //! ----------|-----------|-------
-//!    24      |     0     | 50.000000 NOID  (genesis)
-//!    25      |     1     | 25.000000 NOID
-//!    26      |     2     | 12.500000 NOID
-//!    27      |     3     |  6.250000 NOID
-//!    28      |     4     |  3.125000 NOID
-//!    29      |     5     |  1.562500 NOID
-//!    30+     |     6+    |  1.000000 NOID  (floor, forever)
+//!    24      |     0     | 50.000000 KAI  (genesis)
+//!    25      |     1     | 25.000000 KAI
+//!    26      |     2     | 12.500000 KAI
+//!    27      |     3     |  6.250000 KAI
+//!    28      |     4     |  3.125000 KAI
+//!    29      |     5     |  1.562500 KAI
+//!    30+     |     6+    |  1.000000 KAI  (floor, forever)
 //! ```
 //!
 //! The v2 height schedule does not change occupancy-sensitive State-growth
@@ -65,7 +66,7 @@ pub fn block_reward_at_height(height: u64, log_slots: u32) -> u64 {
     block_reward_with_schedule(height, log_slots, super::forks::ACTIVE_SCHEDULE)
 }
 
-/// Compute the legacy block reward in μNOID for the given `log_slots` value.
+/// Compute the legacy block reward in μKAI for the given `log_slots` value.
 /// Frozen legacy relations retain this function; network callers use
 /// [`block_reward_at_height`].
 ///
@@ -76,10 +77,10 @@ pub fn block_reward_at_height(height: u64, log_slots: u32) -> u64 {
 ///
 /// ```
 /// use noid_chain::consensus::emission::block_reward;
-/// assert_eq!(block_reward(24), 50_000_000); // 50 NOID at genesis
-/// assert_eq!(block_reward(25), 25_000_000); // 25 NOID after first expansion
-/// assert_eq!(block_reward(30), 1_000_000);  // 1 NOID floor
-/// assert_eq!(block_reward(32), 1_000_000);  // 1 NOID still
+/// assert_eq!(block_reward(24), 50_000_000); // 50 KAI at genesis
+/// assert_eq!(block_reward(25), 25_000_000); // 25 KAI after first expansion
+/// assert_eq!(block_reward(30), 1_000_000);  // 1 KAI floor
+/// assert_eq!(block_reward(32), 1_000_000);  // 1 KAI still
 /// ```
 pub fn block_reward(log_slots: u32) -> u64 {
     let expansions = log_slots.saturating_sub(LOG_SLOTS_GENESIS);
@@ -89,7 +90,7 @@ pub fn block_reward(log_slots: u32) -> u64 {
         .max(FLOOR_REWARD_MICRONOID)
 }
 
-/// Sum all gross transaction fees (non-coinbase) in μNOID.
+/// Sum all gross transaction fees (non-coinbase) in μKAI.
 ///
 /// A block can contain 255 `u64` fees, so aggregation uses `u128`; consensus
 /// predicates never silently saturate a monetary total. This is accounting
@@ -102,7 +103,7 @@ pub fn total_fees(txs: &[TxBody]) -> u128 {
         .sum()
 }
 
-/// Maximum value the coinbase output is permitted to carry (μNOID).
+/// Maximum value the coinbase output is permitted to carry (μKAI).
 ///
 /// Only miner-claimable fees are included. The deterministic state-growth
 /// component is burned and can never be recovered through coinbase.
@@ -161,11 +162,11 @@ pub fn max_coinbase_value_from_claimable_fee_sum_with_schedule(
     Ok(u128::from(allocation.miner_subsidy) + claimable_fee_sum)
 }
 
-/// Format a μNOID amount as a human-readable string (not consensus-critical).
+/// Format a μKAI amount as a human-readable string (not consensus-critical).
 pub fn format_noid(micronoid: u64) -> String {
     let whole = micronoid / MICRONOID_PER_NOID;
     let frac = micronoid % MICRONOID_PER_NOID;
-    format!("{}.{:06} NOID", whole, frac)
+    format!("{}.{:06} KAI", whole, frac)
 }
 
 #[cfg(test)]

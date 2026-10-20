@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: Apache-2.0
 // Copyright (C) 2026 Paranoid Zero.
+// Modified by the Kairos Chain contributors (rebrand to Kairos Chain).
 
 //! Universal postconditions for successful native integer-program execution.
 
@@ -154,7 +155,7 @@ pub fn smt(contract: &CompiledContract) -> Result<String, Error> {
     if contract.source.ensures.is_empty() {
         return Err(Error::plain("declare at least one ensures postcondition"));
     }
-    let mut text = String::from("; Pruv / Parano1d contract ABI 3\n; Expected results: sat, unsat. Initial state is universally quantified.\n(set-logic QF_BV)\n(set-option :timeout 10000)\n");
+    let mut text = String::from("; Pruv / Kairos contract ABI 3\n; Expected results: sat, unsat. Initial state is universally quantified.\n(set-logic QF_BV)\n(set-option :timeout 10000)\n");
     for name in [
         "old_state0",
         "old_state1",

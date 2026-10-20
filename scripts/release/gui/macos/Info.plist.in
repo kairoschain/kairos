@@ -5,17 +5,17 @@
   <key>CFBundleDevelopmentRegion</key>
   <string>en</string>
   <key>CFBundleDisplayName</key>
-  <string>Parano1d</string>
+  <string>Kairos</string>
   <key>CFBundleExecutable</key>
-  <string>Parano1d</string>
+  <string>Kairos</string>
   <key>CFBundleIconFile</key>
-  <string>Parano1d</string>
+  <string>Kairos</string>
   <key>CFBundleIdentifier</key>
-  <string>org.parano1d.wallet</string>
+  <string>xyz.kairoschain.wallet</string>
   <key>CFBundleInfoDictionaryVersion</key>
   <string>6.0</string>
   <key>CFBundleName</key>
-  <string>Parano1d</string>
+  <string>Kairos</string>
   <key>CFBundlePackageType</key>
   <string>APPL</string>
   <key>CFBundleShortVersionString</key>

@@ -8,7 +8,7 @@ Its bundled node is a private application component. The wallet starts it
 without a terminal, communicates through local RPC and shuts it down cleanly
 when the application exits.
 
-![Parano1d wallet main screen](../assets/wallet/main.png)
+![Kairos wallet main screen](../assets/wallet/main.png)
 
 Screenshots show the English wallet connected to an isolated v2 test network.
 Addresses, balances and heights belong to that local test.
@@ -59,7 +59,7 @@ payments. If an offline wallet missed a call that peers have already pruned,
 request updated terms or a call receipt from a participant to recover the new
 counters and check their current balances.
 
-**Call fee limit** caps the fee of a future call. The default 1 NOID is not a
+**Call fee limit** caps the fee of a future call. The default 1 KAI is not a
 creation charge: saving unfunded terms is free, and funding shows its own actual
 network fee before confirmation.
 
@@ -95,15 +95,15 @@ wallet later saves a receipt.
 The default data directory is:
 
 ```text
-~/.parano1d/data
+~/.kairos/data
 ```
 
-on Linux and macOS, and the equivalent `.parano1d\data` directory under the
+on Linux and macOS, and the equivalent `.kairos\data` directory under the
 Windows user profile.
 
 The master secret is stored in `wallet.key`. Saved receipts are stored in
 `wallet.receipts`. Interface preferences are in
-`~/.parano1d/gui-settings.json`.
+`~/.kairos/gui-settings.json`.
 
 The master-secret file is not password-encrypted. Protect the operating-system
 account and back up the secret before receiving funds.

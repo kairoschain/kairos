@@ -1,10 +1,11 @@
 // SPDX-License-Identifier: Apache-2.0
 // Copyright (C) 2026 Paranoid Zero.
+// Modified by the Kairos Chain contributors (rebrand to Kairos Chain).
 
 //! Native GUI boundary around the production node.
 //!
 //! The GUI never implements consensus, wallet proving, mining, or networking.
-//! It supervises the `parano1d` daemon and talks to its loopback JSON-RPC
+//! It supervises the `kairos` daemon and talks to its loopback JSON-RPC
 //! endpoint. This keeps one production path for both headless and graphical
 //! users while still allowing the GUI to own the daemon lifecycle.
 
@@ -42,9 +43,9 @@ use crate::model::{
 
 mod contracts;
 
-const DEFAULT_RPC_URL: &str = "http://127.0.0.1:9601";
-const DEFAULT_RPC_LISTEN: &str = "127.0.0.1:9601";
-const DEFAULT_P2P_LISTEN: &str = "0.0.0.0:9600";
+const DEFAULT_RPC_URL: &str = "http://127.0.0.1:9701";
+const DEFAULT_RPC_LISTEN: &str = "127.0.0.1:9701";
+const DEFAULT_P2P_LISTEN: &str = "0.0.0.0:9700";
 const STATE_SEGMENT_LOG: u32 = 16;
 const STATE_MAP_BUCKETS: usize = 256;
 const GENESIS_DIFFICULTY_LOG2: f64 = 238.0;
@@ -376,7 +377,7 @@ impl Backend {
     }
 
     pub async fn node_log_tail(&self, max_bytes: u64, max_lines: usize) -> Result<String, String> {
-        let log_path = self.config_snapshot()?.data_dir.join("parano1d-node.log");
+        let log_path = self.config_snapshot()?.data_dir.join("kairos-node.log");
         read_node_log_tail(&log_path, max_bytes, max_lines).await
     }
 
@@ -1200,14 +1201,14 @@ impl Backend {
             return Err("Enter an address, block, transaction, or slot.".into());
         }
 
-        if query.to_ascii_lowercase().starts_with("o1") {
+        if query.to_ascii_lowercase().starts_with("k1") {
             let validated = self
                 .rpc::<RpcAddressInfo>("validateAddress", json!([query]))
                 .await?;
             if !validated.valid {
                 return Err(validated
                     .error
-                    .unwrap_or_else(|| "Invalid ParanO(1)d address.".into()));
+                    .unwrap_or_else(|| "Invalid Kairos address.".into()));
             }
             let address = validated
                 .bech32
@@ -1437,8 +1438,8 @@ impl Backend {
                 config.data_dir.display()
             )
         })?;
-        let config_path = config.data_dir.join("parano1d-gui.toml");
-        let log_path = config.data_dir.join("parano1d-node.log");
+        let config_path = config.data_dir.join("kairos-gui.toml");
+        let log_path = config.data_dir.join("kairos-node.log");
         let mut log_options = OpenOptions::new();
         log_options.create(true).append(true);
         let log = log_options
@@ -1517,7 +1518,7 @@ impl Backend {
                         state.owned = false;
                         return Err(format!(
                             "production node exited with {status}; see {}",
-                            config.data_dir.join("parano1d-node.log").display()
+                            config.data_dir.join("kairos-node.log").display()
                         ));
                     }
                 }
@@ -1743,7 +1744,7 @@ fn ensure_node_hardware(node_binary: &Path) -> Result<(), String> {
         .join("\n");
     if detail.is_empty() {
         Err(format!(
-            "this computer does not satisfy the ParanO(1)d production CPU requirements ({})",
+            "this computer does not satisfy the Kairos production CPU requirements ({})",
             output.status
         ))
     } else {
@@ -1767,7 +1768,7 @@ async fn run_node_maintenance(
     let mut command = tokio::process::Command::new(&config.node_binary);
     command
         .arg("--config")
-        .arg(config.data_dir.join("parano1d-gui.toml"))
+        .arg(config.data_dir.join("kairos-gui.toml"))
         .arg("--data-dir")
         .arg(&config.data_dir)
         .arg("--log")
@@ -1828,7 +1829,7 @@ async fn run_node_maintenance(
 
 fn default_data_dir() -> PathBuf {
     let mut home = home_dir().unwrap_or_else(|| PathBuf::from("."));
-    home.push(".parano1d");
+    home.push(".kairos");
     #[cfg(feature = "dev-genesis")]
     home.push("gui-dev");
     home.push("data");
@@ -1837,7 +1838,7 @@ fn default_data_dir() -> PathBuf {
 
 fn default_gui_settings_path() -> PathBuf {
     let mut path = home_dir().unwrap_or_else(|| PathBuf::from("."));
-    path.push(".parano1d");
+    path.push(".kairos");
     #[cfg(feature = "dev-genesis")]
     path.push("gui-dev");
     path.push("gui-settings.json");
@@ -1931,11 +1932,11 @@ fn home_dir() -> Option<PathBuf> {
 }
 
 #[cfg(target_os = "windows")]
-const SIBLING_NODE_NAMES: &[&str] = &["parano1d-node.exe", "parano1d.exe"];
+const SIBLING_NODE_NAMES: &[&str] = &["kairos-node.exe", "kairos.exe"];
 #[cfg(target_os = "macos")]
-const SIBLING_NODE_NAMES: &[&str] = &["parano1d-node", "parano1d"];
+const SIBLING_NODE_NAMES: &[&str] = &["kairos-node", "kairos"];
 #[cfg(not(any(target_os = "windows", target_os = "macos")))]
-const SIBLING_NODE_NAMES: &[&str] = &["parano1d"];
+const SIBLING_NODE_NAMES: &[&str] = &["kairos"];
 
 fn sibling_node_binary(current: &Path) -> Option<PathBuf> {
     let parent = current.parent()?;
@@ -1969,9 +1970,9 @@ pub(crate) fn bundled_node_binary() -> Option<PathBuf> {
 fn find_node_binary() -> PathBuf {
     bundled_node_binary().unwrap_or_else(|| {
         PathBuf::from(if cfg!(target_os = "windows") {
-            "parano1d.exe"
+            "kairos.exe"
         } else {
-            "parano1d"
+            "kairos"
         })
     })
 }
@@ -2724,8 +2725,8 @@ struct RpcBlockTransactionOutput {
 
 fn mock_block_details(height: u64) -> BlockDetailsSnapshot {
     let hash = format!("{:064x}", 0xa94f_2c77_18d9_5063u64.wrapping_add(height));
-    let miner = "o1q9p2w4t8k3ux7c5n0r6dmzfae9hj2ls4v8y6c3b7n5q2wk0t9xp";
-    let recipient = "o1k3v8s5q2nc7r4m9x6df0wa8h1yt5p3j7u9e2l6b4z8g0cm5nr";
+    let miner = "k1q9p2w4t8k3ux7c5n0r6dmzfae9hj2ls4v8y6c3b7n5q2wk0t9xp";
+    let recipient = "k1k3v8s5q2nc7r4m9x6df0wa8h1yt5p3j7u9e2l6b4z8g0cm5nr";
     let coinbase_txid = format!("{:064x}", height.wrapping_mul(3));
     let spend_txid = format!("{:064x}", height.wrapping_mul(5));
     BlockDetailsSnapshot {
@@ -2927,7 +2928,7 @@ fn mock_explorer_snapshot(block_page: u32, transaction_page: u32) -> ExplorerSna
 
 fn mock_explorer_search(query: &str, transaction_page: u32) -> Result<ExplorerLookup, String> {
     let query = query.trim();
-    if query.to_ascii_lowercase().starts_with("o1") {
+    if query.to_ascii_lowercase().starts_with("k1") {
         let preview = AppSnapshot::design_preview();
         let slots = if preview.active_address().address == query {
             preview
@@ -3065,11 +3066,11 @@ async fn read_node_log_tail(
 }
 
 fn mock_receipt_records() -> Vec<ReceiptSnapshot> {
-    const SENDER: &str = "o1q9p2w4t8k3ux7c5n0r6dmzfae9hj2ls4v8y6c3b7n5q2wk0t9xp";
+    const SENDER: &str = "k1q9p2w4t8k3ux7c5n0r6dmzfae9hj2ls4v8y6c3b7n5q2wk0t9xp";
     const RECIPIENTS: [&str; 3] = [
-        "o1k3v8s5q2nc7r4m9x6df0wa8h1yt5p3j7u9e2l6b4z8g0cm5nr",
-        "o1y7m4h2p8vz5k9c3d6ta0er4wn8qx2f5j7l9s3u6g1b4n8kp2mc",
-        "o1mw9w0ak0kexrt8nge0d30wxqe2ghqah5m6fkqjkv3upjwfgpg02stde4s0",
+        "k1k3v8s5q2nc7r4m9x6df0wa8h1yt5p3j7u9e2l6b4z8g0cm5nr",
+        "k1y7m4h2p8vz5k9c3d6ta0er4wn8qx2f5j7l9s3u6g1b4n8kp2mc",
+        "k1mw9w0ak0kexrt8nge0d30wxqe2ghqah5m6fkqjkv3upjwfgpg02svgtplv",
     ];
     (0..12u64)
         .map(|index| ReceiptSnapshot {
@@ -3285,8 +3286,8 @@ mod tests {
     #[test]
     fn loopback_rpc_url_yields_a_daemon_listen_address() {
         assert_eq!(
-            rpc_listen_from_url("http://127.0.0.1:9601"),
-            Some("127.0.0.1:9601")
+            rpc_listen_from_url("http://127.0.0.1:9701"),
+            Some("127.0.0.1:9701")
         );
         assert_eq!(
             rpc_listen_from_url("http://127.0.0.1:9411/rpc"),
@@ -3554,7 +3555,7 @@ mod tests {
     #[tokio::test]
     async fn node_log_tail_reads_only_the_latest_complete_lines() {
         let directory = tempfile::tempdir().unwrap();
-        let path = directory.path().join("parano1d-node.log");
+        let path = directory.path().join("kairos-node.log");
         let contents = (0..120)
             .map(|line| format!("node-log-line-{line:03}\n"))
             .collect::<String>();
@@ -3618,13 +3619,13 @@ mod tests {
             rpc_listen: DEFAULT_RPC_LISTEN.into(),
             p2p_listen: "127.0.0.1:19400".into(),
             data_dir: directory.path().join("node-data"),
-            node_binary: PathBuf::from("parano1d"),
-            seeds: vec!["seed-a.example:9600".into(), "dnsaddr:noid.network".into()],
+            node_binary: PathBuf::from("kairos"),
+            seeds: vec!["seed-a.example:9700".into(), "dnsaddr:noid.network".into()],
             log_level: LogLevel::Debug,
             language: Some(Language::Russian),
             address_labels: BTreeMap::from([
-                ("o1wallet-address-a".into(), "Savings".into()),
-                ("o1wallet-address-b".into(), "Mining".into()),
+                ("k1wallet-address-a".into(), "Savings".into()),
+                ("k1wallet-address-b".into(), "Mining".into()),
             ]),
             settings_path: settings_path.clone(),
             mock: false,
@@ -3659,7 +3660,7 @@ mod tests {
     fn legacy_gui_settings_require_a_one_time_language_choice() {
         let decoded: PersistedGuiSettings = serde_json::from_str(
             r#"{
-                "data_dir": "/tmp/parano1d",
+                "data_dir": "/tmp/kairos",
                 "p2p_listen": "127.0.0.1:9500",
                 "seeds": [],
                 "log_level": "info"
@@ -3680,7 +3681,7 @@ mod tests {
                     rpc_listen: DEFAULT_RPC_LISTEN.into(),
                     p2p_listen: DEFAULT_P2P_LISTEN.into(),
                     data_dir: directory.path().join("node-data"),
-                    node_binary: PathBuf::from("parano1d"),
+                    node_binary: PathBuf::from("kairos"),
                     seeds: Vec::new(),
                     log_level: LogLevel::Info,
                     language: None,
@@ -3726,7 +3727,7 @@ mod tests {
                     rpc_listen: DEFAULT_RPC_LISTEN.into(),
                     p2p_listen: DEFAULT_P2P_LISTEN.into(),
                     data_dir: data_dir.clone(),
-                    node_binary: PathBuf::from("parano1d"),
+                    node_binary: PathBuf::from("kairos"),
                     seeds: Vec::new(),
                     log_level: LogLevel::Info,
                     language: Some(Language::English),

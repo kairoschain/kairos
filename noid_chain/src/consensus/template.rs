@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: Apache-2.0
 // Copyright (C) 2026 Paranoid Zero.
+// Modified by the Kairos Chain contributors (rebrand to Kairos Chain).
 
 //! Block template construction for the mining pipeline .
 //!
@@ -574,7 +575,7 @@ fn build_block_template_with_post_state(
     pending_outputs: &HashSet<u32>,
 ) -> Result<(BlockTemplate, ChainState), TemplateBuildError> {
     use crate::consensus::development_allocation::{
-        development_allocation_at_height, O1_NETWORK_FUND_ADDRESS, PARANO1D_LAB_ADDRESS,
+        development_allocation_at_height, DISABLED_FUND_ADDRESS_A, DISABLED_FUND_ADDRESS_B,
     };
     use crate::consensus::expected_child_log_slots;
     use crate::consensus::fees::fee_breakdown;
@@ -795,12 +796,12 @@ fn build_block_template_with_post_state(
                 TxOutput {
                     slot_index: network_slot,
                     amount,
-                    owner: O1_NETWORK_FUND_ADDRESS,
+                    owner: DISABLED_FUND_ADDRESS_A,
                 },
                 TxOutput {
                     slot_index: lab_slot,
                     amount,
-                    owner: PARANO1D_LAB_ADDRESS,
+                    owner: DISABLED_FUND_ADDRESS_B,
                 },
             ],
             validity_bitmap: noid_tx::output_bitmap_bit(0) | noid_tx::output_bitmap_bit(1),
@@ -1048,8 +1049,8 @@ mod tests {
     #[test]
     fn due_template_builds_the_mandatory_two_recipient_payout() {
         use crate::consensus::development_allocation::{
-            development_share_each, miner_subsidy_at_height, O1_NETWORK_FUND_ADDRESS,
-            PARANO1D_LAB_ADDRESS,
+            development_share_each, miner_subsidy_at_height, DISABLED_FUND_ADDRESS_A,
+            DISABLED_FUND_ADDRESS_B,
         };
         use crate::consensus::emission::block_reward_at_height;
 
@@ -1076,8 +1077,8 @@ mod tests {
             .development_payout
             .as_ref()
             .expect("daily payout is mandatory");
-        assert_eq!(payout.body.outputs[0].owner, O1_NETWORK_FUND_ADDRESS);
-        assert_eq!(payout.body.outputs[1].owner, PARANO1D_LAB_ADDRESS);
+        assert_eq!(payout.body.outputs[0].owner, DISABLED_FUND_ADDRESS_A);
+        assert_eq!(payout.body.outputs[1].owner, DISABLED_FUND_ADDRESS_B);
         assert_eq!(payout.body.outputs[0].amount, share * DAY_BLOCKS);
         assert_eq!(payout.body.outputs[1].amount, share * DAY_BLOCKS);
         assert_eq!(

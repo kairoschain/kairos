@@ -15,9 +15,9 @@ its declared prices and states their batch-amortization requirement explicitly.
 ## Scope and provenance
 
 The audit addresses the missing-reduction observation in Borealis's
-[submission #9](https://git.parano1d.org/ignotusnemo/parano1d-soundness/pulls/9)
+[submission #9](https://git.parano1d.org/ignotusnemo/kairos-soundness/pulls/9)
 and the scalar target-touch argument in Delta's
-[submission #11](https://git.parano1d.org/ignotusnemo/parano1d-soundness/pulls/11).
+[submission #11](https://git.parano1d.org/ignotusnemo/kairos-soundness/pulls/11).
 The latter is proved here for exact unitary circuits; no extension to
 measurement, classical feed-forward or free output relabeling is asserted.
 

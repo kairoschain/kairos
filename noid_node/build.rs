@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: Apache-2.0
 // Copyright (C) 2026 Paranoid Zero.
+// Modified by the Kairos Chain contributors (rebrand to Kairos Chain).
 
 //! Build-time authentication and embedding of history release material.
 
@@ -59,13 +60,8 @@ fn main() {
     let metadata_digest = env::var_os(METADATA_DIGEST_ENV);
     let out_directory = PathBuf::from(env::var_os("OUT_DIR").expect("Cargo sets OUT_DIR"));
     let generated_path = out_directory.join(GENERATED_FILE);
-    if env::var("PROFILE").as_deref() == Ok("release")
-        && noid_chain::consensus::params::V2_ACTIVATION_HEIGHT.is_some()
-    {
-        assert!([RETIREMENT_KEYS_ENV, RETIREMENT_PIN0_ENV, RETIREMENT_PIN1_ENV]
-            .into_iter().all(|name| env::var_os(name).is_some()),
-            "scheduled v2 releases require independently pinned retirement keys for origin-format interoperability");
-    }
+    // Kairos Chain: v2 is active from block 1, so there is no retired legacy
+    // history and no retirement keys are required for a release build.
     write_if_changed(
         &out_directory.join("retirement_keys.rs"),
         b"static GENERATED_RETIREMENT_KEYS: Option<EmbeddedRetirementKeys> = None;\n",

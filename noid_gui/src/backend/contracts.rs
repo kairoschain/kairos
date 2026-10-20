@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: Apache-2.0
 // Copyright (C) 2026 Paranoid Zero.
+// Modified by the Kairos Chain contributors (rebrand to Kairos Chain).
 
 use super::*;
 use crate::contracts::{
@@ -538,7 +539,7 @@ mod tests {
                     rpc_listen: DEFAULT_RPC_LISTEN.into(),
                     p2p_listen: DEFAULT_P2P_LISTEN.into(),
                     data_dir: directory.into(),
-                    node_binary: PathBuf::from("parano1d"),
+                    node_binary: PathBuf::from("kairos"),
                     seeds: Vec::new(),
                     log_level: LogLevel::Info,
                     language: None,

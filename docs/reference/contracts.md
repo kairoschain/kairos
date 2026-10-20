@@ -21,8 +21,8 @@ shows retained interactions from either party. Imports merge verified evidence,
 deduplicate transaction IDs and preserve your own records. F4 handles ordinary
 payment receipts; contract files and call receipts use F7 Open file.
 
-CLI starts with `parano1d-cli contract protocol` and
-`parano1d-cli contract --help`. RPC uses the `paranoid_` namespace and local
+CLI starts with `kairos-cli contract protocol` and
+`kairos-cli contract --help`. RPC uses the `paranoid_` namespace and local
 owner scope. Discover limits with `getContractProtocol`, create terms with
 `createObject`, fund with `walletFundObject`, preview with `previewObjectCall`
 and submit with `walletCallObject`. Select an exact slot and creation ID and
@@ -38,4 +38,4 @@ The detailed [contract documentation](../contracts/index.md) covers the
 [core](../contracts/core.md), [templates](../contracts/templates.md),
 [API](../contracts/api.md), [GUI](../contracts/gui.md) and
 [recovery](../contracts/receipts-and-recovery.md). Release-package readers can
-open the same section at [docs.parano1d.org](https://docs.parano1d.org/contracts).
+open the same section at [docs.kairoschain.xyz](https://docs.kairoschain.xyz/contracts).

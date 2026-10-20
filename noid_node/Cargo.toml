@@ -25,12 +25,12 @@ required-features = ["isolated-v1-1-testnet"]
 
 # --- Daemon ---
 [[bin]]
-name = "parano1d"
+name = "kairos"
 path = "src/main.rs"
 
 # --- CLI client ---
 [[bin]]
-name = "parano1d-cli"
+name = "kairos-cli"
 path = "src/bin/noid_cli.rs"
 
 [dependencies]

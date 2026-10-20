@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: Apache-2.0
 // Copyright (C) 2026 Paranoid Zero.
+// Modified by the Kairos Chain contributors (rebrand to Kairos Chain).
 
 //! `AsyncMempool` — async wrapper around the synchronous `noid_chain::Mempool`.
 //!
@@ -903,7 +904,7 @@ impl AsyncMempool {
         self.len().await == 0
     }
 
-    /// Current dynamic fee floor (μNOID).
+    /// Current dynamic fee floor (μKAI).
     pub async fn fee_floor(&self) -> u64 {
         self.state.lock().await.floor.current()
     }

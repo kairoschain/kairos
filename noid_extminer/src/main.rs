@@ -1,9 +1,10 @@
 // SPDX-License-Identifier: Apache-2.0
 // Copyright (C) 2026 Paranoid Zero.
+// Modified by the Kairos Chain contributors (rebrand to Kairos Chain).
 
-//! # parano1d-miner — External Poseidon2b PoW miner for the ParanO(1)d.
+//! # kairos-miner — External Poseidon2b PoW miner for the Kairos.
 //!
-//! Connects to any `parano1d` full node via JSON-RPC, fetches a block template,
+//! Connects to any `kairos` full node via JSON-RPC, fetches a block template,
 //! searches for a valid PoW nonce using all available CPU cores (rayon), and
 //! returns only that nonce to the node-owned template.
 //!
@@ -11,13 +12,13 @@
 //!
 //! ```bash
 //! # Solo (node on localhost, no auth)
-//! parano1d-miner --rpc http://127.0.0.1:9601
+//! kairos-miner --rpc http://127.0.0.1:9701
 //!
 //! # Pool (remote node with bearer token)
-//! parano1d-miner --rpc https://pool.example.com:9601 --key-file /secure/mining.key
+//! kairos-miner --rpc https://pool.example.com:9701 --key-file /secure/mining.key
 //!
 //! # Limit threads
-//! parano1d-miner --rpc http://127.0.0.1:9601 --threads 4
+//! kairos-miner --rpc http://127.0.0.1:9701 --threads 4
 //! ```
 //!
 //! ## Template protocol
@@ -51,10 +52,10 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Parser, Debug)]
 #[command(
-    name = "parano1d-miner",
+    name = "kairos-miner",
     version,
-    about = "External Poseidon2b PoW miner for ParanO(1)d",
-    long_about = "Fetches block templates from a ParanO(1)d node and mines blocks \
+    about = "External Poseidon2b PoW miner for Kairos",
+    long_about = "Fetches block templates from a Kairos node and mines blocks \
                   using all available CPU cores.\n\n\
                   The node builds the proven template; this worker only does PoW.\n\
                   Coinbase is the node payout address unless the node enables \
@@ -65,8 +66,8 @@ struct Cli {
     #[arg(long, exclusive = true)]
     check_hardware: bool,
 
-    /// JSON-RPC endpoint of the ParanO(1)d node or pool.
-    #[arg(long, default_value = "http://127.0.0.1:9601", value_name = "URL")]
+    /// JSON-RPC endpoint of the Kairos node or pool.
+    #[arg(long, default_value = "http://127.0.0.1:9701", value_name = "URL")]
     rpc: String,
 
     /// Bearer token for pool/external RPC access.
@@ -83,7 +84,7 @@ struct Cli {
     #[arg(long, default_value_t = 0, value_name = "N")]
     threads: usize,
 
-    /// Your own payout address (bech32m o1...).
+    /// Your own payout address (bech32m k1...).
     /// Only works when the node is started with --allow-custom-coinbase.
     /// Leave empty to use the node's configured payout address (pool mode).
     #[arg(long, value_name = "ADDRESS", default_value = "")]
@@ -388,7 +389,7 @@ fn mine(cli: &Cli, key: Option<String>) -> Result<()> {
     let threads = rayon::current_num_threads();
 
     eprintln!(
-        "parano1d-miner  rpc={}  threads={}  backend={}  poll={}ms",
+        "kairos-miner  rpc={}  threads={}  backend={}  poll={}ms",
         cli.rpc,
         threads,
         noid_core::cpu::selected_backend(),
@@ -563,12 +564,12 @@ mod tests {
 
     #[test]
     fn worker_accepts_legacy_and_file_credentials() {
-        let legacy = Cli::try_parse_from(["parano1d-miner", "--key", "0123456789abcdef"]).unwrap();
+        let legacy = Cli::try_parse_from(["kairos-miner", "--key", "0123456789abcdef"]).unwrap();
         assert_eq!(legacy.key.as_deref(), Some("0123456789abcdef"));
         assert!(legacy.key_file.is_none());
 
         let file =
-            Cli::try_parse_from(["parano1d-miner", "--key-file", "/secure/mining.key"]).unwrap();
+            Cli::try_parse_from(["kairos-miner", "--key-file", "/secure/mining.key"]).unwrap();
         assert!(file.key.is_none());
         assert_eq!(
             file.key_file.as_deref(),
@@ -576,7 +577,7 @@ mod tests {
         );
 
         assert!(Cli::try_parse_from([
-            "parano1d-miner",
+            "kairos-miner",
             "--key",
             "0123456789abcdef",
             "--key-file",

@@ -1,6 +1,6 @@
 # Native releases
 
-The canonical repository is `git.parano1d.org/ignotusnemo/parano1d`. GitHub `proof-native/parano1d` runs the manual Platform CI and Native Release workflows. GitLab `ignotusnemo/parano1d` mirrors the same source, tag, release notes and binary files. The former GitHub `ignotusnemo/parano1d` mirror is unavailable and is excluded from release checks.
+The canonical repository is `git.parano1d.org/ignotusnemo/kairos`. GitHub `proof-native/parano1d` runs the manual Platform CI and Native Release workflows. GitLab `ignotusnemo/kairos` mirrors the same source, tag, release notes and binary files. The former GitHub `ignotusnemo/kairos` mirror is unavailable and is excluded from release checks.
 
 ## Prepare
 

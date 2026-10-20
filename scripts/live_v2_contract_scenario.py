@@ -2,7 +2,7 @@
 """Exercise the scheduled integer-contract fork through real isolated daemons.
 
 Build the separately named isolated_v2_node with pinned candidate material,
-parano1d-cli, and parano1d-miner. Run this script in a loopback-only network
+kairos-cli, and kairos-miner. Run this script in a loopback-only network
 namespace. The receiver is limited to four logical CPUs and 8 GiB with no swap.
 Every new block, wallet authorization, receipt and network acceptance uses the
 normal production path. This is qualification of a candidate, not a release pin.
@@ -19,8 +19,8 @@ import live_two_miner_fork_reorg_scenario as live
 ROOT = Path(__file__).resolve().parents[1]
 BASE = Path(os.environ.get("NOID_V2_LIVE_DIR", ROOT / "target/live-tests/v2-integer-contracts"))
 NODE = ROOT / "target/release/examples/isolated_v2_node"
-MINER = ROOT / "target/release/parano1d-miner"
-CLI = ROOT / "target/release/parano1d-cli"
+MINER = ROOT / "target/release/kairos-miner"
+CLI = ROOT / "target/release/kairos-cli"
 
 
 class Node(live.Node):

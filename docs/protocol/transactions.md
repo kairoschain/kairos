@@ -86,7 +86,7 @@ The minimum fee is:
 + growth_price × max(0, live_outputs - live_inputs)
 ```
 
-All amounts are in μNOID. `growth_price` begins at 2,500 μNOID per net-new
+All amounts are in μKAI. `growth_price` begins at 2,500 μKAI per net-new
 slot and is multiplied by 1, 2, 4 or 8 according to parent-State occupancy.
 
 The State-growth component is burned. Any fee above the required minimum is a

@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: Apache-2.0
 // Copyright (C) 2026 Paranoid Zero.
+// Modified by the Kairos Chain contributors (rebrand to Kairos Chain).
 
 //! All consensus constants.
 
@@ -13,10 +14,10 @@ pub const BLOCK_TIME: u64 = 20;
 /// V2 target interval, selected by candidate height.
 pub const V2_BLOCK_TIME: u64 = 30;
 
-/// Nominal activation estimate for 2026-10-10 23:59 PDT (October 11 06:59 UTC).
-/// Two mainnet seeds agreed on H139327, timestamp 1790277759, on September 24.
-/// H = 139327 + ceil((1791701940 - 1790277759) / 20). Actual time may differ.
-pub const MAINNET_V2_ACTIVATION_HEIGHT: u64 = 210_537;
+/// Kairos Chain launches directly on the v2 profile: block 1 is the first
+/// v2 block (30 s target, m23/m24 proof classes). Genesis is the only block
+/// governed by the legacy rules and it carries no proof.
+pub const MAINNET_V2_ACTIVATION_HEIGHT: u64 = 1;
 
 /// Local v2 tests include both upgrades; the v1.1-only profile stays separate.
 pub const ISOLATED_V2_FORK_TESTNET: bool = cfg!(feature = "isolated-v2-fork-testnet");
@@ -58,7 +59,7 @@ pub const HALFLIFE: u64 = EPOCH_LENGTH * BLOCK_TIME; // 120s at BLOCK_TIME=20
 pub const V1_1_ACTIVATION_HEIGHT: Option<u64> = if ISOLATED_V1_1_TESTNET {
     Some(5)
 } else {
-    Some(95_125)
+    Some(1) // Kairos: v1.1 and v2 both active from block 1
 };
 
 /// Deliberately incompatible local test profile, never a release default.
@@ -305,13 +306,13 @@ pub const MAX_TARGET: [u8; 32] = [0xFF; 32];
 // Emission
 // ---------------------------------------------------------------------------
 
-/// Precision: 1 NOID = 1_000_000 μNOID (microNOID).
+/// Precision: 1 KAI = 1_000_000 μKAI (microNOID).
 pub const MICRONOID_PER_NOID: u64 = 1_000_000;
 
-/// Starting block reward at zero occupancy: 50 NOID.
+/// Starting block reward at zero occupancy: 50 KAI.
 pub const BASE_REWARD_MICRONOID: u64 = 50 * MICRONOID_PER_NOID;
 
-/// Reward floor: 1 NOID forever.
+/// Reward floor: 1 KAI forever.
 pub const FLOOR_REWARD_MICRONOID: u64 = MICRONOID_PER_NOID;
 
 // ---------------------------------------------------------------------------
@@ -372,26 +373,26 @@ pub const fn creation_id_within_boundary(
 // Fee policy
 // ---------------------------------------------------------------------------
 
-/// Base minimum fee in μNOID per non-coinbase transaction.
-pub const MIN_FEE_BASE: u64 = 5_000; // 0.005 NOID
+/// Base minimum fee in μKAI per non-coinbase transaction.
+pub const MIN_FEE_BASE: u64 = 5_000; // 0.005 KAI
 
 /// Small anti-DoS fee charged per live input verified by a transaction.
 ///
 /// Inputs do not grow chain state, so this intentionally stays much lower than
 /// the output fee. It keeps very large-input transactions from becoming free
 /// relay/prover spam without penalising useful state-shrinking transactions.
-pub const FEE_PER_INPUT: u64 = 100; // 0.0001 NOID per input
+pub const FEE_PER_INPUT: u64 = 100; // 0.0001 KAI per input
 
 /// Fee charged per live output created by a transaction.
 ///
 /// Outputs are the main user-visible driver of fee because they create UTXOs and
 /// may increase state pressure. The 1-input/2-output low-pressure send remains
-/// at the historical 9_000 μNOID baseline together with state-growth burn.
-pub const FEE_PER_OUTPUT: u64 = 700; // 0.0007 NOID per output
+/// at the historical 9_000 μKAI baseline together with state-growth burn.
+pub const FEE_PER_OUTPUT: u64 = 700; // 0.0007 KAI per output
 
 /// Base fee charged per net-new live UTXO slot at low occupancy.
 /// This state-growth component is burned by consensus.
-pub const STATE_GROWTH_FEE_BASE: u64 = 2_500; // 0.0025 NOID per net-new slot
+pub const STATE_GROWTH_FEE_BASE: u64 = 2_500; // 0.0025 KAI per net-new slot
 
 #[cfg(test)]
 mod tests {

@@ -21,7 +21,7 @@ ARM64 要求 NEON 和 PMULL。发布版不会退回标量参考实现。
 运行不修改数据的检查：
 
 ```sh
-parano1d --check-hardware
+kairos --check-hardware
 ```
 
 ## 没有对等节点
@@ -29,13 +29,13 @@ parano1d --check-hardware
 检查：
 
 ```sh
-parano1d-cli peers
+kairos-cli peers
 ```
 
 确认出站 DNS 和 TCP 可用、本机时间正确、P2P 监听配置无误。若要接受入站
-连接，请同时在主机和上游防火墙开放 TCP `9600`。
+连接，请同时在主机和上游防火墙开放 TCP `9700`。
 
-不要用开放 RPC `9601` 来代替 P2P。
+不要用开放 RPC `9701` 来代替 P2P。
 
 ## 挖矿按钮或进程不可用
 
@@ -50,9 +50,9 @@ parano1d-cli peers
 运行：
 
 ```sh
-parano1d-cli status
-parano1d-cli peers
-parano1d-cli mining
+kairos-cli status
+kairos-cli peers
+kairos-cli mining
 ```
 
 以 `--mode node` 启动的普通节点永远不会挖矿，即使旧 TOML 中包含
@@ -98,7 +98,7 @@ MDBX。全核工作时出现短暂延迟是正常的。
 
 ## 端口已被占用
 
-找出占用 `9600` 或 `9601` 的进程。同一监听地址只能由一个节点绑定，
+找出占用 `9700` 或 `9701` 的进程。同一监听地址只能由一个节点绑定，
 同一数据目录也只能由一个进程使用。
 
 独立实例必须使用不同的监听端口和数据目录。GUI 管理的私有节点也可能与

@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: Apache-2.0
 // Copyright (C) 2026 Paranoid Zero.
+// Modified by the Kairos Chain contributors (rebrand to Kairos Chain).
 
 //! WalletOps trait — interface between RPC layer and wallet implementation.
 //!
@@ -20,7 +21,7 @@ use crate::types::{
 /// prevents the RPC layer from scraping human-readable wallet errors.
 #[derive(Debug, thiserror::Error, PartialEq, Eq)]
 pub enum WalletSendPlanError {
-    #[error("InsufficientFunds: need {needed_micronoid} μNOID, have {available_micronoid} μNOID spendable")]
+    #[error("InsufficientFunds: need {needed_micronoid} μKAI, have {available_micronoid} μKAI spendable")]
     InsufficientFunds {
         needed_micronoid: u64,
         available_micronoid: u64,
@@ -262,8 +263,8 @@ pub trait WalletOps: Send + Sync {
     ///
     /// # Parameters
     /// - `to_address`: recipient 32-byte address
-    /// - `amount_micronoid`: payment amount in μNOID
-    /// - `fee_micronoid`: transaction fee in μNOID
+    /// - `amount_micronoid`: payment amount in μKAI
+    /// - `fee_micronoid`: transaction fee in μKAI
     /// - `epoch_anchor`: exact transaction-epoch anchor for the next block
     /// - `slot_hints`: one or two empty slot indices for outputs
     /// - `log_slots`: current chain `log_slots` (from `tip_header().log_slots`)

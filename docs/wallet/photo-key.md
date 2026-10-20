@@ -18,7 +18,7 @@ stream and feeds the following data to domain-separated BLAKE3 derive-key mode:
 The derivation context is fixed by the wallet format:
 
 ```text
-Parano1d master secret from canonical image pixels v1
+Kairos master secret from canonical image pixels v1
 ```
 
 The 32-byte output is the master secret.
@@ -37,7 +37,7 @@ The image is processed locally. It is not uploaded, placed in a transaction or
 copied into the wallet data directory. After setup, the keystore contains the
 derived master secret, just as it would after Generate or Import.
 
-On-chain, a photo-derived owner is no different from any other Parano1d
+On-chain, a photo-derived owner is no different from any other Kairos
 owner. The photo is only a human-chosen source for the same 256-bit wallet
 secret.
 

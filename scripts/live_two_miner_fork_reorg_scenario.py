@@ -22,7 +22,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 NODE_BIN = Path(
-    os.environ.get("NOID_LIVE_NODE_BIN", str(ROOT / "target" / "release" / "parano1d"))
+    os.environ.get("NOID_LIVE_NODE_BIN", str(ROOT / "target" / "release" / "kairos"))
 ).resolve()
 RUN_PARENT = ROOT / "target" / "live-tests"
 STAMP = datetime.datetime.now().strftime("%Y%m%d-%H%M%S")
@@ -107,7 +107,7 @@ class Node:
         self.command_prefix = tuple(command_prefix)
         self.root = BASE / name
         self.data_dir = self.root / "data"
-        self.config = self.root / "parano1d.toml"
+        self.config = self.root / "kairos.toml"
         self.proc = None
         self.log_handle = None
         self.log_path = None

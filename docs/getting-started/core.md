@@ -2,9 +2,9 @@
 
 The Core archive is for node operators, miners and developers. It contains:
 
-- `parano1d`, the full node and built-in miner;
-- `parano1d-cli`, the local node and wallet client;
-- `parano1d-miner`, the external PoW worker.
+- `kairos`, the full node and built-in miner;
+- `kairos-cli`, the local node and wallet client;
+- `kairos-miner`, the external PoW worker.
 
 The GUI wallet is distributed separately.
 
@@ -13,11 +13,11 @@ The GUI wallet is distributed separately.
 Choose the Core archive for the host:
 
 ```text
-parano1d-core-vVERSION-linux-x86_64.tar.gz
-parano1d-core-vVERSION-linux-aarch64.tar.gz
-parano1d-core-vVERSION-windows-x86_64.zip
-parano1d-core-vVERSION-macos-aarch64.tar.gz
-parano1d-core-vVERSION-macos-x86_64.tar.gz
+kairos-core-vVERSION-linux-x86_64.tar.gz
+kairos-core-vVERSION-linux-aarch64.tar.gz
+kairos-core-vVERSION-windows-x86_64.zip
+kairos-core-vVERSION-macos-aarch64.tar.gz
+kairos-core-vVERSION-macos-x86_64.tar.gz
 ```
 
 Compare its SHA-256 digest with `SHA256SUMS` from the same release before
@@ -28,13 +28,13 @@ extracting it.
 On Linux or macOS:
 
 ```sh
-./parano1d --check-hardware
+./kairos --check-hardware
 ```
 
 On Windows PowerShell:
 
 ```powershell
-.\parano1d.exe --check-hardware
+.\kairos.exe --check-hardware
 ```
 
 The final line must be:
@@ -55,31 +55,31 @@ For virtual-machine caveats, memory and disk planning, see
 Run Core in the foreground:
 
 ```sh
-./parano1d
+./kairos
 ```
 
 On first start it creates:
 
 ```text
-~/.parano1d/parano1d.toml
-~/.parano1d/data/
+~/.kairos/kairos.toml
+~/.kairos/data/
 ```
 
 In another terminal:
 
 ```sh
-./parano1d-cli status
-./parano1d-cli peers
-./parano1d-cli state
+./kairos-cli status
+./kairos-cli peers
+./kairos-cli state
 ```
 
-The default P2P listener is `0.0.0.0:9600`. RPC remains on
-`127.0.0.1:9601`.
+The default P2P listener is `0.0.0.0:9700`. RPC remains on
+`127.0.0.1:9701`.
 
 Stop cleanly with:
 
 ```sh
-./parano1d-cli stop
+./kairos-cli stop
 ```
 
 For a permanent system service, firewall guidance and updates, continue with

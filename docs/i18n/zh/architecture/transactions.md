@@ -1,6 +1,6 @@
 # 交易架构
 
-Parano1d 把区块携带的物理交易页与钱包授权的逻辑付款分离。
+Kairos 把区块携带的物理交易页与钱包授权的逻辑付款分离。
 
 [`Tx8x2` 物理页](../reference/glossary.md#tx8x2)采用固定 323 字节编码，最多包含八个输入和两个输出。逻辑 [`PagedSpend`](../reference/glossary.md#pagedspend) 最多把 128 个物理页组合为一笔原子[交易意图](../reference/glossary.md#transaction-intent)，共用一个交易 ID 和一份[授权证明封装](../reference/glossary.md#authorization-envelope)。
 
@@ -80,7 +80,7 @@ ID 由带域分离的 Poseidon2b 海绵函数计算。钱包授权绑定的是�
 
 向同一所有者进行的归集不会生成收据。向任何不同所有者付款——包括同一钱包派生出的另一个非活动地址——都会作为支出凭证保留。
 
-规范有效性规则见[交易协议](../protocol/transactions.md)，用户界面行为见[发送 NOID](../wallet/send.md)。
+规范有效性规则见[交易协议](../protocol/transactions.md)，用户界面行为见[发送 KAI](../wallet/send.md)。
 
 ## 合约意图
 

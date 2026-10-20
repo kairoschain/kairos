@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 760" role="img"
      aria-labelledby="title description">
-  <title id="title">ParanO(1)d finalized-window live-state expansion</title>
+  <title id="title">Kairos finalized-window live-state expansion</title>
   <desc id="description">
     Eighteen hard-finalized occupancy observations control a one-level state
     expansion. Ten observations at or above seventy-five percent expand the
@@ -55,7 +55,7 @@
     </text>
     <text x="1384" y="57" fill="#34e06f" font-size="15" text-anchor="end"
           font-family="ui-monospace, SFMono-Regular, Menlo, monospace">
-      ParanO(1)d
+      Kairos
     </text>
 
     <!-- finalized window -->

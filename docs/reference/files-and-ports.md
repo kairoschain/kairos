@@ -4,9 +4,9 @@
 
 | Path | Purpose | Authority |
 |---|---|---|
-| `~/.parano1d/parano1d.toml` | Core configuration | Operator |
-| `~/.parano1d/gui-settings.json` | GUI preferences | Local UI |
-| `~/.parano1d/data/` | Default Core and GUI node data | Consensus data |
+| `~/.kairos/kairos.toml` | Core configuration | Operator |
+| `~/.kairos/gui-settings.json` | GUI preferences | Local UI |
+| `~/.kairos/data/` | Default Core and GUI node data | Consensus data |
 | `DATA_DIR/wallet.key` | 256-bit wallet master secret | Spending authority |
 | `DATA_DIR/wallet.receipts` | Saved outgoing receipts | Local payment evidence |
 | `DATA_DIR/wallet.labels` | Persistent address labels | Local display only |
@@ -15,8 +15,8 @@
 | `DATA_DIR/peers.json` | Successful public outbound peers | Discovery hint |
 | `DATA_DIR/history-step-cache/` | Derived local proof-matrix cache | Rebuildable |
 | `DATA_DIR/snapshot-staging/` | Incoming snapshot scratch data | Never canonical |
-| `DATA_DIR/parano1d-gui.toml` | GUI-owned node configuration | Private node |
-| `DATA_DIR/parano1d-node.log` | GUI-owned node log | Diagnostics |
+| `DATA_DIR/kairos-gui.toml` | GUI-owned node configuration | Private node |
+| `DATA_DIR/kairos-node.log` | GUI-owned node log | Diagnostics |
 
 On Windows, `~` means the user profile directory.
 
@@ -49,8 +49,8 @@ local storage integrity, not consensus validity or authorization to spend.
 
 | Port | Bind | Use | Public |
 |---:|---|---|---|
-| TCP 9600 | `0.0.0.0` | libp2p | Yes |
-| TCP 9601 | `127.0.0.1` | JSON-RPC | No |
+| TCP 9700 | `0.0.0.0` | libp2p | Yes |
+| TCP 9701 | `127.0.0.1` | JSON-RPC | No |
 
 Remote external mining may use RPC only through a protected private or TLS
 transport. A bearer token authenticates requests but does not encrypt them.
@@ -61,7 +61,7 @@ transport. A bearer token authenticates requests but does not encrypt them.
 |---|---|
 | Network | `mainnet` |
 | Genesis block ID | `860e70453390bf815718e933aa4927167a13d098b0151391eefd722ee1add610` |
-| Network magic | `NOID` |
+| Network magic | `KAI` |
 | libp2p protocol | `/noid/mainnet/860e70453390bf81/1` |
 | Transaction and block gossip | GossipSub |
 | Discovery | DNS seeds, Kademlia, mDNS |

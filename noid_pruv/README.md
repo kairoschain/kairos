@@ -20,7 +20,7 @@ cargo build --release --locked -p noid_pruv
 target/release/pruv check noid_pruv/examples/budget.pruv --params budget.params.json
 target/release/pruv verify noid_pruv/examples/budget.pruv --params budget.params.json
 target/release/pruv build noid_pruv/examples/budget.pruv --params budget.params.json --out budget.json
-parano1d-cli contract create budget.json --out budget.opening.json
+kairos-cli contract create budget.json --out budget.opening.json
 ```
 
 `check` validates syntax, types, policy fields and native resource limits.
@@ -45,7 +45,7 @@ errors. For the budget example, provide:
 }
 ```
 
-Amounts are integer μNOID. Each separately funded instance has its own state
+Amounts are integer μKAI. Each separately funded instance has its own state
 and budget. The example debits both the payout and its fee from `remaining`.
 Before the deadline, the spending key can continue; afterwards, the recovery
 key can close. Closing follows ABI 3's physical output convention: `retained`

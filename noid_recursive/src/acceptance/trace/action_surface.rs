@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: Apache-2.0
 // Copyright (C) 2026 Paranoid Zero.
+// Modified by the Kairos Chain contributors (rebrand to Kairos Chain).
 
 //! Hash-bound transaction selectors shared by the C' semantic relation.
 //!
@@ -343,8 +344,8 @@ pub fn bind_development_payout_action(
     gate_expected(b, &spine.leaves[LEAF_FLAGS][1], Block128::from(1u128));
 
     let recipients = [
-        noid_chain::consensus::development_allocation::O1_NETWORK_FUND_ADDRESS,
-        noid_chain::consensus::development_allocation::PARANO1D_LAB_ADDRESS,
+        noid_chain::consensus::development_allocation::DISABLED_FUND_ADDRESS_A,
+        noid_chain::consensus::development_allocation::DISABLED_FUND_ADDRESS_B,
     ];
     for (index, recipient) in recipients.iter().enumerate() {
         let owner_leaf = LEAF_OUTPUT0_OWNER + 2 * index;
@@ -464,12 +465,12 @@ mod tests {
                 TxOutput {
                     slot_index: 24,
                     amount,
-                    owner: noid_chain::consensus::O1_NETWORK_FUND_ADDRESS,
+                    owner: noid_chain::consensus::DISABLED_FUND_ADDRESS_A,
                 },
                 TxOutput {
                     slot_index: 25,
                     amount,
-                    owner: noid_chain::consensus::PARANO1D_LAB_ADDRESS,
+                    owner: noid_chain::consensus::DISABLED_FUND_ADDRESS_B,
                 },
             ],
             validity_bitmap: output_bitmap_bit(0) | output_bitmap_bit(1),

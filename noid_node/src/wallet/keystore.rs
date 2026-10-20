@@ -1,11 +1,12 @@
 // SPDX-License-Identifier: Apache-2.0
 // Copyright (C) 2026 Paranoid Zero.
+// Modified by the Kairos Chain contributors (rebrand to Kairos Chain).
 
 //! Plaintext key file: master_secret → disk.
 //!
 //! Format: `noid_plain_key_1` (16 bytes magic) + secret (32 bytes) = 48 bytes.
 //!
-//! Security model: the file is stored at `~/.parano1d/data/wallet.key` with
+//! Security model: the file is stored at `~/.kairos/data/wallet.key` with
 //! permissions 0o600 (owner-only). No encryption — the OS filesystem is the
 //! security boundary during development. Future versions will derive the
 //! master secret from a user-chosen file (photo, document, etc.) instead of
@@ -50,7 +51,7 @@ pub enum KeystoreError {
 // On-disk format (plaintext)
 // ---------------------------------------------------------------------------
 
-const PLAIN_MAGIC: &[u8; 16] = b"noid_plain_key_1";
+const PLAIN_MAGIC: &[u8; 16] = b"kai_plain_key_v1";
 const SECRET_LEN: usize = 32;
 const PLAIN_FILE_LEN: usize = 16 + SECRET_LEN; // 48 bytes
 

@@ -2,7 +2,7 @@
 
 **仅有哈希算力无法生成区块。挖矿需要 [State](../reference/glossary.md#state)；只有证明完成后才能开始搜索 [nonce](../reference/glossary.md#nonce)。**
 
-Parano1d 的工作量证明负责为已经证明有效的 State 转换排序。在搜索
+Kairos 的工作量证明负责为已经证明有效的 State 转换排序。在搜索
 nonce 前，区块生产者必须跟随[规范链](../reference/glossary.md#canonical-chain)、持有 [Live State](../reference/glossary.md#live-state)、构建精确的下一
 次转换，并完成递归 `HistoryStep`。
 
@@ -23,7 +23,7 @@ nonce 前，区块生产者必须跟随[规范链](../reference/glossary.md#cano
 - 验证获胜 nonce；
 - 原子提交并广播完整的 `{block, HistoryStep 终端证明}` 区块包。
 
-Nonce 搜索可以在该进程内部运行，也可以交给 `parano1d-miner`。外部
+Nonce 搜索可以在该进程内部运行，也可以交给 `kairos-miner`。外部
 挖矿进程的职责窄得多：
 
 - 接收一份不可变的 Poseidon2b 区块头输入序列和目标值；
@@ -59,7 +59,7 @@ Nonce 搜索可以在该进程内部运行，也可以交给 `parano1d-miner`。
 | 模式 | 证明构建 | Nonce 搜索 | 适合场景 |
 |---|---|---|---|
 | 内置 | Core 节点 | Core 节点 | GUI 钱包、单机矿工、单台服务器 |
-| 外部 | Core 节点 | `parano1d-miner` | 独立 CPU 挖矿进程、私有挖矿网络或矿池 |
+| 外部 | Core 节点 | `kairos-miner` | 独立 CPU 挖矿进程、私有挖矿网络或矿池 |
 
 两种模式遵循同一套共识规则，生成完全相同的区块。外部挖矿只把 nonce
 搜索移过 RPC 边界。
@@ -83,28 +83,28 @@ Nonce 搜索可以在该进程内部运行，也可以交给 `parano1d-miner`。
 创建节点数据前，先检查实际主机：
 
 ```sh
-parano1d --check-hardware
+kairos --check-hardware
 ```
 
 以内置矿工模式启动 Core：
 
 ```sh
-parano1d --mode miner --cpu-threads 12
+kairos --mode miner --cpu-threads 12
 ```
 
 省略 `--cpu-threads` 时，使用进程可见的全部逻辑 CPU。未配置奖励地址时，
 Core 使用本地钱包活动地址。也可固定一个独立的规范 bech32m 地址：
 
 ```sh
-parano1d --mode miner --miner-address o1...
+kairos --mode miner --miner-address k1...
 ```
 
 在另一个终端观察就绪状态和链进度：
 
 ```sh
-parano1d-cli status
-parano1d-cli peers
-parano1d-cli mining
+kairos-cli status
+kairos-cli peers
+kairos-cli mining
 ```
 
 如果未同步或已完成身份认证的对等节点少于一个，Core 会等待，不会在孤立的本地视图上
@@ -116,17 +116,17 @@ parano1d-cli mining
 启动负责持有并证明外部挖矿模板的节点：
 
 ```sh
-parano1d \
+kairos \
   --mode extminer \
-  --mining-key-file ~/.parano1d/mining.key
+  --mining-key-file ~/.kairos/mining.key
 ```
 
 让挖矿进程连接节点的本地回环 RPC：
 
 ```sh
-parano1d-miner \
-  --rpc http://127.0.0.1:9601 \
-  --key-file ~/.parano1d/mining.key \
+kairos-miner \
+  --rpc http://127.0.0.1:9701 \
+  --key-file ~/.kairos/mining.key \
   --threads 12
 ```
 
@@ -172,11 +172,11 @@ ASERT 根据已接受区块之间的完整间隔调整 Poseidon2b 目标值。�
 搜索与区块传播共同使用平均 30 秒的目标。累计有效工作量
 最大的链获胜；工作量相同时使用规范区块哈希作确定性决胜。
 
-奖励按高度计划从 16 NOID 开始，每 1,051,200 个区块下降一次，计时从 H210537 开始。
+奖励按高度计划从 16 KAI 开始，每 1,051,200 个区块下降一次，计时从 H210537 开始。
 挖矿 RPC 显示下一块总补贴：
 
 ```sh
-parano1d-cli mining
+kairos-cli mining
 ```
 
 在三年开发分配期内，矿工获得每个新区块发行奖励的 90%。扣除共识规定的

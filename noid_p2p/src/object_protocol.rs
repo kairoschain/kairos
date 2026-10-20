@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: Apache-2.0
 // Copyright (C) 2026 Paranoid Zero.
+// Modified by the Kairos Chain contributors (rebrand to Kairos Chain).
 
 //! Source-independent identities for objects transferred by network v2.
 
@@ -42,10 +43,10 @@ impl DataResponseStatus {
     }
 }
 
-const BODY_DIGEST_DOMAIN: &[u8] = b"NOID/P2P/OBJECT/BLOCK-BODY/V2";
-const TERMINAL_DIGEST_DOMAIN: &[u8] = b"NOID/P2P/OBJECT/HISTORY-TERMINAL/V2";
-const MANIFEST_DIGEST_DOMAIN: &[u8] = b"NOID/P2P/OBJECT/SNAPSHOT-MANIFEST/V2";
-const SEGMENT_DIGEST_DOMAIN: &[u8] = b"NOID/P2P/OBJECT/STATE-SEGMENT/V2";
+const BODY_DIGEST_DOMAIN: &[u8] = b"KAI/P2P/OBJECT/BLOCK-BODY/V2";
+const TERMINAL_DIGEST_DOMAIN: &[u8] = b"KAI/P2P/OBJECT/HISTORY-TERMINAL/V2";
+const MANIFEST_DIGEST_DOMAIN: &[u8] = b"KAI/P2P/OBJECT/SNAPSHOT-MANIFEST/V2";
+const SEGMENT_DIGEST_DOMAIN: &[u8] = b"KAI/P2P/OBJECT/STATE-SEGMENT/V2";
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, Serialize, Deserialize)]
 pub struct ChainPoint {

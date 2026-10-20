@@ -1,6 +1,6 @@
 # 安装并使用钱包
 
-原生 GUI 安装包同时包含 Parano1d 钱包及其私有完整节点。应用会自行
+原生 GUI 安装包同时包含 Kairos 钱包及其私有完整节点。应用会自行
 启动、监控并停止该节点，日常使用无需终端。
 
 ## 选择安装包
@@ -10,26 +10,26 @@
 
 | 平台 | 安装包 |
 |---|---|
-| Debian 或 Ubuntu，x86-64 | `parano1d-gui-vVERSION-linux-x86_64.deb` |
-| Debian 或 Ubuntu，ARM64 | `parano1d-gui-vVERSION-linux-aarch64.deb` |
-| Windows x86-64 | `parano1d-gui-vVERSION-windows-x86_64-setup.exe` |
-| macOS Apple 芯片 | `parano1d-gui-vVERSION-macos-aarch64.dmg` |
-| macOS Intel | `parano1d-gui-vVERSION-macos-x86_64.dmg` |
+| Debian 或 Ubuntu，x86-64 | `kairos-gui-vVERSION-linux-x86_64.deb` |
+| Debian 或 Ubuntu，ARM64 | `kairos-gui-vVERSION-linux-aarch64.deb` |
+| Windows x86-64 | `kairos-gui-vVERSION-windows-x86_64-setup.exe` |
+| macOS Apple 芯片 | `kairos-gui-vVERSION-macos-aarch64.dmg` |
+| macOS Intel | `kairos-gui-vVERSION-macos-x86_64.dmg` |
 
 同时下载该版本的 `SHA256SUMS`，打开安装包前先进行校验：
 
 ```sh
 # Linux
-sha256sum parano1d-gui-vVERSION-linux-x86_64.deb
+sha256sum kairos-gui-vVERSION-linux-x86_64.deb
 
 # macOS
-shasum -a 256 parano1d-gui-vVERSION-macos-aarch64.dmg
+shasum -a 256 kairos-gui-vVERSION-macos-aarch64.dmg
 ```
 
 Windows 请使用 PowerShell：
 
 ```powershell
-Get-FileHash .\parano1d-gui-vVERSION-windows-x86_64-setup.exe -Algorithm SHA256
+Get-FileHash .\kairos-gui-vVERSION-windows-x86_64-setup.exe -Algorithm SHA256
 ```
 
 输出摘要必须与 `SHA256SUMS` 中对应的一行完全一致。
@@ -41,10 +41,10 @@ Get-FileHash .\parano1d-gui-vVERSION-windows-x86_64-setup.exe -Algorithm SHA256
 用系统的软件中心打开 `.deb`，或执行：
 
 ```sh
-sudo apt install ./parano1d-gui-vVERSION-linux-x86_64.deb
+sudo apt install ./kairos-gui-vVERSION-linux-x86_64.deb
 ```
 
-然后从应用菜单启动 **Parano1d**。
+然后从应用菜单启动 **Kairos**。
 
 ### Windows
 
@@ -55,7 +55,7 @@ sudo apt install ./parano1d-gui-vVERSION-linux-x86_64.deb
 
 ### macOS
 
-打开 DMG，将 **Parano1d** 拖入 Applications。
+打开 DMG，将 **Kairos** 拖入 Applications。
 
 在版本尚未通过 Apple Developer ID 公证时，请按住 Control 点击应用，
 选择 **打开** 并确认。如果 macOS 仍然阻止启动，请在校验下载文件后
@@ -77,8 +77,8 @@ sudo apt install ./parano1d-gui-vVERSION-linux-x86_64.deb
 顶部状态栏显示连接和同步状态。追赶网络期间，钱包仍可显示本地已有
 数据；只有节点显示 **在线** 后，可用余额和当前槽位状态才是最新的规范值。
 
-钱包的私有节点通过 TCP `9600` 接受入站和出站 P2P 流量。普通用户只靠
-出站对等连接也能正常使用；开放入站 TCP `9600` 还可为网络提供更多
+钱包的私有节点通过 TCP `9700` 接受入站和出站 P2P 流量。普通用户只靠
+出站对等连接也能正常使用；开放入站 TCP `9700` 还可为网络提供更多
 连接能力。
 
 ## 收款与发送
@@ -89,13 +89,13 @@ sudo apt install ./parano1d-gui-vVERSION-linux-x86_64.deb
 
 1. 打开 **发送**，或按 `F3`；
 2. 粘贴有效的 `o1…` 地址；
-3. 输入 NOID 数量；
+3. 输入 KAI 数量；
 4. 核对选定输入、输出和网络费；
 5. 选择 **证明并发送**。
 
 钱包在本机生成私有授权证明，再将完整交易意图提交给自己的节点。发送
 成功后，最终面板会显示逻辑交易 ID。状态与确认行为详见
-[发送 NOID](../wallet/send.md)。
+[发送 KAI](../wallet/send.md)。
 
 ## 卸载应用
 
@@ -104,13 +104,13 @@ sudo apt install ./parano1d-gui-vVERSION-linux-x86_64.deb
 Debian 或 Ubuntu：
 
 ```sh
-sudo apt remove parano1d-gui
+sudo apt remove kairos-gui
 ```
 
-Windows 请使用 **已安装的应用 → Parano1d → 卸载**；macOS 则将
+Windows 请使用 **已安装的应用 → Kairos → 卸载**；macOS 则将
 Applications 中的应用移到废纸篓。
 
-钱包和节点数据仍保存在用户目录下的 `.parano1d` 中。只有在导出或
+钱包和节点数据仍保存在用户目录下的 `.kairos` 中。只有在导出或
 备份主密钥以及需要保留的收据后，才应删除该目录。
 
 ## 使用合约

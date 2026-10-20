@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: Apache-2.0
 // Copyright (C) 2026 Paranoid Zero.
+// Modified by the Kairos Chain contributors (rebrand to Kairos Chain).
 
 //! `P2PNetwork` — the libp2p swarm event loop.
 //!
@@ -776,7 +777,7 @@ struct RelayReservations {
 impl RelayReservations {
     fn new(target: usize, local_peer: PeerId) -> Self {
         let mut hasher = blake3::Hasher::new();
-        hasher.update(b"parano1d/relay-selection/v1");
+        hasher.update(b"kairos/relay-selection/v1");
         hasher.update(&local_peer.to_bytes());
         Self {
             target: target.min(MAX_RELAY_RESERVATIONS),
@@ -789,7 +790,7 @@ impl RelayReservations {
 
     fn candidate_rank(&self, peer: PeerId) -> [u8; 32] {
         let mut hasher = blake3::Hasher::new();
-        hasher.update(b"parano1d/relay-candidate/v1");
+        hasher.update(b"kairos/relay-candidate/v1");
         hasher.update(&self.selection_salt);
         hasher.update(&peer.to_bytes());
         *hasher.finalize().as_bytes()
@@ -1956,7 +1957,7 @@ fn stop_discovery_after_mesh_formed(
 }
 
 /// `libp2p-kad` starts a full bootstrap automatically whenever its routing
-/// table is small. Parano1d has its own identity-jittered, topology-bounded
+/// table is small. Kairos has its own identity-jittered, topology-bounded
 /// `GetClosestPeers` controller, so allowing both mechanisms makes one wallet
 /// launch walk up to K_VALUE peers through relays before the eight-peer target
 /// can stop it. The first `SwarmEvent::Dialing` gives the outer reactor a
@@ -2507,7 +2508,7 @@ fn schedule_manifest_page_requests(
                     .collect::<Vec<_>>();
                 providers.sort_by_key(|peer| {
                     let mut hasher = blake3::Hasher::new();
-                    hasher.update(b"PARANO1D/P2P/MANIFEST-PAGE-SOURCE/V1");
+                    hasher.update(b"KAIROS/P2P/MANIFEST-PAGE-SOURCE/V1");
                     hasher.update(&swarm.local_peer_id().to_bytes());
                     hasher.update(&key.snapshot.manifest_digest);
                     hasher.update(&page_index.to_le_bytes());
@@ -5274,7 +5275,7 @@ fn begin_bootstrap_dial(
             .condition(libp2p::swarm::dial_opts::PeerCondition::DisconnectedAndNotDialing)
             // Ordinary bootstrap traffic does not need TCP source-port
             // reuse. Some VPN, NAT and stateful-firewall paths silently drop
-            // a 9600 -> 9600 flow while accepting the same destination from
+            // a 9700 -> 9700 flow while accepting the same destination from
             // an ephemeral source port. DCUtR owns its separate reuse dials
             // for hole punching and is deliberately unaffected here.
             .allocate_new_port()
@@ -9863,13 +9864,13 @@ mod tests {
         let destination = PeerId::random();
         let first_relay = PeerId::random();
         let second_relay = PeerId::random();
-        let direct: Multiaddr = "/ip4/1.1.1.1/tcp/9600".parse().unwrap();
-        let relay_one = "/ip4/8.8.8.8/tcp/9600"
+        let direct: Multiaddr = "/ip4/1.1.1.1/tcp/9700".parse().unwrap();
+        let relay_one = "/ip4/8.8.8.8/tcp/9700"
             .parse::<Multiaddr>()
             .unwrap()
             .with(Protocol::P2p(first_relay))
             .with(Protocol::P2pCircuit);
-        let relay_two = "/ip4/8.8.4.4/tcp/9600"
+        let relay_two = "/ip4/8.8.4.4/tcp/9700"
             .parse::<Multiaddr>()
             .unwrap()
             .with(Protocol::P2p(second_relay))
@@ -10963,7 +10964,7 @@ mod tests {
         let local = PeerId::random();
         let peer = PeerId::random();
         let aggregate: Multiaddr = "/dnsaddr/noid.network".parse().unwrap();
-        let individual: Multiaddr = "/dns4/seed1.parano1d.org/tcp/9500".parse().unwrap();
+        let individual: Multiaddr = "/dns4/seed1.kairoschain.xyz/tcp/9500".parse().unwrap();
         let first = libp2p::swarm::ConnectionId::new_unchecked(71);
         let duplicate = libp2p::swarm::ConnectionId::new_unchecked(72);
         let mut state = AutomaticPeerState::new(local);

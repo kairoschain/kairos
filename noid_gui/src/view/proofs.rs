@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: Apache-2.0
 // Copyright (C) 2026 Paranoid Zero.
+// Modified by the Kairos Chain contributors (rebrand to Kairos Chain).
 
 use std::time::{SystemTime, UNIX_EPOCH};
 
@@ -458,7 +459,7 @@ fn authenticated_payment<'a>(
             .spacing(7),
             row![
                 metric(
-                    "FEE / NOID",
+                    "FEE / KAI",
                     format_micronoid(summary.fee_micronoid),
                     theme::WARNING,
                 ),
@@ -485,7 +486,7 @@ fn authenticated_payment<'a>(
                 theme::PROOF,
             ),
             metric(
-                "FEE / NOID",
+                "FEE / KAI",
                 format_micronoid(summary.fee_micronoid),
                 theme::WARNING,
             ),

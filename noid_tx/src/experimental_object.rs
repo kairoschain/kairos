@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: Apache-2.0
 // Copyright (C) 2026 Paranoid Zero.
+// Modified by the Kairos Chain contributors (rebrand to Kairos Chain).
 
 //! V2 contract carrier. Activation belongs to the network's fork schedule.
 //! Commitments and execution match the bounded
@@ -28,8 +29,8 @@ pub const BODY_CONTEXT_FIELDS: usize = 8;
 /// per-class call budget and never derives it from this value.
 pub const CONTRACT_SLOTS: usize = 16;
 pub const OBJECT_VERSION: u16 = 3;
-const OPENING_MAGIC: &[u8; 8] = b"NOIDOBJ3";
-pub const INTENT_MAGIC: &[u8; 8] = b"NOIDV2TX";
+const OPENING_MAGIC: &[u8; 8] = b"KAIROBJ1";
+pub const INTENT_MAGIC: &[u8; 8] = b"KAIV2TX1";
 pub const OPENING_BYTES: usize = 8 + 2 + PROGRAM_STEPS * 32 + 16 + 4 * 32 + 8 + policy::RULE_BYTES;
 pub const INTENT_PREFIX_BYTES: usize = INTENT_MAGIC.len() + OPENING_BYTES;
 pub const MAX_INTENT_BYTES: usize =

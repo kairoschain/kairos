@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: Apache-2.0
 // Copyright (C) 2026 Paranoid Zero.
+// Modified by the Kairos Chain contributors (rebrand to Kairos Chain).
 
 //! In-memory wallet state.
 //!
@@ -56,7 +57,7 @@ pub struct TxHistoryEntry {
     /// True only for the canonical coinbase at logical transaction zero.
     #[serde(default)]
     pub is_coinbase: bool,
-    /// Net amount in μNOID (sent: net sent, received: total received).
+    /// Net amount in μKAI (sent: net sent, received: total received).
     pub amount_micronoid: u64,
     /// Counterparty address (None if unknown).
     pub peer_address: Option<[u8; 32]>,
@@ -77,7 +78,7 @@ pub struct TxHistoryEntry {
 pub struct WalletUtxo {
     /// Global slot index in the chain state.
     pub slot_index: u32,
-    /// Value in μNOID.
+    /// Value in μKAI.
     pub value: u64,
     /// Incarnation assigned when this UTXO was minted: the monotone
     /// alloc-counter value for user mints, or the height-tagged coinbase
@@ -276,7 +277,7 @@ impl WalletState {
         Ok(())
     }
 
-    /// Confirmed balance of the ACTIVE address in μNOID.
+    /// Confirmed balance of the ACTIVE address in μKAI.
     pub fn balance(&self) -> u64 {
         self.utxos
             .values()

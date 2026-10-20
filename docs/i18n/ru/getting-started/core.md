@@ -2,9 +2,9 @@
 
 Архив Core предназначен для операторов нод, майнеров и разработчиков. В него входят:
 
-- `parano1d` — полная нода со встроенным майнером;
-- `parano1d-cli` — локальный клиент ноды и кошелька;
-- `parano1d-miner` — внешний вычислитель PoW.
+- `kairos` — полная нода со встроенным майнером;
+- `kairos-cli` — локальный клиент ноды и кошелька;
+- `kairos-miner` — внешний вычислитель PoW.
 
 GUI-кошелёк распространяется отдельно.
 
@@ -13,11 +13,11 @@ GUI-кошелёк распространяется отдельно.
 Выберите архив Core для своей платформы:
 
 ```text
-parano1d-core-vVERSION-linux-x86_64.tar.gz
-parano1d-core-vVERSION-linux-aarch64.tar.gz
-parano1d-core-vVERSION-windows-x86_64.zip
-parano1d-core-vVERSION-macos-aarch64.tar.gz
-parano1d-core-vVERSION-macos-x86_64.tar.gz
+kairos-core-vVERSION-linux-x86_64.tar.gz
+kairos-core-vVERSION-linux-aarch64.tar.gz
+kairos-core-vVERSION-windows-x86_64.zip
+kairos-core-vVERSION-macos-aarch64.tar.gz
+kairos-core-vVERSION-macos-x86_64.tar.gz
 ```
 
 Перед распаковкой сравните SHA-256 архива со значением в файле
@@ -28,13 +28,13 @@ parano1d-core-vVERSION-macos-x86_64.tar.gz
 На Linux или macOS:
 
 ```sh
-./parano1d --check-hardware
+./kairos --check-hardware
 ```
 
 В Windows PowerShell:
 
 ```powershell
-.\parano1d.exe --check-hardware
+.\kairos.exe --check-hardware
 ```
 
 Последняя строка должна выглядеть так:
@@ -56,31 +56,31 @@ NODE READY
 Запустите Core в текущем терминале:
 
 ```sh
-./parano1d
+./kairos
 ```
 
 При первом запуске будут созданы:
 
 ```text
-~/.parano1d/parano1d.toml
-~/.parano1d/data/
+~/.kairos/kairos.toml
+~/.kairos/data/
 ```
 
 В другом терминале можно проверить состояние:
 
 ```sh
-./parano1d-cli status
-./parano1d-cli peers
-./parano1d-cli state
+./kairos-cli status
+./kairos-cli peers
+./kairos-cli state
 ```
 
-По умолчанию P2P-нода слушает `0.0.0.0:9600`, а RPC доступен только на
-`127.0.0.1:9601`.
+По умолчанию P2P-нода слушает `0.0.0.0:9700`, а RPC доступен только на
+`127.0.0.1:9701`.
 
 Для корректной остановки выполните:
 
 ```sh
-./parano1d-cli stop
+./kairos-cli stop
 ```
 
 Настройка постоянной системной службы, межсетевого экрана и обновлений

@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: Apache-2.0
 // Copyright (C) 2026 Paranoid Zero.
+// Modified by the Kairos Chain contributors (rebrand to Kairos Chain).
 
 mod contracts;
 mod explorer;
@@ -734,7 +735,7 @@ fn header(app: &App, _compact: bool) -> Element<'_, Message> {
     let coin = canvas(RotatingCoin::new(app.header_coin_angle(), 32.0, 3.0))
         .width(Length::Fixed(40.0))
         .height(Length::Fixed(40.0));
-    let identity = row![coin, text("Parano1d").size(15).color(theme::MUTED),]
+    let identity = row![coin, text("Kairos").size(15).color(theme::MUTED),]
         .spacing(0)
         .align_y(Alignment::Center);
 
@@ -1577,7 +1578,7 @@ fn node_log_terminal(app: &App) -> Element<'_, Message> {
     }
 
     let output = text_editor(&app.node_log)
-        .placeholder(translate("No parano1d-node.log output yet…"))
+        .placeholder(translate("No kairos-node.log output yet…"))
         .on_action(Message::EditNodeLog)
         .font(theme::TECH_FONT)
         .size(12)
@@ -1590,7 +1591,7 @@ fn node_log_terminal(app: &App) -> Element<'_, Message> {
     let mut body = column![
         row![
             text("LOGS").size(13).color(theme::CYAN),
-            text("parano1d-node.log").size(12).color(theme::DIM),
+            text("kairos-node.log").size(12).color(theme::DIM),
             Space::new().width(Length::Fill),
             text(status).size(12).color(status_color),
             refresh,
@@ -1670,7 +1671,7 @@ fn node_settings_group(app: &App) -> iced::widget::Container<'_, Message> {
             ),
             settings_field(
                 "LOG LEVEL",
-                "Written locally to parano1d-node.log",
+                "Written locally to kairos-node.log",
                 levels.into(),
             ),
         ]
@@ -1680,7 +1681,7 @@ fn node_settings_group(app: &App) -> iced::widget::Container<'_, Message> {
 }
 
 fn network_settings_group(app: &App) -> iced::widget::Container<'_, Message> {
-    let listen = text_input("0.0.0.0:9600", &app.settings_p2p_listen)
+    let listen = text_input("0.0.0.0:9700", &app.settings_p2p_listen)
         .on_input(Message::SettingsP2pListenChanged)
         .size(14)
         .padding([8, 10])

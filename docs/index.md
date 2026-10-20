@@ -1,6 +1,6 @@
-# Parano1d ①
+# Kairos ①
 
-Parano1d is a live proof-native L1 where the present proves the past. Proofs
+Kairos is a live proof-native L1 where the present proves the past. Proofs
 establish validity. PoW sets canonical order. Signatureless authorization,
 execution and recursion share one transparent end-to-end post-quantum stack. V2
 adds proof-native contracts: programmable live rights verifiable after pruning.
@@ -67,7 +67,7 @@ and [actual measurements](reference/performance.md).
 ## Issuance and State efficiency
 
 The exact subsidy schedule is **16 → 11.30 → 8 → 5.65 → 4 → 2.83 → 2 → 1.41 → 1
-NOID**, one step per 1,051,200 blocks from v2. The 1 NOID tail continues
+KAI**, one step per 1,051,200 blocks from v2. The 1 KAI tail continues
 indefinitely. Occupancy independently prices new live slots; the growth fee is
 burned and consolidation avoids it. [Network economics](protocol/economics.md)
 explains the constants and why State usage no longer acts as the monetary clock.

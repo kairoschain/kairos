@@ -1,6 +1,6 @@
 # Testing
 
-Parano1d uses three layers of tests: crate-level invariants, cross-crate
+Kairos uses three layers of tests: crate-level invariants, cross-crate
 release tests and fresh-process live scenarios.
 
 ## Pruv contracts
@@ -36,8 +36,8 @@ proof bank. Use CLI and miner executables from the same source version.
 NOID_PRUV_LIVE_DIR=/absolute/path/to/fresh-output \
 NOID_PRUV_SOURCE_FIXTURE=/absolute/path/to/passed-v2-fixture \
 NOID_PRUV_NODE=/absolute/path/to/isolated_v2_node \
-NOID_PRUV_CLI=/absolute/path/to/parano1d-cli \
-NOID_PRUV_MINER=/absolute/path/to/parano1d-miner \
+NOID_PRUV_CLI=/absolute/path/to/kairos-cli \
+NOID_PRUV_MINER=/absolute/path/to/kairos-miner \
 NOID_PRUV_BIN=/absolute/path/to/pruv \
 NOID_PRUV_Z3=/absolute/path/to/z3 \
 unshare --user --map-root-user --net python3 scripts/live_pruv_contract_scenario.py

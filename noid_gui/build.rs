@@ -1,8 +1,9 @@
 // SPDX-License-Identifier: Apache-2.0
 // Copyright (C) 2026 Paranoid Zero.
+// Modified by the Kairos Chain contributors (rebrand to Kairos Chain).
 
 fn main() {
-    println!("cargo:rerun-if-changed=assets/app-icons/Parano1d.ico");
+    println!("cargo:rerun-if-changed=assets/app-icons/Kairos.ico");
 
     if std::env::var("CARGO_CFG_TARGET_OS").as_deref() != Ok("windows") {
         return;
@@ -10,18 +11,18 @@ fn main() {
 
     let manifest_directory =
         std::path::PathBuf::from(std::env::var_os("CARGO_MANIFEST_DIR").unwrap());
-    let icon = manifest_directory.join("assets/app-icons/Parano1d.ico");
+    let icon = manifest_directory.join("assets/app-icons/Kairos.ico");
     let version = std::env::var("CARGO_PKG_VERSION").unwrap();
 
     let mut resource = winresource::WindowsResource::new();
     resource
         .set_icon(icon.to_str().expect("Windows icon path is UTF-8"))
-        .set("FileDescription", "Parano1d Wallet")
-        .set("ProductName", "Parano1d")
+        .set("FileDescription", "Kairos Wallet")
+        .set("ProductName", "Kairos")
         .set("ProductVersion", &version)
         .set("FileVersion", &version)
-        .set("InternalName", "Parano1d")
-        .set("OriginalFilename", "parano1d-gui.exe")
+        .set("InternalName", "Kairos")
+        .set("OriginalFilename", "kairos-gui.exe")
         .set("LegalCopyright", "Copyright © 2026 Paranoid Zero")
         .set_manifest(
             r#"<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
@@ -49,5 +50,5 @@ fn main() {
         );
     resource
         .compile()
-        .expect("compile Parano1d Windows resources");
+        .expect("compile Kairos Windows resources");
 }

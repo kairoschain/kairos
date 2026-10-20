@@ -8,15 +8,15 @@
 先运行发布版硬件检查：
 
 ```sh
-parano1d --check-hardware
+kairos --check-hardware
 ```
 
 从节点钱包获取奖励地址：
 
 ```sh
-parano1d
-parano1d-cli address --list
-parano1d-cli stop
+kairos
+kairos-cli address --list
+kairos-cli stop
 ```
 
 未显式配置奖励地址时，会自动使用钱包活动地址。
@@ -26,14 +26,14 @@ parano1d-cli stop
 在前台运行：
 
 ```sh
-parano1d --mode miner --cpu-threads 12
+kairos --mode miner --cpu-threads 12
 ```
 
 也可更新 systemd unit：
 
 ```ini
-ExecStart=/usr/local/bin/parano1d \
-  --config /etc/parano1d/parano1d.toml \
+ExecStart=/usr/local/bin/kairos \
+  --config /etc/kairos/kairos.toml \
   --mode miner \
   --cpu-threads 12
 ```
@@ -42,7 +42,7 @@ ExecStart=/usr/local/bin/parano1d \
 
 ```sh
 sudo systemctl daemon-reload
-sudo systemctl restart parano1d
+sudo systemctl restart kairos
 ```
 
 ## 就绪条件
@@ -50,16 +50,16 @@ sudo systemctl restart parano1d
 普通挖矿需要一个经过认证的对等节点，以及已同步的链。检查：
 
 ```sh
-parano1d-cli status
-parano1d-cli peers
-parano1d-cli mining
+kairos-cli status
+kairos-cli peers
+kairos-cli mining
 ```
 
 进程选择支持的 CPU 后端，默认使用 Small m23：63 页、504 输入、63 调用。
 服务器可允许 Large m24（206 页，相同输入和调用限制）：
 
 ```sh
-parano1d --mode miner --v2-large-blocks
+kairos --mode miner --v2-large-blocks
 ```
 
 合格集合提供更多可领取手续费时选择 Large，Small 仍可使用。请测量实际主机，
@@ -84,7 +84,7 @@ GUI 没有 Large 选项。见[类别选择](../architecture/mining.md)。
 若要固定独立的进程奖励地址：
 
 ```sh
-parano1d --mode miner --miner-address o1...
+kairos --mode miner --miner-address k1...
 ```
 
 请使用完整 bech32m 地址。
@@ -94,11 +94,11 @@ parano1d --mode miner --miner-address o1...
 通过 RPC 或服务管理器停止：
 
 ```sh
-parano1d-cli stop
+kairos-cli stop
 ```
 
 ```sh
-sudo systemctl stop parano1d
+sudo systemctl stop kairos
 ```
 
 正常关闭会取消挖矿、关闭网络并刷入 MDBX。不要仅因活动证明需要几秒到达

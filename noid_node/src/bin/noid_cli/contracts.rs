@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: Apache-2.0
 // Copyright (C) 2026 Paranoid Zero.
+// Modified by the Kairos Chain contributors (rebrand to Kairos Chain).
 
 use super::*;
 use serde_json::json;
@@ -98,7 +99,7 @@ pub(super) enum ContractCommand {
         #[arg(long)]
         out: PathBuf,
     },
-    /// Fund an opening with an ordinary wallet payment (amounts in NOID).
+    /// Fund an opening with an ordinary wallet payment (amounts in KAI).
     Fund {
         object: PathBuf,
         amount: String,
@@ -276,7 +277,7 @@ pub(super) async fn run(ctx: &Ctx<'_>, command: &ContractCommand) -> anyhow::Res
             let result = rpc(ctx, "getObjectInstances", &[json!(read_opening(object)?), json!(from_slot), json!(limit)]).await?;
             if ctx.json { print_json(&result) } else {
                 for slot in result["slots"].as_array().context("contract slots missing")? {
-                    println!("Slot {}  incarnation {}  {} NOID", slot["slot_index"], slot["creation_id"], noid_str(slot["value"].as_u64().unwrap_or(0)));
+                    println!("Slot {}  incarnation {}  {} KAI", slot["slot_index"], slot["creation_id"], noid_str(slot["value"].as_u64().unwrap_or(0)));
                 }
                 if !result["next_slot"].is_null() { println!("Next page: --from-slot {}", result["next_slot"]); }
                 Ok(())
@@ -328,7 +329,7 @@ pub(super) async fn run(ctx: &Ctx<'_>, command: &ContractCommand) -> anyhow::Res
         ContractCommand::Status { object, slot } => {
             let result = rpc(ctx, "getObjectStatus", &[json!(read_opening(object)?), json!(slot)]).await?;
             if ctx.json { print_json(&result) } else {
-                println!("Opening matches State: {}\nBalance: {} NOID\nIncarnation: {}\nNext-call authority: {}",
+                println!("Opening matches State: {}\nBalance: {} KAI\nIncarnation: {}\nNext-call authority: {}",
                     result["matches_opening"], noid_str(result["slot"]["value"].as_u64().unwrap_or(0)), result["slot"]["creation_id"], result["active_authority"].as_str().unwrap_or("")); Ok(())
             }
         }

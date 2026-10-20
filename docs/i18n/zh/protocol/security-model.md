@@ -37,14 +37,14 @@ C1 使用 65 个钱包查询、133 个 History 查询，代数挑战来自 GF(2^
 大小为 2^255 的迹一集合。迹算术为 GF(2^128)。合约增加确定性约束，不为每个
 应用引入单独 Fiat–Shamir 协议。共享 ABI 不保证自定义策略正确实现作者意图。
 
-[推导及复现命令](https://git.parano1d.org/ignotusnemo/parano1d/src/branch/v2/noid_soundness/docs/v2-retirement.md)和
-[最终矩阵库精确记录](https://git.parano1d.org/ignotusnemo/parano1d/src/branch/v2/research/v2_feasibility/results/2026-09-25-common-input-budget/REPORT.md#accounting-for-the-final-banks)
+[推导及复现命令](https://git.parano1d.org/ignotusnemo/kairos/src/branch/v2/noid_soundness/docs/v2-retirement.md)和
+[最终矩阵库精确记录](https://git.parano1d.org/ignotusnemo/kairos/src/branch/v2/research/v2_feasibility/results/2026-09-25-common-input-budget/REPORT.md#accounting-for-the-final-banks)
 列出假设、输入及有理数界限。默认旧计算器不能替代 v2 工具。性能和畸形证明
 测试补充分析，但不证明其实现对应假设。
 
 ## 2026 年 10 月密码分析
 
-[10 月评估](https://git.parano1d.org/ignotusnemo/parano1d/src/branch/main/noid_soundness/docs/october-2026-attack-review.md)将 10 月 1 日至 13 日的论文和修订与 v2.0.3 对照。修订版 Poseidon 攻击中保持维数的 CICO-2 分支要求宽度至少为八；实际构造的宽度为四。SDitH 和 MQOM 的秘密恢复算法需要各自签名构造披露的种子份额。授权使用代数矩阵库及经过认证的多项式 opening，不包含这些种子份额。
+[10 月评估](https://git.parano1d.org/ignotusnemo/kairos/src/branch/main/noid_soundness/docs/october-2026-attack-review.md)将 10 月 1 日至 13 日的论文和修订与 v2.0.3 对照。修订版 Poseidon 攻击中保持维数的 CICO-2 分支要求宽度至少为八；实际构造的宽度为四。SDitH 和 MQOM 的秘密恢复算法需要各自签名构造披露的种子份额。授权使用代数矩阵库及经过认证的多项式 opening，不包含这些种子份额。
 
 每次诚实授权尝试通过 `OsRng` 获取新的随机性，并消耗私有 PCS 状态。隐藏性要求每次尝试使用独立的操作系统熵。全部 23 项授权和 PCS 测试、41 项 soundness 测试以及外部矩阵及其逆矩阵的 138 项子式检查均通过。mainnet v2 精确证书已逐字节复现，在所述条件下保留全部 20 个事件及 Category 1 评估。报告和 [noid.network 页面](https://noid.network/security/october-2026)给出具体攻击不适用的论证、源码哈希及复现记录。
 

@@ -24,14 +24,14 @@ import urllib.request
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-NODE_BIN = ROOT / "target" / "release" / "parano1d"
+NODE_BIN = ROOT / "target" / "release" / "kairos"
 BASE = ROOT / "target" / "live-tests" / "slot-mempool-wallet"
 LOGS = BASE / "logs"
 
 START_BLOCKS = int(os.environ.get("NOID_LIVE_START_BLOCKS", "20"))
 TX_ROUNDS = int(os.environ.get("NOID_LIVE_TX_ROUNDS", "2"))
 BASE_PORT = int(os.environ.get("NOID_LIVE_BASE_PORT", "19600"))
-AMOUNT_BASE = 100_000  # 0.1 NOID in micronoid; small enough for many rounds
+AMOUNT_BASE = 100_000  # 0.1 KAI in micronoid; small enough for many rounds
 
 
 class LiveTestError(Exception):
@@ -285,7 +285,7 @@ def wait_tx_confirmed(nodes, tx_hash, timeout=480):
 def main():
     if not NODE_BIN.exists():
         raise LiveTestError(
-            f"release binary missing: {NODE_BIN}; run cargo build --release -p noid_node --bin parano1d"
+            f"release binary missing: {NODE_BIN}; run cargo build --release -p noid_node --bin kairos"
         )
     if BASE.exists():
         shutil.rmtree(BASE)

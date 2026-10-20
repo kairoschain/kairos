@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: Apache-2.0
 // Copyright (C) 2026 Paranoid Zero.
+// Modified by the Kairos Chain contributors (rebrand to Kairos Chain).
 
 use super::*;
 use crate::contracts::{
@@ -501,7 +502,7 @@ impl Backend {
             let opening = if value.get("format").is_some() {
                 let file: ContractFile =
                     serde_json::from_value(value).map_err(|e| e.to_string())?;
-                if file.format != "parano1d-contract" || file.version != 1 {
+                if file.format != "kairos-contract" || file.version != 1 {
                     return Err("Unsupported contract file version.".into());
                 }
                 validate_name(&file.name)?;
@@ -624,7 +625,7 @@ impl Backend {
             }
         }
         Ok(ContractFile {
-            format: "parano1d-contract".into(),
+            format: "kairos-contract".into(),
             version: 1,
             name,
             opening_hex: info.opening_hex.clone(),
@@ -678,7 +679,7 @@ impl Backend {
             self.check_shared_proof(Some(&original), &proof).await?;
             // Include the original rules so a funding receipt is usable by its recipient.
             let file = ContractFile {
-                format: "parano1d-contract".into(),
+                format: "kairos-contract".into(),
                 version: 1,
                 name: String::new(),
                 opening_hex: original.opening_hex,
@@ -1224,7 +1225,7 @@ mod tests {
         let directory = tempfile::tempdir().unwrap();
         let path = directory.path().join("contract.json");
         let file = ContractFile {
-            format: "parano1d-contract".into(),
+            format: "kairos-contract".into(),
             version: 1,
             name: "Received payment".into(),
             opening_hex: crate::contracts::tests::info().opening_hex,

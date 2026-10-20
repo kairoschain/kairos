@@ -3,7 +3,7 @@
 По умолчанию Core читает конфигурацию TOML из файла:
 
 ```text
-~/.parano1d/parano1d.toml
+~/.kairos/kairos.toml
 ```
 
 Другой файл можно указать через `--config`. Отсутствующий файл создаётся
@@ -14,15 +14,15 @@
 
 ```toml
 [network]
-listen = "0.0.0.0:9600"
+listen = "0.0.0.0:9700"
 seeds = []
 
 [storage]
 backend = "mdbx"
-path = "~/.parano1d/data"
+path = "~/.kairos/data"
 
 [rpc]
-listen = "127.0.0.1:9601"
+listen = "127.0.0.1:9701"
 
 [mining]
 enabled = false
@@ -36,14 +36,14 @@ miner_address = ""
 
 `network.listen` принимает `HOST:PORT` или [мультиадрес libp2p](../reference/glossary.md#мультиадрес-libp2p-multiaddress).
 Для публичных
-IPv4-соединений используйте `0.0.0.0:9600`.
+IPv4-соединений используйте `0.0.0.0:9700`.
 
 `network.seeds` добавляет начальные пиры. Допустимые формы:
 
 ```text
-198.51.100.10:9600
-seed.example.org:9600
-/ip4/198.51.100.10/tcp/9600
+198.51.100.10:9700
+seed.example.org:9700
+/ip4/198.51.100.10/tcp/9700
 dnsaddr:seed.example.org
 ```
 
@@ -68,7 +68,7 @@ dnsaddr:seed.example.org
 Оставляйте RPC на:
 
 ```text
-127.0.0.1:9601
+127.0.0.1:9701
 ```
 
 Интерфейс позволяет отправлять транзакции кошелька и управлять процессом. Это
@@ -89,9 +89,9 @@ RPC поддерживает только HTTP. Переключение на We
 Режим процесса задаётся явно:
 
 ```sh
-parano1d --mode node
-parano1d --mode miner
-parano1d --mode extminer --mining-key-file ~/.parano1d/mining.key
+kairos --mode node
+kairos --mode miner
+kairos --mode extminer --mining-key-file ~/.kairos/mining.key
 ```
 
 Устаревшее поле `mining.enabled` не переопределяет `--mode`. Пустой
@@ -108,7 +108,7 @@ parano1d --mode extminer --mining-key-file ~/.parano1d/mining.key
 создаёт значительно больше записей.
 
 Под systemd вывод попадает в journal. GUI перенаправляет вывод собственной ноды в
-`parano1d-node.log` выбранного каталога данных.
+`kairos-node.log` выбранного каталога данных.
 
 ## Предварительная проверка
 
@@ -116,7 +116,7 @@ parano1d --mode extminer --mining-key-file ~/.parano1d/mining.key
 базы:
 
 ```sh
-parano1d --check-hardware
+kairos --check-hardware
 ```
 
 Успешный отчёт заканчивается строкой `NODE READY`.

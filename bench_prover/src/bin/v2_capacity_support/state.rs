@@ -420,7 +420,7 @@ impl Chain {
     /// Its per-page rooting cost is recorded separately from HistoryStep.
     pub fn build(&self, pages: &[TxPage], schedule: ForkSchedule) -> Result<(Block, ChainState)> {
         use noid_chain::consensus::development_allocation::{
-            development_allocation_with_schedule, O1_NETWORK_FUND_ADDRESS, PARANO1D_LAB_ADDRESS,
+            development_allocation_with_schedule, DISABLED_FUND_ADDRESS_A, DISABLED_FUND_ADDRESS_B,
         };
         let height = self.parent().height + 1;
         let mut state = self.state.clone();
@@ -501,12 +501,12 @@ impl Chain {
                     TxOutput {
                         slot_index: slot()?,
                         amount,
-                        owner: O1_NETWORK_FUND_ADDRESS,
+                        owner: DISABLED_FUND_ADDRESS_A,
                     },
                     TxOutput {
                         slot_index: slot()?,
                         amount,
-                        owner: PARANO1D_LAB_ADDRESS,
+                        owner: DISABLED_FUND_ADDRESS_B,
                     },
                 ],
                 output_bitmap_bit(0) | output_bitmap_bit(1),

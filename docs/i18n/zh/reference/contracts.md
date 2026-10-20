@@ -15,7 +15,7 @@ GUI：**F7 Contracts**，选择 Create、My contracts 或 Open file。本地日�
 双方保留交互。导入合并已验证证据，按交易 ID 去重并保留自己的记录。
 F4 用于普通付款回执，合约文件和调用回执在 F7 打开。
 
-CLI 从 `parano1d-cli contract protocol`、`parano1d-cli contract --help` 开始。
+CLI 从 `kairos-cli contract protocol`、`kairos-cli contract --help` 开始。
 RPC 使用 `paranoid_` 命名空间和本地所有者权限。`getContractProtocol` 查询限制，
 `createObject` 创建条款，`walletFundObject` 充值，`previewObjectCall` 预览，
 `walletCallObject` 提交。选择准确 slot 和 creation ID，授权前绑定审阅过的交易体。
@@ -28,4 +28,4 @@ RPC 使用 `paranoid_` 命名空间和本地所有者权限。`getContractProtoc
 完整[合约文档](../contracts/index.md)包括[内核](../contracts/core.md)、
 [模板](../contracts/templates.md)、[API](../contracts/api.md)、
 [GUI](../contracts/gui.md)和[恢复](../contracts/receipts-and-recovery.md)。
-发布包读者可访问 [docs.parano1d.org](https://docs.parano1d.org/zh/contracts)。
+发布包读者可访问 [docs.kairoschain.xyz](https://docs.kairoschain.xyz/zh/contracts)。

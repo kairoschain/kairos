@@ -8,19 +8,19 @@ retained in the [archive](../archive/index.md).
 ## Unit
 
 ```text
-1 NOID = 1,000,000 μNOID
+1 KAI = 1,000,000 μKAI
 ```
 
-NOID is the ticker; the wallet uses ①. Consensus uses integer μNOID, never
+KAI is the ticker; the wallet uses ①. Consensus uses integer μKAI, never
 floating-point arithmetic. There is no fixed maximum supply because the
-permanent tail continues at 1 NOID per block.
+permanent tail continues at 1 KAI per block.
 
 ## V2 issuance
 
 Let `H = 210537` and `I = 1051200`. For a block at height `h ≥ H`, the tier is
 `min((h − H) / I, 8)` using integer division. The exact gross subsidy table is:
 
-| Tier / nominal years from v2 | First height | NOID per block | Gross NOID per full interval |
+| Tier / nominal years from v2 | First height | KAI per block | Gross KAI per full interval |
 | ---: | ---: | ---: | ---: |
 | 0 | 210,537 | 16 | 16,819,200 |
 | 1 | 1,261,737 | 11.30 | 11,878,560 |
@@ -41,15 +41,15 @@ State expansion neither advances nor resets the schedule.
 An interval is a nominal 365-day year at the **30-second target**. Calendar
 dates depend on actual production; the clock starts at the v2 block, not at
 genesis or a release date. The eight declining intervals total **53,810,928
-NOID** in gross scheduled subsidy. The first two total **28,697,760 NOID**;
-the tail schedules **1,051,200 NOID per nominal year**. These are subsidy sums,
+KAI** in gross scheduled subsidy. The first two total **28,697,760 KAI**;
+the tail schedules **1,051,200 KAI per nominal year**. These are subsidy sums,
 not circulating-supply forecasts: burns, unclaimed amounts and the temporary
 allocation accounting affect actual issued and live value.
 
 ## Why the monetary clock changed
 
 The initial model linked reward reductions to State expansion: starting at
-50 NOID, the reward halved when sustained occupancy required a larger slot
+50 KAI, the reward halved when sustained occupancy required a larger slot
 domain. This assumed that growth of useful network activity would provide a
 meaningful clock for reducing issuance.
 
@@ -69,7 +69,7 @@ without forecasting occupancy. Existing balances are not rescaled.
 
 ## Why this curve
 
-The design chooses a permanent **1 NOID tail**, **four halving equivalents**
+The design chooses a permanent **1 KAI tail**, **four halving equivalents**
 before reaching it and **two nominal years per halving**. This gives the
 anchors `16 → 8 → 4 → 2 → 1` over eight nominal years. Splitting each halving
 into two annual reductions gives an approximate multiplier of `1/√2`, with
@@ -78,9 +78,9 @@ the published intermediate values fixed as integer amounts.
 The tail preserves an ongoing block subsidy alongside fees. The finite
 transition gives a visible horizon; smaller annual steps spread later subsidy
 reductions rather than concentrating each into a 50% boundary. The intermediate steps are rounded to the fixed amounts 11.30,
-5.65, 2.83 and 1.41 NOID.
+5.65, 2.83 and 1.41 KAI.
 
-Changing 50 NOID per 20 seconds to 16 per 30 seconds reduces the initial gross
+Changing 50 KAI per 20 seconds to 16 per 30 seconds reduces the initial gross
 issuance rate by **78.67%**, at the respective targets and before any old State
 halving. That is a substantial immediate reduction, followed by the scheduled
 steps. Height-based rules remove the need to tune the monetary
@@ -111,9 +111,9 @@ The final partial v2 interval is paid at the ending height. Percentages and
 recipients are unchanged.
 
 The payout uses the reward tier at its boundary; a tier change within an
-interval can leave a difference unissued. At the initial 16 NOID tier, the
-miner subsidy is 14.4 NOID, and each 5% share of a complete daily interval is
-2,304 NOID. Mandatory system records are derived by consensus, not by an
+interval can leave a difference unissued. At the initial 16 KAI tier, the
+miner subsidy is 14.4 KAI, and each 5% share of a complete daily interval is
+2,304 KAI. Mandatory system records are derived by consensus, not by an
 operator transaction. This accounting must not be mistaken for extra issuance
 on top of the gross schedule.
 
@@ -121,10 +121,10 @@ on top of the gross schedule.
 
 The minimum transaction fee consists of:
 
-- 5,000 μNOID per logical transaction;
-- 100 μNOID per live input;
-- 700 μNOID per live output;
-- 2,500 μNOID times occupancy pressure for each net-new live slot.
+- 5,000 μKAI per logical transaction;
+- 100 μKAI per live input;
+- 700 μKAI per live output;
+- 2,500 μKAI times occupancy pressure for each net-new live slot.
 
 Pressure multipliers are:
 
@@ -144,7 +144,7 @@ pays no growth burn.
 ## Dynamic relay floor
 
 Consensus fees and local relay policy are separate. The local dynamic floor
-uses the greater of 5,000 μNOID and 90% of the median fee among the last 50
+uses the greater of 5,000 μKAI and 90% of the median fee among the last 50
 transactions admitted to that node's mempool, not a network-wide fee estimate.
 
 A raised floor applies only under pressure.

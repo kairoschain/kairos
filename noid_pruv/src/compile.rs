@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: Apache-2.0
 // Copyright (C) 2026 Paranoid Zero.
+// Modified by the Kairos Chain contributors (rebrand to Kairos Chain).
 
 use std::collections::{BTreeMap, BTreeSet};
 
@@ -42,7 +43,7 @@ impl CompiledContract {
         &self.opening
     }
 
-    /// Accepted by `parano1d-cli contract create` and `paranoid_createObject`.
+    /// Accepted by `kairos-cli contract create` and `paranoid_createObject`.
     pub fn definition(&self) -> Json {
         let opening = &self.opening;
         let modes = opening.rules.modes;

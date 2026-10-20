@@ -89,7 +89,7 @@ impl ProductionHardwareReport {
 
 impl fmt::Display for ProductionHardwareReport {
     fn fmt(&self, formatter: &mut fmt::Formatter<'_>) -> fmt::Result {
-        writeln!(formatter, "ParanO(1)d hardware check")?;
+        writeln!(formatter, "Kairos hardware check")?;
         writeln!(formatter, "ARCHITECTURE {}", self.architecture)?;
         writeln!(formatter, "BACKEND {}", self.backend)?;
         #[cfg(target_arch = "x86_64")]
@@ -434,7 +434,7 @@ mod tests {
         assert_eq!(report.ready(), report.backend.production_ready());
         assert!(!report.requirement().is_empty());
         let rendered = report.to_string();
-        assert!(rendered.contains("ParanO(1)d hardware check"));
+        assert!(rendered.contains("Kairos hardware check"));
         assert!(rendered.contains("ARCHITECTURE"));
         assert!(rendered.contains("BACKEND"));
     }

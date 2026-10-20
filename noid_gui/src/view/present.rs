@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: Apache-2.0
 // Copyright (C) 2026 Paranoid Zero.
+// Modified by the Kairos Chain contributors (rebrand to Kairos Chain).
 
 use iced::widget::{
     button, canvas, column, container, mouse_area, opaque, pin, responsive, row, scrollable, stack,
@@ -188,7 +189,7 @@ pub fn system_meters(app: &App, compact: bool) -> Element<'_, Message> {
         telemetry_value(
             "CIRC SUPPLY",
             format!(
-                "{} NOID",
+                "{} KAI",
                 format_compact_micronoid(network.circulating_supply_micronoid)
             ),
             theme::ACCENT,
@@ -196,7 +197,7 @@ pub fn system_meters(app: &App, compact: bool) -> Element<'_, Message> {
         telemetry_value(
             "BLOCK REWARD",
             format!(
-                "{} NOID",
+                "{} KAI",
                 format_micronoid_trimmed(network.block_reward_micronoid)
             ),
             theme::ACCENT,
@@ -479,7 +480,7 @@ fn active_owner(app: &App, compact: bool) -> Element<'_, Message> {
     let metric_value_size = if compact { 16.0 } else { 18.0 };
     let balance_metric = container(
         column![
-            text("NOID BALANCE")
+            text("KAI BALANCE")
                 .size(metric_label_size)
                 .color(theme::DIM),
             row![
@@ -763,7 +764,7 @@ fn utxo_table(app: &App) -> container::Container<'_, Message> {
     ]
     .align_y(Alignment::Center);
 
-    let header = table_columns("SLOT", "VALUE / NOID", "ORIGIN", "SEGMENT", "STATUS");
+    let header = table_columns("SLOT", "VALUE / KAI", "ORIGIN", "SEGMENT", "STATUS");
     let mut rows = column![].spacing(0);
     for (index, utxo) in app
         .snapshot
@@ -1614,7 +1615,7 @@ fn consolidation_confirmation<'a>(
         form_line(
             "INPUTS",
             format!(
-                "{} smallest of {} · {} NOID",
+                "{} smallest of {} · {} KAI",
                 plan.input_count,
                 original_count,
                 format_micronoid(plan.input_value_micronoid)
@@ -1623,12 +1624,12 @@ fn consolidation_confirmation<'a>(
         ),
         form_line(
             "NETWORK FEE",
-            format!("{} NOID", format_micronoid(plan.fee_micronoid)),
+            format!("{} KAI", format_micronoid(plan.fee_micronoid)),
             compact,
         ),
         form_line(
             "NEW OUTPUT",
-            format!("1 · {} NOID", format_micronoid(plan.output_value_micronoid)),
+            format!("1 · {} KAI", format_micronoid(plan.output_value_micronoid)),
             compact,
         ),
         form_line(
@@ -1749,13 +1750,13 @@ fn consolidation_success<'a>(
         metrics,
         form_line(
             "NEW OUTPUT",
-            format!("{} NOID", format_micronoid(result.output_value_micronoid)),
+            format!("{} KAI", format_micronoid(result.output_value_micronoid)),
             compact,
         ),
         form_line(
             "INPUT VALUE",
             format!(
-                "{} NOID selected",
+                "{} KAI selected",
                 format_micronoid(result.input_value_micronoid),
             ),
             compact,
@@ -1784,7 +1785,7 @@ fn send_form(app: &App, compact: bool) -> Element<'_, Message> {
         Some(Message::PasteSendRecipient),
     );
     let amount = send_input_line(
-        "AMOUNT / NOID",
+        "AMOUNT / KAI",
         "0.000000",
         &app.send_amount,
         Message::SendAmountChanged,
@@ -1793,7 +1794,7 @@ fn send_form(app: &App, compact: bool) -> Element<'_, Message> {
         None,
     );
     let fee = send_input_line(
-        "NETWORK FEE / NOID",
+        "NETWORK FEE / KAI",
         "AUTO",
         &app.send_fee,
         Message::SendFeeChanged,

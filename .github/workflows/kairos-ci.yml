@@ -1,0 +1,34 @@
+name: kairos-ci
+on:
+  push:
+    branches: [master, main]
+  pull_request:
+  workflow_dispatch:
+jobs:
+  build:
+    name: build (${{ matrix.os }})
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-24.04, windows-2022, macos-14]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Linux build deps
+        if: runner.os == 'Linux'
+        run: sudo apt-get update && sudo apt-get install -y build-essential cmake clang libclang-dev pkg-config
+      - name: Windows LLVM
+        if: runner.os == 'Windows'
+        run: echo "LIBCLANG_PATH=C:\Program Files\LLVM\bin" >> $env:GITHUB_ENV
+      - uses: Swatinem/rust-cache@v2
+      - name: cargo check
+        run: cargo check --workspace --locked
+      - name: build kairos + kairos-cli (dev profile, no proof packs)
+        run: cargo build -p noid_node --bins --locked
+      - uses: actions/upload-artifact@v4
+        with:
+          name: kairos-dev-${{ runner.os }}
+          path: |
+            target/debug/kairos*
+            !target/debug/*.d
+            !target/debug/*.pdb
